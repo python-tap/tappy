@@ -21,6 +21,7 @@ if __name__ == '__main__':
     long_description = __doc__
 
     install_requires = [
+        'nose',
     ]
 
     # Add some developer tools.
@@ -38,9 +39,9 @@ if __name__ == '__main__':
         description='Tools for working with the Test Anything Protocol (TAP)',
         long_description=long_description,
         packages=find_packages(),
-#        entry_points={
-#            'console_scripts': ['markwiki = markwiki.server:run']
-#        },
+        entry_points={
+            'nose.plugins.0.10': ['tap = tap.plugin:TAP']
+        },
         include_package_data=True,
         zip_safe=False,
         install_requires=install_requires,
