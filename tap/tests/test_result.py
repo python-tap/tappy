@@ -54,6 +54,7 @@ class TestTAPTestResult(unittest.TestCase):
     def test_adds_success(self):
         result = self._make_one()
         result.addSuccess(FakeTestCase())
+        # TODO: just check that the list contains a tuple.
         line = result._test_cases['FakeTestCase'][0]
         self.assertEqual(line.status, 'ok')
         self.assertTrue('runTest (' in line.description)
