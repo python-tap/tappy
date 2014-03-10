@@ -1,75 +1,53 @@
 # Copyright (c) 2014, Matt Layman
 
-from __future__ import print_function
-from collections import namedtuple
 import unittest
-import sys
 
-TAPLine = namedtuple('TAPLine', ['status', 'description', 'directive'])
+from tap.tracker import Tracker
 
 
 class TAPTestResult(unittest.TextTestResult):
 
     def __init__(self, stream, descriptions, verbosity):
         super(TAPTestResult, self).__init__(stream, descriptions, verbosity)
-        # The test cases dictionary tracks all the TAP lines to write out.
-        self._test_cases = {}
-
-    def startTest(self, test):
-        '''Add the test class to tracing if it has not been seen yet.'''
-        super(TAPTestResult, self).startTest(test)
-        cls_name = test.__class__.__name__
-        if self._test_cases.get(cls_name) is None:
-            self._test_cases[cls_name] = []
+        self.tracker = Tracker()
 
     def stopTestRun(self):
         '''Once the test run is complete, generate each of the TAP files.'''
         super(TAPTestResult, self).stopTestRun()
-        for test_case, tap_lines in self._test_cases.items():
-            with open(test_case + '.tap', 'w') as f:
-                print('# TAP results for {0}'.format(test_case), file=f)
-
-                for line_count, tap_line in enumerate(tap_lines, start=1):
-                    print(' '.join([
-                        tap_line.status,
-                        str(line_count),
-                        '-',
-                        tap_line.description,
-                        tap_line.directive,
-                    ]), file=f)
-
-                print('1..{0}'.format(len(tap_lines)), file=f)
+        self.tracker.generate_tap_reports()
 
     def addError(self, test, err):
-        # TAP does not distinguish between errors and failures.
         super(TAPTestResult, self).addError(test, err)
-        self._add_line(test, 'not ok', '')
+        self.tracker.add_not_ok(self._cls_name(test), self._description(test))
 
     def addFailure(self, test, err):
-        # TAP does not distinguish between errors and failures.
         super(TAPTestResult, self).addFailure(test, err)
-        self._add_line(test, 'not ok', '')
+        self.tracker.add_not_ok(self._cls_name(test), self._description(test))
 
     def addSuccess(self, test):
         super(TAPTestResult, self).addSuccess(test)
-        self._add_line(test, 'ok', '')
+        self.tracker.add_ok(self._cls_name(test), self._description(test))
 
     def addSkip(self, test, reason):
         super(TAPTestResult, self).addSkip(test, reason)
-        self._add_line(test, 'ok', '# SKIP {0}'.format(reason))
+        self.tracker.add_skip(
+            self._cls_name(test), self._description(test), reason)
 
     def addExpectedFailure(self, test, err):
         super(TAPTestResult, self).addExpectedFailure(test, err)
-        self._add_line(test, 'not ok', '(expected failure)')
+        self.tracker.add_not_ok(self._cls_name(test), self._description(test),
+                                '(expected failure)')
 
     def addUnexpectedSuccess(self, test):
         super(TAPTestResult, self).addUnexpectedSuccess(test)
-        self._add_line(test, 'ok', '(unexpected success)')
+        self.tracker.add_ok(self._cls_name(test), self._description(test),
+                            '(unexpected success)')
 
-    def _add_line(self, test, status, directive):
-        description = test.shortDescription() or str(test)
-        self._test_cases[test.__class__.__name__].append(
-            TAPLine(status, description, directive))
+    def _cls_name(self, test):
+        return test.__class__.__name__
+
+    def _description(self, test):
+        return test.shortDescription() or str(test)
 
 
 class TAPTestRunner(unittest.TextTestRunner):
