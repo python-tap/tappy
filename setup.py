@@ -13,12 +13,10 @@ __version__ = '0.1'
 # The docs import setup.py for the version so only call setup when not behaving
 # as a module.
 if __name__ == '__main__':
-# FIXME: Clean this up to not reflect MarkWiki.
-#    with open('docs/releases.rst', 'r') as f:
-#        releases = f.read()
+    with open('docs/releases.rst', 'r') as f:
+        releases = f.read()
 
-#    long_description = __doc__ + '\n\n' + releases
-    long_description = __doc__
+    long_description = __doc__ + '\n\n' + releases
 
     install_requires = [
         'nose',

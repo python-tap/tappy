@@ -1,22 +1,17 @@
-.. tappy documentation master file, created by
-   sphinx-quickstart on Tue Mar 11 20:21:22 2014.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+tappy - TAP tools for Python
+============================
 
-Welcome to tappy's documentation!
-=================================
+**tappy** provides tools for working with the Test Anything Protocol (TAP) in
+Python. **tappy** generates TAP output for your ``unittest`` test cases. You
+can use the TAP output files with a tool like the `Jenkins TAP plugin
+<https://wiki.jenkins-ci.org/display/JENKINS/TAP+Plugin>`_ or any other TAP
+consumer.
 
-Contents:
+For the curious: **tappy** sounds like "happy."
 
 .. toctree::
    :maxdepth: 2
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
+   goals
+   producers
+   releases
