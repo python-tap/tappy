@@ -1,11 +1,17 @@
 # Copyright (c) 2014, Matt Layman
 
-import unittest
+from unittest import TextTestRunner
+
+# Older versions of Python have the result under a different name.
+try:
+    from unittest import TextTestResult
+except ImportError:
+    from unittest import _TextTestResult as TextTestResult
 
 from tap.tracker import Tracker
 
 
-class TAPTestResult(unittest.TextTestResult):
+class TAPTestResult(TextTestResult):
 
     def __init__(self, stream, descriptions, verbosity):
         super(TAPTestResult, self).__init__(stream, descriptions, verbosity)
@@ -50,7 +56,7 @@ class TAPTestResult(unittest.TextTestResult):
         return test.shortDescription() or str(test)
 
 
-class TAPTestRunner(unittest.TextTestRunner):
+class TAPTestRunner(TextTestRunner):
     '''A test runner that will behave exactly like TextTestRunner and will
     additionally generate TAP files for each test case'''
 
