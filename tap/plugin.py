@@ -1,13 +1,7 @@
 # Copyright (c) 2014, Matt Layman
 
 import os
-
-try:
-    from unittest import SkipTest
-except ImportError:
-    class SkipTest(object):
-        '''SkipTest does not exist earlier than Python 2.7'''
-        pass
+from unittest import SkipTest
 
 from nose.plugins import Plugin
 

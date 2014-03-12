@@ -25,6 +25,7 @@ if __name__ == '__main__':
     # Add some developer tools.
     if 'develop' in sys.argv:
         install_requires.extend([
+            'coverage',
             'Sphinx',
             'tox',
         ])
