@@ -26,6 +26,7 @@ if __name__ == '__main__':
     if 'develop' in sys.argv:
         install_requires.extend([
             'Sphinx',
+            'tox',
         ])
 
     setup(
