@@ -1,6 +1,7 @@
 language: python
 env:
   - TOX_ENV=py27
+  - TOX_ENV=runner
   - TOX_ENV=pep8
 install:
   - pip install tox

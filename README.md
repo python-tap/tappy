@@ -48,9 +48,6 @@ This project is very young. There is lots to do.
 *   TODO: Use travis to do an end to end test. Run the test suite to generate
     TAP and use `tappy` to parse and verify the results. The results should
     always be the same.
-*   TODO: Use travis to run the test runner and nosetests. Both paths need to
-    always work.
-*   TODO: provide Sphinx documentation at read the docs.
 
 [rtd]: http://tappy.readthedocs.org/en/latest/
 [produce]: http://testanything.org/producers.html
