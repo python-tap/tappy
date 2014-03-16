@@ -45,6 +45,16 @@ if __name__ == '__main__':
         },
         include_package_data=True,
         zip_safe=False,
+        platforms='any',
         install_requires=install_requires,
+        classifiers=[
+            'Development Status :: 4 - Beta',
+            'Environment :: Console',
+            'Intended Audience :: Developers',
+            'License :: OSI Approved :: BSD License',
+            'Operating System :: OS Independent',
+            'Programming Language :: Python :: 2.7',
+            'Topic :: Software Development :: Testing',
+        ],
         test_suite='tap.tests'
     )
