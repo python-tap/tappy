@@ -9,9 +9,30 @@ consumer.
 
 For the curious: **tappy** sounds like "happy."
 
+Installation
+------------
+
+**tappy** is available for download from `PyPI
+<https://pypi.python.org/pypi/tap.py>`_.  You can install it with ``pip`` or
+``easy_install``.
+
+.. code-block:: bash
+
+   $ pip install tap.py
+
+Or:
+
+.. code-block:: bash
+
+   $ easy_install tap.py
+
+Documentation
+-------------
+
 .. toctree::
    :maxdepth: 2
 
    goals
    producers
+   contributing
    releases

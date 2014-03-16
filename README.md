@@ -8,6 +8,22 @@ below provides a synopsis of what **tappy** supplies.
 
 For the curious: **tappy** sounds like "happy."
 
+Installation
+------------
+
+**tappy** is available for download from [PyPI][pypi]. You can install it with `pip` or
+`easy_install`.
+
+```bash
+$ pip install tap.py
+```
+
+Or:
+
+```bash
+$ easy_install tap.py
+```
+
 Motivation
 ----------
 
@@ -48,8 +64,13 @@ This project is very young. There is lots to do.
 *   TODO: Use travis to do an end to end test. Run the test suite to generate
     TAP and use `tappy` to parse and verify the results. The results should
     always be the same.
+*   TODO: The Pygments project could possibly benefit from a TAP lexer. This
+    would help the **tappy** documentation.
+*   TODO: For a 1.0, **tappy** only supports Python 2.7. It would be nice to
+    push that support to older and newer releases.
 
 [rtd]: http://tappy.readthedocs.org/en/latest/
+[pypi]: https://pypi.python.org/pypi/tap.py
 [produce]: http://testanything.org/producers.html
 [consume]: http://testanything.org/consumers.html
 [ns]: https://nose.readthedocs.org/en/latest/

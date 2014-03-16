@@ -31,7 +31,7 @@ if __name__ == '__main__':
         ])
 
     setup(
-        name='tappy',
+        name='tap.py',
         version=__version__,
         url='https://github.com/mblayman/tappy',
         license='BSD',
@@ -56,5 +56,9 @@ if __name__ == '__main__':
             'Programming Language :: Python :: 2.7',
             'Topic :: Software Development :: Testing',
         ],
+        keywords=[
+            'TAP',
+            'unittest',
+        ]
         test_suite='tap.tests'
     )
