@@ -8,7 +8,7 @@ Follow tappy development on `GitHub
 from setuptools import find_packages, setup
 import sys
 
-__version__ = '0.1'
+__version__ = '1.0'
 
 # The docs import setup.py for the version so only call setup when not behaving
 # as a module.
