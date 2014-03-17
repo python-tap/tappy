@@ -12,7 +12,8 @@ Installation
 ------------
 
 **tappy** is available for download from [PyPI][pypi]. You can install it with
-`pip` or `easy_install`. **tappy** is currently supported on Python 2.7.
+`pip` or `easy_install`. **tappy** is currently supported on Python 2.6 and
+2.7.
 
 ```bash
 $ pip install tap.py
@@ -66,8 +67,8 @@ This project is very young. There is lots to do.
     always be the same.
 *   TODO: The Pygments project could possibly benefit from a TAP lexer. This
     would help the **tappy** documentation.
-*   TODO: For a 1.0, **tappy** only supports Python 2.7. It would be nice to
-    push that support to older and newer releases.
+*   TODO: **tappy** supports Python 2.6 and 2.7. It would be nice to push that
+    support to newer releases.
 
 [rtd]: http://tappy.readthedocs.org/en/latest/
 [pypi]: https://pypi.python.org/pypi/tap.py
