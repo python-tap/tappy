@@ -11,8 +11,8 @@ For the curious: **tappy** sounds like "happy."
 Installation
 ------------
 
-**tappy** is available for download from [PyPI][pypi]. You can install it with `pip` or
-`easy_install`.
+**tappy** is available for download from [PyPI][pypi]. You can install it with
+`pip` or `easy_install`. **tappy** is currently supported on Python 2.7.
 
 ```bash
 $ pip install tap.py
