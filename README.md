@@ -1,6 +1,10 @@
 tappy
 =====
 
+[![PyPI version][fury]](http://badge.fury.io/py/tap.py)
+[![Downloads][pypip]](https://crate.io/packages/tap.py)
+[![Build Status][travis]](https://travis-ci.org/mblayman/tappy)
+
 Tools for working with the Test Anything Protocol (TAP) in Python
 
 Full documentation for **tappy** is at [Read the Docs][rtd]. The information
@@ -70,6 +74,9 @@ This project is very young. There is lots to do.
 *   TODO: **tappy** supports Python 2.6 and 2.7. It would be nice to push that
     support to newer releases.
 
+[fury]: https://badge.fury.io/py/tap.py.png
+[pypip]: https://pypip.in/d/tap.py/badge.png
+[travis]: https://travis-ci.org/mblayman/tappy.png?branch=master
 [rtd]: http://tappy.readthedocs.org/en/latest/
 [pypi]: https://pypi.python.org/pypi/tap.py
 [produce]: http://testanything.org/producers.html
