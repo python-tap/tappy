@@ -59,6 +59,6 @@ if __name__ == '__main__':
         keywords=[
             'TAP',
             'unittest',
-        ]
+        ],
         test_suite='tap.tests'
     )
