@@ -1,14 +1,14 @@
 # Copyright (c) 2014, Matt Layman
 '''
-Follow tappy development on `GitHub
-<https://github.com/mblayman/tappy>`_. Developer documentation is on
+Follow tappy development on `GitHub <https://github.com/mblayman/tappy>`_.
+Developer documentation is on
 `Read the Docs <https://tappy.readthedocs.org/>`_.
 '''
 
 from setuptools import find_packages, setup
 import sys
 
-__version__ = '1.0'
+__version__ = '1.1'
 
 # The docs import setup.py for the version so only call setup when not behaving
 # as a module.
@@ -53,6 +53,7 @@ if __name__ == '__main__':
             'Intended Audience :: Developers',
             'License :: OSI Approved :: BSD License',
             'Operating System :: OS Independent',
+            'Programming Language :: Python :: 2.6',
             'Programming Language :: Python :: 2.7',
             'Topic :: Software Development :: Testing',
         ],
