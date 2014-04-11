@@ -30,12 +30,20 @@ class TestTAPTestResult(unittest.TestCase):
 
     def test_adds_error(self):
         result = self._make_one()
-        result.addError(FakeTestCase(), (None, None, None))
+        # Python 3 does some extra testing in unittest on exceptions so fake
+        # the cause as if it were raised.
+        ex = Exception()
+        ex.__cause__ = None
+        result.addError(FakeTestCase(), (None, ex, None))
         self.assertEqual(len(result.tracker._test_cases['FakeTestCase']), 1)
 
     def test_adds_failure(self):
         result = self._make_one()
-        result.addFailure(FakeTestCase(), (None, None, None))
+        # Python 3 does some extra testing in unittest on exceptions so fake
+        # the cause as if it were raised.
+        ex = Exception()
+        ex.__cause__ = None
+        result.addFailure(FakeTestCase(), (None, ex, None))
         self.assertEqual(len(result.tracker._test_cases['FakeTestCase']), 1)
 
     def test_adds_success(self):
