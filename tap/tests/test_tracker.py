@@ -1,5 +1,7 @@
 # Copyright (c) 2014, Matt Layman
 
+import os
+import tempfile
 import unittest
 
 from tap.tracker import Tracker
@@ -39,3 +41,24 @@ class TestTracker(unittest.TestCase):
         self.assertEqual(line.status, 'ok')
         self.assertEqual(line.description, 'a description')
         self.assertEqual(line.directive, '# SKIP a reason')
+
+    def test_generates_tap_reports_in_new_outdir(self):
+        tempdir = tempfile.mkdtemp()
+        outdir = os.path.join(tempdir, 'non', 'existent', 'path')
+        tracker = Tracker(outdir=outdir)
+        tracker.add_ok('FakeTestCase', 'I should be in the specified dir.')
+
+        tracker.generate_tap_reports()
+
+        tap_file = os.path.join(outdir, 'FakeTestCase.tap')
+        self.assertTrue(os.path.exists(tap_file))
+
+    def test_generates_tap_reports_in_existing_outdir(self):
+        outdir = tempfile.mkdtemp()
+        tracker = Tracker(outdir=outdir)
+        tracker.add_ok('FakeTestCase', 'I should be in the specified dir.')
+
+        tracker.generate_tap_reports()
+
+        tap_file = os.path.join(outdir, 'FakeTestCase.tap')
+        self.assertTrue(os.path.exists(tap_file))
