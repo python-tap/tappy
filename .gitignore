@@ -43,3 +43,7 @@ nosetests.xml
 
 # docs
 docs/_build
+
+# virtualenv
+include/
+local/
