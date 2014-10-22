@@ -28,6 +28,11 @@ The class will create a file named ``TestFoo.tap`` containing the following. ::
     ok 1 - Test numeric equality as an example. 
     1..1
 
+**tappy** for **nose** also supports an optional output directory when you
+don't want to store the ``.tap`` files wherever you executed ``nosetests``. Use
+``--tap-outdir`` followed by a directory path to store the files in a different
+place. The directory will be created if it does not exist.
+
 Examples
 --------
 
