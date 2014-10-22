@@ -22,11 +22,15 @@ class TAP(Plugin):
 
     def options(self, parser, env=os.environ):
         super(TAP, self).options(parser, env=env)
+        parser.add_option(
+            '--tap-outdir',
+            help='An optional output directory to write TAP files to. If the'
+                 ' directory does not exist, it will be created.')
 
     def configure(self, options, conf):
         super(TAP, self).configure(options, conf)
         if self.enabled:
-            self.tracker = Tracker()
+            self.tracker = Tracker(outdir=options.tap_outdir)
 
     def finalize(self, results):
         self.tracker.generate_tap_reports()

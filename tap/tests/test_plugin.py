@@ -9,6 +9,12 @@ from nose import case
 from tap.plugin import TAP
 
 
+class FakeOptions(object):
+
+    def __init__(self):
+        self.tap_outdir = None
+
+
 class FakeTestCase(object):
 
     def __call__(self):
@@ -21,7 +27,7 @@ class TestPlugin(unittest.TestCase):
     def _make_one(cls):
         plugin = TAP()
         plugin.enabled = True
-        plugin.configure(None, None)
+        plugin.configure(FakeOptions(), None)
         return plugin
 
     def test_adds_error(self):
