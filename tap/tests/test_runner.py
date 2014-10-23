@@ -3,8 +3,6 @@
 import tempfile
 import unittest
 
-import mock
-
 from tap import TAPTestRunner
 from tap.runner import TAPTestResult
 
