@@ -17,7 +17,7 @@ Installation
 
 **tappy** is available for download from [PyPI][pypi]. You can install it with
 `pip` or `easy_install`. **tappy** is currently supported on Python 2.6,
-2.7, 3.2, and 3.3.
+2.7, 3.2, 3.3, 3.4 and PyPy.
 
 ```bash
 $ pip install tap.py
