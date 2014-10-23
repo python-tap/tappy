@@ -55,7 +55,7 @@ class Tracker(object):
             print('1..{0}'.format(len(tap_lines)), file=f)
 
     def _get_tap_file_path(self, test_case):
-        """Get the TAP output file path for the test case."""
+        '''Get the TAP output file path for the test case.'''
         tap_file = test_case + '.tap'
         if self.outdir:
             return os.path.join(self.outdir, tap_file)

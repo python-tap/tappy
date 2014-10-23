@@ -13,9 +13,12 @@ from tap.tracker import Tracker
 
 class TAPTestResult(TextTestResult):
 
+    # This attribute will store the user's desired output directory.
+    OUTDIR = None
+
     def __init__(self, stream, descriptions, verbosity):
         super(TAPTestResult, self).__init__(stream, descriptions, verbosity)
-        self.tracker = Tracker()
+        self.tracker = Tracker(outdir=self.OUTDIR)
 
     def stopTestRun(self):
         '''Once the test run is complete, generate each of the TAP files.'''
@@ -61,3 +64,11 @@ class TAPTestRunner(TextTestRunner):
     additionally generate TAP files for each test case'''
 
     resultclass = TAPTestResult
+
+    @classmethod
+    def set_outdir(cls, outdir):
+        '''Set the output directory so that TAP files are written to the
+        specified outdir location.
+        '''
+        # Blame the lack of unittest extensibility for this hacky method.
+        TAPTestResult.OUTDIR = outdir

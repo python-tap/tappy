@@ -19,6 +19,7 @@ if __name__ == '__main__':
     long_description = __doc__ + '\n\n' + releases
 
     install_requires = [
+        'mock',
         'nose',
     ]
 

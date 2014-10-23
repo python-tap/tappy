@@ -28,7 +28,23 @@ The class will create a file named ``TestFoo.tap`` containing the following. ::
     ok 1 - Test numeric equality as an example. 
     1..1
 
-**tappy** for **nose** also supports an optional output directory when you
+``TAPTestRunner``
+-----------------
+
+The ``TAPTestRunner`` gives the user the ability to set the output directory.
+Use the ``set_outdir`` class method.
+
+.. code-block:: python
+
+    # Either set it from the class or from a runner instance.
+    TAPTestRunner.set_outdir('/my/output/directory')
+    runner = TAPTestRunner()
+    runner.set_outdir('/my/output/directory')
+
+nose TAP Plugin
+-------------------
+
+The **nose** TAP plugin also supports an optional output directory when you
 don't want to store the ``.tap`` files wherever you executed ``nosetests``. Use
 ``--tap-outdir`` followed by a directory path to store the files in a different
 place. The directory will be created if it does not exist.
