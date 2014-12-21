@@ -14,12 +14,12 @@ class TestTAPTestRunner(unittest.TestCase):
         self.assertEqual(runner.resultclass, TAPTestResult)
 
     def test_runner_uses_outdir(self):
-        '''Test that the test runner sets the TAPTestResult OUTDIR so that TAP
+        """Test that the test runner sets the TAPTestResult OUTDIR so that TAP
         files will be written to that location.
 
         Setting class attributes to get the right behavior is a dirty hack, but
         the unittest classes aren't very extensible.
-        '''
+        """
         # Save the previous outdir in case **this** execution was using it.
         previous_outdir = TAPTestResult
         outdir = tempfile.mkdtemp()

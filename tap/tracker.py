@@ -16,7 +16,7 @@ class Tracker(object):
             os.makedirs(outdir)
 
     def _track(self, class_name):
-        '''Keep track of which test cases have executed.'''
+        """Keep track of which test cases have executed."""
         if self._test_cases.get(class_name) is None:
             self._test_cases[class_name] = []
 
@@ -55,7 +55,7 @@ class Tracker(object):
             print('1..{0}'.format(len(tap_lines)), file=f)
 
     def _get_tap_file_path(self, test_case):
-        '''Get the TAP output file path for the test case.'''
+        """Get the TAP output file path for the test case."""
         tap_file = test_case + '.tap'
         if self.outdir:
             return os.path.join(self.outdir, tap_file)

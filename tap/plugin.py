@@ -6,7 +6,7 @@ try:
     from unittest import SkipTest
 except ImportError:
     class SkipTest(object):
-        '''SkipTest does not exist earlier than Python 2.7'''
+        """SkipTest does not exist earlier than Python 2.7"""
         pass
 
 from nose.plugins import Plugin
@@ -15,9 +15,8 @@ from tap.tracker import Tracker
 
 
 class TAP(Plugin):
-    '''
-    This plugin provides test results in the Test Anything Protocol format.
-    '''
+    """This plugin provides test results in the Test Anything Protocol format.
+    """
     name = 'tap'
 
     def options(self, parser, env=os.environ):

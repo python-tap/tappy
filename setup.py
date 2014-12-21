@@ -1,9 +1,9 @@
 # Copyright (c) 2014, Matt Layman
-'''
+"""
 Follow tappy development on `GitHub <https://github.com/mblayman/tappy>`_.
 Developer documentation is on
 `Read the Docs <https://tappy.readthedocs.org/>`_.
-'''
+"""
 
 from setuptools import find_packages, setup
 import sys

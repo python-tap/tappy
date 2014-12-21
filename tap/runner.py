@@ -21,7 +21,7 @@ class TAPTestResult(TextTestResult):
         self.tracker = Tracker(outdir=self.OUTDIR)
 
     def stopTestRun(self):
-        '''Once the test run is complete, generate each of the TAP files.'''
+        """Once the test run is complete, generate each of the TAP files."""
         super(TAPTestResult, self).stopTestRun()
         self.tracker.generate_tap_reports()
 
@@ -60,15 +60,15 @@ class TAPTestResult(TextTestResult):
 
 
 class TAPTestRunner(TextTestRunner):
-    '''A test runner that will behave exactly like TextTestRunner and will
-    additionally generate TAP files for each test case'''
+    """A test runner that will behave exactly like TextTestRunner and will
+    additionally generate TAP files for each test case"""
 
     resultclass = TAPTestResult
 
     @classmethod
     def set_outdir(cls, outdir):
-        '''Set the output directory so that TAP files are written to the
+        """Set the output directory so that TAP files are written to the
         specified outdir location.
-        '''
+        """
         # Blame the lack of unittest extensibility for this hacky method.
         TAPTestResult.OUTDIR = outdir
