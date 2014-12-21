@@ -1,2 +1,4 @@
 include LICENSE
-include docs/releases.rst
+include README.md
+recursive-include docs *
+prune docs/_build

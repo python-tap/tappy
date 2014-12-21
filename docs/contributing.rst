@@ -1,13 +1,14 @@
 Contributing
 ============
 
-**tappy** should be easy to contribute to. If anything is unclear about how to
+tappy should be easy to contribute to. If anything is unclear about how to
 contribute, please submit an issue on GitHub so that we can fix it!
 
 How
 -----
 
-Fork **tappy** on GitHub and submit a pull request when you're ready.
+Fork tappy on `GitHub <https://github.com/mblayman/tappy>`_ and submit a pull
+request when you're ready.
 
 Guidelines
 ----------

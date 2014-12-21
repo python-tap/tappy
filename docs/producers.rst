@@ -1,13 +1,13 @@
 TAP Producers
 =============
 
-**tappy** integrates with ``unittest`` based test cases to produce TAP output.
+tappy integrates with ``unittest`` based test cases to produce TAP output.
 The producers come in two varieties: support with only the standard library
 and support for `nose <https://nose.readthedocs.org/en/latest/>`_.
 
 * ``TAPTestRunner`` - This subclass of ``unittest.TextTestRunner`` provides all
   the functionality of ``TextTestRunner`` and generates TAP files.
-* **tappy** for **nose** - **tappy** provides a plugin (simply called ``TAP``)
+* tappy for **nose** - tappy provides a plugin (simply called ``TAP``)
   for the **nose** testing tool.
 
 Both producers will create one TAP file for each ``TestCase`` executed by the
@@ -30,8 +30,8 @@ The class will create a file named ``TestFoo.tap`` containing the following.
     ok 1 - Test numeric equality as an example.
     1..1
 
-``TAPTestRunner``
------------------
+TAPTestRunner
+-------------
 
 The ``TAPTestRunner`` gives the user the ability to set the output directory.
 Use the ``set_outdir`` class method.
@@ -44,7 +44,7 @@ Use the ``set_outdir`` class method.
     runner.set_outdir('/my/output/directory')
 
 nose TAP Plugin
--------------------
+---------------
 
 The **nose** TAP plugin also supports an optional output directory when you
 don't want to store the ``.tap`` files wherever you executed ``nosetests``. Use
@@ -56,12 +56,12 @@ Examples
 
 The ``TAPTestRunner`` works like the ``TextTestRunner``. To use the runner,
 load test cases using the ``TestLoader`` and pass the tests to the run method.
-The sample below is the test runner used with **tappy**'s own tests.
+The sample below is the test runner used with tappy's own tests.
 
 .. literalinclude:: ../tap/tests/run.py
    :lines: 3-
 
-Running **tappy** with **nose** is as straightforward as enabling the plugin
+Running tappy with **nose** is as straightforward as enabling the plugin
 when calling ``nosetests``.
 
 .. code-block:: sh
