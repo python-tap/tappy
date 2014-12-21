@@ -1,8 +1,8 @@
 Releases
 ========
 
-Version 1.2, In Development
----------------------------
+Version 1.2, Released December 21, 2014
+---------------------------------------
 
 * Provide a syntax highlighter for Pygments so any project using Pygments
   (e.g., Sphinx) can highlight TAP output.
