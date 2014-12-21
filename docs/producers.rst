@@ -22,10 +22,12 @@ extension. For example:
            '''Test numeric equality as an example.'''
            self.assertTrue(1 == 1)
 
-The class will create a file named ``TestFoo.tap`` containing the following. ::
+The class will create a file named ``TestFoo.tap`` containing the following.
+
+.. code-block:: tap
 
     # TAP results for TestFoo
-    ok 1 - Test numeric equality as an example. 
+    ok 1 - Test numeric equality as an example.
     1..1
 
 ``TAPTestRunner``

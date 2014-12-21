@@ -8,7 +8,7 @@ Developer documentation is on
 from setuptools import find_packages, setup
 import sys
 
-__version__ = '1.1'
+__version__ = '1.2'
 
 # The docs import setup.py for the version so only call setup when not behaving
 # as a module.
@@ -20,6 +20,7 @@ if __name__ == '__main__':
 
     install_requires = [
         'nose',
+        'Pygments==2.0.1',
     ]
 
     # Add some developer tools.
@@ -41,7 +42,8 @@ if __name__ == '__main__':
         long_description=long_description,
         packages=find_packages(),
         entry_points={
-            'nose.plugins.0.10': ['tap = tap.plugin:TAP']
+            'nose.plugins.0.10': ['tap = tap.plugin:TAP'],
+            'pygments.lexers': ['tap = tap.lexer:TAPLexer'],
         },
         include_package_data=True,
         zip_safe=False,
