@@ -14,9 +14,9 @@ Version 1.1, Released October 23, 2014
   ``.tap`` files.
 * The ``nosetests`` plugin has an optional ``--tap-outdir`` flag to specify
   where to store ``.tap`` files.
-* **tappy** has backported support for Python 2.6.
-* **tappy** has support for Python 3.2, 3.3, and 3.4.
-* **tappy** has support for PyPy.
+* tappy has backported support for Python 2.6.
+* tappy has support for Python 3.2, 3.3, and 3.4.
+* tappy has support for PyPy.
 
 Version 1.0, Released March 2014
 --------------------------------
