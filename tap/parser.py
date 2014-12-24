@@ -3,7 +3,7 @@
 import re
 
 from tap.directive import Directive
-from tap.line import Result, Unknown
+from tap.line import Diagnostic, Result, Unknown
 
 
 class Parser(object):
@@ -20,6 +20,7 @@ class Parser(object):
                    """
     ok = re.compile(r'^ok' + result_base, re.VERBOSE)
     not_ok = re.compile(r'^not\ ok' + result_base, re.VERBOSE)
+    diagnostic = re.compile(r'^#')
 
     def parse_line(self, text):
         """Parse a line into whatever TAP category it belongs."""
@@ -30,6 +31,9 @@ class Parser(object):
         match = self.not_ok.match(text)
         if match:
             return self.parse_result(False, match)
+
+        if self.diagnostic.match(text):
+            return Diagnostic(text)
 
         # TODO: Integrate with all the other line types.
         return Unknown()

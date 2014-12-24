@@ -49,6 +49,21 @@ class Result(Line):
         return self.directive.todo
 
 
+class Diagnostic(Line):
+    """A diagnostic line (i.e. anything starting with a hash)."""
+
+    def __init__(self, text):
+        self._text = text
+
+    @property
+    def category(self):
+        return 'diagnostic'
+
+    @property
+    def text(self):
+        return self._text
+
+
 class Unknown(Line):
     """A line that represents something that is not a known TAP line.
 
@@ -58,7 +73,6 @@ class Unknown(Line):
     def category(self):
         return 'unknown'
 
-# TODO: Diagnostic line
 # TODO: Bail out! line
 # TODO: Plan line
 # TODO: Version line

@@ -70,9 +70,19 @@ class TestParser(unittest.TestCase):
         self.assertTrue(line.number is None)
 
     def test_unrecognizable_line(self):
-        """An unrecognizable line is returned."""
+        """The parser returns an unrecognizable line."""
         parser = Parser()
 
-        line = parser.parse_line('This is not a valid TAP line.')
+        line = parser.parse_line('This is not a valid TAP line. # srsly')
 
         self.assertEqual('unknown', line.category)
+
+    def test_diagnostic_line(self):
+        """The parser extracts a diagnostic line."""
+        text = '# An example diagnostic line'
+        parser = Parser()
+
+        line = parser.parse_line(text)
+
+        self.assertEqual('diagnostic', line.category)
+        self.assertEqual(text, line.text)
