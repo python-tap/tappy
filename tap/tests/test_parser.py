@@ -58,3 +58,13 @@ class TestParser(unittest.TestCase):
 
         self.assertEqual('test', line.category)
         self.assertTrue(line.skip)
+
+    def test_finds_not_ok(self):
+        """The parser extracts a not ok line."""
+        parser = Parser()
+
+        line = parser.parse_line('not ok - This is a failing test line.')
+
+        self.assertEqual('test', line.category)
+        self.assertFalse(line.ok)
+        self.assertTrue(line.number is None)
