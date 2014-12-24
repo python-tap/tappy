@@ -64,6 +64,21 @@ class Diagnostic(Line):
         return self._text
 
 
+class Bail(Line):
+    """A bail out line (i.e. anything starting with 'Bail out!')."""
+
+    def __init__(self, reason):
+        self._reason = reason
+
+    @property
+    def category(self):
+        return 'bail'
+
+    @property
+    def reason(self):
+        return self._reason
+
+
 class Unknown(Line):
     """A line that represents something that is not a known TAP line.
 
@@ -73,6 +88,5 @@ class Unknown(Line):
     def category(self):
         return 'unknown'
 
-# TODO: Bail out! line
 # TODO: Plan line
 # TODO: Version line

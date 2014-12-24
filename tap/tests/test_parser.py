@@ -86,3 +86,12 @@ class TestParser(unittest.TestCase):
 
         self.assertEqual('diagnostic', line.category)
         self.assertEqual(text, line.text)
+
+    def test_bail_out_line(self):
+        """The parser extracts a bail out line."""
+        parser = Parser()
+
+        line = parser.parse_line('Bail out! This is the reason to bail.')
+
+        self.assertEqual('bail', line.category)
+        self.assertEqual('This is the reason to bail.', line.reason)
