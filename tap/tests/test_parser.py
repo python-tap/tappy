@@ -68,3 +68,11 @@ class TestParser(unittest.TestCase):
         self.assertEqual('test', line.category)
         self.assertFalse(line.ok)
         self.assertTrue(line.number is None)
+
+    def test_unrecognizable_line(self):
+        """An unrecognizable line is returned."""
+        parser = Parser()
+
+        line = parser.parse_line('This is not a valid TAP line.')
+
+        self.assertEqual('unknown', line.category)

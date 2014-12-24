@@ -48,8 +48,17 @@ class Result(Line):
     def todo(self):
         return self.directive.todo
 
+
+class Unknown(Line):
+    """A line that represents something that is not a known TAP line.
+
+    This exists for the purpose of a Null Object pattern.
+    """
+    @property
+    def category(self):
+        return 'unknown'
+
 # TODO: Diagnostic line
 # TODO: Bail out! line
 # TODO: Plan line
 # TODO: Version line
-# TODO: Unknown line

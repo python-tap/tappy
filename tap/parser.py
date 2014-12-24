@@ -3,7 +3,7 @@
 import re
 
 from tap.directive import Directive
-from tap.line import Result
+from tap.line import Result, Unknown
 
 
 class Parser(object):
@@ -32,6 +32,7 @@ class Parser(object):
             return self.parse_result(False, match)
 
         # TODO: Integrate with all the other line types.
+        return Unknown()
 
     def parse_result(self, ok, match):
         """Parse a matching result line into a result instance."""
