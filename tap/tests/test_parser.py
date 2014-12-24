@@ -95,3 +95,18 @@ class TestParser(unittest.TestCase):
 
         self.assertEqual('bail', line.category)
         self.assertEqual('This is the reason to bail.', line.reason)
+
+    def test_finds_version(self):
+        """The parser extracts a version line."""
+        parser = Parser()
+
+        line = parser.parse_line('TAP version 13')
+
+        self.assertEqual('version', line.category)
+        self.assertEqual(13, line.version)
+
+    def test_errors_on_old_version(self):
+        """The TAP spec dictates that anything less than 13 is an error."""
+        parser = Parser()
+
+        self.assertRaises(ValueError, parser.parse_line, 'TAP version 12')

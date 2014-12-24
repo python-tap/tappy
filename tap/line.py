@@ -79,6 +79,22 @@ class Bail(Line):
         return self._reason
 
 
+class Version(Line):
+    """A version line (i.e. of the form 'TAP version 13')."""
+
+    def __init__(self, version):
+        self._version = version
+
+    @property
+    def category(self):
+        return 'version'
+
+    @property
+    def version(self):
+        """Get the version number."""
+        return self._version
+
+
 class Unknown(Line):
     """A line that represents something that is not a known TAP line.
 
@@ -89,4 +105,3 @@ class Unknown(Line):
         return 'unknown'
 
 # TODO: Plan line
-# TODO: Version line

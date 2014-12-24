@@ -3,7 +3,7 @@
 import re
 
 from tap.directive import Directive
-from tap.line import Bail, Diagnostic, Result, Unknown
+from tap.line import Bail, Diagnostic, Result, Unknown, Version
 
 
 class Parser(object):
@@ -27,6 +27,9 @@ class Parser(object):
         \s*            # Optional whitespace.
         (?P<reason>.*) # Optional reason.
     """, re.VERBOSE)
+    version = re.compile(r'^TAP version (?P<version>\d+)$')
+
+    TAP_MINIMUM_DECLARED_VERSION = 13
 
     def parse_line(self, text):
         """Parse a line into whatever TAP category it belongs."""
@@ -45,6 +48,10 @@ class Parser(object):
         if match:
             return Bail(match.group('reason'))
 
+        match = self.version.match(text)
+        if match:
+            return self.parse_version(match)
+
         # TODO: Integrate with all the other line types.
         return Unknown()
 
@@ -53,3 +60,13 @@ class Parser(object):
         return Result(
             ok, match.group('number'), match.group('description').strip(),
             Directive(match.group('directive')))
+
+    def parse_version(self, match):
+        version = int(match.group('version'))
+        if version < self.TAP_MINIMUM_DECLARED_VERSION:
+            raise ValueError('It is an error to explicitly specify '
+                             'any version lower than 13.')
+        return Version(version)
+
+# TODO: Introduce a Rules class that will track and enforce critical state
+# during parsing of a TAP file (e.g., position of the plan line).
