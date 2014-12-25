@@ -49,6 +49,26 @@ class Result(Line):
         return self.directive.todo
 
 
+class Plan(Line):
+    """A plan line to indicate how many tests to expect."""
+
+    def __init__(self, expected_tests, directive=None):
+        self._expected_tests = expected_tests
+        self.directive = directive
+
+    @property
+    def category(self):
+        return 'plan'
+
+    @property
+    def expected_tests(self):
+        return self._expected_tests
+
+    @property
+    def skip(self):
+        return self.directive.skip
+
+
 class Diagnostic(Line):
     """A diagnostic line (i.e. anything starting with a hash)."""
 

@@ -18,6 +18,7 @@ class Directive(object):
 
         The text is assumed to be everything after a '#\s*' on a result line.
         """
+        self._text = text
         self._skip = False
         self._todo = False
 
@@ -33,6 +34,11 @@ class Directive(object):
                 # Catch the case where the directive has no descriptive text.
                 if match.group('remainder') == '':
                     self._todo = True
+
+    @property
+    def text(self):
+        """Get the entire text."""
+        return self._text
 
     @property
     def skip(self):

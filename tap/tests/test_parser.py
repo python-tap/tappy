@@ -110,3 +110,29 @@ class TestParser(unittest.TestCase):
         parser = Parser()
 
         self.assertRaises(ValueError, parser.parse_line, 'TAP version 12')
+
+    def test_finds_plan(self):
+        """The parser extracts a plan line."""
+        parser = Parser()
+
+        line = parser.parse_line('1..42')
+
+        self.assertEqual('plan', line.category)
+        self.assertEqual(42, line.expected_tests)
+
+    def test_finds_plan_with_skip(self):
+        """The parser extracts a plan line."""
+        parser = Parser()
+
+        line = parser.parse_line('1..42 # Skipping this test file.')
+
+        self.assertEqual('plan', line.category)
+        self.assertTrue(line.skip)
+
+    def test_ignores_plan_with_any_non_skip_directive(self):
+        """The parser only recognizes SKIP directives in plans."""
+        parser = Parser()
+
+        line = parser.parse_line('1..42 # TODO will not work.')
+
+        self.assertEqual('unknown', line.category)

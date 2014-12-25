@@ -3,7 +3,7 @@
 import re
 
 from tap.directive import Directive
-from tap.line import Bail, Diagnostic, Result, Unknown, Version
+from tap.line import Bail, Diagnostic, Plan, Result, Unknown, Version
 
 
 class Parser(object):
@@ -21,6 +21,14 @@ class Parser(object):
     """
     ok = re.compile(r'^ok' + result_base, re.VERBOSE)
     not_ok = re.compile(r'^not\ ok' + result_base, re.VERBOSE)
+    plan = re.compile(r"""
+        ^1..(?P<expected>\d+) # Match the plan details.
+        [^#]*                 # Consume any non-hash character to confirm only
+                              # directives appear with the plan details.
+        \#?                   # Optional directive marker.
+        \s*                   # Optional whitespace.
+        (?P<directive>.*)     # Optional directive text.
+    """, re.VERBOSE)
     diagnostic = re.compile(r'^#')
     bail = re.compile(r"""
         ^Bail\ out!
@@ -44,6 +52,10 @@ class Parser(object):
         if self.diagnostic.match(text):
             return Diagnostic(text)
 
+        match = self.plan.match(text)
+        if match:
+            return self.parse_plan(match)
+
         match = self.bail.match(text)
         if match:
             return Bail(match.group('reason'))
@@ -52,8 +64,18 @@ class Parser(object):
         if match:
             return self.parse_version(match)
 
-        # TODO: Integrate with all the other line types.
         return Unknown()
+
+    def parse_plan(self, match):
+        """Parse a matching plan line."""
+        expected_tests = int(match.group('expected'))
+        directive = Directive(match.group('directive'))
+
+        # Only SKIP directives are allowed in the plan.
+        if directive.text and not directive.skip:
+            return Unknown()
+
+        return Plan(expected_tests, directive)
 
     def parse_result(self, ok, match):
         """Parse a matching result line into a result instance."""
