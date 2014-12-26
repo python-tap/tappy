@@ -39,6 +39,12 @@ class Parser(object):
 
     TAP_MINIMUM_DECLARED_VERSION = 13
 
+    def parse_file(self, filename):
+        """Parse a TAP file and determine what each line in the file is."""
+        with open(filename, 'r') as tap_file:
+            for line in tap_file:
+                yield self.parse_line(line.rstrip())
+
     def parse_line(self, text):
         """Parse a line into whatever TAP category it belongs."""
         match = self.ok.match(text)

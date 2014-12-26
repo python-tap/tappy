@@ -1,5 +1,7 @@
 # Copyright (c) 2014, Matt Layman
 
+import inspect
+import tempfile
 import unittest
 
 from tap.parser import Parser
@@ -136,3 +138,24 @@ class TestParser(unittest.TestCase):
         line = parser.parse_line('1..42 # TODO will not work.')
 
         self.assertEqual('unknown', line.category)
+
+    def test_parses_file(self):
+        sample = inspect.cleandoc(
+            """1..2
+            ok 1 A passing test
+            not ok 2 A failing test""")
+        temp = tempfile.NamedTemporaryFile(delete=False)
+        temp.write(sample)
+        temp.close()
+        parser = Parser()
+        lines = []
+
+        for line in parser.parse_file(temp.name):
+            lines.append(line)
+
+        self.assertEqual(3, len(lines))
+        self.assertEqual('plan', lines[0].category)
+        self.assertEqual('test', lines[1].category)
+        self.assertTrue(lines[1].ok)
+        self.assertEqual('test', lines[2].category)
+        self.assertFalse(lines[2].ok)
