@@ -145,7 +145,7 @@ class TestParser(unittest.TestCase):
             ok 1 A passing test
             not ok 2 A failing test""")
         temp = tempfile.NamedTemporaryFile(delete=False)
-        temp.write(sample)
+        temp.write(sample.encode('utf-8'))
         temp.close()
         parser = Parser()
         lines = []
