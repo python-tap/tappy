@@ -21,7 +21,7 @@ class TestTAPTestRunner(unittest.TestCase):
         the unittest classes aren't very extensible.
         """
         # Save the previous outdir in case **this** execution was using it.
-        previous_outdir = TAPTestResult
+        previous_outdir = TAPTestResult.OUTDIR
         outdir = tempfile.mkdtemp()
 
         TAPTestRunner.set_outdir(outdir)
