@@ -123,5 +123,3 @@ class Unknown(Line):
     @property
     def category(self):
         return 'unknown'
-
-# TODO: Plan line

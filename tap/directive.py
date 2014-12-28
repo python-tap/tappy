@@ -6,11 +6,15 @@ import re
 class Directive(object):
     """A representation of a result line directive."""
 
-    skip_pattern = re.compile(r'^SKIP\S*', re.IGNORECASE)
+    skip_pattern = re.compile(
+        r"""^SKIP\S*
+            (?P<whitespace>\s*) # Optional whitespace.
+            (?P<reason>.*)      # Slurp up the rest.""",
+        re.IGNORECASE | re.VERBOSE)
     todo_pattern = re.compile(
         r"""^TODO\b             # The directive name
             (?P<whitespace>\s*) # Immediately following must be whitespace.
-            (?P<remainder>.*)   # Slurp up the rest.""",
+            (?P<reason>.*)      # Slurp up the rest.""",
         re.IGNORECASE | re.VERBOSE)
 
     def __init__(self, text):
@@ -21,10 +25,12 @@ class Directive(object):
         self._text = text
         self._skip = False
         self._todo = False
+        self._reason = None
 
         match = self.skip_pattern.match(text)
         if match:
             self._skip = True
+            self._reason = match.group('reason')
 
         match = self.todo_pattern.match(text)
         if match:
@@ -32,8 +38,9 @@ class Directive(object):
                 self._todo = True
             else:
                 # Catch the case where the directive has no descriptive text.
-                if match.group('remainder') == '':
+                if match.group('reason') == '':
                     self._todo = True
+            self._reason = match.group('reason')
 
     @property
     def text(self):
@@ -49,3 +56,8 @@ class Directive(object):
     def todo(self):
         """Check if the directive is a TODO type."""
         return self._todo
+
+    @property
+    def reason(self):
+        """Get the reason for the directive."""
+        return self._reason

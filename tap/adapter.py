@@ -4,21 +4,55 @@ from tap.parser import Parser
 
 
 class Adapter(object):
-    """The adapter parses a TAP file and updates unittest's results.
+    """The adapter parses a TAP file and updates a unittest result.
 
     It is an alternative to TestCase to collect TAP results.
     """
+
+    ignored_lines = set(['diagnostic', 'unknown', 'version'])
 
     def __init__(self, filename):
         self._filename = filename
         self._parser = Parser()
 
-    def __call__(self, results):
-        """Update test results with the lines in the TAP file.
+    def __call__(self, result):
+        """Update test result with the lines in the TAP file.
 
         Provide the interface that TestCase provides to a suite or runner.
         """
         # TODO: Check if the file exists. Add error and abort if it doesn't.
         for line in self._parser.parse_file(self._filename):
-            # TODO: Inspect line category and update results.
+            if line.category in self.ignored_lines:
+                continue
+
+            handler = getattr(self, 'handle_' + line.category)
+            handler(line, result)
+
+    def handle_test(self, line, result):
+        # TODO: Pass in a fake test case that has all the internal APIs.
+        """Handle a test result line."""
+        if line.skip:
+            result.addSkip(None, line.directive.reason)
+            return
+
+        if line.todo:
+            if line.ok:
+                result.addUnexpectedSuccess(None)
+            else:
+                # TODO: make it work
+                pass
+            return
+
+        if line.ok:
+            result.addSuccess(None)
+        else:
+            # TODO: handle failure
             pass
+
+    def handle_plan(self, line, result):
+        """Handle a plan line."""
+        # TODO: Deal with the plan specific logic.
+
+    def handle_bail(self, line, result):
+        """Handle a plan line."""
+        # TODO: Abort further processing of the test case.
