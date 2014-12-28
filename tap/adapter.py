@@ -32,12 +32,20 @@ class Adapter(object):
         # TODO: Pass in a fake test case that has all the internal APIs.
         """Handle a test result line."""
         if line.skip:
-            result.addSkip(None, line.directive.reason)
+            try:
+                result.addSkip(None, line.directive.reason)
+            except AttributeError:
+                # Python 2.6 does not support skipping.
+                result.addSuccess(None)
             return
 
         if line.todo:
             if line.ok:
-                result.addUnexpectedSuccess(None)
+                try:
+                    result.addUnexpectedSuccess(None)
+                except AttributeError:
+                    # TODO: Set as addFailure with full directive text.
+                    pass
             else:
                 # TODO: make it work
                 pass

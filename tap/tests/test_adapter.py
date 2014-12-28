@@ -1,6 +1,7 @@
 # Copyright (c) 2014, Matt Layman
 
 import inspect
+import sys
 import tempfile
 
 import mock
@@ -52,6 +53,10 @@ class TestAdapter(TestCase):
 
     def test_handles_skip_test_line(self):
         """Add a skip when a test line contains a skip directive."""
+        # Don't test on Python 2.6.
+        if sys.version_info[0] == 2 and sys.version_info[1] == 6:
+            return
+
         adapter = Adapter(None)
         result = self.factory.make_test_result()
         skip_line = self.factory.make_ok(
@@ -64,6 +69,10 @@ class TestAdapter(TestCase):
 
     def test_handles_ok_todo_test_line(self):
         """Add an unexpected success for an ok todo test line."""
+        # Don't test on Python 2.6.
+        if sys.version_info[0] == 2 and sys.version_info[1] == 6:
+            return
+
         adapter = Adapter(None)
         result = self.factory.make_test_result()
         todo_line = self.factory.make_ok(
