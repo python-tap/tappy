@@ -22,6 +22,7 @@ class Adapter(object):
         """
         # TODO: Check if the file exists. Add error and abort if it doesn't.
         for line in self._parser.parse_file(self._filename):
+
             if line.category in self.ignored_lines:
                 continue
 
@@ -29,6 +30,9 @@ class Adapter(object):
             handler(line, result)
 
     def handle_test(self, line, result):
+        # Each line counts as a test that needs to be "started."
+        result.startTest(self)
+
         # TODO: Pass in a fake test case that has all the internal APIs.
         """Handle a test result line."""
         if line.skip:
