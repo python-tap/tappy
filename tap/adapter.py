@@ -15,6 +15,11 @@ class Adapter(object):
         self._filename = filename
         self._parser = Parser()
 
+    def shortDescription(self):
+        """Get the short description for verbeose results."""
+        # TODO: Make the adapter work on one line and return its description.
+        return 'Adapter instance'
+
     def __call__(self, result):
         """Update test result with the lines in the TAP file.
 
@@ -68,3 +73,6 @@ class Adapter(object):
     def handle_bail(self, line, result):
         """Handle a plan line."""
         # TODO: Abort further processing of the test case.
+
+    def __repr__(self):
+        return '<file={filename}>'.format(filename=self._filename)

@@ -17,7 +17,7 @@ def main(argv=sys.argv):
     for filename in args.files:
         suite.addTest(Adapter(filename))
 
-    runner = unittest.TextTestRunner()
+    runner = unittest.TextTestRunner(verbosity=args.verbose)
     runner.run(suite)
 
 
@@ -28,6 +28,9 @@ def parse_args(argv):
         'files', metavar='FILE', nargs='+', help=(
             'A file containing TAP output. Any directories listed will be '
             'scanned for files to include as TAP files.'))
+    parser.add_argument(
+        '-v', '--verbose', action='store_const', default=1, const=2,
+        help='use verbose messages')
 
     # argparse expects the executable to be removed from argv.
     args = parser.parse_args(argv[1:])
