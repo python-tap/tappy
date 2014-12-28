@@ -1,8 +1,11 @@
 # Copyright (c) 2014, Matt Layman
 
+import os
 import unittest
 
 from tap.adapter import Adapter
+from tap.directive import Directive
+from tap.line import Result
 from tap.parser import Parser
 
 
@@ -24,8 +27,15 @@ class Loader(object):
 
     def load_suite_from_file(self, filename):
         """Load a test suite with test lines from the provided TAP file."""
-        # TODO: Check if the file exists. Add error and abort if it doesn't.
         suite = unittest.TestSuite()
+
+        if not os.path.exists(filename):
+            error_line = Result(
+                False, 1, '{0} does not exist.'.format(filename),
+                Directive(''))
+            suite.addTest(Adapter(filename, error_line))
+            return suite
+
         for line in self._parser.parse_file(filename):
             if line.category in self.ignored_lines:
                 continue

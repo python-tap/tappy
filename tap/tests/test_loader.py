@@ -29,3 +29,13 @@ class TestLoader(TestCase):
         suite = loader.load_suite_from_file(temp.name)
 
         self.assertEqual(2, len(suite._tests))
+
+    def test_file_does_not_exist(self):
+        """The loader records a failure when a file does not exist."""
+        loader = Loader()
+
+        suite = loader.load_suite_from_file('phony.tap')
+
+        self.assertEqual(1, len(suite._tests))
+        self.assertEqual(
+            'phony.tap does not exist.', suite._tests[0]._line.description)
