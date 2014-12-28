@@ -4,18 +4,15 @@ import argparse
 import sys
 import unittest
 
-from tap.adapter import Adapter
+from tap.loader import Loader
 
 
 def main(argv=sys.argv):
     """Entry point for ``tappy`` command."""
     args = parse_args(argv)
 
-    # TODO: Factor out into a loader.
-    # TODO: Handle directories.
-    suite = unittest.TestSuite()
-    for filename in args.files:
-        suite.addTest(Adapter(filename))
+    loader = Loader()
+    suite = loader.load(args.files)
 
     runner = unittest.TextTestRunner(verbosity=args.verbose)
     runner.run(suite)
