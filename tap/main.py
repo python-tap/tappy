@@ -7,16 +7,20 @@ import unittest
 from tap.loader import Loader
 
 
-def main(argv=sys.argv):
+def main(argv=sys.argv, stream=sys.stderr):
     """Entry point for ``tappy`` command."""
     args = parse_args(argv)
 
     loader = Loader()
     suite = loader.load(args.files)
 
-    runner = unittest.TextTestRunner(verbosity=args.verbose)
-    runner.run(suite)
-    # TODO: Set exit code based on run status.
+    runner = unittest.TextTestRunner(verbosity=args.verbose, stream=stream)
+    result = runner.run(suite)
+
+    if result.wasSuccessful():
+        return 0
+    else:
+        return 1
 
 
 def parse_args(argv):
