@@ -8,7 +8,7 @@ Developer documentation is on
 from setuptools import find_packages, setup
 import sys
 
-__version__ = '1.2'
+__version__ = '1.3'
 
 # The docs import setup.py for the version so only call setup when not behaving
 # as a module.
@@ -54,7 +54,7 @@ if __name__ == '__main__':
         platforms='any',
         install_requires=install_requires,
         classifiers=[
-            'Development Status :: 4 - Beta',
+            'Development Status :: 5 - Production/Stable',
             'Environment :: Console',
             'Intended Audience :: Developers',
             'License :: OSI Approved :: BSD License',

@@ -1,6 +1,13 @@
 Releases
 ========
 
+Version 1.3, In Development
+---------------------------
+
+* The ``tappy`` command line tool is available as a TAP consumer.
+* The ``Parser`` and ``Loader`` are available as APIs for programmatic
+  handling of TAP files and data.
+
 Version 1.2, Released December 21, 2014
 ---------------------------------------
 

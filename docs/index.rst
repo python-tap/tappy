@@ -2,10 +2,16 @@ tappy - TAP tools for Python
 ============================
 
 tappy provides tools for working with the Test Anything Protocol (TAP) in
-Python. tappy generates TAP output from your ``unittest`` test cases. You
+Python.
+
+tappy generates TAP output from your ``unittest`` test cases. You
 can use the TAP output files with a tool like the `Jenkins TAP plugin
 <https://wiki.jenkins-ci.org/display/JENKINS/TAP+Plugin>`_ or any other TAP
 consumer.
+
+tappy also provides a ``tappy`` command line tool as a TAP consumer. This tool
+can read TAP files and display the results like a normal Python test runner.
+The other TAP consumers are Python APIs for programmatic access to TAP files.
 
 For the curious: tappy sounds like "happy."
 
@@ -28,6 +34,7 @@ Documentation
    :maxdepth: 2
 
    producers
+   consumers
    highlighter
    contributing
    releases

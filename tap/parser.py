@@ -40,7 +40,11 @@ class Parser(object):
     TAP_MINIMUM_DECLARED_VERSION = 13
 
     def parse_file(self, filename):
-        """Parse a TAP file and determine what each line in the file is."""
+        """Parse a TAP file and determine what each line in the file is.
+
+        This is a generator method that will yield each parsed line. The
+        filename is assumed to exist.
+        """
         with open(filename, 'r') as tap_file:
             for line in tap_file:
                 yield self.parse_line(line.rstrip())
@@ -49,18 +53,18 @@ class Parser(object):
         """Parse a line into whatever TAP category it belongs."""
         match = self.ok.match(text)
         if match:
-            return self.parse_result(True, match)
+            return self._parse_result(True, match)
 
         match = self.not_ok.match(text)
         if match:
-            return self.parse_result(False, match)
+            return self._parse_result(False, match)
 
         if self.diagnostic.match(text):
             return Diagnostic(text)
 
         match = self.plan.match(text)
         if match:
-            return self.parse_plan(match)
+            return self._parse_plan(match)
 
         match = self.bail.match(text)
         if match:
@@ -68,11 +72,11 @@ class Parser(object):
 
         match = self.version.match(text)
         if match:
-            return self.parse_version(match)
+            return self._parse_version(match)
 
         return Unknown()
 
-    def parse_plan(self, match):
+    def _parse_plan(self, match):
         """Parse a matching plan line."""
         expected_tests = int(match.group('expected'))
         directive = Directive(match.group('directive'))
@@ -83,13 +87,13 @@ class Parser(object):
 
         return Plan(expected_tests, directive)
 
-    def parse_result(self, ok, match):
+    def _parse_result(self, ok, match):
         """Parse a matching result line into a result instance."""
         return Result(
             ok, match.group('number'), match.group('description').strip(),
             Directive(match.group('directive')))
 
-    def parse_version(self, match):
+    def _parse_version(self, match):
         version = int(match.group('version'))
         if version < self.TAP_MINIMUM_DECLARED_VERSION:
             raise ValueError('It is an error to explicitly specify '

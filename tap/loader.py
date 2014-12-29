@@ -18,7 +18,10 @@ class Loader(object):
         self._parser = Parser()
 
     def load(self, files):
-        """Load any files found into a suite."""
+        """Load any files found into a suite.
+
+        Any directories are walked and their files are added as TAP files.
+        """
         # TODO: Handle directories
         suite = unittest.TestSuite()
         for filename in files:

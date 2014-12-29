@@ -52,16 +52,21 @@ Producers
 *   tappy for [nose][ns] - tappy provides a plugin for the **nose**
     testing tool.
 
+Consumers
+---------
+
+*   `tappy` - A command line tool for processing TAP files.
+*   `Loader` and `Parser` - Python APIs for low level handling of TAP files and
+    data.
+
 TODOs
 -----
 
-There is a lot to do.
-
-*   TODO: Create an API similar to Test::Harness (if it makes sense to do so) to provide programmatic access to TAP results within Python programs.
-*   TODO: Create an executable `tappy` which should function like `prove`.
 *   TODO: Use travis to do an end to end test. Run the test suite to generate
     TAP and use `tappy` to parse and verify the results. The results should
     always be the same.
+*   TODO: After release of 1.3, get tappy listed as a TAP consumer on
+    testanything.org.
 
 [fury]: https://badge.fury.io/py/tap.py.png
 [pypip]: https://pypip.in/d/tap.py/badge.png
