@@ -1,0 +1,18 @@
+TAP version 13
+1..7
+
+# This is a full sample TAP file.
+It should try all the functionality of TAP.
+
+ok 1 A passing test
+not ok A failing test
+
+ok 3 An unexpected success # TODO That was unexpected.
+not ok 4 An expected failure # TODO Because it is not done yet.
+
+ok 5 A skipped test # SKIP Because. Just because.
+not ok 6 A skipped test # SKIP Failing or not does not matter.
+
+Bail out! Something blew up.
+
+ok 7 This should not have happened because the test supposedly bailed out.

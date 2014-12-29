@@ -6,6 +6,7 @@ class Adapter(object):
 
     It is an alternative to TestCase to collect TAP results.
     """
+    failureException = AssertionError
 
     def __init__(self, filename, line):
         self._filename = filename
@@ -20,35 +21,43 @@ class Adapter(object):
 
         Provide the interface that TestCase provides to a suite or runner.
         """
-        # Each line counts as a test that needs to be "started."
         result.startTest(self)
 
-        # TODO: Pass in a fake test case that has all the internal APIs.
         if self._line.skip:
             try:
                 result.addSkip(None, self._line.directive.reason)
             except AttributeError:
                 # Python 2.6 does not support skipping.
-                result.addSuccess(None)
+                result.addSuccess(self)
             return
 
         if self._line.todo:
             if self._line.ok:
                 try:
-                    result.addUnexpectedSuccess(None)
+                    result.addUnexpectedSuccess(self)
                 except AttributeError:
-                    # TODO: Set as addFailure with full directive text.
-                    pass
+                    # Python 2.6 does not support unexpected success..
+                    self.addFailure(result)
             else:
-                # TODO: make it work
-                pass
+                try:
+                    result.addExpectedFailure(self, ('', Exception(), None))
+                except KeyError:
+                    # Python 2.6 does not support expected failures.
+                    result.addSuccess(self)
             return
 
         if self._line.ok:
-            result.addSuccess(None)
+            result.addSuccess(self)
         else:
-            # TODO: handle failure
-            pass
+            self.addFailure(result)
+
+    def addFailure(self, result):
+        """Add a failure to the result."""
+        result.addFailure(self, ('', None, None))
+        # Since TAP will not provide assertion data, clean up the assertion
+        # section so it is not so spaced out.
+        test, err = result.failures[-1]
+        result.failures[-1] = (test, '')
 
     def __repr__(self):
         return '<file={filename}>'.format(filename=self._filename)

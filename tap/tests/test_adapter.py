@@ -58,3 +58,18 @@ class TestAdapter(TestCase):
         adapter(result)
 
         self.assertEqual(1, len(result.unexpectedSuccesses))
+
+    def test_handles_not_ok_todo_test_line(self):
+        """Add an expected failure for a not ok todo test line."""
+        # Don't test on Python 2.6.
+        if sys.version_info[0] == 2 and sys.version_info[1] == 6:
+            return
+
+        todo_line = self.factory.make_not_ok(
+            directive_text='TODO An incomplete test')
+        adapter = Adapter('fake.tap', todo_line)
+        result = self.factory.make_test_result()
+
+        adapter(result)
+
+        self.assertEqual(1, len(result.expectedFailures))

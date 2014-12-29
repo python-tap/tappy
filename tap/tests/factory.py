@@ -18,6 +18,10 @@ class Factory(object):
         return Result(
             True, 1, 'This is a description.', Directive(directive_text))
 
+    def make_not_ok(self, directive_text=''):
+        return Result(
+            False, 1, 'This is a description.', Directive(directive_text))
+
     def make_test_result(self):
         stream = tempfile.TemporaryFile(mode='w')
         return TextTestResult(stream, None, 1)

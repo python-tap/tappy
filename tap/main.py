@@ -16,6 +16,7 @@ def main(argv=sys.argv):
 
     runner = unittest.TextTestRunner(verbosity=args.verbose)
     runner.run(suite)
+    # TODO: Set exit code based on run status.
 
 
 def parse_args(argv):
