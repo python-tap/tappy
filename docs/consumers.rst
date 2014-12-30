@@ -61,8 +61,6 @@ The API specifics are listed below.
 The parser returns ``Line`` instances. Each line contains different properties
 depending on its category.
 
-# TODO: Document the properties so that it is clear what each line will do.
-
 .. autoclass:: tap.line.Result
    :members:
 

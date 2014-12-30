@@ -99,6 +99,3 @@ class Parser(object):
             raise ValueError('It is an error to explicitly specify '
                              'any version lower than 13.')
         return Version(version)
-
-# TODO: Introduce a Rules class that will track and enforce critical state
-# during parsing of a TAP file (e.g., position of the plan line).

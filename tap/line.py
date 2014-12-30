@@ -26,26 +26,44 @@ class Result(Line):
 
     @property
     def category(self):
+        """:returns: ``test``"""
         return 'test'
 
     @property
     def ok(self):
+        """Get the ok status.
+
+        :rtype: bool
+        """
         return self._ok
 
     @property
     def number(self):
+        """Get the test number.
+
+        :rtype: int
+        """
         return self._number
 
     @property
     def description(self):
+        """Get the description."""
         return self._description
 
     @property
     def skip(self):
+        """Check if this test was skipped.
+
+        :rtype: bool
+        """
         return self.directive.skip
 
     @property
     def todo(self):
+        """Check if this test was a TODO.
+
+        :rtype: bool
+        """
         return self.directive.todo
 
 
@@ -58,14 +76,23 @@ class Plan(Line):
 
     @property
     def category(self):
+        """:returns: ``plan``"""
         return 'plan'
 
     @property
     def expected_tests(self):
+        """Get the number of expected tests.
+
+        :rtype: int
+        """
         return self._expected_tests
 
     @property
     def skip(self):
+        """Check if this plan should skip the file.
+
+        :rtype: bool
+        """
         return self.directive.skip
 
 
@@ -77,10 +104,12 @@ class Diagnostic(Line):
 
     @property
     def category(self):
+        """:returns: ``diagnostic``"""
         return 'diagnostic'
 
     @property
     def text(self):
+        """Get the text."""
         return self._text
 
 
@@ -92,10 +121,12 @@ class Bail(Line):
 
     @property
     def category(self):
+        """:returns: ``bail``"""
         return 'bail'
 
     @property
     def reason(self):
+        """Get the reason."""
         return self._reason
 
 
@@ -107,11 +138,15 @@ class Version(Line):
 
     @property
     def category(self):
+        """:returns: ``version``"""
         return 'version'
 
     @property
     def version(self):
-        """Get the version number."""
+        """Get the version number.
+
+        :rtype: int
+        """
         return self._version
 
 
@@ -122,4 +157,5 @@ class Unknown(Line):
     """
     @property
     def category(self):
+        """:returns: ``unknown``"""
         return 'unknown'

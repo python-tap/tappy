@@ -59,12 +59,6 @@ Consumers
 *   `Loader` and `Parser` - Python APIs for low level handling of TAP files and
     data.
 
-TODOs
------
-
-*   TODO: After release of 1.3, get tappy listed as a TAP consumer on
-    testanything.org.
-
 [fury]: https://badge.fury.io/py/tap.py.png
 [pypip]: https://pypip.in/d/tap.py/badge.png
 [travis]: https://travis-ci.org/mblayman/tappy.png?branch=master
