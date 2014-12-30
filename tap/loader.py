@@ -21,6 +21,8 @@ class Loader(object):
         """Load any files found into a suite.
 
         Any directories are walked and their files are added as TAP files.
+
+        :returns: A ``unittest.TestSuite`` instance
         """
         suite = unittest.TestSuite()
         for filepath in files:
@@ -31,7 +33,10 @@ class Loader(object):
         return suite
 
     def load_suite_from_file(self, filename):
-        """Load a test suite with test lines from the provided TAP file."""
+        """Load a test suite with test lines from the provided TAP file.
+
+        :returns: A ``unittest.TestSuite`` instance
+        """
         suite = unittest.TestSuite()
 
         if not os.path.exists(filename):
