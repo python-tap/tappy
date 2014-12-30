@@ -22,10 +22,12 @@ class Loader(object):
 
         Any directories are walked and their files are added as TAP files.
         """
-        # TODO: Handle directories
         suite = unittest.TestSuite()
-        for filename in files:
-            suite.addTest(self.load_suite_from_file(filename))
+        for filepath in files:
+            if os.path.isdir(filepath):
+                self._find_tests_in_directory(filepath, suite)
+            else:
+                suite.addTest(self.load_suite_from_file(filepath))
         return suite
 
     def load_suite_from_file(self, filename):
@@ -52,3 +54,10 @@ class Loader(object):
                 # TODO: Abort further processing of the test case.
                 pass
         return suite
+
+    def _find_tests_in_directory(self, directory, suite):
+        """Find test files in the directory and add them to the suite."""
+        for dirpath, dirnames, filenames in os.walk(directory):
+            for filename in filenames:
+                filepath = os.path.join(dirpath, filename)
+                suite.addTest(self.load_suite_from_file(filepath))

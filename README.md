@@ -62,9 +62,6 @@ Consumers
 TODOs
 -----
 
-*   TODO: Use travis to do an end to end test. Run the test suite to generate
-    TAP and use `tappy` to parse and verify the results. The results should
-    always be the same.
 *   TODO: After release of 1.3, get tappy listed as a TAP consumer on
     testanything.org.
 

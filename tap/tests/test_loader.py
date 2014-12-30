@@ -1,6 +1,7 @@
 # Copyright (c) 2014, Matt Layman
 
 import inspect
+import os
 import tempfile
 
 from tap.loader import Loader
@@ -39,3 +40,17 @@ class TestLoader(TestCase):
         self.assertEqual(1, len(suite._tests))
         self.assertEqual(
             'phony.tap does not exist.', suite._tests[0]._line.description)
+
+    def test_handles_directory(self):
+        directory = tempfile.mkdtemp()
+        sub_directory = os.path.join(directory, 'sub')
+        os.mkdir(sub_directory)
+        with open(os.path.join(directory, 'a_file.tap'), 'w') as f:
+            f.write('ok A passing test')
+        with open(os.path.join(sub_directory, 'another_file.tap'), 'w') as f:
+            f.write('not ok A failing test')
+        loader = Loader()
+
+        suite = loader.load([directory])
+
+        self.assertEqual(2, len(suite._tests))
