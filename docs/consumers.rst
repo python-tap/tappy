@@ -1,7 +1,7 @@
 TAP Consumers
 =============
 
-tappy tool
+tappy Tool
 ----------
 
 The ``tappy`` command line tool is a `TAP consumer
@@ -57,6 +57,9 @@ The API specifics are listed below.
 
 .. autoclass:: tap.parser.Parser
    :members:
+
+Line Categories
+~~~~~~~~~~~~~~~
 
 The parser returns ``Line`` instances. Each line contains different properties
 depending on its category.

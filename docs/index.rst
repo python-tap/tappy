@@ -11,7 +11,8 @@ consumer.
 
 tappy also provides a ``tappy`` command line tool as a TAP consumer. This tool
 can read TAP files and display the results like a normal Python test runner.
-The other TAP consumers are Python APIs for programmatic access to TAP files.
+tappy provides other TAP consumers via Python APIs for programmatic access to
+TAP files.
 
 For the curious: tappy sounds like "happy."
 
@@ -19,8 +20,7 @@ Installation
 ------------
 
 tappy is available for download from `PyPI
-<https://pypi.python.org/pypi/tap.py>`_.  You can install it with Python's
-standard install tools (e.g., ``pip``). tappy is currently supported on
+<https://pypi.python.org/pypi/tap.py>`_. tappy is currently supported on
 Python 2.6, 2.7, 3.2, 3.3, 3.4, and PyPy.
 
 .. code-block:: bash

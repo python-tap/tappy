@@ -1,8 +1,9 @@
 TAP Syntax Highlighter for Pygments
 ===================================
 
-tappy implements a Pygments extension for syntax highlighting of TAP files. Any
-project that uses Pygments, like Sphinx, can take advantage of this feature.
+tappy implements a `Pygments <http://pygments.org/>`_ extension for syntax
+highlighting of TAP files. Any project that uses Pygments, like
+`Sphinx <http://sphinx-doc.org/>`_, can take advantage of this feature.
 Below is an example usage for Sphinx.
 
 .. code-block:: rst
