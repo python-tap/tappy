@@ -54,3 +54,37 @@ class TestLoader(TestCase):
         suite = loader.load([directory])
 
         self.assertEqual(2, len(suite._tests))
+
+    def test_errors_with_multiple_version_lines(self):
+        sample = inspect.cleandoc(
+            """TAP version 13
+            TAP version 13
+            """)
+        temp = tempfile.NamedTemporaryFile(delete=False)
+        temp.write(sample.encode('utf-8'))
+        temp.close()
+        loader = Loader()
+
+        suite = loader.load_suite_from_file(temp.name)
+
+        self.assertEqual(1, len(suite._tests))
+        self.assertEqual(
+            'Multiple version lines appeared.',
+            suite._tests[0]._line.description)
+
+    def test_errors_with_version_not_on_first_line(self):
+        sample = inspect.cleandoc(
+            """# Something that doesn't belong.
+            TAP version 13
+            """)
+        temp = tempfile.NamedTemporaryFile(delete=False)
+        temp.write(sample.encode('utf-8'))
+        temp.close()
+        loader = Loader()
+
+        suite = loader.load_suite_from_file(temp.name)
+
+        self.assertEqual(1, len(suite._tests))
+        self.assertEqual(
+            'The version must be on the first line.',
+            suite._tests[0]._line.description)

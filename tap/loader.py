@@ -12,7 +12,7 @@ from tap.parser import Parser
 class Loader(object):
     """Load TAP lines into unittest-able objects."""
 
-    ignored_lines = set(['diagnostic', 'unknown', 'version'])
+    ignored_lines = set(['diagnostic', 'unknown'])
 
     def __init__(self):
         self._parser = Parser()
@@ -40,13 +40,17 @@ class Loader(object):
         suite = unittest.TestSuite()
 
         if not os.path.exists(filename):
-            error_line = Result(
-                False, 1, '{0} does not exist.'.format(filename),
-                Directive(''))
-            suite.addTest(Adapter(filename, error_line))
+            self._add_error(
+                filename, '{0} does not exist.'.format(filename), suite)
             return suite
 
+        # Keep track of how many times plan and version lines are seen.
+        lines_seen = {'plan': [], 'version': []}
+        lines_counter = 0
+
         for line in self._parser.parse_file(filename):
+            lines_counter += 1
+
             if line.category in self.ignored_lines:
                 continue
 
@@ -58,7 +62,17 @@ class Loader(object):
             elif line.category == 'bail':
                 # TODO: Abort further processing of the test case.
                 pass
+            elif line.category == 'version':
+                lines_seen['version'].append(lines_counter)
+
+        if lines_seen['version']:
+            self._process_version_lines(lines_seen['version'], filename, suite)
         return suite
+
+    def _add_error(self, filename, message, suite):
+        """Add an error test to the suite."""
+        error_line = Result(False, None, message, Directive(''))
+        suite.addTest(Adapter(filename, error_line))
 
     def _find_tests_in_directory(self, directory, suite):
         """Find test files in the directory and add them to the suite."""
@@ -66,3 +80,12 @@ class Loader(object):
             for filename in filenames:
                 filepath = os.path.join(dirpath, filename)
                 suite.addTest(self.load_suite_from_file(filepath))
+
+    def _process_version_lines(self, version_lines, filename, suite):
+        """Process version line rules."""
+        if len(version_lines) > 1:
+            self._add_error(
+                filename, 'Multiple version lines appeared.', suite)
+        elif version_lines[0] != 1:
+            self._add_error(
+                filename, 'The version must be on the first line.', suite)
