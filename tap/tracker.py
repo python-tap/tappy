@@ -1,4 +1,4 @@
-# Copyright (c) 2014, Matt Layman
+# Copyright (c) 2015, Matt Layman
 
 from __future__ import print_function
 from collections import namedtuple

@@ -1,4 +1,4 @@
-# Copyright (c) 2014, Matt Layman
+# Copyright (c) 2015, Matt Layman
 """
 Follow tappy development on `GitHub <https://github.com/mblayman/tappy>`_.
 Developer documentation is on
