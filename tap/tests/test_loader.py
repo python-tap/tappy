@@ -88,3 +88,19 @@ class TestLoader(TestCase):
         self.assertEqual(
             'The version must be on the first line.',
             suite._tests[0]._line.description)
+
+    def test_skip_plan_aborts_loading(self):
+        sample = inspect.cleandoc(
+            """1..0 # Skipping this test file.
+            ok This should not get processed.
+            """)
+        temp = tempfile.NamedTemporaryFile(delete=False)
+        temp.write(sample.encode('utf-8'))
+        temp.close()
+        loader = Loader()
+
+        suite = loader.load_suite_from_file(temp.name)
+
+        self.assertEqual(1, len(suite._tests))
+        self.assertEqual(
+            'Skipping this test file.', suite._tests[0]._line.description)
