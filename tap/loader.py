@@ -52,19 +52,19 @@ class Loader(object):
 
             if line.category == 'test':
                 suite.addTest(Adapter(filename, line))
+                rules.saw_test()
             elif line.category == 'plan':
                 if line.skip:
                     rules.handle_skipping_plan(line)
                     return suite
-                # TODO: Deal with the plan specific logic.
-                pass
+                rules.saw_plan(line, line_counter)
             elif line.category == 'bail':
                 # TODO: Abort further processing of the test case.
                 pass
             elif line.category == 'version':
                 rules.saw_version_at(line_counter)
 
-        rules.check()
+        rules.check(line_counter)
         return suite
 
     def _find_tests_in_directory(self, directory, suite):

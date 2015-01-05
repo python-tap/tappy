@@ -22,3 +22,55 @@ class TestRules(TestCase):
         self.assertEqual(1, len(self.suite._tests))
         self.assertEqual(
             'Skip on Mondays.', self.suite._tests[0]._line.description)
+
+    def test_tracks_plan_line(self):
+        plan = self.factory.make_plan()
+        rules = self._make_one()
+
+        rules.saw_plan(plan, 28)
+
+        self.assertEqual(rules._lines_seen['plan'][0][0], plan)
+        self.assertEqual(rules._lines_seen['plan'][0][1], 28)
+
+    def test_errors_plan_not_at_end(self):
+        plan = self.factory.make_plan()
+        rules = self._make_one()
+        rules.saw_plan(plan, 41)
+
+        rules.check(42)
+
+        self.assertEqual(
+            'A plan must appear at the beginning or end of the file.',
+            self.suite._tests[0]._line.description)
+
+    def test_requires_plan(self):
+        rules = self._make_one()
+
+        rules.check(42)
+
+        self.assertEqual(
+            'Missing a plan.', self.suite._tests[0]._line.description)
+
+    def test_only_one_plan(self):
+        plan = self.factory.make_plan()
+        rules = self._make_one()
+        rules.saw_plan(plan, 41)
+        rules.saw_plan(plan, 42)
+
+        rules.check(42)
+
+        self.assertEqual(
+            'Only one plan line is permitted per file.',
+            self.suite._tests[0]._line.description)
+
+    def test_errors_when_expected_tests_differs_from_actual(self):
+        plan = self.factory.make_plan(expected_tests=42)
+        rules = self._make_one()
+        rules.saw_plan(plan, 1)
+        rules.saw_test()
+
+        rules.check(2)
+
+        self.assertEqual(
+            'Expected 42 tests but only 1 ran.',
+            self.suite._tests[0]._line.description)

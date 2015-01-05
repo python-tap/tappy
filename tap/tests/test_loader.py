@@ -59,6 +59,7 @@ class TestLoader(TestCase):
         sample = inspect.cleandoc(
             """TAP version 13
             TAP version 13
+            1..0
             """)
         temp = tempfile.NamedTemporaryFile(delete=False)
         temp.write(sample.encode('utf-8'))
@@ -76,6 +77,7 @@ class TestLoader(TestCase):
         sample = inspect.cleandoc(
             """# Something that doesn't belong.
             TAP version 13
+            1..0
             """)
         temp = tempfile.NamedTemporaryFile(delete=False)
         temp.write(sample.encode('utf-8'))
