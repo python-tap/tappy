@@ -15,9 +15,8 @@ For the curious: tappy sounds like "happy."
 Installation
 ------------
 
-tappy is available for download from [PyPI][pypi]. You can install it with
-`pip` or `easy_install`. tappy is currently supported on Python 2.6,
-2.7, 3.2, 3.3, 3.4 and PyPy.
+tappy is available for download from [PyPI][pypi]. tappy is currently supported
+on Python 2.6, 2.7, 3.2, 3.3, 3.4 and PyPy.
 
 ```bash
 $ pip install tap.py
@@ -56,8 +55,7 @@ Consumers
 ---------
 
 *   `tappy` - A command line tool for processing TAP files.
-*   `Loader` and `Parser` - Python APIs for low level handling of TAP files and
-    data.
+*   `Loader` and `Parser` - Python APIs for handling of TAP files and data.
 
 [fury]: https://badge.fury.io/py/tap.py.png
 [pypip]: https://pypip.in/d/tap.py/badge.png
