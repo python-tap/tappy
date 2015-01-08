@@ -29,7 +29,8 @@ class TestLoader(TestCase):
 
         suite = loader.load_suite_from_file(temp.name)
 
-        self.assertEqual(2, len(suite._tests))
+        # The bail line counts as a failed test.
+        self.assertEqual(3, len(suite._tests))
 
     def test_file_does_not_exist(self):
         """The loader records a failure when a file does not exist."""

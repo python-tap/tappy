@@ -74,3 +74,14 @@ class TestRules(TestCase):
         self.assertEqual(
             'Expected 42 tests but only 1 ran.',
             self.suite._tests[0]._line.description)
+
+    def test_errors_on_bail(self):
+        bail = self.factory.make_bail(reason='Missing something important.')
+        rules = self._make_one()
+
+        rules.handle_bail(bail)
+
+        self.assertEqual(1, len(self.suite._tests))
+        self.assertEqual(
+            'Bailed: Missing something important.',
+            self.suite._tests[0]._line.description)

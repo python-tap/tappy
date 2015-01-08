@@ -59,8 +59,8 @@ class Loader(object):
                     return suite
                 rules.saw_plan(line, line_counter)
             elif line.category == 'bail':
-                # TODO: Abort further processing of the test case.
-                pass
+                rules.handle_bail(line)
+                return suite
             elif line.category == 'version':
                 rules.saw_version_at(line_counter)
 

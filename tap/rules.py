@@ -61,6 +61,10 @@ class Rules(object):
 
         return False
 
+    def handle_bail(self, bail):
+        """Handle a bail line."""
+        self._add_error('Bailed: {0}'.format(bail.reason))
+
     def handle_file_does_not_exist(self):
         """Handle a test file that does not exist."""
         self._add_error('{0} does not exist.'.format(self._filename))

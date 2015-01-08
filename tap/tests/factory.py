@@ -8,7 +8,7 @@ except ImportError:
     from unittest import _TextTestResult as TextTestResult
 
 from tap.directive import Directive
-from tap.line import Plan, Result
+from tap.line import Bail, Plan, Result
 
 
 class Factory(object):
@@ -21,6 +21,9 @@ class Factory(object):
     def make_not_ok(self, directive_text=''):
         return Result(
             False, 1, 'This is a description.', Directive(directive_text))
+
+    def make_bail(self, reason='Because it is busted.'):
+        return Bail(reason)
 
     def make_plan(self, expected_tests=99, directive_text=''):
         return Plan(expected_tests, Directive(directive_text))
