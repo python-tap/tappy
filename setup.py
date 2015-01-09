@@ -1,5 +1,9 @@
 # Copyright (c) 2015, Matt Layman
 """
+tappy is a set of tools for working with the `Test Anything Protocol (TAP)
+<http://testanything.org/>`_, a line based test protocol for recording test
+data in a standard way.
+
 Follow tappy development on `GitHub <https://github.com/mblayman/tappy>`_.
 Developer documentation is on
 `Read the Docs <https://tappy.readthedocs.org/>`_.
@@ -41,7 +45,7 @@ if __name__ == '__main__':
         license='BSD',
         author='Matt Layman',
         author_email='matthewlayman@gmail.com',
-        description='Tools for working with the Test Anything Protocol (TAP)',
+        description='Test Anything Protocol (TAP) tools',
         long_description=long_description,
         packages=find_packages(),
         entry_points={

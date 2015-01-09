@@ -5,7 +5,9 @@ tappy
 [![Downloads][pypip]](https://pypi.python.org/pypi/tap.py)
 [![Build Status][travis]](https://travis-ci.org/mblayman/tappy)
 
-Tools for working with the Test Anything Protocol (TAP) in Python
+tappy is a set of tools for working with the
+[Test Anything Protocol (TAP)][tap] in Python. TAP is a line based test
+protocol for recording test data in a standard way.
 
 Full documentation for tappy is at [Read the Docs][rtd]. The information
 below provides a synopsis of what tappy supplies.
@@ -57,6 +59,7 @@ Consumers
 *   `tappy` - A command line tool for processing TAP files.
 *   `Loader` and `Parser` - Python APIs for handling of TAP files and data.
 
+[tap]: http://testanything.org/
 [fury]: https://badge.fury.io/py/tap.py.png
 [pypip]: https://pypip.in/d/tap.py/badge.png
 [travis]: https://travis-ci.org/mblayman/tappy.png?branch=master
