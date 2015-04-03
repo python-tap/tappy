@@ -14,6 +14,20 @@ import sys
 
 __version__ = '1.3'
 
+
+def install_requirements():
+    requirements = [
+        'nose',
+        'Pygments==2.0.1',
+        ]
+    if (2, 7, 0) > sys.version_info:
+        requirements.append('argparse')
+
+    if (3, 3, 0) > sys.version_info:
+        requirements.append('mock')
+
+    return requirements
+
 # The docs import setup.py for the version so only call setup when not behaving
 # as a module.
 if __name__ == '__main__':
@@ -22,13 +36,7 @@ if __name__ == '__main__':
 
     long_description = __doc__ + '\n\n' + releases
 
-    install_requires = [
-        'argparse',  # For Python 2.6 support
-        'mock',
-        'nose',
-        'Pygments==2.0.1',
-    ]
-
+    install_requires = install_requirements()
     # Add some developer tools.
     if 'develop' in sys.argv:
         install_requires.extend([
