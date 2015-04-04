@@ -25,7 +25,7 @@ tools, you may use tappy to *replay* tests from .tap files,
 without having to actually run the tests again (which is much
 faster).
 
-It is also a example of how to use the tap consumer API
+It is also an example of how to use the tap consumer API
 provided by the :py:mod:`tap` module.
 
 .. warning::
@@ -47,16 +47,16 @@ Aliases
 -------
 
 When installed from a Debian package, the tappy command can be
-ran against a specific python interpreter. Debian's current
-policy with respect python is to favor Python 3. Thus, if you
-install the :file:`python3-tappy` package, :program:`tappy`
+run against a specific python interpreter. Debian's current
+policy with respect to Python is to favor Python 3. Thus, if
+you install the :file:`python3-tappy` package, :program:`tappy`
 will run with Python 3. You can use the
 :manpage:`update-alternatives(1)` command to change that
-behaviour and favor the version running against the Python 2.
+behaviour and favor the version running against Python 2.
 
 Alternatively you can select the interpreter, by explicitly
 choosing either of the :program:`python-tappy` and
-:program:`python3-tappy` command.
+:program:`python3-tappy` commands.
 
 :manpage:`tappy(1)`, :manpage:`python-tappy(1)`, :manpage:`python3-tappy(1)`
 
