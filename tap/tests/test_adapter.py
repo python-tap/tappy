@@ -2,7 +2,10 @@
 
 import sys
 
-import mock
+try:
+    from unittest import mock
+except ImportError:
+    import mock
 
 from tap.adapter import Adapter
 from tap.tests import TestCase
