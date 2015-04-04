@@ -12,7 +12,7 @@ Developer documentation is on
 from setuptools import find_packages, setup
 import sys
 
-__version__ = '1.3'
+__version__ = '1.4'
 
 
 def install_requirements():
