@@ -3,10 +3,11 @@
 tappy manual page
 =================
 
+
 Synopsis
 --------
 
-**tappy** [*options*] <*pathname*> [*pathname* ...]
+**tappy** [*options*] <*pathname*> [<*pathname*> ...]
 
 
 Description
@@ -35,30 +36,13 @@ provided by the :py:mod:`tap` module.
    and failure messages (e.g. stack traces, ...) that are not
    recorded in tap files.
 
+
 Options
 -------
 
 -h, --help     show a short description and option list
                and exit.
 -v, --verbose  produce verbose output
-
-
-Aliases
--------
-
-When installed from a Debian package, the tappy command can be
-run against a specific python interpreter. Debian's current
-policy with respect to Python is to favor Python 3. Thus, if
-you install the :file:`python3-tappy` package, :program:`tappy`
-will run with Python 3. You can use the
-:manpage:`update-alternatives(1)` command to change that
-behaviour and favor the version running against Python 2.
-
-Alternatively you can select the interpreter, by explicitly
-choosing either of the :program:`python-tappy` and
-:program:`python3-tappy` commands.
-
-:manpage:`tappy(1)`, :manpage:`python-tappy(1)`, :manpage:`python3-tappy(1)`
 
 
 Author
