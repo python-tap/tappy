@@ -1,7 +1,7 @@
 Releases
 ========
 
-Version 1.4, Released April 5, 2015
+Version 1.4, Released April 4, 2015
 -----------------------------------
 
 * Update ``setup.py`` to support Debian packaging. Include man page.
