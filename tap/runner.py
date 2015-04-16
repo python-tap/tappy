@@ -15,6 +15,7 @@ class TAPTestResult(TextTestResult):
 
     # This attribute will store the user's desired output directory.
     OUTDIR = None
+    FORMAT = None
 
     def __init__(self, stream, descriptions, verbosity):
         super(TAPTestResult, self).__init__(stream, descriptions, verbosity)
@@ -56,6 +57,8 @@ class TAPTestResult(TextTestResult):
         return test.__class__.__name__
 
     def _description(self, test):
+        if self.FORMAT:
+            return self.FORMAT.format(sd=test.shortDescription, md=str(test))
         return test.shortDescription() or str(test)
 
 
@@ -72,3 +75,10 @@ class TAPTestRunner(TextTestRunner):
         """
         # Blame the lack of unittest extensibility for this hacky method.
         TAPTestResult.OUTDIR = outdir
+
+    @classmethod
+    def set_format(cls, fmt):
+        """Set the format of each line to a string
+        {mn}: method name
+        {sd}: short description"""
+        TAPTestResult.FORMAT = fmt

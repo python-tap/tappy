@@ -29,3 +29,16 @@ class TestTAPTestRunner(unittest.TestCase):
         self.assertEqual(outdir, TAPTestResult.OUTDIR)
 
         TAPTestResult.OUTDIR = previous_outdir
+
+    def test_runner_uses_format(self):
+        """Test that format is set on TAPTestResult"""
+
+        # Save previous format
+        previous_format = TAPTestResult.FORMAT
+        fmt = "{mn}: {sd}"
+
+        TAPTestRunner.set_format(fmt)
+
+        self.assertEqual(fmt, TAPTestResult.FORMAT)
+
+        TAPTestResult.FORMAT = previous_format

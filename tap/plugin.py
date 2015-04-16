@@ -25,11 +25,17 @@ class TAP(Plugin):
             '--tap-outdir',
             help='An optional output directory to write TAP files to. If the'
                  ' directory does not exist, it will be created.')
+        parser.add_option(
+            '--tap-format',
+            default='',
+            help='An optional format string for the TAP output'
+                '{sd} = short_description, {mn} is method name')
 
     def configure(self, options, conf):
         super(TAP, self).configure(options, conf)
         if self.enabled:
             self.tracker = Tracker(outdir=options.tap_outdir)
+        self._format = getattr(options, "tap_format", '')
 
     def finalize(self, results):
         self.tracker.generate_tap_reports()
@@ -55,4 +61,6 @@ class TAP(Plugin):
         return test.test.__class__.__name__
 
     def _description(self, test):
+        if self._format:
+            return self._format.format(sd=test.shortDescription(), mn=str(test))
         return test.shortDescription() or str(test)
