@@ -31,8 +31,8 @@ class TAP(Plugin):
             '--tap-format',
             default='',
             help='An optional format string for the TAP output'
-                ' {short_description} is test.shortDescription()'
-                ' {method_name} is str(test)')
+                 ' {short_description} is test.shortDescription()'
+                 ' {method_name} is str(test)')
 
     def configure(self, options, conf):
         super(TAP, self).configure(options, conf)
