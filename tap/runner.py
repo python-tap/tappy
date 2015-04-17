@@ -1,6 +1,7 @@
 # Copyright (c) 2015, Matt Layman
 
 from unittest import TextTestRunner
+import sys
 
 # Older versions of Python have the result under a different name.
 try:
@@ -60,12 +61,13 @@ class TAPTestResult(TextTestResult):
         if self.FORMAT:
             try:
                 return self.FORMAT.format(
-                    short_description=test.shortDescription(),
-                    method_name=str(test))
-            except KeyError as e:
-                exit('''Bad format string: {key}
-Replacement options are: \{short_description\} and \{method_name\}'''.format(
-                    key=e[0]))
+                    method_name=str(test),
+                    short_description=test.shortDescription() or '')
+            except KeyError:
+                sys.exit((
+                    'Bad format string: {format}\n'
+                    'Replacement options are: {{short_description}} and '
+                    '{{method_name}}').format(format=self.FORMAT))
 
         return test.shortDescription() or str(test)
 
@@ -86,7 +88,10 @@ class TAPTestRunner(TextTestRunner):
 
     @classmethod
     def set_format(cls, fmt):
-        """Set the format of each line to a string
-        {method_name}: method name
-        {short_description}: short description"""
+        """Set the format of each test line.
+
+        The format string can use:
+        * {method_name}: The test method name
+        * {short_description}: The test's docstring short description
+        """
         TAPTestResult.FORMAT = fmt

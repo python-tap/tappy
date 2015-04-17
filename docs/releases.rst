@@ -1,7 +1,7 @@
 Releases
 ========
 
-Version 1.5, In development
+Version 1.5, In Development
 ---------------------------
 
 * ``TAPTestRunner`` has a ``set_format`` method to specify line format.

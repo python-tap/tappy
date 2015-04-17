@@ -2,6 +2,10 @@
 
 import unittest
 
+try:
+    from unittest import mock
+except ImportError:
+    import mock
 # There is some weird conflict with `TestLoader.discover` if `nose.case.Test`
 # is imported directly. Importing `nose.case` works.
 from nose import case
@@ -13,6 +17,7 @@ class FakeOptions(object):
 
     def __init__(self):
         self.tap_outdir = None
+        self.tap_format = ''
 
 
 class FakeTestCase(object):
@@ -24,10 +29,12 @@ class FakeTestCase(object):
 class TestPlugin(unittest.TestCase):
 
     @classmethod
-    def _make_one(cls):
+    def _make_one(cls, options=None):
         plugin = TAP()
         plugin.enabled = True
-        plugin.configure(FakeOptions(), None)
+        if options is None:
+            options = FakeOptions()
+        plugin.configure(options, None)
         return plugin
 
     def test_adds_error(self):
@@ -48,3 +55,15 @@ class TestPlugin(unittest.TestCase):
         except AttributeError:
             self.assertTrue(
                 True, 'Pass because this Python does not support SkipTest.')
+
+    @mock.patch('tap.plugin.sys')
+    def test_bad_format_string(self, fake_sys):
+        """A bad format string exits the runner."""
+        options = FakeOptions()
+        options.tap_format = "Not gonna work {sort_desc}"
+        plugin = self._make_one(options)
+        test = mock.Mock()
+
+        plugin._description(test)
+
+        self.assertTrue(fake_sys.exit.called)

@@ -43,13 +43,25 @@ Use the ``set_outdir`` class method.
     runner = TAPTestRunner()
     runner.set_outdir('/my/output/directory')
 
+Use the ``set_format`` class method to change the format of result lines.
+``{method_name}`` and ``{short_description}`` are available options.
+
+.. code-block:: python
+
+    TAPTestRunner.set_format('{method_name}: {short_description}')
+
 nose TAP Plugin
 ---------------
 
 The **nose** TAP plugin also supports an optional output directory when you
-don't want to store the ``.tap`` files wherever you executed ``nosetests``. Use
-``--tap-outdir`` followed by a directory path to store the files in a different
-place. The directory will be created if it does not exist.
+don't want to store the ``.tap`` files wherever you executed ``nosetests``.
+
+Use ``--tap-outdir`` followed by a directory path to store the files
+in a different place. The directory will be created if it does not exist.
+
+Use ``--tap-format`` to provide a different format for the result lines.
+``{method_name}`` and ``{short_description}`` are available options.
+For example, ``'{method_name}: {short_description}'``.
 
 Examples
 --------

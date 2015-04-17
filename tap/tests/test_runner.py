@@ -3,6 +3,11 @@
 import tempfile
 import unittest
 
+try:
+    from unittest import mock
+except ImportError:
+    import mock
+
 from tap import TAPTestRunner
 from tap.runner import TAPTestResult
 
@@ -31,14 +36,28 @@ class TestTAPTestRunner(unittest.TestCase):
         TAPTestResult.OUTDIR = previous_outdir
 
     def test_runner_uses_format(self):
-        """Test that format is set on TAPTestResult"""
-
-        # Save previous format
+        """Test that format is set on TAPTestResult FORMAT."""
+        # Save the previous format in case **this** execution was using it.
         previous_format = TAPTestResult.FORMAT
-        fmt = "{mn}: {sd}"
+        fmt = "{method_name}: {short_description}"
 
         TAPTestRunner.set_format(fmt)
 
         self.assertEqual(fmt, TAPTestResult.FORMAT)
+
+        TAPTestResult.FORMAT = previous_format
+
+    @mock.patch('tap.runner.sys')
+    def test_bad_format_string(self, fake_sys):
+        """A bad format string exits the runner."""
+        previous_format = TAPTestResult.FORMAT
+        bad_format = "Not gonna work {sort_desc}"
+        TAPTestRunner.set_format(bad_format)
+        result = TAPTestResult(None, True, 1)
+        test = mock.Mock()
+
+        result._description(test)
+
+        self.assertTrue(fake_sys.exit.called)
 
         TAPTestResult.FORMAT = previous_format
