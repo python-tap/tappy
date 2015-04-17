@@ -1,6 +1,13 @@
 Releases
 ========
 
+Version 1.5, In development
+---------------------------
+
+* ``TAPTestRunner`` has a ``set_format`` method to specify line format.
+* The ``nosetests`` plugin has an optional ``--tap-format`` flag to specify
+  line format.
+
 Version 1.4, Released April 4, 2015
 -----------------------------------
 

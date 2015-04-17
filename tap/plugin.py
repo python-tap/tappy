@@ -2,6 +2,8 @@
 
 import os
 
+from sys import exit
+
 try:
     from unittest import SkipTest
 except ImportError:
@@ -25,11 +27,18 @@ class TAP(Plugin):
             '--tap-outdir',
             help='An optional output directory to write TAP files to. If the'
                  ' directory does not exist, it will be created.')
+        parser.add_option(
+            '--tap-format',
+            default='',
+            help='An optional format string for the TAP output'
+                 ' {short_description} is test.shortDescription()'
+                 ' {method_name} is str(test)')
 
     def configure(self, options, conf):
         super(TAP, self).configure(options, conf)
         if self.enabled:
             self.tracker = Tracker(outdir=options.tap_outdir)
+        self._format = getattr(options, "tap_format", '')
 
     def finalize(self, results):
         self.tracker.generate_tap_reports()
@@ -55,4 +64,14 @@ class TAP(Plugin):
         return test.test.__class__.__name__
 
     def _description(self, test):
+        if self._format:
+            try:
+                return self._format.format(
+                    short_description=test.shortDescription(),
+                    method_name=str(test))
+            except KeyError as e:
+                exit('''Bad format string: {key}
+Replacement options are: \{short_description\} and \{method_name\}'''.format(
+                    key=e[0]))
+
         return test.shortDescription() or str(test)
