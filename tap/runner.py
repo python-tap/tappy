@@ -58,7 +58,15 @@ class TAPTestResult(TextTestResult):
 
     def _description(self, test):
         if self.FORMAT:
-            return self.FORMAT.format(sd=test.shortDescription, md=str(test))
+            try:
+                return self.FORMAT.format(
+                    short_description=test.shortDescription(),
+                    method_name=str(test))
+            except KeyError as e:
+                exit('''Bad format string: {key}
+Replacement options are: \{short_description\} and \{method_name\}'''.format(
+                    key=e[0]))
+
         return test.shortDescription() or str(test)
 
 
@@ -79,6 +87,6 @@ class TAPTestRunner(TextTestRunner):
     @classmethod
     def set_format(cls, fmt):
         """Set the format of each line to a string
-        {mn}: method name
-        {sd}: short description"""
+        {method_name}: method name
+        {short_description}: short description"""
         TAPTestResult.FORMAT = fmt
