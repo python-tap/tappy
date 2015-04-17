@@ -56,8 +56,8 @@ class TestPlugin(unittest.TestCase):
             self.assertTrue(
                 True, 'Pass because this Python does not support SkipTest.')
 
-    @mock.patch('tap.plugin.sys')
-    def test_bad_format_string(self, fake_sys):
+    @mock.patch('sys.exit')
+    def test_bad_format_string(self, fake_exit):
         """A bad format string exits the runner."""
         options = FakeOptions()
         options.tap_format = "Not gonna work {sort_desc}"
@@ -66,4 +66,4 @@ class TestPlugin(unittest.TestCase):
 
         plugin._description(test)
 
-        self.assertTrue(fake_sys.exit.called)
+        self.assertTrue(fake_exit.called)

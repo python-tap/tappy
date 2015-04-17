@@ -47,8 +47,8 @@ class TestTAPTestRunner(unittest.TestCase):
 
         TAPTestResult.FORMAT = previous_format
 
-    @mock.patch('tap.runner.sys')
-    def test_bad_format_string(self, fake_sys):
+    @mock.patch('sys.exit')
+    def test_bad_format_string(self, fake_exit):
         """A bad format string exits the runner."""
         previous_format = TAPTestResult.FORMAT
         bad_format = "Not gonna work {sort_desc}"
@@ -58,6 +58,6 @@ class TestTAPTestRunner(unittest.TestCase):
 
         result._description(test)
 
-        self.assertTrue(fake_sys.exit.called)
+        self.assertTrue(fake_exit.called)
 
         TAPTestResult.FORMAT = previous_format
