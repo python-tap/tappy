@@ -2,7 +2,7 @@ tappy
 =====
 
 [![PyPI version][fury]](https://pypi.python.org/pypi/tap.py)
-[![Downloads][pypip]](https://pypi.python.org/pypi/tap.py)
+[![Downloads][shield]](https://pypi.python.org/pypi/tap.py)
 [![Build Status][travis]](https://travis-ci.org/mblayman/tappy)
 
 tappy is a set of tools for working with the
@@ -61,7 +61,7 @@ Consumers
 
 [tap]: http://testanything.org/
 [fury]: https://badge.fury.io/py/tap.py.png
-[pypip]: https://pypip.in/d/tap.py/badge.png
+[shield]: https://img.shields.io/pypi/dm/tap.py.svg
 [travis]: https://travis-ci.org/mblayman/tappy.png?branch=master
 [rtd]: http://tappy.readthedocs.org/en/latest/
 [pypi]: https://pypi.python.org/pypi/tap.py
