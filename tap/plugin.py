@@ -11,6 +11,7 @@ except ImportError:
         pass
 
 from nose.plugins import Plugin
+from nose.suite import ContextSuite
 
 from tap.tracker import Tracker
 
@@ -59,9 +60,14 @@ class TAP(Plugin):
         self.tracker.add_ok(self._cls_name(test), self._description(test))
 
     def _cls_name(self, test):
-        # nose masks the true test case name so the real class name is found
-        # under the test attribute.
-        return test.test.__class__.__name__
+        if isinstance(test, ContextSuite):
+            # In the class setup and teardown, test is a ContextSuite
+            # instead of a test case. Grab the name from the context.
+            return test.context.__name__
+        else:
+            # nose masks the true test case name so the real class name
+            # is found under the test attribute.
+            return test.test.__class__.__name__
 
     def _description(self, test):
         if self._format:
