@@ -9,8 +9,10 @@ except ImportError:
 # There is some weird conflict with `TestLoader.discover` if `nose.case.Test`
 # is imported directly. Importing `nose.case` works.
 from nose import case
+from nose.suite import ContextSuite
 
 from tap.plugin import TAP
+from tap.tests import TestCase
 
 
 class FakeOptions(object):
@@ -26,7 +28,7 @@ class FakeTestCase(object):
         pass
 
 
-class TestPlugin(unittest.TestCase):
+class TestPlugin(TestCase):
 
     @classmethod
     def _make_one(cls, options=None):
@@ -67,3 +69,18 @@ class TestPlugin(unittest.TestCase):
         plugin._description(test)
 
         self.assertTrue(fake_exit.called)
+
+    def test_get_name_from_context_suite(self):
+        """When the test is actually a ContextSuite, get the name from context.
+
+        setUpClass/tearDownClass provides a ContextSuite object to the plugin
+        if they raise an exception. The test case is not available so its
+        name must be pulled from a different location.
+        """
+        plugin = self._make_one()
+        context = mock.Mock(__name__='FakeContext')
+        test = ContextSuite(context=context)
+
+        name = plugin._cls_name(test)
+
+        self.assertEqual(name, 'FakeContext')
