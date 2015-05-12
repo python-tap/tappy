@@ -14,13 +14,10 @@ from tap.tracker import Tracker
 
 class TAPTestResult(TextTestResult):
 
-    # This attribute will store the user's desired output directory.
-    OUTDIR = None
     FORMAT = None
 
     def __init__(self, stream, descriptions, verbosity):
         super(TAPTestResult, self).__init__(stream, descriptions, verbosity)
-        self.tracker = Tracker(outdir=self.OUTDIR)
 
     def stopTestRun(self):
         """Once the test run is complete, generate each of the TAP files."""
@@ -72,11 +69,24 @@ class TAPTestResult(TextTestResult):
         return test.shortDescription() or str(test)
 
 
+# Module level state stinks, but this is the only way to keep compatibility
+# with Python 2.6. The best place for the tracker is as an instance variable
+# on the runner, but __init__ is so different that it is not easy to create
+# a runner that satisfies every supported Python version.
+_tracker = Tracker()
+
+
 class TAPTestRunner(TextTestRunner):
     """A test runner that will behave exactly like TextTestRunner and will
     additionally generate TAP files for each test case"""
 
     resultclass = TAPTestResult
+
+    def _makeResult(self):
+        result = self.resultclass(
+            self.stream, self.descriptions, self.verbosity)
+        result.tracker = _tracker
+        return result
 
     @classmethod
     def set_outdir(cls, outdir):
@@ -84,7 +94,7 @@ class TAPTestRunner(TextTestRunner):
         specified outdir location.
         """
         # Blame the lack of unittest extensibility for this hacky method.
-        TAPTestResult.OUTDIR = outdir
+        _tracker.outdir = outdir
 
     @classmethod
     def set_format(cls, fmt):

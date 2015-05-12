@@ -4,6 +4,7 @@ import os
 import unittest
 
 from tap.runner import TAPTestResult
+from tap.tracker import Tracker
 
 
 class FakeTestCase(unittest.TestCase):
@@ -22,11 +23,8 @@ class TestTAPTestResult(unittest.TestCase):
         # Yep, the stream is not being closed.
         stream = open(os.devnull, 'w')
         result = TAPTestResult(stream, False, 0)
+        result.tracker = Tracker()
         return result
-
-    def test_has_tracker(self):
-        result = self._make_one()
-        self.assertTrue(result.tracker is not None)
 
     def test_adds_error(self):
         result = self._make_one()

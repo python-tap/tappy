@@ -12,8 +12,16 @@ class Tracker(object):
     def __init__(self, outdir=None):
         self._test_cases = {}
         self.outdir = outdir
+
+    def _get_outdir(self):
+        return self._outdir
+
+    def _set_outdir(self, outdir):
+        self._outdir = outdir
         if outdir and not os.path.exists(outdir):
             os.makedirs(outdir)
+
+    outdir = property(_get_outdir, _set_outdir)
 
     def _track(self, class_name):
         """Keep track of which test cases have executed."""

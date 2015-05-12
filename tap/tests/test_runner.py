@@ -9,7 +9,7 @@ except ImportError:
     import mock
 
 from tap import TAPTestRunner
-from tap.runner import TAPTestResult
+from tap.runner import TAPTestResult, _tracker
 
 
 class TestTAPTestRunner(unittest.TestCase):
@@ -19,21 +19,21 @@ class TestTAPTestRunner(unittest.TestCase):
         self.assertEqual(runner.resultclass, TAPTestResult)
 
     def test_runner_uses_outdir(self):
-        """Test that the test runner sets the TAPTestResult OUTDIR so that TAP
+        """Test that the test runner sets the outdir so that TAP
         files will be written to that location.
 
         Setting class attributes to get the right behavior is a dirty hack, but
         the unittest classes aren't very extensible.
         """
         # Save the previous outdir in case **this** execution was using it.
-        previous_outdir = TAPTestResult.OUTDIR
+        previous_outdir = _tracker.outdir
         outdir = tempfile.mkdtemp()
 
         TAPTestRunner.set_outdir(outdir)
 
-        self.assertEqual(outdir, TAPTestResult.OUTDIR)
+        self.assertEqual(outdir, _tracker.outdir)
 
-        TAPTestResult.OUTDIR = previous_outdir
+        _tracker.outdir = previous_outdir
 
     def test_runner_uses_format(self):
         """Test that format is set on TAPTestResult FORMAT."""
