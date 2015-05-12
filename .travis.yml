@@ -10,6 +10,7 @@ env:
   - TOX_ENV=runner
   - TOX_ENV=flake8
   - TOX_ENV=integration
+  - TOX_ENV=coverage
 install:
   - pip install tox
 script: tox -e $TOX_ENV
