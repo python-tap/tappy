@@ -1,10 +1,10 @@
 # Copyright (c) 2015, Matt Layman
 
 from __future__ import print_function
-from collections import namedtuple
 import os
 
-TAPLine = namedtuple('TAPLine', ['status', 'description', 'directive'])
+from tap.directive import Directive
+from tap.line import Result
 
 
 class Tracker(object):
@@ -31,16 +31,27 @@ class Tracker(object):
     def add_ok(self, class_name, description, directive=''):
         self._track(class_name)
         self._test_cases[class_name].append(
-            TAPLine('ok', description, directive))
+            Result(
+                ok=True, number=self._get_next_line_number(class_name),
+                description=description))
 
     def add_not_ok(self, class_name, description, directive=''):
         self._track(class_name)
         self._test_cases[class_name].append(
-            TAPLine('not ok', description, directive))
+            Result(
+                ok=False, number=self._get_next_line_number(class_name),
+                description=description))
 
     def add_skip(self, class_name, description, reason):
-        directive = '# SKIP {0}'.format(reason)
-        self.add_ok(class_name, description, directive)
+        self._track(class_name)
+        directive = 'SKIP {0}'.format(reason)
+        self._test_cases[class_name].append(
+            Result(
+                ok=True, number=self._get_next_line_number(class_name),
+                description=description, directive=Directive(directive)))
+
+    def _get_next_line_number(self, class_name):
+        return len(self._test_cases[class_name]) + 1
 
     def generate_tap_reports(self):
         for test_case, tap_lines in self._test_cases.items():
@@ -50,15 +61,8 @@ class Tracker(object):
         with open(self._get_tap_file_path(test_case), 'w') as f:
             print('# TAP results for {0}'.format(test_case), file=f)
 
-            for line_count, tap_line in enumerate(tap_lines, start=1):
-                result = ' '.join([
-                    tap_line.status,
-                    str(line_count),
-                    '-',
-                    tap_line.description,
-                    tap_line.directive,
-                ])
-                print(result, file=f)
+            for tap_line in tap_lines:
+                print(tap_line, file=f)
 
             print('1..{0}'.format(len(tap_lines)), file=f)
 

@@ -43,7 +43,7 @@ class TestPlugin(TestCase):
         plugin = self._make_one()
         plugin.addError(case.Test(FakeTestCase()), (None, None, None))
         line = plugin.tracker._test_cases['FakeTestCase'][0]
-        self.assertEqual(line.status, 'not ok')
+        self.assertFalse(line.ok)
 
     def test_adds_skip(self):
         # Since Python versions earlier than 2.7 don't support skipping tests,
@@ -53,7 +53,7 @@ class TestPlugin(TestCase):
             plugin.addError(case.Test(
                 FakeTestCase()), (unittest.SkipTest, 'a reason', None))
             line = plugin.tracker._test_cases['FakeTestCase'][0]
-            self.assertEqual(line.directive, '# SKIP a reason')
+            self.assertEqual(line.directive.text, 'SKIP a reason')
         except AttributeError:
             self.assertTrue(
                 True, 'Pass because this Python does not support SkipTest.')

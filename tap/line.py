@@ -66,6 +66,16 @@ class Result(Line):
         """
         return self.directive.todo
 
+    def __str__(self):
+        is_not = ''
+        if not self.ok:
+            is_not = 'not '
+        directive = ''
+        if self.directive is not None:
+            directive = ' # {0}'.format(self.directive.text)
+        return "{0}ok {1} - {2}{3}".format(
+            is_not, self.number, self.description, directive)
+
 
 class Plan(Line):
     """A plan line to indicate how many tests to expect."""

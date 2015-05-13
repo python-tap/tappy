@@ -2,12 +2,12 @@
 
 import os
 import tempfile
-import unittest
 
+from tap.tests import TestCase
 from tap.tracker import Tracker
 
 
-class TestTracker(unittest.TestCase):
+class TestTracker(TestCase):
 
     def test_has_test_cases(self):
         tracker = Tracker()
@@ -22,25 +22,23 @@ class TestTracker(unittest.TestCase):
         tracker = Tracker()
         tracker.add_ok('FakeTestCase', 'a description')
         line = tracker._test_cases['FakeTestCase'][0]
-        self.assertEqual(line.status, 'ok')
+        self.assertTrue(line.ok)
         self.assertEqual(line.description, 'a description')
-        self.assertEqual(line.directive, '')
 
     def test_adds_not_ok(self):
         tracker = Tracker()
         tracker.add_not_ok('FakeTestCase', 'a description')
         line = tracker._test_cases['FakeTestCase'][0]
-        self.assertEqual(line.status, 'not ok')
+        self.assertFalse(line.ok)
         self.assertEqual(line.description, 'a description')
-        self.assertEqual(line.directive, '')
 
     def test_adds_skip(self):
         tracker = Tracker()
         tracker.add_skip('FakeTestCase', 'a description', 'a reason')
         line = tracker._test_cases['FakeTestCase'][0]
-        self.assertEqual(line.status, 'ok')
+        self.assertTrue(line.ok)
         self.assertEqual(line.description, 'a description')
-        self.assertEqual(line.directive, '# SKIP a reason')
+        self.assertEqual(line.directive.text, 'SKIP a reason')
 
     def test_generates_tap_reports_in_new_outdir(self):
         tempdir = tempfile.mkdtemp()
