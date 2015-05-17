@@ -1,5 +1,7 @@
 # Copyright (c) 2015, Matt Layman
 
+from cStringIO import StringIO
+import inspect
 import os
 import tempfile
 
@@ -60,3 +62,43 @@ class TestTracker(TestCase):
 
         tap_file = os.path.join(outdir, 'FakeTestCase.tap')
         self.assertTrue(os.path.exists(tap_file))
+
+    def test_results_not_combined_by_default(self):
+        tracker = Tracker()
+        self.assertFalse(tracker.combined)
+
+    def test_individual_report_has_no_plan_when_combined(self):
+        outdir = tempfile.mkdtemp()
+        tracker = Tracker(outdir=outdir, combined=True)
+        tracker.add_ok('FakeTestCase', 'Look ma, no plan!')
+        out_file = StringIO()
+
+        tracker.generate_tap_report(
+            'FakeTestCase', tracker._test_cases['FakeTestCase'], out_file)
+
+        report = out_file.getvalue()
+        self.assertTrue('Look ma' in report)
+        self.assertFalse('1..' in report)
+
+    def test_combined_results_in_one_file(self):
+        outdir = tempfile.mkdtemp()
+        tracker = Tracker(outdir=outdir, combined=True)
+        tracker.add_ok('FakeTestCase', 'YESSS!')
+        tracker.add_ok('DifferentFakeTestCase', 'GOAAL!')
+
+        tracker.generate_tap_reports()
+
+        self.assertFalse(
+            os.path.exists(os.path.join(outdir, 'FakeTestCase.tap')))
+        self.assertFalse(
+            os.path.exists(os.path.join(outdir, 'DifferentFakeTestCase.tap')))
+        with open(os.path.join(outdir, 'testresults.tap'), 'r') as f:
+            report = f.read()
+        expected = inspect.cleandoc(
+            """# TAP results for FakeTestCase
+            ok 1 - YESSS!
+            # TAP results for DifferentFakeTestCase
+            ok 2 - GOAAL!
+            1..2
+            """)
+        self.assertEqual(report.strip(), expected)
