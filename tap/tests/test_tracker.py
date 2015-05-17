@@ -1,9 +1,12 @@
 # Copyright (c) 2015, Matt Layman
 
-from cStringIO import StringIO
 import inspect
 import os
 import tempfile
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 from tap.tests import TestCase
 from tap.tracker import Tracker
