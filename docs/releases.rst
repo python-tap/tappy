@@ -1,8 +1,8 @@
 Releases
 ========
 
-Version 1.5, In Development
----------------------------
+Version 1.5, Released May 18, 2015
+----------------------------------
 
 * ``TAPTestRunner`` has a ``set_combined`` method to collect all
   results in a single output file.
