@@ -28,6 +28,10 @@ class TAP(Plugin):
             help='An optional output directory to write TAP files to. If the'
                  ' directory does not exist, it will be created.')
         parser.add_option(
+            '--tap-combined',
+            default=False, action='store_true',
+            help='Store all TAP test results into a combined output file.')
+        parser.add_option(
             '--tap-format',
             default='',
             help='An optional format string for the TAP output.'
@@ -38,7 +42,8 @@ class TAP(Plugin):
     def configure(self, options, conf):
         super(TAP, self).configure(options, conf)
         if self.enabled:
-            self.tracker = Tracker(outdir=options.tap_outdir)
+            self.tracker = Tracker(
+                outdir=options.tap_outdir, combined=options.tap_combined)
         self._format = options.tap_format
 
     def finalize(self, results):

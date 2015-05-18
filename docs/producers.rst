@@ -66,6 +66,8 @@ don't want to store the ``.tap`` files wherever you executed ``nosetests``.
 Use ``--tap-outdir`` followed by a directory path to store the files
 in a different place. The directory will be created if it does not exist.
 
+Use ``--tap-combined`` to store test results in a single output file.
+
 Use ``--tap-format`` to provide a different format for the result lines.
 ``{method_name}`` and ``{short_description}`` are available options.
 For example, ``'{method_name}: {short_description}'``.

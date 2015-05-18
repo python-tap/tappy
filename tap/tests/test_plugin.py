@@ -19,6 +19,7 @@ class FakeOptions(object):
 
     def __init__(self):
         self.tap_outdir = None
+        self.tap_combined = False
         self.tap_format = ''
 
 
