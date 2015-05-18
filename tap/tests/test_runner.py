@@ -47,6 +47,17 @@ class TestTAPTestRunner(unittest.TestCase):
 
         TAPTestResult.FORMAT = previous_format
 
+    def test_runner_uses_combined(self):
+        """Test that output is combined."""
+        # Save previous combined in case **this** execution was using it.
+        previous_combined = _tracker.combined
+
+        TAPTestRunner.set_combined(True)
+
+        self.assertTrue(_tracker.combined)
+
+        _tracker.combined = previous_combined
+
     @mock.patch('sys.exit')
     def test_bad_format_string(self, fake_exit):
         """A bad format string exits the runner."""

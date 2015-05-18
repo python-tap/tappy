@@ -43,6 +43,13 @@ Use the ``set_outdir`` class method.
     runner = TAPTestRunner()
     runner.set_outdir('/my/output/directory')
 
+TAP results can be directed into a single output file. Use ``set_combined``
+to store the results in ``testresults.tap``.
+
+.. code-block:: python
+
+    TAPTestRunner.set_combined(True)
+
 Use the ``set_format`` class method to change the format of result lines.
 ``{method_name}`` and ``{short_description}`` are available options.
 

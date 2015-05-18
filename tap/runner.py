@@ -97,6 +97,11 @@ class TAPTestRunner(TextTestRunner):
         _tracker.outdir = outdir
 
     @classmethod
+    def set_combined(cls, combined):
+        """Set the tracker to use a single output file."""
+        _tracker.combined = combined
+
+    @classmethod
     def set_format(cls, fmt):
         """Set the format of each test line.
 

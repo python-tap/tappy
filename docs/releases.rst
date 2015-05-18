@@ -4,6 +4,8 @@ Releases
 Version 1.5, In Development
 ---------------------------
 
+* ``TAPTestRunner`` has a ``set_combined`` method to collect all
+  results in a single output file.
 * ``TAPTestRunner`` has a ``set_format`` method to specify line format.
 * The ``nosetests`` plugin has an optional ``--tap-format`` flag to specify
   line format.
