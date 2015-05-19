@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tap.py 1.6\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-05-18 21:27-0400\n"
+"POT-Creation-Date: 2015-05-18 21:55-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,15 +79,15 @@ msgid "A plan must appear at the beginning or end of the file."
 msgstr ""
 
 #: tap/rules.py:46
-msgid "Expected {0} tests but only {1} ran."
+msgid "Expected {expected_count} tests but only {seen_count} ran."
 msgstr ""
 
-#: tap/rules.py:67
-msgid "Bailed: {0}"
+#: tap/rules.py:70
+msgid "Bailed: {reason}"
 msgstr ""
 
-#: tap/rules.py:71
-msgid "{0} does not exist."
+#: tap/rules.py:74
+msgid "{filename} does not exist."
 msgstr ""
 
 #: tap/runner.py:48
@@ -98,7 +98,7 @@ msgstr ""
 msgid "(unexpected success)"
 msgstr ""
 
-#: tap/tracker.py:93
-msgid "# TAP results for {0}"
+#: tap/tracker.py:94
+msgid "# TAP results for {test_case}"
 msgstr ""
 
