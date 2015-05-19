@@ -4,6 +4,7 @@ from __future__ import print_function
 import os
 
 from tap.directive import Directive
+from tap.i18n import _
 from tap.line import Result
 
 
@@ -90,7 +91,8 @@ class Tracker(object):
                     self.generate_tap_report(test_case, tap_lines, out_file)
 
     def generate_tap_report(self, test_case, tap_lines, out_file):
-        print('# TAP results for {0}'.format(test_case), file=out_file)
+        print(_('# TAP results for {test_case}').format(
+            test_case=test_case), file=out_file)
 
         for tap_line in tap_lines:
             print(tap_line, file=out_file)

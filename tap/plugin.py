@@ -13,6 +13,7 @@ except ImportError:
 from nose.plugins import Plugin
 from nose.suite import ContextSuite
 
+from tap.i18n import _
 from tap.tracker import Tracker
 
 
@@ -25,19 +26,20 @@ class TAP(Plugin):
         super(TAP, self).options(parser, env=env)
         parser.add_option(
             '--tap-outdir',
-            help='An optional output directory to write TAP files to. If the'
-                 ' directory does not exist, it will be created.')
+            help=_('An optional output directory to write TAP files to. If the'
+                   ' directory does not exist, it will be created.'))
         parser.add_option(
             '--tap-combined',
             default=False, action='store_true',
-            help='Store all TAP test results into a combined output file.')
+            help=_('Store all TAP test results into a combined output file.'))
         parser.add_option(
             '--tap-format',
             default='',
-            help='An optional format string for the TAP output.'
-                 ' The format options are:'
-                 ' {short_description} for the short description, and'
-                 ' {method_name} for the test method name.')
+            help=_(
+                'An optional format string for the TAP output.'
+                ' The format options are:'
+                ' {short_description} for the short description, and'
+                ' {method_name} for the test method name.'))
 
     def configure(self, options, conf):
         super(TAP, self).configure(options, conf)
@@ -81,7 +83,7 @@ class TAP(Plugin):
                     method_name=str(test),
                     short_description=test.shortDescription() or '')
             except KeyError:
-                sys.exit((
+                sys.exit(_(
                     'Bad format string: {format}\n'
                     'Replacement options are: {{short_description}} and '
                     '{{method_name}}').format(format=self._format))

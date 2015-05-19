@@ -10,9 +10,19 @@ Developer documentation is on
 """
 
 from setuptools import find_packages, setup
+from setuptools.command.sdist import sdist
 import sys
 
-__version__ = '1.5'
+__version__ = '1.6'
+
+
+class Sdist(sdist):
+    """Custom ``sdist`` command to ensure that mo files are always created."""
+
+    def run(self):
+        self.run_command('compile_catalog')
+        # sdist is an old style class so super cannot be used.
+        sdist.run(self)
 
 
 def install_requirements():
@@ -20,10 +30,10 @@ def install_requirements():
         'nose',
         'Pygments==2.0.1',
         ]
-    if (2, 7, 0) > sys.version_info:
+    if sys.version_info < (2, 7, 0):
         requirements.append('argparse')
 
-    if (3, 3, 0) > sys.version_info:
+    if sys.version_info < (3, 3, 0):
         requirements.append('mock')
 
     return requirements
@@ -65,6 +75,9 @@ if __name__ == '__main__':
         zip_safe=False,
         platforms='any',
         install_requires=install_requires,
+        setup_requires=[
+            'Babel',  # sdist compiles po into mo.
+        ],
         classifiers=[
             'Development Status :: 5 - Production/Stable',
             'Environment :: Console',
@@ -83,5 +96,6 @@ if __name__ == '__main__':
             'TAP',
             'unittest',
         ],
+        cmdclass={'sdist': Sdist},
         test_suite='tap.tests'
     )

@@ -9,6 +9,7 @@ try:
 except ImportError:
     from unittest import _TextTestResult as TextTestResult
 
+from tap.i18n import _
 from tap.tracker import Tracker
 
 
@@ -44,12 +45,12 @@ class TAPTestResult(TextTestResult):
     def addExpectedFailure(self, test, err):
         super(TAPTestResult, self).addExpectedFailure(test, err)
         self.tracker.add_not_ok(self._cls_name(test), self._description(test),
-                                '(expected failure)')
+                                _('(expected failure)'))
 
     def addUnexpectedSuccess(self, test):
         super(TAPTestResult, self).addUnexpectedSuccess(test)
         self.tracker.add_ok(self._cls_name(test), self._description(test),
-                            '(unexpected success)')
+                            _('(unexpected success)'))
 
     def _cls_name(self, test):
         return test.__class__.__name__
@@ -61,7 +62,7 @@ class TAPTestResult(TextTestResult):
                     method_name=str(test),
                     short_description=test.shortDescription() or '')
             except KeyError:
-                sys.exit((
+                sys.exit(_(
                     'Bad format string: {format}\n'
                     'Replacement options are: {{short_description}} and '
                     '{{method_name}}').format(format=self.FORMAT))

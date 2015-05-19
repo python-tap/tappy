@@ -4,6 +4,7 @@ import argparse
 import sys
 import unittest
 
+from tap.i18n import _
 from tap.loader import Loader
 
 
@@ -24,15 +25,15 @@ def main(argv=sys.argv, stream=sys.stderr):
 
 
 def parse_args(argv):
-    description = 'A TAP consumer for Python'
+    description = _('A TAP consumer for Python')
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument(
-        'files', metavar='FILE', nargs='+', help=(
+        'files', metavar='FILE', nargs='+', help=_(
             'A file containing TAP output. Any directories listed will be '
             'scanned for files to include as TAP files.'))
     parser.add_argument(
         '-v', '--verbose', action='store_const', default=1, const=2,
-        help='use verbose messages')
+        help=_('use verbose messages'))
 
     # argparse expects the executable to be removed from argv.
     args = parser.parse_args(argv[1:])

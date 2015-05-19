@@ -3,6 +3,7 @@
 import re
 
 from tap.directive import Directive
+from tap.i18n import _
 from tap.line import Bail, Diagnostic, Plan, Result, Unknown, Version
 
 
@@ -96,6 +97,6 @@ class Parser(object):
     def _parse_version(self, match):
         version = int(match.group('version'))
         if version < self.TAP_MINIMUM_DECLARED_VERSION:
-            raise ValueError('It is an error to explicitly specify '
-                             'any version lower than 13.')
+            raise ValueError(_('It is an error to explicitly specify '
+                               'any version lower than 13.'))
         return Version(version)
