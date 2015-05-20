@@ -1,5 +1,7 @@
 # Copyright (c) 2015, Matt Layman
 
+import os
+import sys
 import tempfile
 import unittest
 
@@ -72,3 +74,29 @@ class TestTAPTestRunner(unittest.TestCase):
         self.assertTrue(fake_exit.called)
 
         TAPTestResult.FORMAT = previous_format
+
+    def test_runner_sets_tracker_for_streaming(self):
+        """The tracker is set for streaming mode."""
+        previous_streaming = _tracker.streaming
+        previous_stream= _tracker.stream
+        runner = TAPTestRunner()
+
+        runner.set_stream(True)
+
+        self.assertTrue(_tracker.streaming)
+        self.assertTrue(_tracker.stream, sys.stdout)
+
+        _tracker.streaming = previous_streaming
+        _tracker.stream= previous_stream
+
+    def test_runner_stream_to_devnull_for_streaming(self):
+        previous_streaming = _tracker.streaming
+        previous_stream= _tracker.stream
+        runner = TAPTestRunner()
+
+        runner.set_stream(True)
+
+        self.assertTrue(runner.stream.stream.name, os.devnull)
+
+        _tracker.streaming = previous_streaming
+        _tracker.stream= previous_stream

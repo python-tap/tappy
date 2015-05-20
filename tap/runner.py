@@ -1,5 +1,6 @@
 # Copyright (c) 2015, Matt Layman
 
+import os
 from unittest import TextTestRunner
 import sys
 
@@ -8,6 +9,10 @@ try:
     from unittest import TextTestResult
 except ImportError:
     from unittest import _TextTestResult as TextTestResult
+try:
+    from unittest.runner import _WritelnDecorator
+except ImportError:  # Python 2.6 has a different package structure.
+    from unittest import _WritelnDecorator
 
 from tap.i18n import _
 from tap.tracker import Tracker
@@ -82,6 +87,15 @@ class TAPTestRunner(TextTestRunner):
     additionally generate TAP files for each test case"""
 
     resultclass = TAPTestResult
+
+    def set_stream(self, streaming):
+        """Set the streaming boolean option to stream TAP directly to stdout.
+
+        The test runner default output will be suppressed in favor of TAP.
+        """
+        self.stream = _WritelnDecorator(open(os.devnull, 'w'))
+        _tracker.streaming = streaming
+        _tracker.stream = sys.stdout
 
     def _makeResult(self):
         result = self.resultclass(
