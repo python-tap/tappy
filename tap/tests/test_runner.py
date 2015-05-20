@@ -78,7 +78,7 @@ class TestTAPTestRunner(unittest.TestCase):
     def test_runner_sets_tracker_for_streaming(self):
         """The tracker is set for streaming mode."""
         previous_streaming = _tracker.streaming
-        previous_stream= _tracker.stream
+        previous_stream = _tracker.stream
         runner = TAPTestRunner()
 
         runner.set_stream(True)
@@ -87,11 +87,11 @@ class TestTAPTestRunner(unittest.TestCase):
         self.assertTrue(_tracker.stream, sys.stdout)
 
         _tracker.streaming = previous_streaming
-        _tracker.stream= previous_stream
+        _tracker.stream = previous_stream
 
     def test_runner_stream_to_devnull_for_streaming(self):
         previous_streaming = _tracker.streaming
-        previous_stream= _tracker.stream
+        previous_stream = _tracker.stream
         runner = TAPTestRunner()
 
         runner.set_stream(True)
@@ -99,4 +99,4 @@ class TestTAPTestRunner(unittest.TestCase):
         self.assertTrue(runner.stream.stream.name, os.devnull)
 
         _tracker.streaming = previous_streaming
-        _tracker.stream= previous_stream
+        _tracker.stream = previous_stream
