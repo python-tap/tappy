@@ -10,9 +10,10 @@ from tap.line import Result
 
 class Tracker(object):
 
-    def __init__(self, outdir=None, combined=False):
-        self._test_cases = {}
+    def __init__(
+            self, outdir=None, combined=False, streaming=False, stream=None):
         self.outdir = outdir
+
         # Combine all the test results into one file.
         self.combined = combined
         self.combined_line_number = 0
@@ -21,6 +22,13 @@ class Tracker(object):
         # must be tracked in order so that reporting can sequence
         # the line numbers properly.
         self.combined_test_cases_seen = []
+
+        # Stream output directly to a stream instead of file output.
+        self.streaming = streaming
+        self.stream = stream
+
+        # Internal state for tracking each test case.
+        self._test_cases = {}
 
     def _get_outdir(self):
         return self._outdir
@@ -35,39 +43,50 @@ class Tracker(object):
     def _track(self, class_name):
         """Keep track of which test cases have executed."""
         if self._test_cases.get(class_name) is None:
+            if self.streaming:
+                self._write_test_case_header(class_name, self.stream)
+
             self._test_cases[class_name] = []
             if self.combined:
                 self.combined_test_cases_seen.append(class_name)
 
     def add_ok(self, class_name, description, directive=''):
-        self._track(class_name)
-        self._test_cases[class_name].append(
-            Result(
-                ok=True, number=self._get_next_line_number(class_name),
-                description=description))
+        result = Result(
+            ok=True, number=self._get_next_line_number(class_name),
+            description=description)
+        self._add_line(class_name, result)
 
     def add_not_ok(self, class_name, description, directive=''):
-        self._track(class_name)
-        self._test_cases[class_name].append(
-            Result(
-                ok=False, number=self._get_next_line_number(class_name),
-                description=description))
+        result = Result(
+            ok=False, number=self._get_next_line_number(class_name),
+            description=description)
+        self._add_line(class_name, result)
 
     def add_skip(self, class_name, description, reason):
-        self._track(class_name)
         directive = 'SKIP {0}'.format(reason)
-        self._test_cases[class_name].append(
-            Result(
-                ok=True, number=self._get_next_line_number(class_name),
-                description=description, directive=Directive(directive)))
+        result = Result(
+            ok=True, number=self._get_next_line_number(class_name),
+            description=description, directive=Directive(directive))
+        self._add_line(class_name, result)
+
+    def _add_line(self, class_name, result):
+        self._track(class_name)
+        if self.streaming:
+            print(result, file=self.stream)
+        self._test_cases[class_name].append(result)
 
     def _get_next_line_number(self, class_name):
-        if self.combined:
+        if self.combined or self.streaming:
             # This has an obvious side effect. Oh well.
             self.combined_line_number += 1
             return self.combined_line_number
         else:
-            return len(self._test_cases[class_name]) + 1
+            try:
+                return len(self._test_cases[class_name]) + 1
+            except KeyError:
+                # A result is created before the call to _track so the test
+                # case may not be tracked yet. In that case, the line is 1.
+                return 1
 
     def generate_tap_reports(self):
         """Generate TAP reports.
@@ -75,6 +94,10 @@ class Tracker(object):
         The results are either combined into a single output file or
         the output file name is generated from the test case.
         """
+        if self.streaming:
+            # The results already went to the stream.
+            return
+
         if self.combined:
             combined_file = 'testresults.tap'
             if self.outdir:
@@ -91,8 +114,7 @@ class Tracker(object):
                     self.generate_tap_report(test_case, tap_lines, out_file)
 
     def generate_tap_report(self, test_case, tap_lines, out_file):
-        print(_('# TAP results for {test_case}').format(
-            test_case=test_case), file=out_file)
+        self._write_test_case_header(test_case, out_file)
 
         for tap_line in tap_lines:
             print(tap_line, file=out_file)
@@ -101,6 +123,10 @@ class Tracker(object):
         # all the test cases complete.
         if not self.combined:
             print('1..{0}'.format(len(tap_lines)), file=out_file)
+
+    def _write_test_case_header(self, test_case, stream):
+        print(_('# TAP results for {test_case}').format(
+            test_case=test_case), file=stream)
 
     def _get_tap_file_path(self, test_case):
         """Get the TAP output file path for the test case."""

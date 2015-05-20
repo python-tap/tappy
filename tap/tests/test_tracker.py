@@ -105,3 +105,61 @@ class TestTracker(TestCase):
             1..2
             """)
         self.assertEqual(report.strip(), expected)
+
+    def test_tracker_does_not_stream_by_default(self):
+        tracker = Tracker()
+        self.assertFalse(tracker.streaming)
+
+    def test_tracker_has_stream(self):
+        tracker = Tracker()
+        self.assertTrue(tracker.stream is None)
+
+    def test_add_ok_writes_to_stream_while_streaming(self):
+        stream = StringIO()
+        tracker = Tracker(streaming=True, stream=stream)
+
+        tracker.add_ok('FakeTestCase', 'YESSS!')
+        tracker.add_ok('AnotherTestCase', 'Sure.')
+
+        expected = inspect.cleandoc(
+            """# TAP results for FakeTestCase
+            ok 1 - YESSS!
+            # TAP results for AnotherTestCase
+            ok 2 - Sure.
+            """)
+        self.assertEqual(stream.getvalue().strip(), expected)
+
+    def test_add_not_ok_writes_to_stream_while_streaming(self):
+        stream = StringIO()
+        tracker = Tracker(streaming=True, stream=stream)
+
+        tracker.add_not_ok('FakeTestCase', 'YESSS!')
+
+        expected = inspect.cleandoc(
+            """# TAP results for FakeTestCase
+            not ok 1 - YESSS!
+            """)
+        self.assertEqual(stream.getvalue().strip(), expected)
+
+    def test_add_skip_writes_to_stream_while_streaming(self):
+        stream = StringIO()
+        tracker = Tracker(streaming=True, stream=stream)
+
+        tracker.add_skip('FakeTestCase', 'YESSS!', 'a reason')
+
+        expected = inspect.cleandoc(
+            """# TAP results for FakeTestCase
+            ok 1 - YESSS! # SKIP a reason
+            """)
+        self.assertEqual(stream.getvalue().strip(), expected)
+
+    def test_streaming_does_not_write_files(self):
+        outdir = tempfile.mkdtemp()
+        stream = StringIO()
+        tracker = Tracker(outdir=outdir, streaming=True, stream=stream)
+        tracker.add_ok('FakeTestCase', 'YESSS!')
+
+        tracker.generate_tap_reports()
+
+        self.assertFalse(
+            os.path.exists(os.path.join(outdir, 'FakeTestCase.tap')))
