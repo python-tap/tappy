@@ -95,7 +95,8 @@ class Tracker(object):
         the output file name is generated from the test case.
         """
         if self.streaming:
-            # The results already went to the stream.
+            # The results already went to the stream, record the plan.
+            print('1..{0}'.format(self.combined_line_number), file=self.stream)
             return
 
         if self.combined:

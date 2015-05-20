@@ -163,3 +163,12 @@ class TestTracker(TestCase):
 
         self.assertFalse(
             os.path.exists(os.path.join(outdir, 'FakeTestCase.tap')))
+
+    def test_streaming_writes_plan(self):
+        stream = StringIO()
+        tracker = Tracker(streaming=True, stream=stream)
+        tracker.combined_line_number = 42
+
+        tracker.generate_tap_reports()
+
+        self.assertEqual(stream.getvalue(), '1..42\n')
