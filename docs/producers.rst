@@ -6,12 +6,13 @@ The producers come in two varieties: support with only the standard library
 and support for `nose <https://nose.readthedocs.org/en/latest/>`_.
 
 * ``TAPTestRunner`` - This subclass of ``unittest.TextTestRunner`` provides all
-  the functionality of ``TextTestRunner`` and generates TAP files.
+  the functionality of ``TextTestRunner`` and generates TAP files or streams.
 * tappy for **nose** - tappy provides a plugin (simply called ``TAP``)
   for the **nose** testing tool.
 
-Both producers will create one TAP file for each ``TestCase`` executed by the
-test suite. The files will use the name of the test case class with a ``.tap``
+By default, both producers will create one TAP file for each ``TestCase``
+executed by the test suite.
+The files will use the name of the test case class with a ``.tap``
 extension. For example:
 
 .. code-block:: python
@@ -30,47 +31,86 @@ The class will create a file named ``TestFoo.tap`` containing the following.
     ok 1 - Test numeric equality as an example.
     1..1
 
+The producers also have streaming modes which bypass the default runner
+output and write TAP to the output stream instead of files. This is useful
+for piping output directly to tools that read TAP natively.
+
+.. code-block:: tap
+
+    $ nosetests --with-tap --tap-stream tap.tests.test_parser
+    # TAP results for TestParser
+    ok 1 - test_after_hash_is_not_description (tap.tests.test_parser.TestParser)
+    ok 2 - The parser extracts a bail out line.
+    ok 3 - The parser extracts a diagnostic line.
+    ok 4 - The TAP spec dictates that anything less than 13 is an error.
+    ok 5 - test_finds_description (tap.tests.test_parser.TestParser)
+    ok 6 - The parser extracts a not ok line.
+    ok 7 - The parser extracts a test number.
+    ok 8 - The parser extracts an ok line.
+    ok 9 - The parser extracts a plan line.
+    ok 10 - The parser extracts a plan line.
+    1..10
+
 TAPTestRunner
 -------------
 
-The ``TAPTestRunner`` gives the user the ability to set the output directory.
-Use the ``set_outdir`` class method.
+You can configure the ``TAPTestRunner`` from a set of class or instance
+methods.
 
-.. code-block:: python
+* ``set_stream`` - Enable streaming mode to send TAP output directly to
+  the output stream. Use the ``set_stream`` instance method.
 
-    # Either set it from the class or from a runner instance.
-    TAPTestRunner.set_outdir('/my/output/directory')
-    runner = TAPTestRunner()
-    runner.set_outdir('/my/output/directory')
+  .. code-block:: python
 
-TAP results can be directed into a single output file. Use ``set_combined``
-to store the results in ``testresults.tap``.
+      runner = TAPTestRunner()
+      runner.set_stream(True)
 
-.. code-block:: python
+* ``set_outdir`` - The ``TAPTestRunner`` gives the user the ability to
+  set the output directory. Use the ``set_outdir`` class method.
 
-    TAPTestRunner.set_combined(True)
+  .. code-block:: python
 
-Use the ``set_format`` class method to change the format of result lines.
-``{method_name}`` and ``{short_description}`` are available options.
+      TAPTestRunner.set_outdir('/my/output/directory')
 
-.. code-block:: python
+* ``set_combined`` - TAP results can be directed into a single output file.
+  Use the ``set_combined`` class method to store the results in
+  ``testresults.tap``.
 
-    TAPTestRunner.set_format('{method_name}: {short_description}')
+  .. code-block:: python
+
+      TAPTestRunner.set_combined(True)
+
+* ``set_format`` - Use the ``set_format`` class method to change the
+  format of result lines.  ``{method_name}`` and ``{short_description}``
+  are available options.
+
+  .. code-block:: python
+
+      TAPTestRunner.set_format('{method_name}: {short_description}')
 
 nose TAP Plugin
 ---------------
 
-The **nose** TAP plugin also supports an optional output directory when you
-don't want to store the ``.tap`` files wherever you executed ``nosetests``.
+The **nose** TAP plugin is configured from command line flags.
 
-Use ``--tap-outdir`` followed by a directory path to store the files
-in a different place. The directory will be created if it does not exist.
+* ``--with-tap`` - This flag is required to enable the plugin.
 
-Use ``--tap-combined`` to store test results in a single output file.
+* ``--tap-stream`` - Enable streaming mode to send TAP output directly to
+  the output stream.
 
-Use ``--tap-format`` to provide a different format for the result lines.
-``{method_name}`` and ``{short_description}`` are available options.
-For example, ``'{method_name}: {short_description}'``.
+* ``--tap-outdir`` - The **nose** TAP plugin also supports an optional
+  output directory when you don't want to store the ``.tap`` files
+  wherever you executed ``nosetests``.
+
+  Use ``--tap-outdir`` followed by a directory path to store the files
+  in a different place. The directory will be created if it does not exist.
+
+* ``--tap-combined`` - Store test results in a single output file
+  in ``testresults.tap``.
+
+* ``--tap-format`` - Provide a different format for the result lines.
+  ``{method_name}`` and ``{short_description}`` are available options.
+  For example, ``'{method_name}: {short_description}'``.
 
 Examples
 --------
