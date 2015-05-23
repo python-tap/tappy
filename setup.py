@@ -52,6 +52,7 @@ if __name__ == '__main__':
         install_requires.extend([
             'coverage',
             'flake8',
+            'requests',
             'Sphinx',
             'tox',
         ])

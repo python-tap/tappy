@@ -8,11 +8,15 @@ try:
 except ImportError:
     from io import StringIO
 
+from tap.i18n import _
 from tap.tests import TestCase
 from tap.tracker import Tracker
 
 
 class TestTracker(TestCase):
+
+    def _make_header(self, test_case):
+        return _('# TAP results for {test_case}').format(test_case=test_case)
 
     def test_has_test_cases(self):
         tracker = Tracker()
@@ -98,12 +102,14 @@ class TestTracker(TestCase):
         with open(os.path.join(outdir, 'testresults.tap'), 'r') as f:
             report = f.read()
         expected = inspect.cleandoc(
-            """# TAP results for FakeTestCase
+            """{header_1}
             ok 1 - YESSS!
-            # TAP results for DifferentFakeTestCase
+            {header_2}
             ok 2 - GOAAL!
             1..2
-            """)
+            """.format(
+                header_1=self._make_header('FakeTestCase'),
+                header_2=self._make_header('DifferentFakeTestCase')))
         self.assertEqual(report.strip(), expected)
 
     def test_tracker_does_not_stream_by_default(self):
@@ -122,11 +128,13 @@ class TestTracker(TestCase):
         tracker.add_ok('AnotherTestCase', 'Sure.')
 
         expected = inspect.cleandoc(
-            """# TAP results for FakeTestCase
+            """{header_1}
             ok 1 - YESSS!
-            # TAP results for AnotherTestCase
+            {header_2}
             ok 2 - Sure.
-            """)
+            """.format(
+                header_1=self._make_header('FakeTestCase'),
+                header_2=self._make_header('AnotherTestCase')))
         self.assertEqual(stream.getvalue().strip(), expected)
 
     def test_add_not_ok_writes_to_stream_while_streaming(self):
@@ -136,9 +144,10 @@ class TestTracker(TestCase):
         tracker.add_not_ok('FakeTestCase', 'YESSS!')
 
         expected = inspect.cleandoc(
-            """# TAP results for FakeTestCase
+            """{header}
             not ok 1 - YESSS!
-            """)
+            """.format(
+                header=self._make_header('FakeTestCase')))
         self.assertEqual(stream.getvalue().strip(), expected)
 
     def test_add_skip_writes_to_stream_while_streaming(self):
@@ -148,9 +157,10 @@ class TestTracker(TestCase):
         tracker.add_skip('FakeTestCase', 'YESSS!', 'a reason')
 
         expected = inspect.cleandoc(
-            """# TAP results for FakeTestCase
+            """{header}
             ok 1 - YESSS! # SKIP a reason
-            """)
+            """.format(
+                header=self._make_header('FakeTestCase')))
         self.assertEqual(stream.getvalue().strip(), expected)
 
     def test_streaming_does_not_write_files(self):

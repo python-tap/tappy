@@ -1,100 +1,105 @@
-# Spanish translations for tap.py.
+# Translations template for tap.py.
 # Copyright (C) 2015 Matt Layman
 # This file is distributed under the same license as the tap.py project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
-#
+# 
+# Translators:
+# Matt Layman <matthewlayman@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: tap.py 1.6\n"
+"Project-Id-Version: tappy\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-05-18 21:22-0400\n"
-"PO-Revision-Date: 2015-05-18 21:22-0400\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: es <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2015-05-18 21:55-0400\n"
+"PO-Revision-Date: 2015-05-23 21:10+0000\n"
+"Last-Translator: Matt Layman <matthewlayman@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/tappy/language/es/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: tap/main.py:28
+msgid "A TAP consumer for Python"
+msgstr "Un consumidor TAP para Python"
 
 #: tap/main.py:31
 msgid ""
 "A file containing TAP output. Any directories listed will be scanned for "
 "files to include as TAP files."
-msgstr ""
+msgstr "Una salida de TAP archivo que contiene. Cualquier directorios listados serán analizados en busca de archivos que incluyen como archivos TAP."
 
 #: tap/main.py:36
 msgid "use verbose messages"
-msgstr ""
+msgstr "utilizar mensajes detallados"
 
 #: tap/parser.py:100
 msgid "It is an error to explicitly specify any version lower than 13."
-msgstr ""
+msgstr "Es un error especificar explícitamente cualquier versión inferior a 13."
 
 #: tap/plugin.py:29
 msgid ""
-"An optional output directory to write TAP files to. If the directory does"
-" not exist, it will be created."
-msgstr ""
+"An optional output directory to write TAP files to. If the directory does "
+"not exist, it will be created."
+msgstr "Un directorio de salida opcional para escribir archivos TAP a. Si el directorio no existe, se creará."
 
 #: tap/plugin.py:34
 msgid "Store all TAP test results into a combined output file."
-msgstr ""
+msgstr "Guarde todos los resultados de las pruebas de TAP en un archivo de salida combinada."
 
 #: tap/plugin.py:38
 msgid ""
 "An optional format string for the TAP output. The format options are: "
 "{short_description} for the short description, and {method_name} for the "
 "test method name."
-msgstr ""
+msgstr "Una cadena de formato opcional para la salida de TAP. Las opciones de formato son: {short_description} para la descripción corta, y {method_name} para el nombre de método de ensayo."
 
 #: tap/plugin.py:86 tap/runner.py:65
 msgid ""
 "Bad format string: {format}\n"
 "Replacement options are: {{short_description}} and {{method_name}}"
-msgstr ""
+msgstr "Cadena de formato Malo: {format}\nLas opciones de reemplazo son: {{short_description}} y {{method_name}}"
 
 #: tap/rules.py:25
 msgid "Multiple version lines appeared."
-msgstr ""
+msgstr "Múltiples líneas de versión aparecieron."
 
 #: tap/rules.py:27
 msgid "The version must be on the first line."
-msgstr ""
+msgstr "La versión debe estar en la primera línea."
 
 #: tap/rules.py:32
 msgid "Missing a plan."
-msgstr ""
+msgstr "Falta un plan."
 
 #: tap/rules.py:36
 msgid "Only one plan line is permitted per file."
-msgstr ""
+msgstr "Sólo una línea de plan está permitido por archivo."
 
 #: tap/rules.py:42
 msgid "A plan must appear at the beginning or end of the file."
-msgstr ""
+msgstr "Un plan debe aparecer al principio o al final del archivo."
 
 #: tap/rules.py:46
-msgid "Expected {0} tests but only {1} ran."
-msgstr ""
+msgid "Expected {expected_count} tests but only {seen_count} ran."
+msgstr "Esperados {expected_count} pruebas, pero sólo {seen_count} corrían."
 
-#: tap/rules.py:67
-msgid "Bailed: {0}"
-msgstr ""
+#: tap/rules.py:70
+msgid "Bailed: {reason}"
+msgstr "Rescatados: {reason}"
 
-#: tap/rules.py:71
-msgid "{0} does not exist."
-msgstr ""
+#: tap/rules.py:74
+msgid "{filename} does not exist."
+msgstr "{filename} no existe."
 
 #: tap/runner.py:48
 msgid "(expected failure)"
-msgstr ""
+msgstr "(fallo esperado)"
 
 #: tap/runner.py:53
 msgid "(unexpected success)"
-msgstr ""
+msgstr "(éxito inesperado)"
 
-#: tap/tracker.py:93
-msgid "# TAP results for {0}"
-msgstr ""
-
+#: tap/tracker.py:94
+msgid "# TAP results for {test_case}"
+msgstr "# Resultados TAP para {test_case}"

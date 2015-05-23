@@ -4,6 +4,7 @@ import inspect
 import os
 import tempfile
 
+from tap.i18n import _
 from tap.loader import Loader
 from tap.tests import TestCase
 
@@ -40,7 +41,8 @@ class TestLoader(TestCase):
 
         self.assertEqual(1, len(suite._tests))
         self.assertEqual(
-            'phony.tap does not exist.', suite._tests[0]._line.description)
+            _('{filename} does not exist.').format(filename='phony.tap'),
+            suite._tests[0]._line.description)
 
     def test_handles_directory(self):
         directory = tempfile.mkdtemp()
@@ -71,7 +73,7 @@ class TestLoader(TestCase):
 
         self.assertEqual(1, len(suite._tests))
         self.assertEqual(
-            'Multiple version lines appeared.',
+            _('Multiple version lines appeared.'),
             suite._tests[0]._line.description)
 
     def test_errors_with_version_not_on_first_line(self):
@@ -89,7 +91,7 @@ class TestLoader(TestCase):
 
         self.assertEqual(1, len(suite._tests))
         self.assertEqual(
-            'The version must be on the first line.',
+            _('The version must be on the first line.'),
             suite._tests[0]._line.description)
 
     def test_skip_plan_aborts_loading(self):
