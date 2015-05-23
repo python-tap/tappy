@@ -48,7 +48,7 @@ for piping output directly to tools that read TAP natively.
     ok 7 - The parser extracts a test number.
     ok 8 - The parser extracts an ok line.
     ok 9 - The parser extracts a plan line.
-    ok 10 - The parser extracts a plan line.
+    ok 10 - The parser extracts a plan line containing a SKIP.
     1..10
 
 TAPTestRunner

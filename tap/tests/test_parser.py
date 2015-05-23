@@ -123,7 +123,7 @@ class TestParser(unittest.TestCase):
         self.assertEqual(42, line.expected_tests)
 
     def test_finds_plan_with_skip(self):
-        """The parser extracts a plan line."""
+        """The parser extracts a plan line containing a SKIP."""
         parser = Parser()
 
         line = parser.parse_line('1..42 # Skipping this test file.')
