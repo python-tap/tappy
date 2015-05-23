@@ -1,6 +1,16 @@
 Releases
 ========
 
+Version 1.6, In Development
+---------------------------
+
+* ``TAPTestRunner`` has a ``set_stream`` method to stream all TAP
+  output directly to an output stream instead of a file.
+  results in a single output file.
+* The ``nosetests`` plugin has an optional ``--tap-stream`` flag to
+  stream all TAP output directly to an output stream instead of a file.
+* tappy is now internationalized. It is translated into Spanish.
+
 Version 1.5, Released May 18, 2015
 ----------------------------------
 
