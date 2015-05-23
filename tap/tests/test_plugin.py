@@ -11,13 +11,14 @@ except ImportError:
 from nose import case
 from nose.suite import ContextSuite
 
-from tap.plugin import TAP
+from tap.plugin import DummyStream, TAP
 from tap.tests import TestCase
 
 
 class FakeOptions(object):
 
     def __init__(self):
+        self.tap_stream = False
         self.tap_outdir = None
         self.tap_combined = False
         self.tap_format = ''
@@ -85,3 +86,22 @@ class TestPlugin(TestCase):
         name = plugin._cls_name(test)
 
         self.assertEqual(name, 'FakeContext')
+
+    def test_streaming_option_captures_stream(self):
+        options = FakeOptions()
+        options.tap_stream = True
+        plugin = self._make_one(options)
+        fake_stream = mock.Mock()
+
+        plugin.setOutputStream(fake_stream)
+
+        self.assertEqual(plugin.tracker.stream, fake_stream)
+
+    def test_streaming_options_returns_dummy_stream(self):
+        options = FakeOptions()
+        options.tap_stream = True
+        plugin = self._make_one(options)
+
+        dummy_stream = plugin.setOutputStream(None)
+
+        self.assertTrue(isinstance(dummy_stream, DummyStream))

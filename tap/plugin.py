@@ -17,6 +17,17 @@ from tap.i18n import _
 from tap.tracker import Tracker
 
 
+class DummyStream(object):
+    def write(self, *args):
+        pass
+
+    def writeln(self, *args):
+        pass
+
+    def flush(self):
+        pass
+
+
 class TAP(Plugin):
     """This plugin provides test results in the Test Anything Protocol format.
     """
@@ -24,6 +35,11 @@ class TAP(Plugin):
 
     def options(self, parser, env=os.environ):
         super(TAP, self).options(parser, env=env)
+        parser.add_option(
+            '--tap-stream',
+            default=False, action='store_true',
+            help=_('Stream TAP output instead of the default test runner'
+                   ' output.'))
         parser.add_option(
             '--tap-outdir',
             help=_('An optional output directory to write TAP files to. If the'
@@ -45,11 +61,20 @@ class TAP(Plugin):
         super(TAP, self).configure(options, conf)
         if self.enabled:
             self.tracker = Tracker(
-                outdir=options.tap_outdir, combined=options.tap_combined)
+                outdir=options.tap_outdir, combined=options.tap_combined,
+                streaming=options.tap_stream)
         self._format = options.tap_format
 
     def finalize(self, results):
         self.tracker.generate_tap_reports()
+
+    def setOutputStream(self, stream):
+        # When streaming is on, hijack the stream and return a dummy to send
+        # standard nose output to oblivion.
+        if self.tracker.streaming:
+            self.tracker.stream = stream
+            return DummyStream()
+        return stream
 
     def addError(self, test, err):
         err_cls, reason, _ = err
