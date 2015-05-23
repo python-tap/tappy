@@ -51,6 +51,31 @@ for piping output directly to tools that read TAP natively.
     ok 10 - The parser extracts a plan line containing a SKIP.
     1..10
 
+Examples
+--------
+
+The ``TAPTestRunner`` works like the ``TextTestRunner``. To use the runner,
+load test cases using the ``TestLoader`` and pass the tests to the run method.
+The sample below is the test runner used with tappy's own tests.
+
+.. literalinclude:: ../tap/tests/run.py
+   :lines: 3-
+
+Running tappy with **nose** is as straightforward as enabling the plugin
+when calling ``nosetests``.
+
+.. code-block:: sh
+
+   $ nosetests --with-tap
+   ...............
+   ----------------------------------------------------------------------
+   Ran 15 tests in 0.020s
+
+   OK
+
+The configuration options for each TAP tool are listed
+in the following sections.
+
 TAPTestRunner
 -------------
 
@@ -111,25 +136,3 @@ The **nose** TAP plugin is configured from command line flags.
 * ``--tap-format`` - Provide a different format for the result lines.
   ``{method_name}`` and ``{short_description}`` are available options.
   For example, ``'{method_name}: {short_description}'``.
-
-Examples
---------
-
-The ``TAPTestRunner`` works like the ``TextTestRunner``. To use the runner,
-load test cases using the ``TestLoader`` and pass the tests to the run method.
-The sample below is the test runner used with tappy's own tests.
-
-.. literalinclude:: ../tap/tests/run.py
-   :lines: 3-
-
-Running tappy with **nose** is as straightforward as enabling the plugin
-when calling ``nosetests``.
-
-.. code-block:: sh
-
-   $ nosetests --with-tap
-   ...............
-   ----------------------------------------------------------------------
-   Ran 15 tests in 0.020s
-
-   OK
