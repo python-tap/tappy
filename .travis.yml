@@ -12,6 +12,7 @@ env:
   - TOX_ENV=integration
   - TOX_ENV=coverage
   - TOX_ENV=language_es
+  - TOX_ENV=language_nl
 install:
   - pip install tox
 script: tox -e $TOX_ENV

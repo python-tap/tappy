@@ -9,101 +9,101 @@ msgstr ""
 "Project-Id-Version: tappy\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2015-05-23 16:56-0400\n"
-"PO-Revision-Date: 2015-05-25 02:40+0000\n"
+"PO-Revision-Date: 2015-05-25 02:57+0000\n"
 "Last-Translator: Matt Layman <matthewlayman@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/projects/p/tappy/language/es/)\n"
+"Language-Team: Dutch (http://www.transifex.com/projects/p/tappy/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
-"Language: es\n"
+"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: tap/main.py:28
 msgid "A TAP consumer for Python"
-msgstr "Un consumidor TAP para Python"
+msgstr "Een TAP consument voor Python"
 
 #: tap/main.py:31
 msgid ""
 "A file containing TAP output. Any directories listed will be scanned for "
 "files to include as TAP files."
-msgstr "Una salida de TAP archivo que contiene. Cualquier directorios listados serán analizados en busca de archivos que incluyen como archivos TAP."
+msgstr "Een bestand met TAP output. Elke beursgenoteerde directories zal worden gescand op bestanden op te nemen als TAP bestanden."
 
 #: tap/main.py:36
 msgid "use verbose messages"
-msgstr "utilizar mensajes detallados"
+msgstr "Gebruik uitgebreide berichten"
 
 #: tap/parser.py:100
 msgid "It is an error to explicitly specify any version lower than 13."
-msgstr "Es un error especificar explícitamente cualquier versión inferior a 13."
+msgstr "Het is een fout om expliciet een versie lager dan 13."
 
 #: tap/plugin.py:41
 msgid "Stream TAP output instead of the default test runner output."
-msgstr "Salida TAP corriente en lugar de la salida de corredor de prueba por defecto."
+msgstr "Stroom TAP uitgang in plaats van de standaard-test runner-uitgang."
 
 #: tap/plugin.py:45
 msgid ""
 "An optional output directory to write TAP files to. If the directory does "
 "not exist, it will be created."
-msgstr "Un directorio de salida opcional para escribir archivos TAP a. Si el directorio no existe, se creará."
+msgstr "Een optionele output directory aan TAP bestanden schrijven. Als de map niet bestaat, zal het worden aangemaakt."
 
 #: tap/plugin.py:50
 msgid "Store all TAP test results into a combined output file."
-msgstr "Guarde todos los resultados de las pruebas de TAP en un archivo de salida combinada."
+msgstr "Bewaar alle TAP testresultaten in een gecombineerde output file."
 
 #: tap/plugin.py:54
 msgid ""
 "An optional format string for the TAP output. The format options are: "
 "{short_description} for the short description, and {method_name} for the "
 "test method name."
-msgstr "Una cadena de formato opcional para la salida de TAP. Las opciones de formato son: {short_description} para la descripción corta, y {method_name} para el nombre de método de ensayo."
+msgstr "Een optionele format string voor de TAP output. De opties zijn formaat: {short_description} voor de korte omschrijving, en {method_name} voor de naam testmethode."
 
 #: tap/plugin.py:111 tap/runner.py:70
 msgid ""
 "Bad format string: {format}\n"
 "Replacement options are: {{short_description}} and {{method_name}}"
-msgstr "Cadena de formato Malo: {format}\nLas opciones de reemplazo son: {{short_description}} y {{method_name}}"
+msgstr "Bad format string: {format}\nVervanging opties zijn: {{short_description}} en {{method_name}}"
 
 #: tap/rules.py:25
 msgid "Multiple version lines appeared."
-msgstr "Múltiples líneas de versión aparecieron."
+msgstr "Meerdere versie lijnen verscheen."
 
 #: tap/rules.py:27
 msgid "The version must be on the first line."
-msgstr "La versión debe estar en la primera línea."
+msgstr "De versie moet op de eerste lijn."
 
 #: tap/rules.py:32
 msgid "Missing a plan."
-msgstr "Falta un plan."
+msgstr "Het missen van een plan."
 
 #: tap/rules.py:36
 msgid "Only one plan line is permitted per file."
-msgstr "Sólo una línea de plan está permitido por archivo."
+msgstr "Slechts één plan lijn is toegestaan per bestand."
 
 #: tap/rules.py:42
 msgid "A plan must appear at the beginning or end of the file."
-msgstr "Un plan debe aparecer al principio o al final del archivo."
+msgstr "Een plan moet aan het begin of einde van het bestand."
 
 #: tap/rules.py:46
 msgid "Expected {expected_count} tests but only {seen_count} ran."
-msgstr "Esperados {expected_count} pruebas, pero sólo {seen_count} corrían."
+msgstr "Verwachte {expected_count} testen, maar slechts {seen_count} liep."
 
 #: tap/rules.py:70
 msgid "Bailed: {reason}"
-msgstr "Rescatados: {reason}"
+msgstr "Gered: {reason}"
 
 #: tap/rules.py:74
 msgid "{filename} does not exist."
-msgstr "{filename} no existe."
+msgstr "{filename} bestaat niet."
 
 #: tap/runner.py:53
 msgid "(expected failure)"
-msgstr "(fallo esperado)"
+msgstr "(verwachte falen)"
 
 #: tap/runner.py:58
 msgid "(unexpected success)"
-msgstr "(éxito inesperado)"
+msgstr "(onverwacht succes)"
 
 #: tap/tracker.py:129
 msgid "# TAP results for {test_case}"
-msgstr "# Resultados TAP para {test_case}"
+msgstr "# TAP resultaten voor {test_case}"
