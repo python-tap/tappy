@@ -1,0 +1,109 @@
+# Translations template for tap.py.
+# Copyright (C) 2015 Matt Layman
+# This file is distributed under the same license as the tap.py project.
+# 
+# Translators:
+# Matt Layman <matthewlayman@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: tappy\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2015-05-23 16:56-0400\n"
+"PO-Revision-Date: 2015-05-30 03:00+0000\n"
+"Last-Translator: Matt Layman <matthewlayman@gmail.com>\n"
+"Language-Team: Italian (http://www.transifex.com/projects/p/tappy/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: tap/main.py:28
+msgid "A TAP consumer for Python"
+msgstr "Un consumatore TAP per Python"
+
+#: tap/main.py:31
+msgid ""
+"A file containing TAP output. Any directories listed will be scanned for "
+"files to include as TAP files."
+msgstr "Un file contenente uscita TAP. Ogni directory elencate verranno esaminati per i file da includere come file TAP."
+
+#: tap/main.py:36
+msgid "use verbose messages"
+msgstr "utilizzare messaggi dettagliati"
+
+#: tap/parser.py:100
+msgid "It is an error to explicitly specify any version lower than 13."
+msgstr "E 'un errore specificare esplicitamente qualsiasi versione inferiore a 13."
+
+#: tap/plugin.py:41
+msgid "Stream TAP output instead of the default test runner output."
+msgstr "Flusso uscita TAP invece dell'uscita test runner di default."
+
+#: tap/plugin.py:45
+msgid ""
+"An optional output directory to write TAP files to. If the directory does "
+"not exist, it will be created."
+msgstr "Una directory di output opzionale per scrivere file TAP a. Se la directory non esiste, verrà creata."
+
+#: tap/plugin.py:50
+msgid "Store all TAP test results into a combined output file."
+msgstr "Conservare tutti i risultati dei test TAP in un file di output combinato."
+
+#: tap/plugin.py:54
+msgid ""
+"An optional format string for the TAP output. The format options are: "
+"{short_description} for the short description, and {method_name} for the "
+"test method name."
+msgstr "Una stringa di formato opzionale per l'uscita TAP. Le opzioni di formato sono: {short_description} per la breve descrizione, e {method_name} per il nome del metodo di prova."
+
+#: tap/plugin.py:111 tap/runner.py:70
+msgid ""
+"Bad format string: {format}\n"
+"Replacement options are: {{short_description}} and {{method_name}}"
+msgstr "Stringa di formato Bad: {format}\nLe opzioni di sostituzione sono: {{short_description}} e {{method_name}}"
+
+#: tap/rules.py:25
+msgid "Multiple version lines appeared."
+msgstr "Diverse linee di versione è apparso."
+
+#: tap/rules.py:27
+msgid "The version must be on the first line."
+msgstr "La versione deve essere sulla prima riga."
+
+#: tap/rules.py:32
+msgid "Missing a plan."
+msgstr "Manca un piano."
+
+#: tap/rules.py:36
+msgid "Only one plan line is permitted per file."
+msgstr "Solo una riga piano è consentito per file."
+
+#: tap/rules.py:42
+msgid "A plan must appear at the beginning or end of the file."
+msgstr "Un piano deve apparire all'inizio o alla fine del file."
+
+#: tap/rules.py:46
+msgid "Expected {expected_count} tests but only {seen_count} ran."
+msgstr "Attesi test {expected_count} ma solo {seen_count} ran."
+
+#: tap/rules.py:70
+msgid "Bailed: {reason}"
+msgstr "Bailed: {reason}"
+
+#: tap/rules.py:74
+msgid "{filename} does not exist."
+msgstr "{filename} non esiste."
+
+#: tap/runner.py:53
+msgid "(expected failure)"
+msgstr "(fallimento atteso)"
+
+#: tap/runner.py:58
+msgid "(unexpected success)"
+msgstr "(successo inaspettato)"
+
+#: tap/tracker.py:129
+msgid "# TAP results for {test_case}"
+msgstr "# Risultati TAP per {test_case}"

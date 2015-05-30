@@ -13,6 +13,7 @@ env:
   - TOX_ENV=coverage
   - TOX_ENV=language_es
   - TOX_ENV=language_fr
+  - TOX_ENV=language_it
   - TOX_ENV=language_nl
 install:
   - pip install tox
