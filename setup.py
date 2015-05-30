@@ -21,7 +21,9 @@ class BuildPy(build_py):
     """Custom ``build_py`` command to always build mo files for wheels."""
 
     def run(self):
-        self.run_command('compile_catalog')
+        # Babel fails hard on Python 3. Let Python 2 make the mo files.
+        if sys.version_info < (3, 0, 0):
+            self.run_command('compile_catalog')
         # build_py is an old style class so super cannot be used.
         build_py.run(self)
 
