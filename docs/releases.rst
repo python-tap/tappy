@@ -9,7 +9,8 @@ Version 1.6, In Development
   results in a single output file.
 * The ``nosetests`` plugin has an optional ``--tap-stream`` flag to
   stream all TAP output directly to an output stream instead of a file.
-* tappy is now internationalized. It is translated into Dutch and Spanish.
+* tappy is now internationalized. It is translated into Dutch, French,
+  and Spanish.
 
 Version 1.5, Released May 18, 2015
 ----------------------------------

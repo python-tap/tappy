@@ -22,7 +22,7 @@ Installation
 
 tappy is available for download from [PyPI][pypi]. tappy is currently supported
 on Python 2.6, 2.7, 3.2, 3.3, 3.4 and PyPy.
-tappy is also translated into Dutch and Spanish.
+tappy is also translated into Dutch, French, and Spanish.
 
 ```bash
 $ pip install tap.py
