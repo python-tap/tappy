@@ -1,7 +1,8 @@
 tappy
 =====
 
-[![PyPI version][fury]](https://pypi.python.org/pypi/tap.py)
+[![PyPI version][pypishield]](https://pypi.python.org/pypi/tap.py)
+[![BSD license][license]](https://raw.githubusercontent.com/mblayman/tappy/master/LICENSE)
 [![Downloads][shield]](https://pypi.python.org/pypi/tap.py)
 [![Build Status][travis]](https://travis-ci.org/mblayman/tappy)
 
@@ -64,7 +65,8 @@ Consumers
 *   `Loader` and `Parser` - Python APIs for handling of TAP files and data.
 
 [tap]: http://testanything.org/
-[fury]: https://badge.fury.io/py/tap.py.png
+[pypishield]: https://img.shields.io/pypi/v/tap.py.svg
+[license]: https://img.shields.io/pypi/l/tap.py.svg
 [shield]: https://img.shields.io/pypi/dm/tap.py.svg
 [travis]: https://travis-ci.org/mblayman/tappy.png?branch=master
 [rtd]: http://tappy.readthedocs.org/en/latest/
