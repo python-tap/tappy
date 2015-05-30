@@ -10,10 +10,20 @@ Developer documentation is on
 """
 
 from setuptools import find_packages, setup
+from setuptools.command.build_py import build_py
 from setuptools.command.sdist import sdist
 import sys
 
 __version__ = '1.6'
+
+
+class BuildPy(build_py):
+    """Custom ``build_py`` command to always build mo files for wheels."""
+
+    def run(self):
+        self.run_command('compile_catalog')
+        # build_py is an old style class so super cannot be used.
+        build_py.run(self)
 
 
 class Sdist(sdist):
@@ -28,13 +38,10 @@ class Sdist(sdist):
 def install_requirements():
     requirements = [
         'nose',
-        'Pygments==2.0.1',
-        ]
+        'Pygments',
+    ]
     if sys.version_info < (2, 7, 0):
         requirements.append('argparse')
-
-    if sys.version_info < (3, 3, 0):
-        requirements.append('mock')
 
     return requirements
 
@@ -50,11 +57,15 @@ if __name__ == '__main__':
     # Add some developer tools.
     if 'develop' in sys.argv:
         install_requires.extend([
+            'Babel',
             'coverage',
             'flake8',
+            'mock',
             'requests',
             'Sphinx',
             'tox',
+            'twine',
+            'wheel',
         ])
 
     setup(
@@ -97,6 +108,12 @@ if __name__ == '__main__':
             'TAP',
             'unittest',
         ],
-        cmdclass={'sdist': Sdist},
-        test_suite='tap.tests'
+        cmdclass={
+            'build_py': BuildPy,
+            'sdist': Sdist,
+        },
+        test_suite='tap.tests',
+        tests_require=[
+            'mock'
+        ]
     )
