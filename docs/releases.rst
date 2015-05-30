@@ -11,6 +11,8 @@ Version 1.6, In Development
   stream all TAP output directly to an output stream instead of a file.
 * tappy is now internationalized. It is translated into Dutch, French,
   Italian, and Spanish.
+* tappy is available as a Python wheel package, the new Python packaging
+  standard.
 
 Version 1.5, Released May 18, 2015
 ----------------------------------
