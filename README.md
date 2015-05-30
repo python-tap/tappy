@@ -14,6 +14,9 @@ below provides a synopsis of what tappy supplies.
 
 For the curious: tappy sounds like "happy."
 
+If you find tappy useful, please consider starring the repository to show a
+kindness and help others discover something valuable. Thanks!
+
 Installation
 ------------
 
