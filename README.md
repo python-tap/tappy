@@ -6,7 +6,7 @@ tappy
 [![Downloads][shield]](https://pypi.python.org/pypi/tap.py)
 [![Build Status][travis]](https://travis-ci.org/mblayman/tappy)
 
-<img align="right" src="http://testanything.org/images/tap.png" 
+<img align="right" src="https://github.com/mblayman/tappy/blob/master/tap.png" 
   alt="TAP logo" />
 
 tappy is a set of tools for working with the
