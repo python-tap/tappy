@@ -6,6 +6,9 @@ tappy
 [![Downloads][shield]](https://pypi.python.org/pypi/tap.py)
 [![Build Status][travis]](https://travis-ci.org/mblayman/tappy)
 
+<img align="right" src="http://testanything.org/images/tap.png" 
+  alt="TAP logo" />
+
 tappy is a set of tools for working with the
 [Test Anything Protocol (TAP)][tap] in Python. TAP is a line based test
 protocol for recording test data in a standard way.
