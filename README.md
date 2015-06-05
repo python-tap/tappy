@@ -44,6 +44,8 @@ difficult to integrate a Python test suite into a larger TAP ecosystem.
 
 tappy is Python's bridge to TAP.
 
+![TAP streaming demo][stream]
+  
 Goals
 -----
 
@@ -74,6 +76,7 @@ Consumers
 [travis]: https://travis-ci.org/mblayman/tappy.png?branch=master
 [rtd]: http://tappy.readthedocs.org/en/latest/
 [pypi]: https://pypi.python.org/pypi/tap.py
+[stream]: https://github.com/mblayman/tappy/blob/master/stream.gif
 [produce]: http://testanything.org/producers.html
 [consume]: http://testanything.org/consumers.html
 [ns]: https://nose.readthedocs.org/en/latest/
