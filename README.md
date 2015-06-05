@@ -35,17 +35,18 @@ $ pip install tap.py
 Motivation
 ----------
 
-Some projects have extremely heterogenous programming environments with many
-programming languages and tools. Because of the simplicity of TAP, the
-protocol can function as a *lingua franca* for testing. When every testing
-tool on a project can create TAP, a team can get a holistic view of
-their system. Python did not have a bridge from `unittest` to TAP so it was
+Some projects have mixed programming environments with many
+programming languages and tools. Because of TAP's simplicity,
+it can function as a *lingua franca* for testing.
+When every testing tool can create TAP,
+a team can get a holistic view of their system.
+Python did not have a bridge from `unittest` to TAP so it was
 difficult to integrate a Python test suite into a larger TAP ecosystem.
 
 tappy is Python's bridge to TAP.
 
 ![TAP streaming demo][stream]
-  
+
 Goals
 -----
 
