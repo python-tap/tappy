@@ -5,9 +5,10 @@ tappy Tool
 ----------
 
 The ``tappy`` command line tool is a `TAP consumer
-<http://testanything.org/consumers.html>`_. The tool accepts TAP files or
-directories contain TAP files and provides a standard Python ``unittest`` style
-summary report. Check out ``tappy -h`` for the complete list of options.
+<http://testanything.org/consumers.html>`_.
+The tool accepts TAP files or directories containing TAP files
+and provides a standard Python ``unittest`` style summary report.
+Check out ``tappy -h`` for the complete list of options.
 
 .. code-block:: bash
 
