@@ -1,8 +1,8 @@
 Releases
 ========
 
-Version 1.6, In Development
----------------------------
+Version 1.6, Released June 18, 2015
+-----------------------------------
 
 * ``TAPTestRunner`` has a ``set_stream`` method to stream all TAP
   output directly to an output stream instead of a file.
