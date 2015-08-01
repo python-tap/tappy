@@ -11,7 +11,7 @@ except ImportError:
 from nose import case
 from nose.suite import ContextSuite
 
-from tap.plugin import DummyStream, TAP
+from tap.plugins._nose import DummyStream, TAP
 from tap.tests import TestCase
 
 
