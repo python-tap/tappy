@@ -37,4 +37,5 @@ Documentation
    consumers
    highlighter
    contributing
+   alternatives
    releases
