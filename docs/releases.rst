@@ -4,6 +4,8 @@ Releases
 Version 1.7, In Development
 ---------------------------
 
+* Document some viable alternatives to tappy.
+
 Version 1.6, Released June 18, 2015
 -----------------------------------
 
