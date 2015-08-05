@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tappy\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-05-23 16:56-0400\n"
+"POT-Creation-Date: 2015-06-17 08:31-0400\n"
 "PO-Revision-Date: 2015-05-25 03:00+0000\n"
 "Last-Translator: Matt Layman <matthewlayman@gmail.com>\n"
-"Language-Team: Dutch (http://www.transifex.com/projects/p/tappy/language/nl/)\n"
+"Language-Team: Dutch (http://www.transifex.com/tappy/tappy/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -64,35 +64,35 @@ msgid ""
 "Replacement options are: {{short_description}} and {{method_name}}"
 msgstr "Bad format string: {format}\nVervanging opties zijn: {{short_description}} en {{method_name}}"
 
-#: tap/rules.py:25
+#: tap/rules.py:25 tap/tests/test_loader.py:76
 msgid "Multiple version lines appeared."
 msgstr "Meerdere versie lijnen verscheen."
 
-#: tap/rules.py:27
+#: tap/rules.py:27 tap/tests/test_loader.py:94
 msgid "The version must be on the first line."
 msgstr "De versie moet op de eerste lijn."
 
-#: tap/rules.py:32
+#: tap/rules.py:32 tap/tests/test_rules.py:53
 msgid "Missing a plan."
 msgstr "Het missen van een plan."
 
-#: tap/rules.py:36
+#: tap/rules.py:36 tap/tests/test_rules.py:64
 msgid "Only one plan line is permitted per file."
 msgstr "Slechts één plan lijn is toegestaan per bestand."
 
-#: tap/rules.py:42
+#: tap/rules.py:42 tap/tests/test_rules.py:44
 msgid "A plan must appear at the beginning or end of the file."
 msgstr "Een plan moet aan het begin of einde van het bestand."
 
-#: tap/rules.py:46
+#: tap/rules.py:46 tap/tests/test_rules.py:76
 msgid "Expected {expected_count} tests but only {seen_count} ran."
 msgstr "Verwachte {expected_count} testen, maar slechts {seen_count} liep."
 
-#: tap/rules.py:70
+#: tap/rules.py:70 tap/tests/test_rules.py:88
 msgid "Bailed: {reason}"
 msgstr "Gered: {reason}"
 
-#: tap/rules.py:74
+#: tap/rules.py:74 tap/tests/test_loader.py:44
 msgid "{filename} does not exist."
 msgstr "{filename} bestaat niet."
 
@@ -104,6 +104,6 @@ msgstr "(verwachte falen)"
 msgid "(unexpected success)"
 msgstr "(onverwacht succes)"
 
-#: tap/tracker.py:129
+#: tap/tracker.py:129 tap/tests/test_tracker.py:19
 msgid "# TAP results for {test_case}"
 msgstr "# TAP resultaten voor {test_case}"

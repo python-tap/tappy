@@ -9,101 +9,101 @@ msgstr ""
 "Project-Id-Version: tappy\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2015-06-17 08:31-0400\n"
-"PO-Revision-Date: 2015-05-30 03:00+0000\n"
+"PO-Revision-Date: 2015-08-04 13:05+0000\n"
 "Last-Translator: Matt Layman <matthewlayman@gmail.com>\n"
-"Language-Team: Italian (http://www.transifex.com/tappy/tappy/language/it/)\n"
+"Language-Team: German (http://www.transifex.com/tappy/tappy/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
-"Language: it\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: tap/main.py:28
 msgid "A TAP consumer for Python"
-msgstr "Un consumatore TAP per Python"
+msgstr "Ein TAP Verbraucher für Python"
 
 #: tap/main.py:31
 msgid ""
 "A file containing TAP output. Any directories listed will be scanned for "
 "files to include as TAP files."
-msgstr "Un file contenente uscita TAP. Ogni directory elencate verranno esaminati per i file da includere come file TAP."
+msgstr "Eine Datei mit TAP-Ausgang. Alle aufgeführten Verzeichnisse werden gescannt für Dateien als TAP-Dateien enthalten."
 
 #: tap/main.py:36
 msgid "use verbose messages"
-msgstr "utilizzare messaggi dettagliati"
+msgstr "benutzen ausführliche Meldungen"
 
 #: tap/parser.py:100
 msgid "It is an error to explicitly specify any version lower than 13."
-msgstr "E 'un errore specificare esplicitamente qualsiasi versione inferiore a 13."
+msgstr "Es ist ein Fehler explizit jede Version niedriger als 13 angeben."
 
 #: tap/plugin.py:41
 msgid "Stream TAP output instead of the default test runner output."
-msgstr "Flusso uscita TAP invece dell'uscita test runner di default."
+msgstr "Stream TAP Ausgang anstelle des Standard-Test-Runner-Ausgang."
 
 #: tap/plugin.py:45
 msgid ""
 "An optional output directory to write TAP files to. If the directory does "
 "not exist, it will be created."
-msgstr "Una directory di output opzionale per scrivere file TAP a. Se la directory non esiste, verrà creata."
+msgstr "Ein optionales Ausgabeverzeichnis zu TAP-Dateien zu schreiben. Wenn das Verzeichnis nicht existiert, wird er erstellt."
 
 #: tap/plugin.py:50
 msgid "Store all TAP test results into a combined output file."
-msgstr "Conservare tutti i risultati dei test TAP in un file di output combinato."
+msgstr "Speichern Sie alle TAP Testergebnisse in eine kombinierte Ausgabedatei."
 
 #: tap/plugin.py:54
 msgid ""
 "An optional format string for the TAP output. The format options are: "
 "{short_description} for the short description, and {method_name} for the "
 "test method name."
-msgstr "Una stringa di formato opzionale per l'uscita TAP. Le opzioni di formato sono: {short_description} per la breve descrizione, e {method_name} per il nome del metodo di prova."
+msgstr "Eine optionale Format-String für die TAP-Ausgang. Die Formatoptionen sind: {short_description} für die kurze Beschreibung, und {method_name} für die Testmethodennamen."
 
 #: tap/plugin.py:111 tap/runner.py:70
 msgid ""
 "Bad format string: {format}\n"
 "Replacement options are: {{short_description}} and {{method_name}}"
-msgstr "Stringa di formato Bad: {format}\nLe opzioni di sostituzione sono: {{short_description}} e {{method_name}}"
+msgstr "Bad Format-String: {format}\nAustausch-Optionen sind: {{short_description}} und {{method_name}}"
 
 #: tap/rules.py:25 tap/tests/test_loader.py:76
 msgid "Multiple version lines appeared."
-msgstr "Diverse linee di versione è apparso."
+msgstr "Mehrere Version Linien erschienen."
 
 #: tap/rules.py:27 tap/tests/test_loader.py:94
 msgid "The version must be on the first line."
-msgstr "La versione deve essere sulla prima riga."
+msgstr "Die Version muss auf der ersten Zeile stehen."
 
 #: tap/rules.py:32 tap/tests/test_rules.py:53
 msgid "Missing a plan."
-msgstr "Manca un piano."
+msgstr "Vermissen Sie einen Plan."
 
 #: tap/rules.py:36 tap/tests/test_rules.py:64
 msgid "Only one plan line is permitted per file."
-msgstr "Solo una riga piano è consentito per file."
+msgstr "Nur ein Planeinzel wird pro Datei zulässig."
 
 #: tap/rules.py:42 tap/tests/test_rules.py:44
 msgid "A plan must appear at the beginning or end of the file."
-msgstr "Un piano deve apparire all'inizio o alla fine del file."
+msgstr "Ein Plan muss am Anfang oder Ende der Datei angezeigt."
 
 #: tap/rules.py:46 tap/tests/test_rules.py:76
 msgid "Expected {expected_count} tests but only {seen_count} ran."
-msgstr "Attesi test {expected_count} ma solo {seen_count} ran."
+msgstr "Erwartete {expected_count} Tests jedoch nur {seen_count} ran."
 
 #: tap/rules.py:70 tap/tests/test_rules.py:88
 msgid "Bailed: {reason}"
-msgstr "Bailed: {reason}"
+msgstr "Gerettet: {reason}"
 
 #: tap/rules.py:74 tap/tests/test_loader.py:44
 msgid "{filename} does not exist."
-msgstr "{filename} non esiste."
+msgstr "{filename} ist nicht vorhanden."
 
 #: tap/runner.py:53
 msgid "(expected failure)"
-msgstr "(fallimento atteso)"
+msgstr "(erwartete Ausfall)"
 
 #: tap/runner.py:58
 msgid "(unexpected success)"
-msgstr "(successo inaspettato)"
+msgstr "(unerwarteten Erfolg)"
 
 #: tap/tracker.py:129 tap/tests/test_tracker.py:19
 msgid "# TAP results for {test_case}"
-msgstr "# Risultati TAP per {test_case}"
+msgstr "# TAP Ergebnisse für {test_case}"
