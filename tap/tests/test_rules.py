@@ -64,6 +64,15 @@ class TestRules(TestCase):
             _('Only one plan line is permitted per file.'),
             self.suite._tests[0]._line.description)
 
+    def test_plan_line_two(self):
+        """A plan may appear on line 2 when line 1 is a version line."""
+        rules = self._make_one()
+        rules.saw_version_at(1)
+
+        valid = rules._plan_on_valid_line(at_line=2, final_line_count=42)
+
+        self.assertTrue(valid)
+
     def test_errors_when_expected_tests_differs_from_actual(self):
         plan = self.factory.make_plan(expected_tests=42)
         rules = self._make_one()
