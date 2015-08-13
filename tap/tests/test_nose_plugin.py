@@ -30,7 +30,7 @@ class FakeTestCase(object):
         pass
 
 
-class TestPlugin(TestCase):
+class TestNosePlugin(TestCase):
 
     @classmethod
     def _make_one(cls, options=None):
