@@ -1,6 +1,6 @@
 # Copyright (c) 2015, Matt Layman
 
-from tap.plugins import labels
+from tap.i18n import _
 from tap.tracker import Tracker
 
 # Because of how pytest hooks work, there is not much choice
@@ -11,7 +11,9 @@ tracker = Tracker()
 def pytest_addoption(parser):
     """Include all the command line options."""
     group = parser.getgroup('terminal reporting', after='general')
-    group.addoption('--tap-outdir', metavar='path', help=labels.OUTDIR_HELP)
+    group.addoption('--tap-outdir', metavar='path', help=_(
+        'An optional output directory to write TAP files to. '
+        'If the directory does not exist, it will be created.'))
 
 
 def pytest_configure(config):

@@ -14,7 +14,6 @@ from nose.plugins import Plugin
 from nose.suite import ContextSuite
 
 from tap.i18n import _
-from tap.plugins import labels
 from tap.tracker import Tracker
 
 
@@ -41,7 +40,9 @@ class TAP(Plugin):
             help=_('Stream TAP output instead of the default test runner'
                    ' output.'))
         parser.add_option(
-            '--tap-outdir', metavar='PATH', help=labels.OUTDIR_HELP)
+            '--tap-outdir', metavar='PATH', help=_(
+                'An optional output directory to write TAP files to. '
+                'If the directory does not exist, it will be created.'))
         parser.add_option(
             '--tap-combined', default=False, action='store_true',
             help=_('Store all TAP test results into a combined output file.'))
