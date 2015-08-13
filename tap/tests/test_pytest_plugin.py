@@ -4,6 +4,7 @@ try:
     from unittest import mock
 except ImportError:
     import mock
+import tempfile
 
 from tap.plugins import pytest
 from tap.tests import TestCase
@@ -25,7 +26,8 @@ class TestPytestPlugin(TestCase):
         self.assertEqual(group.addoption.call_count, 1)
 
     def test_tracker_outdir_set(self):
+        outdir = tempfile.mkdtemp()
         config = mock.Mock()
-        config.option.tap_outdir = 'fakeout'
+        config.option.tap_outdir = outdir
         pytest.pytest_configure(config)
-        self.assertEqual(pytest.tracker.outdir, 'fakeout')
+        self.assertEqual(pytest.tracker.outdir, outdir)
