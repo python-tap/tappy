@@ -17,6 +17,13 @@ class TestPytestPlugin(TestCase):
         must be installed each time."""
         pytest.tracker = Tracker()
 
+    def test_includes_options(self):
+        group = mock.Mock()
+        parser = mock.Mock()
+        parser.getgroup.return_value = group
+        pytest.pytest_addoption(parser)
+        self.assertEqual(group.addoption.call_count, 1)
+
     def test_tracker_outdir_set(self):
         config = mock.Mock()
         config.option.tap_outdir = 'fakeout'
