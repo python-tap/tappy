@@ -23,19 +23,31 @@ class TestPytestPlugin(TestCase):
     def tearDown(self):
         pytest.tracker = self._tracker
 
+    def _make_config(self):
+        config = mock.Mock()
+        config.option.tap_outdir = None
+        config.option.tap_combined = False
+        return config
+
     def test_includes_options(self):
         group = mock.Mock()
         parser = mock.Mock()
         parser.getgroup.return_value = group
         pytest.pytest_addoption(parser)
-        self.assertEqual(group.addoption.call_count, 1)
+        self.assertEqual(group.addoption.call_count, 2)
 
     def test_tracker_outdir_set(self):
         outdir = tempfile.mkdtemp()
-        config = mock.Mock()
+        config = self._make_config()
         config.option.tap_outdir = outdir
         pytest.pytest_configure(config)
         self.assertEqual(pytest.tracker.outdir, outdir)
+
+    def test_tracker_combined_set(self):
+        config = self._make_config()
+        config.option.tap_combined = True
+        pytest.pytest_configure(config)
+        self.assertTrue(pytest.tracker.combined)
 
     def test_track_when_call_report(self):
         """Only the call reports are tracked."""

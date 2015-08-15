@@ -14,6 +14,9 @@ def pytest_addoption(parser):
     group.addoption('--tap-outdir', metavar='path', help=_(
         'An optional output directory to write TAP files to. '
         'If the directory does not exist, it will be created.'))
+    group.addoption(
+        '--tap-combined', default=False, action='store_true',
+        help=_('Store all TAP test results into a combined output file.'))
     # TODO: Add remaining options.
     # TODO: Figure out how to suppress pytest terminal output.
 
@@ -21,6 +24,7 @@ def pytest_addoption(parser):
 def pytest_configure(config):
     """Set all the options before the test run."""
     tracker.outdir = config.option.tap_outdir
+    tracker.combined = config.option.tap_combined
     # TODO: Set options on tracker.
 
 
