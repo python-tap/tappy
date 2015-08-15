@@ -1,5 +1,9 @@
 # Copyright (c) 2015, Matt Layman
 
+import sys
+
+import pytest
+
 from tap.i18n import _
 from tap.tracker import Tracker
 
@@ -11,21 +15,27 @@ tracker = Tracker()
 def pytest_addoption(parser):
     """Include all the command line options."""
     group = parser.getgroup('terminal reporting', after='general')
+    group.addoption(
+        '--tap-stream', default=False, action='store_true', help=_(
+            'Stream TAP output instead of the default test runner output.'))
     group.addoption('--tap-outdir', metavar='path', help=_(
         'An optional output directory to write TAP files to. '
         'If the directory does not exist, it will be created.'))
     group.addoption(
         '--tap-combined', default=False, action='store_true',
         help=_('Store all TAP test results into a combined output file.'))
-    # TODO: Add remaining options.
-    # TODO: Figure out how to suppress pytest terminal output.
 
 
+@pytest.mark.trylast
 def pytest_configure(config):
     """Set all the options before the test run."""
     tracker.outdir = config.option.tap_outdir
     tracker.combined = config.option.tap_combined
-    # TODO: Set options on tracker.
+    if config.option.tap_stream:
+        reporter = config.pluginmanager.getplugin('terminalreporter')
+        config.pluginmanager.unregister(reporter)
+        tracker.streaming = True
+        tracker.stream = sys.stdout
 
 
 def pytest_runtest_logreport(report):
