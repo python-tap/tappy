@@ -2,15 +2,19 @@ TAP Producers
 =============
 
 tappy integrates with ``unittest`` based test cases to produce TAP output.
-The producers come in two varieties: support with only the standard library
-and support for `nose <https://nose.readthedocs.org/en/latest/>`_.
+The producers come in three varieties:
+support with only the standard library,
+support for `nose <https://nose.readthedocs.org/en/latest/>`_,
+and support for `pytest <http://pytest.org/latest/>`_.
 
 * ``TAPTestRunner`` - This subclass of ``unittest.TextTestRunner`` provides all
   the functionality of ``TextTestRunner`` and generates TAP files or streams.
 * tappy for **nose** - tappy provides a plugin (simply called ``TAP``)
   for the **nose** testing tool.
+* tappy for **pytest** - tappy provides a plugin called ``tap``
+  for the **pytest** testing tool.
 
-By default, both producers will create one TAP file for each ``TestCase``
+By default, the producers will create one TAP file for each ``TestCase``
 executed by the test suite.
 The files will use the name of the test case class with a ``.tap``
 extension. For example:
@@ -72,6 +76,34 @@ when calling ``nosetests``.
    Ran 15 tests in 0.020s
 
    OK
+
+Running tappy with **pytest** is even easier than with **nose**.
+The plugin is automatically activated for **pytest**
+when tappy is installed.
+
+.. code-block:: sh
+
+   $ py.test
+   =========================== test session starts ============================
+   platform linux2 -- Python 2.7.6 -- py-1.4.30 -- pytest-2.7.2
+   rootdir: /home/matt/tappy, inifile:
+   plugins: tap.py
+   collected 94 items
+
+   tests/test_adapter.py .....
+   tests/test_directive.py ......
+   tests/test_line.py ......
+   tests/test_loader.py ......
+   tests/test_main.py .
+   tests/test_nose_plugin.py ......
+   tests/test_parser.py ................
+   tests/test_pytest_plugin.py .........
+   tests/test_result.py .......
+   tests/test_rules.py ........
+   tests/test_runner.py .......
+   tests/test_tracker.py .................
+
+   ======================== 94 passed in 0.24 seconds =========================
 
 The configuration options for each TAP tool are listed
 in the following sections.
@@ -136,3 +168,21 @@ The **nose** TAP plugin is configured from command line flags.
 * ``--tap-format`` - Provide a different format for the result lines.
   ``{method_name}`` and ``{short_description}`` are available options.
   For example, ``'{method_name}: {short_description}'``.
+
+pytest TAP Plugin
+-----------------
+
+The **pytest** TAP plugin is configured from command line flags.
+
+* ``--tap-stream`` - Enable streaming mode to send TAP output directly to
+  the output stream.
+
+* ``--tap-outdir`` - The **pytest** TAP plugin also supports an optional
+  output directory when you don't want to store the ``.tap`` files
+  wherever you executed ``py.test``.
+
+  Use ``--tap-outdir`` followed by a directory path to store the files
+  in a different place. The directory will be created if it does not exist.
+
+* ``--tap-combined`` - Store test results in a single output file
+  in ``testresults.tap``.

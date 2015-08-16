@@ -4,6 +4,7 @@ Releases
 Version 1.7, In Development
 ---------------------------
 
+* Provide a plugin to integrate with pytest.
 * Document some viable alternatives to tappy.
 * Translated into German.
 
