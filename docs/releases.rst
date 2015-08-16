@@ -7,6 +7,7 @@ Version 1.7, In Development
 * Provide a plugin to integrate with pytest.
 * Document some viable alternatives to tappy.
 * Translated into German.
+* Translated into Portuguese.
 
 Version 1.6, Released June 18, 2015
 -----------------------------------

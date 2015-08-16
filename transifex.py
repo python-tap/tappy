@@ -13,6 +13,7 @@ LANGUAGES = [
     'fr',
     'it',
     'nl',
+    'pt',
 ]
 
 
