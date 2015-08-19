@@ -1,8 +1,8 @@
 Releases
 ========
 
-Version 1.7, In Development
----------------------------
+Version 1.7, Released August 19, 2015
+-------------------------------------
 
 * Provide a plugin to integrate with pytest.
 * Document some viable alternatives to tappy.
