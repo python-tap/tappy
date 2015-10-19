@@ -69,6 +69,9 @@ Producers
     the functionality of `TextTestRunner` and generates TAP files.
 *   tappy for [nose][ns] - tappy provides a plugin for the **nose**
     testing tool.
+*   tappy for [pytest][pytest] -
+    tappy provides a plugin
+    for the **pytest** testing tool.
 
 Consumers
 ---------
@@ -87,3 +90,4 @@ Consumers
 [produce]: http://testanything.org/producers.html
 [consume]: http://testanything.org/consumers.html
 [ns]: https://nose.readthedocs.org/en/latest/
+[pytest]: http://pytest.org/latest/
