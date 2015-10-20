@@ -36,12 +36,12 @@ class Adapter(object):
                 try:
                     result.addUnexpectedSuccess(self)
                 except AttributeError:
-                    # Python 2.6 does not support unexpected success..
+                    # Python 2.6 does not support unexpected success.
                     self.addFailure(result)
             else:
                 try:
                     result.addExpectedFailure(self, ('', Exception(), None))
-                except KeyError:
+                except AttributeError:
                     # Python 2.6 does not support expected failures.
                     result.addSuccess(self)
             return

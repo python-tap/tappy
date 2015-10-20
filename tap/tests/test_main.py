@@ -2,7 +2,12 @@
 
 import os
 
-from tap.main import main
+try:
+    from unittest import mock
+except ImportError:
+    import mock
+
+from tap.main import get_status, main
 from tap.tests import TestCase
 
 
@@ -17,3 +22,8 @@ class TestMain(TestCase):
         status = main(argv, stream=stream)
 
         self.assertEqual(1, status)
+
+    def test_get_successful_status(self):
+        result = mock.Mock()
+        result.wasSuccessful.return_value = True
+        self.assertEqual(0, get_status(result))

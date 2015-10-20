@@ -182,3 +182,8 @@ class TestTracker(TestCase):
         tracker.generate_tap_reports()
 
         self.assertEqual(stream.getvalue(), '1..42\n')
+
+    def test_get_default_tap_file_path(self):
+        tracker = Tracker()
+        file_path = tracker._get_tap_file_path('foo')
+        self.assertEqual('foo.tap', file_path)

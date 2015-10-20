@@ -18,10 +18,7 @@ def main(argv=sys.argv, stream=sys.stderr):
     runner = unittest.TextTestRunner(verbosity=args.verbose, stream=stream)
     result = runner.run(suite)
 
-    if result.wasSuccessful():
-        return 0
-    else:
-        return 1
+    return get_status(result)
 
 
 def parse_args(argv):
@@ -38,3 +35,11 @@ def parse_args(argv):
     # argparse expects the executable to be removed from argv.
     args = parser.parse_args(argv[1:])
     return args
+
+
+def get_status(result):
+    """Get a return status from the result."""
+    if result.wasSuccessful():
+        return 0
+    else:
+        return 1

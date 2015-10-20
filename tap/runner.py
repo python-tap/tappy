@@ -7,11 +7,12 @@ import sys
 # Older versions of Python have the result under a different name.
 try:
     from unittest import TextTestResult
-except ImportError:
+except ImportError:  # pragma: no cover
     from unittest import _TextTestResult as TextTestResult
 try:
     from unittest.runner import _WritelnDecorator
-except ImportError:  # Python 2.6 has a different package structure.
+except ImportError:  # pragma: no cover
+    # Python 2.6 has a different package structure.
     from unittest import _WritelnDecorator
 
 from tap.i18n import _
