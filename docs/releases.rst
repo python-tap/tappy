@@ -1,6 +1,14 @@
 Releases
 ========
 
+Version 1.8, In Development
+---------------------------
+
+* The pytest plugin now defaults to no output
+  unless provided a flag.
+  Users dependent on the old default behavior
+  can use ``--tap-files`` to achieve the same results.
+
 Version 1.7, Released August 19, 2015
 -------------------------------------
 

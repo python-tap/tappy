@@ -26,6 +26,7 @@ class TestPytestPlugin(TestCase):
     def _make_config(self):
         config = mock.Mock()
         config.option.tap_stream = False
+        config.option.tap_files = False
         config.option.tap_outdir = None
         config.option.tap_combined = False
         return config
@@ -35,7 +36,7 @@ class TestPytestPlugin(TestCase):
         parser = mock.Mock()
         parser.getgroup.return_value = group
         _pytest.pytest_addoption(parser)
-        self.assertEqual(group.addoption.call_count, 3)
+        self.assertEqual(group.addoption.call_count, 4)
 
     def test_tracker_stream_set(self):
         config = self._make_config()
@@ -90,7 +91,29 @@ class TestPytestPlugin(TestCase):
         _pytest.tracker.add_skip.assert_called_once_with(
             'TestFake', 'TestFake.test_me', 'a reason')
 
-    def test_generates_reports(self):
+    def test_generates_reports_for_stream(self):
+        config = self._make_config()
+        config.option.tap_stream = True
         _pytest.tracker = mock.Mock()
-        _pytest.pytest_unconfigure(None)
+        _pytest.pytest_unconfigure(config)
         _pytest.tracker.generate_tap_reports.assert_called_once_with()
+
+    def test_generates_reports_for_files(self):
+        config = self._make_config()
+        config.option.tap_files = True
+        _pytest.tracker = mock.Mock()
+        _pytest.pytest_unconfigure(config)
+        _pytest.tracker.generate_tap_reports.assert_called_once_with()
+
+    def test_generates_reports_for_combined(self):
+        config = self._make_config()
+        config.option.tap_combined = True
+        _pytest.tracker = mock.Mock()
+        _pytest.pytest_unconfigure(config)
+        _pytest.tracker.generate_tap_reports.assert_called_once_with()
+
+    def test_skips_reporting_with_no_output_option(self):
+        config = self._make_config()
+        _pytest.tracker = mock.Mock()
+        _pytest.pytest_unconfigure(config)
+        self.assertFalse(_pytest.tracker.generate_tap_reports.called)

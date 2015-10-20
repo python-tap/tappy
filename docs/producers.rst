@@ -77,13 +77,14 @@ when calling ``nosetests``.
 
    OK
 
-Running tappy with **pytest** is even easier than with **nose**.
-The plugin is automatically activated for **pytest**
+The **pytest** plugin is automatically activated for **pytest**
 when tappy is installed.
+Because it is automatically activated,
+**pytest** users should specify an output style.
 
 .. code-block:: sh
 
-   $ py.test
+   $ py.test --tap-files
    =========================== test session starts ============================
    platform linux2 -- Python 2.7.6 -- py-1.4.30 -- pytest-2.7.2
    rootdir: /home/matt/tappy, inifile:
@@ -155,15 +156,15 @@ The **nose** TAP plugin is configured from command line flags.
 * ``--tap-stream`` - Enable streaming mode to send TAP output directly to
   the output stream.
 
+* ``--tap-combined`` - Store test results in a single output file
+  in ``testresults.tap``.
+
 * ``--tap-outdir`` - The **nose** TAP plugin also supports an optional
   output directory when you don't want to store the ``.tap`` files
   wherever you executed ``nosetests``.
 
   Use ``--tap-outdir`` followed by a directory path to store the files
   in a different place. The directory will be created if it does not exist.
-
-* ``--tap-combined`` - Store test results in a single output file
-  in ``testresults.tap``.
 
 * ``--tap-format`` - Provide a different format for the result lines.
   ``{method_name}`` and ``{short_description}`` are available options.
@@ -173,9 +174,20 @@ pytest TAP Plugin
 -----------------
 
 The **pytest** TAP plugin is configured from command line flags.
+Since **pytest** automatically activates the TAP plugin,
+the plugin does nothing by default.
+Users must enable a TAP output mode
+(via ``--tap-stream|files|combined``)
+or the plugin will take no action.
 
 * ``--tap-stream`` - Enable streaming mode to send TAP output directly to
   the output stream.
+
+* ``--tap-files`` - Store test results in individual test files.
+  One test file is created for each test case.
+
+* ``--tap-combined`` - Store test results in a single output file
+  in ``testresults.tap``.
 
 * ``--tap-outdir`` - The **pytest** TAP plugin also supports an optional
   output directory when you don't want to store the ``.tap`` files
@@ -183,6 +195,3 @@ The **pytest** TAP plugin is configured from command line flags.
 
   Use ``--tap-outdir`` followed by a directory path to store the files
   in a different place. The directory will be created if it does not exist.
-
-* ``--tap-combined`` - Store test results in a single output file
-  in ``testresults.tap``.
