@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tappy\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-08-16 08:37-0400\n"
-"PO-Revision-Date: 2015-05-30 02:40+0000\n"
+"POT-Creation-Date: 2015-10-19 21:53-0400\n"
+"PO-Revision-Date: 2015-10-20 10:07+0000\n"
 "Last-Translator: Matt Layman <matthewlayman@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/tappy/tappy/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -91,13 +91,13 @@ msgstr "# Résultats TAP pour {test_case}"
 msgid "Stream TAP output instead of the default test runner output."
 msgstr "Sortie TAP Stream lieu de la sortie de lanceur de test par défaut."
 
-#: tap/plugins/_nose.py:43 tap/plugins/_pytest.py:21
+#: tap/plugins/_nose.py:43 tap/plugins/_pytest.py:27
 msgid ""
 "An optional output directory to write TAP files to. If the directory does "
 "not exist, it will be created."
 msgstr "Un répertoire option de sortie à écrire des fichiers TAP à. Si le répertoire est inexistant, il sera créé."
 
-#: tap/plugins/_nose.py:48 tap/plugins/_pytest.py:26
+#: tap/plugins/_nose.py:48 tap/plugins/_pytest.py:25
 msgid "Store all TAP test results into a combined output file."
 msgstr "Conservez tous les résultats des tests de TAP dans un fichier de sortie combiné."
 
@@ -107,3 +107,7 @@ msgid ""
 "{short_description} for the short description, and {method_name} for the "
 "test method name."
 msgstr "Une chaîne de format en option pour la sortie de TAP. Les options de format sont: {short_description} pour la courte description, et {method_name} pour le nom de la méthode d'essai."
+
+#: tap/plugins/_pytest.py:22
+msgid "Store all TAP test results into individual files per test case."
+msgstr ""

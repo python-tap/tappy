@@ -8,6 +8,7 @@ Version 1.8, In Development
   unless provided a flag.
   Users dependent on the old default behavior
   can use ``--tap-files`` to achieve the same results.
+* Translated into Japanese.
 
 Version 1.7, Released August 19, 2015
 -------------------------------------

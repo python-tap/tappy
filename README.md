@@ -32,6 +32,7 @@ Dutch,
 French,
 German,
 Italian,
+Japanese,
 Portuguese,
 and Spanish.
 

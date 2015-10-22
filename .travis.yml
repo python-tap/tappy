@@ -15,6 +15,7 @@ env:
   - TOX_ENV=language_es
   - TOX_ENV=language_fr
   - TOX_ENV=language_it
+  - TOX_ENV=language_ja
   - TOX_ENV=language_nl
   - TOX_ENV=language_pt
 install:

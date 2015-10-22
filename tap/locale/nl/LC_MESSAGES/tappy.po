@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tappy\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-08-16 08:37-0400\n"
-"PO-Revision-Date: 2015-05-25 03:00+0000\n"
+"POT-Creation-Date: 2015-10-19 21:53-0400\n"
+"PO-Revision-Date: 2015-10-20 10:07+0000\n"
 "Last-Translator: Matt Layman <matthewlayman@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/tappy/tappy/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -91,13 +91,13 @@ msgstr "# TAP resultaten voor {test_case}"
 msgid "Stream TAP output instead of the default test runner output."
 msgstr "Stroom TAP uitgang in plaats van de standaard-test runner-uitgang."
 
-#: tap/plugins/_nose.py:43 tap/plugins/_pytest.py:21
+#: tap/plugins/_nose.py:43 tap/plugins/_pytest.py:27
 msgid ""
 "An optional output directory to write TAP files to. If the directory does "
 "not exist, it will be created."
 msgstr "Een optionele output directory aan TAP bestanden schrijven. Als de map niet bestaat, zal het worden aangemaakt."
 
-#: tap/plugins/_nose.py:48 tap/plugins/_pytest.py:26
+#: tap/plugins/_nose.py:48 tap/plugins/_pytest.py:25
 msgid "Store all TAP test results into a combined output file."
 msgstr "Bewaar alle TAP testresultaten in een gecombineerde output file."
 
@@ -107,3 +107,7 @@ msgid ""
 "{short_description} for the short description, and {method_name} for the "
 "test method name."
 msgstr "Een optionele format string voor de TAP output. De opties zijn formaat: {short_description} voor de korte omschrijving, en {method_name} voor de naam testmethode."
+
+#: tap/plugins/_pytest.py:22
+msgid "Store all TAP test results into individual files per test case."
+msgstr ""

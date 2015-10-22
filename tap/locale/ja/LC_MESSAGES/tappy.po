@@ -11,102 +11,102 @@ msgstr ""
 "POT-Creation-Date: 2015-10-19 21:53-0400\n"
 "PO-Revision-Date: 2015-10-20 10:07+0000\n"
 "Last-Translator: Matt Layman <matthewlayman@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/tappy/tappy/language/es/)\n"
+"Language-Team: Japanese (http://www.transifex.com/tappy/tappy/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.0\n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: tap/main.py:28
 msgid "A TAP consumer for Python"
-msgstr "Un consumidor TAP para Python"
+msgstr "Python用のTAP消費者"
 
 #: tap/main.py:31
 msgid ""
 "A file containing TAP output. Any directories listed will be scanned for "
 "files to include as TAP files."
-msgstr "Una salida de TAP archivo que contiene. Cualquier directorios listados serán analizados en busca de archivos que incluyen como archivos TAP."
+msgstr "含むファイルのTAP出力。ファイルは、TAPファイルとして含まれるようにするために記載されている任意のディレクトリがスキャンされます。"
 
 #: tap/main.py:36
 msgid "use verbose messages"
-msgstr "utilizar mensajes detallados"
+msgstr "詳細メッセージを使用します"
 
 #: tap/parser.py:100
 msgid "It is an error to explicitly specify any version lower than 13."
-msgstr "Es un error especificar explícitamente cualquier versión inferior a 13."
+msgstr "これは、明示的に13以外の任意のバージョンが低い指定するとエラーになります。"
 
 #: tap/rules.py:25 tap/tests/test_loader.py:76
 msgid "Multiple version lines appeared."
-msgstr "Múltiples líneas de versión aparecieron."
+msgstr "複数のバージョンのラインが登場しました。"
 
 #: tap/rules.py:27 tap/tests/test_loader.py:94
 msgid "The version must be on the first line."
-msgstr "La versión debe estar en la primera línea."
+msgstr "バージョンは、最初の行になければなりません。"
 
 #: tap/rules.py:32 tap/tests/test_rules.py:53
 msgid "Missing a plan."
-msgstr "Falta un plan."
+msgstr "計画がありません。"
 
 #: tap/rules.py:36 tap/tests/test_rules.py:64
 msgid "Only one plan line is permitted per file."
-msgstr "Sólo una línea de plan está permitido por archivo."
+msgstr "唯一の計画線は、ファイルごとに許可されています。"
 
 #: tap/rules.py:42 tap/tests/test_rules.py:44
 msgid "A plan must appear at the beginning or end of the file."
-msgstr "Un plan debe aparecer al principio o al final del archivo."
+msgstr "計画では、ファイルの先頭や末尾に表示される必要があります。"
 
 #: tap/rules.py:46 tap/tests/test_rules.py:85
 msgid "Expected {expected_count} tests but only {seen_count} ran."
-msgstr "Esperados {expected_count} pruebas, pero sólo {seen_count} corrían."
+msgstr "期待 {expected_count} テストだけ {seen_count} 走りました。"
 
 #: tap/rules.py:70 tap/tests/test_rules.py:97
 msgid "Bailed: {reason}"
-msgstr "Rescatados: {reason}"
+msgstr "保釈：{reason}"
 
 #: tap/rules.py:74 tap/tests/test_loader.py:44
 msgid "{filename} does not exist."
-msgstr "{filename} no existe."
+msgstr "{filename} は存在しません。"
 
 #: tap/runner.py:53
 msgid "(expected failure)"
-msgstr "(fallo esperado)"
+msgstr "(予想失敗)"
 
 #: tap/runner.py:58
 msgid "(unexpected success)"
-msgstr "(éxito inesperado)"
+msgstr "(予期せぬ成功)"
 
 #: tap/runner.py:70 tap/plugins/_nose.py:108
 msgid ""
 "Bad format string: {format}\n"
 "Replacement options are: {{short_description}} and {{method_name}}"
-msgstr "Cadena de formato Malo: {format}\nLas opciones de reemplazo son: {{short_description}} y {{method_name}}"
+msgstr "バートフォーマット文字列: {format}\n交換オプションには、次のとおりです。{{short_description}} と {{method_name}}"
 
 #: tap/tracker.py:129 tap/tests/test_tracker.py:19
 msgid "# TAP results for {test_case}"
-msgstr "# Resultados TAP para {test_case}"
+msgstr "以下のための＃1のTAP結果 {test_case}"
 
 #: tap/plugins/_nose.py:40 tap/plugins/_pytest.py:19
 msgid "Stream TAP output instead of the default test runner output."
-msgstr "Salida TAP corriente en lugar de la salida de corredor de prueba por defecto."
+msgstr "代わりに、デフォルトのテストランナー出力のストリームのTAP出力。"
 
 #: tap/plugins/_nose.py:43 tap/plugins/_pytest.py:27
 msgid ""
 "An optional output directory to write TAP files to. If the directory does "
 "not exist, it will be created."
-msgstr "Un directorio de salida opcional para escribir archivos TAP a. Si el directorio no existe, se creará."
+msgstr "オプションの出力ディレクトリは、TAPにファイルを書き込むことができます。ディレクトリが存在しない場合、それが作成されます。"
 
 #: tap/plugins/_nose.py:48 tap/plugins/_pytest.py:25
 msgid "Store all TAP test results into a combined output file."
-msgstr "Guarde todos los resultados de las pruebas de TAP en un archivo de salida combinada."
+msgstr "結合された出力ファイルにすべてのTAPテスト結果を保存してください。"
 
 #: tap/plugins/_nose.py:51
 msgid ""
 "An optional format string for the TAP output. The format options are: "
 "{short_description} for the short description, and {method_name} for the "
 "test method name."
-msgstr "Una cadena de formato opcional para la salida de TAP. Las opciones de formato son: {short_description} para la descripción corta, y {method_name} para el nombre de método de ensayo."
+msgstr "TAP出力のためのオプションのフォーマット文字列。フォーマットオプションは、次のとおりです。テストメソッド名の短い説明のため{short_description}、と{method_name}。"
 
 #: tap/plugins/_pytest.py:22
 msgid "Store all TAP test results into individual files per test case."

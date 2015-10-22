@@ -12,6 +12,7 @@ LANGUAGES = [
     'es',
     'fr',
     'it',
+    'ja',
     'nl',
     'pt',
 ]
