@@ -187,3 +187,8 @@ class TestTracker(TestCase):
         tracker = Tracker()
         file_path = tracker._get_tap_file_path('foo')
         self.assertEqual('foo.tap', file_path)
+
+    def test_sanitizes_tap_file_path(self):
+        tracker = Tracker()
+        file_path = tracker._get_tap_file_path('an awful \\ testcase / name\n')
+        self.assertEqual('an-awful---testcase---name-.tap', file_path)

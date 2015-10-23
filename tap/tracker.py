@@ -2,6 +2,8 @@
 
 from __future__ import print_function
 import os
+import string
+import sys
 
 from tap.directive import Directive
 from tap.i18n import _
@@ -29,6 +31,12 @@ class Tracker(object):
 
         # Internal state for tracking each test case.
         self._test_cases = {}
+
+        # Python versions 2 and 3 keep maketrans in different locations.
+        if sys.version_info[0] < 3:
+            self._sanitized_table = string.maketrans(' \\/\n', '----')
+        else:  # pragma: no cover
+            self._sanitized_table = str.maketrans(' \\/\n', '----')
 
     def _get_outdir(self):
         return self._outdir
@@ -131,7 +139,8 @@ class Tracker(object):
 
     def _get_tap_file_path(self, test_case):
         """Get the TAP output file path for the test case."""
-        tap_file = test_case + '.tap'
+        sanitized_test_case = test_case.translate(self._sanitized_table)
+        tap_file = sanitized_test_case + '.tap'
         if self.outdir:
             return os.path.join(self.outdir, tap_file)
         return tap_file
