@@ -27,6 +27,7 @@ pip-log.txt
 .tox
 nosetests.xml
 htmlcov
+.cache
 
 # Translations
 .transifex.ini
