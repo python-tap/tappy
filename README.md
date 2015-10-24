@@ -4,7 +4,8 @@ tappy
 [![PyPI version][pypishield]](https://pypi.python.org/pypi/tap.py)
 [![BSD license][license]](https://raw.githubusercontent.com/mblayman/tappy/master/LICENSE)
 [![Downloads][shield]](https://pypi.python.org/pypi/tap.py)
-[![Build Status][travis]](https://travis-ci.org/mblayman/tappy)
+Linux: [![Linux status][travis]](https://travis-ci.org/mblayman/tappy)
+Windows: [![Windows status][appveyor]](https://ci.appveyor.com/project/mblayman/tappy)
 [![Coverage][coverage]](https://codecov.io/github/mblayman/tappy)
 
 <img align="right" src="https://github.com/mblayman/tappy/blob/master/tap.png" 
@@ -86,6 +87,7 @@ Consumers
 [license]: https://img.shields.io/pypi/l/tap.py.svg
 [shield]: https://img.shields.io/pypi/dm/tap.py.svg
 [travis]: https://travis-ci.org/mblayman/tappy.png?branch=master
+[appveyor]: https://ci.appveyor.com/api/projects/status/github/mblayman/tappy
 [coverage]: https://img.shields.io/codecov/c/github/mblayman/tappy.svg
 [rtd]: http://tappy.readthedocs.org/en/latest/
 [pypi]: https://pypi.python.org/pypi/tap.py
