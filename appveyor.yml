@@ -1,11 +1,10 @@
 environment:
-    PYTHON: "C:\\Python3.5"
-    PYTHON_SCRIPTS: "%PYTHON%\\Scripts"
-    PATH: "%PYTHON%;%PYTHON_SCRIPTS%;%PATH%"
+    PYTHON: "C:\\Python35"
+    PATH: "C:\\Python35;C:\\Python35\\Scripts;%PATH%"
 install:
     - set
 build_script:
-    - set
+    - "dir %PYTHON%"
     - "%PYTHON%\\python --version"
 test_script:
     - python --version
