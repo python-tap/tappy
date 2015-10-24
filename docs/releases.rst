@@ -9,6 +9,7 @@ Version 1.8, In Development
   Users dependent on the old default behavior
   can use ``--tap-files`` to achieve the same results.
 * Translated into Japanese.
+* Perform continuous integration testing on Windows with AppVeyor.
 
 Version 1.7, Released August 19, 2015
 -------------------------------------
