@@ -1,10 +1,10 @@
 environment:
-    PYTHON: "C:\\Python35"
-    PATH: "C:\\Python35;C:\\Python35\\Scripts;%PATH%"
+    PYTHON: "C:\\Python34"
+    PATH: "C:\\Python34;C:\\Python34\\Scripts;%PATH%"
 install:
     - python -m ensurepip
     - pip install tox
 build_script:
     - python --version
 test_script:
-    - tox -e py35
+    - tox -e py34
