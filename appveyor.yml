@@ -1,0 +1,4 @@
+environment:
+    PATH: "C:\\Python3.5;%PATH%"
+install:
+    - set
