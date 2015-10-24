@@ -7,4 +7,4 @@ install:
 build_script:
     - python --version
 test_script:
-    - python --version
+    - tox -e py35
