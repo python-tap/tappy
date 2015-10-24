@@ -3,6 +3,7 @@ environment:
 install:
     - set
 build_script:
+    - set
     - python --version
 test_script:
     - python --version
