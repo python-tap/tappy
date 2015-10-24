@@ -2,9 +2,8 @@ environment:
     PYTHON: "C:\\Python35"
     PATH: "C:\\Python35;C:\\Python35\\Scripts;%PATH%"
 install:
-    - set
+    - python -m ensurepip
 build_script:
-    - "dir %PYTHON%"
-    - "%PYTHON%\\python --version"
+    - python --version
 test_script:
     - python --version
