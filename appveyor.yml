@@ -1,4 +1,6 @@
 environment:
-    PATH: "C:\\Python3.5;%PATH%"
+    PATH: "C:\\Python3.5;C:\\Python3.5\\Scripts;%PATH%"
 install:
     - set
+test_script:
+    - python --version
