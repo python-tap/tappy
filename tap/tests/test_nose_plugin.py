@@ -1,5 +1,6 @@
 # Copyright (c) 2015, Matt Layman
 
+import sys
 import unittest
 
 try:
@@ -42,8 +43,12 @@ class TestNosePlugin(TestCase):
         return plugin
 
     def test_adds_error(self):
+        try:
+            raise ValueError()
+        except ValueError:
+            exc = sys.exc_info()
         plugin = self._make_one()
-        plugin.addError(case.Test(FakeTestCase()), (None, None, None))
+        plugin.addError(case.Test(FakeTestCase()), exc)
         line = plugin.tracker._test_cases['FakeTestCase'][0]
         self.assertFalse(line.ok)
 
