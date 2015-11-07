@@ -64,10 +64,11 @@ class Tracker(object):
             description=description)
         self._add_line(class_name, result)
 
-    def add_not_ok(self, class_name, description, directive=''):
+    def add_not_ok(
+            self, class_name, description, directive=None, diagnostics=None):
         result = Result(
             ok=False, number=self._get_next_line_number(class_name),
-            description=description)
+            description=description, diagnostics=diagnostics)
         self._add_line(class_name, result)
 
     def add_skip(self, class_name, description, reason):

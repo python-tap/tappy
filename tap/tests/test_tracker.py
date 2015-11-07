@@ -192,3 +192,10 @@ class TestTracker(TestCase):
         tracker = Tracker()
         file_path = tracker._get_tap_file_path('an awful \\ testcase / name\n')
         self.assertEqual('an-awful---testcase---name-.tap', file_path)
+
+    def test_adds_not_ok_with_diagnostics(self):
+        tracker = Tracker()
+        tracker.add_not_ok(
+            'FakeTestCase', 'a description', diagnostics='# more info\n')
+        line = tracker._test_cases['FakeTestCase'][0]
+        self.assertEqual('# more info\n', line.diagnostics)
