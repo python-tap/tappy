@@ -14,7 +14,9 @@ class Line(object):
 class Result(Line):
     """Information about an individual test line."""
 
-    def __init__(self, ok, number=None, description='', directive=None):
+    def __init__(
+            self, ok, number=None, description='', directive=None,
+            diagnostics=None):
         self._ok = ok
         if number:
             self._number = int(number)
@@ -23,6 +25,7 @@ class Result(Line):
             self._number = None
         self._description = description
         self.directive = directive
+        self.diagnostics = diagnostics
 
     @property
     def category(self):
@@ -73,8 +76,11 @@ class Result(Line):
         directive = ''
         if self.directive is not None:
             directive = ' # {0}'.format(self.directive.text)
-        return "{0}ok {1} - {2}{3}".format(
-            is_not, self.number, self.description, directive)
+        diagnostics = ''
+        if self.diagnostics is not None:
+            diagnostics = '\n' + self.diagnostics
+        return "{0}ok {1} - {2}{3}{4}".format(
+            is_not, self.number, self.description, directive, diagnostics)
 
 
 class Plan(Line):

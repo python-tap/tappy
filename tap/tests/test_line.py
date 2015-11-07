@@ -40,3 +40,8 @@ class TestResult(unittest.TestCase):
         result = Result(True, 44, 'passing', directive)
         self.assertEqual(
             'ok 44 - passing # SKIP a reason', str(result))
+
+    def test_str_diagnostics(self):
+        result = Result(False, 43, 'failing', diagnostics='# more info')
+        self.assertEqual(
+            'not ok 43 - failing\n# more info', str(result))
