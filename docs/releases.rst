@@ -8,6 +8,8 @@ Version 1.8, In Development
   unless provided a flag.
   Users dependent on the old default behavior
   can use ``--tap-files`` to achieve the same results.
+* Tracebacks are included as diagnostic output
+  for failures and errors.
 * Translated into Japanese.
 * Perform continuous integration testing on Windows with AppVeyor.
 

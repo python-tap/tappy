@@ -13,6 +13,7 @@ except ImportError:
 from nose.plugins import Plugin
 from nose.suite import ContextSuite
 
+from tap import formatter
 from tap.i18n import _
 from tap.tracker import Tracker
 
@@ -76,14 +77,19 @@ class TAP(Plugin):
     def addError(self, test, err):
         err_cls, reason, _ = err
         if err_cls != SkipTest:
+            diagnostics = formatter.format_exception(err)
             self.tracker.add_not_ok(
-                self._cls_name(test), self._description(test))
+                self._cls_name(test), self._description(test),
+                diagnostics=diagnostics)
         else:
             self.tracker.add_skip(
                 self._cls_name(test), self._description(test), reason)
 
     def addFailure(self, test, err):
-        self.tracker.add_not_ok(self._cls_name(test), self._description(test))
+        diagnostics = formatter.format_exception(err)
+        self.tracker.add_not_ok(
+            self._cls_name(test), self._description(test),
+            diagnostics=diagnostics)
 
     def addSuccess(self, test):
         self.tracker.add_ok(self._cls_name(test), self._description(test))
