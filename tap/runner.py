@@ -15,6 +15,7 @@ except ImportError:  # pragma: no cover
     # Python 2.6 has a different package structure.
     from unittest import _WritelnDecorator
 
+from tap import formatter
 from tap.i18n import _
 from tap.tracker import Tracker
 
@@ -33,11 +34,17 @@ class TAPTestResult(TextTestResult):
 
     def addError(self, test, err):
         super(TAPTestResult, self).addError(test, err)
-        self.tracker.add_not_ok(self._cls_name(test), self._description(test))
+        diagnostics = formatter.format_exception(err)
+        self.tracker.add_not_ok(
+            self._cls_name(test), self._description(test),
+            diagnostics=diagnostics)
 
     def addFailure(self, test, err):
         super(TAPTestResult, self).addFailure(test, err)
-        self.tracker.add_not_ok(self._cls_name(test), self._description(test))
+        diagnostics = formatter.format_exception(err)
+        self.tracker.add_not_ok(
+            self._cls_name(test), self._description(test),
+            diagnostics=diagnostics)
 
     def addSuccess(self, test):
         super(TAPTestResult, self).addSuccess(test)
@@ -50,8 +57,10 @@ class TAPTestResult(TextTestResult):
 
     def addExpectedFailure(self, test, err):
         super(TAPTestResult, self).addExpectedFailure(test, err)
-        self.tracker.add_not_ok(self._cls_name(test), self._description(test),
-                                _('(expected failure)'))
+        diagnostics = formatter.format_exception(err)
+        self.tracker.add_not_ok(
+            self._cls_name(test), self._description(test),
+            _('(expected failure)'), diagnostics=diagnostics)
 
     def addUnexpectedSuccess(self, test):
         super(TAPTestResult, self).addUnexpectedSuccess(test)

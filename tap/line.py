@@ -78,7 +78,7 @@ class Result(Line):
             directive = ' # {0}'.format(self.directive.text)
         diagnostics = ''
         if self.diagnostics is not None:
-            diagnostics = '\n' + self.diagnostics
+            diagnostics = '\n' + self.diagnostics.rstrip()
         return "{0}ok {1} - {2}{3}{4}".format(
             is_not, self.number, self.description, directive, diagnostics)
 
