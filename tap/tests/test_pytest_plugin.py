@@ -78,7 +78,7 @@ class TestPytestPlugin(TestCase):
         report = mock.Mock(when='call', outcome='failed', location=location)
         _pytest.pytest_runtest_logreport(report)
         _pytest.tracker.add_not_ok.assert_called_once_with(
-            'TestFake', 'TestFake.test_me')
+            'TestFake', 'TestFake.test_me', diagnostics='')
 
     def test_tracks_skip(self):
         _pytest.tracker = mock.Mock()

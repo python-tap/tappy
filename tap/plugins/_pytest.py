@@ -1,9 +1,15 @@
 # Copyright (c) 2015, Matt Layman
 
+try:
+    from cStringIO import StringIO
+except ImportError:  # pragma: no cover
+    from io import StringIO
 import sys
 
+from py.io import TerminalWriter
 import pytest
 
+from tap.formatter import format_as_diagnostics
 from tap.i18n import _
 from tap.tracker import Tracker
 
@@ -50,10 +56,20 @@ def pytest_runtest_logreport(report):
     if report.outcome == 'passed':
         tracker.add_ok(testcase, description)
     elif report.outcome == 'failed':
-        tracker.add_not_ok(testcase, description)
+        diagnostics = _make_as_diagnostics(report)
+        tracker.add_not_ok(testcase, description, diagnostics=diagnostics)
     elif report.outcome == 'skipped':
         reason = report.longrepr[2].split(':', 1)[1].strip()
         tracker.add_skip(testcase, description, reason)
+
+
+def _make_as_diagnostics(report):
+    """Format a report as TAP diagnostic output."""
+    out = StringIO()
+    tw = TerminalWriter(file=out)
+    report.toterminal(tw)
+    lines = out.getvalue().splitlines(True)
+    return format_as_diagnostics(lines)
 
 
 def pytest_unconfigure(config):
