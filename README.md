@@ -36,6 +36,7 @@ German,
 Italian,
 Japanese,
 Portuguese,
+Russian,
 and Spanish.
 
 ```bash

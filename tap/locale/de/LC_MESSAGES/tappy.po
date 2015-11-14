@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: tappy\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2015-10-19 21:53-0400\n"
-"PO-Revision-Date: 2015-10-20 10:07+0000\n"
+"PO-Revision-Date: 2015-11-14 01:31+0000\n"
 "Last-Translator: Matt Layman <matthewlayman@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/tappy/tappy/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -110,4 +110,4 @@ msgstr "Eine optionale Format-String für die TAP-Ausgang. Die Formatoptionen si
 
 #: tap/plugins/_pytest.py:22
 msgid "Store all TAP test results into individual files per test case."
-msgstr ""
+msgstr "Speichern Sie alle TAP Testergebnisse in einzelne Dateien pro Testfall."

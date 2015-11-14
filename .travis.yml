@@ -18,6 +18,7 @@ env:
   - TOX_ENV=language_ja
   - TOX_ENV=language_nl
   - TOX_ENV=language_pt
+  - TOX_ENV=language_ru
 install:
   - pip install tox
 script: tox -e $TOX_ENV

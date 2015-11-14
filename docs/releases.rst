@@ -11,6 +11,7 @@ Version 1.8, In Development
 * Tracebacks are included as diagnostic output
   for failures and errors.
 * Translated into Japanese.
+* Translated into Russian.
 * Perform continuous integration testing on Windows with AppVeyor.
 
 Version 1.7, Released August 19, 2015
