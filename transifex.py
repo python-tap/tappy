@@ -16,6 +16,7 @@ LANGUAGES = [
     'nl',
     'pt',
     'ru',
+    'zh',
 ]
 
 
