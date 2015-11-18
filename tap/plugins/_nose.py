@@ -5,7 +5,7 @@ import sys
 
 try:
     from unittest import SkipTest
-except ImportError:
+except ImportError:  # pragma: no cover
     class SkipTest(object):
         """SkipTest does not exist earlier than Python 2.7"""
         pass

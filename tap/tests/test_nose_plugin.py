@@ -110,3 +110,15 @@ class TestNosePlugin(TestCase):
         dummy_stream = plugin.setOutputStream(None)
 
         self.assertTrue(isinstance(dummy_stream, DummyStream))
+
+    def test_dummy_stream_does_nothing(self):
+        dummy_stream = DummyStream()
+        dummy_stream.write('hello')
+        dummy_stream.writeln('world')
+        dummy_stream.flush()
+
+    def test_parser_adds_options(self):
+        plugin = self._make_one()
+        parser = mock.Mock()
+        plugin.options(parser)
+        self.assertEqual(5, parser.add_option.call_count)
