@@ -122,3 +122,33 @@ class TestNosePlugin(TestCase):
         parser = mock.Mock()
         plugin.options(parser)
         self.assertEqual(5, parser.add_option.call_count)
+
+    def test_adds_success(self):
+        plugin = self._make_one()
+        plugin.tracker = mock.Mock()
+        test = mock.Mock()
+        plugin.addSuccess(test)
+        self.assertTrue(plugin.tracker.add_ok.called)
+
+    def test_adds_failure(self):
+        try:
+            raise ValueError()
+        except ValueError:
+            exc = sys.exc_info()
+        plugin = self._make_one()
+        plugin.addFailure(case.Test(FakeTestCase()), exc)
+        line = plugin.tracker._test_cases['FakeTestCase'][0]
+        self.assertFalse(line.ok)
+
+    def test_non_streaming_passes_stream_through(self):
+        expected_stream = mock.Mock()
+        plugin = self._make_one()
+        stream = plugin.setOutputStream(expected_stream)
+        self.assertEqual(expected_stream, stream)
+
+    def test_finalize_generates_reports(self):
+        plugin = self._make_one()
+        plugin.tracker = mock.Mock()
+        results = mock.Mock()
+        plugin.finalize(results)
+        self.assertTrue(plugin.tracker.generate_tap_reports.called)

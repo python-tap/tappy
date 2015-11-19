@@ -14,6 +14,7 @@ Version 1.8, In Development
 * Translated into Japanese.
 * Translated into Russian.
 * Perform continuous integration testing on Windows with AppVeyor.
+* Improve unit test coverage to 100%.
 
 Version 1.7, Released August 19, 2015
 -------------------------------------
