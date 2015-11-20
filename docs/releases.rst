@@ -10,6 +10,7 @@ Version 1.8, In Development
   can use ``--tap-files`` to achieve the same results.
 * Tracebacks are included as diagnostic output
   for failures and errors.
+* Translated into Arabic.
 * Translated into Chinese.
 * Translated into Japanese.
 * Translated into Russian.

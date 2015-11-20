@@ -11,6 +11,7 @@ env:
   - TOX_ENV=flake8
   - TOX_ENV=integration
   - TOX_ENV=coverage
+  - TOX_ENV=language_ar
   - TOX_ENV=language_de
   - TOX_ENV=language_es
   - TOX_ENV=language_fr
