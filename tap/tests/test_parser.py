@@ -4,6 +4,11 @@ import inspect
 import tempfile
 import unittest
 
+try:
+    from unittest import mock
+except ImportError:
+    import mock
+
 from tap.parser import Parser
 
 
@@ -151,6 +156,28 @@ class TestParser(unittest.TestCase):
         lines = []
 
         for line in parser.parse_file(temp.name):
+            lines.append(line)
+
+        self.assertEqual(3, len(lines))
+        self.assertEqual('plan', lines[0].category)
+        self.assertEqual('test', lines[1].category)
+        self.assertTrue(lines[1].ok)
+        self.assertEqual('test', lines[2].category)
+        self.assertFalse(lines[2].ok)
+
+    @mock.patch('tap.parser.sys')
+    def test_parses_stdin(self, mock_sys):
+        def stdin_data():
+            yield '1..2\n'
+            yield 'ok 1 A passing test\n'
+            yield 'not ok 2 A failing test\n'
+        mock_stdin = mock.PropertyMock()
+        mock_stdin.side_effect = stdin_data
+        type(mock_sys).stdin = mock_stdin
+        parser = Parser()
+        lines = []
+
+        for line in parser.parse_stdin():
             lines.append(line)
 
         self.assertEqual(3, len(lines))

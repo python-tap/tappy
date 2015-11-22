@@ -1,6 +1,7 @@
 # Copyright (c) 2015, Matt Layman
 
 import re
+import sys
 
 from tap.directive import Directive
 from tap.i18n import _
@@ -49,6 +50,11 @@ class Parser(object):
         with open(filename, 'r') as tap_file:
             for line in tap_file:
                 yield self.parse_line(line.rstrip())
+
+    def parse_stdin(self):
+        """Parse a TAP stream from STDIN."""
+        for line in sys.stdin:
+            yield self.parse_line(line.rstrip())
 
     def parse_line(self, text):
         """Parse a line into whatever TAP category it belongs."""
