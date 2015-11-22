@@ -43,8 +43,20 @@ class Loader(object):
             rules.handle_file_does_not_exist()
             return suite
 
+        line_generator = self._parser.parse_file(filename)
+        return self._load_lines(filename, line_generator, suite, rules)
+
+    def _find_tests_in_directory(self, directory, suite):
+        """Find test files in the directory and add them to the suite."""
+        for dirpath, dirnames, filenames in os.walk(directory):
+            for filename in filenames:
+                filepath = os.path.join(dirpath, filename)
+                suite.addTest(self.load_suite_from_file(filepath))
+
+    def _load_lines(self, filename, line_generator, suite, rules):
+        """Load a suite with lines produced by the line generator."""
         line_counter = 0
-        for line in self._parser.parse_file(filename):
+        for line in line_generator:
             line_counter += 1
 
             if line.category in self.ignored_lines:
@@ -66,10 +78,3 @@ class Loader(object):
 
         rules.check(line_counter)
         return suite
-
-    def _find_tests_in_directory(self, directory, suite):
-        """Find test files in the directory and add them to the suite."""
-        for dirpath, dirnames, filenames in os.walk(directory):
-            for filename in filenames:
-                filepath = os.path.join(dirpath, filename)
-                suite.addTest(self.load_suite_from_file(filepath))
