@@ -23,9 +23,12 @@ def main(argv=sys.argv, stream=sys.stderr):
 
 def parse_args(argv):
     description = _('A TAP consumer for Python')
-    parser = argparse.ArgumentParser(description=description)
+    epilog = _(
+        'When no files are given or a dash (-) is used for the file name, '
+        'tappy will read a TAP stream from STDIN.')
+    parser = argparse.ArgumentParser(description=description, epilog=epilog)
     parser.add_argument(
-        'files', metavar='FILE', nargs='+', help=_(
+        'files', metavar='FILE', nargs='*', help=_(
             'A file containing TAP output. Any directories listed will be '
             'scanned for files to include as TAP files.'))
     parser.add_argument(
