@@ -51,7 +51,7 @@ class TestMain(TestCase):
     @mock.patch('tap.main.sys.stdin')
     @mock.patch('tap.main.sys.exit')
     @mock.patch.object(argparse.ArgumentParser, 'print_help')
-    def test_help_when_no_pipe_to_stdin(self, print_help, sys_exit, mock_stdin):
+    def test_when_no_pipe_to_stdin(self, print_help, sys_exit, mock_stdin):
         argv = ['/bin/fake']
         mock_stdin.isatty = mock.Mock(return_value=True)
         parse_args(argv)
