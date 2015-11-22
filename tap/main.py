@@ -11,14 +11,21 @@ from tap.loader import Loader
 def main(argv=sys.argv, stream=sys.stderr):
     """Entry point for ``tappy`` command."""
     args = parse_args(argv)
-
-    loader = Loader()
-    suite = loader.load(args.files)
-
+    suite = build_suite(args)
     runner = unittest.TextTestRunner(verbosity=args.verbose, stream=stream)
     result = runner.run(suite)
 
     return get_status(result)
+
+
+def build_suite(args):
+    """Build a test suite by loading TAP files or a TAP stream."""
+    loader = Loader()
+    if len(args.files) == 0 or args.files[0] == '-':
+        suite = loader.load_suite_from_stdin()
+    else:
+        suite = loader.load(args.files)
+    return suite
 
 
 def parse_args(argv):
@@ -37,6 +44,13 @@ def parse_args(argv):
 
     # argparse expects the executable to be removed from argv.
     args = parser.parse_args(argv[1:])
+
+    # When no files are provided, the user wants to use a TAP stream on STDIN.
+    # But they probably didn't mean it if there is no pipe connected.
+    # In that case, print the help and exit.
+    if not args.files and sys.stdin.isatty():
+        sys.exit(parser.print_help())
+
     return args
 
 
