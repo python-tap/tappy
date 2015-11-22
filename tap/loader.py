@@ -46,6 +46,16 @@ class Loader(object):
         line_generator = self._parser.parse_file(filename)
         return self._load_lines(filename, line_generator, suite, rules)
 
+    def load_suite_from_stdin(self):
+        """Load a test suite with test lines from the TAP stream on STDIN.
+
+        :returns: A ``unittest.TestSuite`` instance
+        """
+        suite = unittest.TestSuite()
+        rules = Rules('stream', suite)
+        line_generator = self._parser.parse_stdin()
+        return self._load_lines('stream', line_generator, suite, rules)
+
     def _find_tests_in_directory(self, directory, suite):
         """Find test files in the directory and add them to the suite."""
         for dirpath, dirnames, filenames in os.walk(directory):
