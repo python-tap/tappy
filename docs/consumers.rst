@@ -56,7 +56,7 @@ from a shell.
 
 .. code-block:: console
 
-    tappy < TestAdapter.tap
+    $ tappy < TestAdapter.tap
     ........
     ----------------------------------------------------------------------
     Ran 8 tests in 0.000s
@@ -69,7 +69,7 @@ The example includes the optional dash character.
 
 .. code-block:: console
 
-    prove t/array.t -v | tappy -
+    $ prove t/array.t -v | tappy -
     ............
     ----------------------------------------------------------------------
     Ran 12 tests in 0.001s
