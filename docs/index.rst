@@ -24,7 +24,7 @@ tappy is available for download from `PyPI
 Python 2.6, 2.7, 3.2, 3.3, 3.4, and PyPy.
 It is continuously tested on Linux and Windows.
 
-.. code-block:: bash
+.. code-block:: console
 
    $ pip install tap.py
 

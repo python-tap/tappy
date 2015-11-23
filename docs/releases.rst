@@ -4,12 +4,14 @@ Releases
 Version 1.8, In Development
 ---------------------------
 
+* The ``tappy`` TAP consumer can read a TAP stream
+  directly from STDIN.
+* Tracebacks are included as diagnostic output
+  for failures and errors.
 * The pytest plugin now defaults to no output
   unless provided a flag.
   Users dependent on the old default behavior
   can use ``--tap-files`` to achieve the same results.
-* Tracebacks are included as diagnostic output
-  for failures and errors.
 * Translated into Arabic.
 * Translated into Chinese.
 * Translated into Japanese.

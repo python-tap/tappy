@@ -68,7 +68,7 @@ The sample below is the test runner used with tappy's own tests.
 Running tappy with **nose** is as straightforward as enabling the plugin
 when calling ``nosetests``.
 
-.. code-block:: sh
+.. code-block:: console
 
    $ nosetests --with-tap
    ...............
@@ -82,7 +82,7 @@ when tappy is installed.
 Because it is automatically activated,
 **pytest** users should specify an output style.
 
-.. code-block:: sh
+.. code-block:: console
 
    $ py.test --tap-files
    =========================== test session starts ============================
