@@ -82,7 +82,10 @@ if __name__ == '__main__':
         long_description=long_description,
         packages=find_packages(),
         entry_points={
-            'console_scripts': ['tappy = tap.main:main'],
+            'console_scripts': [
+                'tappy = tap.main:main',
+                'tap = tap.main:main',
+            ],
             'nose.plugins.0.10': ['tap = tap.plugins._nose:TAP'],
             'pygments.lexers': ['tap = tap.lexer:TAPLexer'],
             'pytest11': ['tap = tap.plugins._pytest'],

@@ -9,6 +9,7 @@ The ``tappy`` command line tool is a `TAP consumer
 The tool accepts TAP files or directories containing TAP files
 and provides a standard Python ``unittest`` style summary report.
 Check out ``tappy -h`` for the complete list of options.
+You can also use the tool's shorter alias of ``tap``.
 
 .. code-block:: console
 

@@ -8,6 +8,8 @@ Version 1.8, In Development
   directly from STDIN.
 * Tracebacks are included as diagnostic output
   for failures and errors.
+* The ``tappy`` TAP consumer has an alternative, shorter name
+  of ``tap``.
 * The pytest plugin now defaults to no output
   unless provided a flag.
   Users dependent on the old default behavior
