@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tap.py 1.8\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-10-19 21:53-0400\n"
+"POT-Creation-Date: 2015-11-26 09:08-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,29 +17,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.0\n"
 
-#: tap/main.py:28
+#: tap/main.py:32
 msgid "A TAP consumer for Python"
 msgstr ""
 
-#: tap/main.py:31
+#: tap/main.py:33
+msgid ""
+"When no files are given or a dash (-) is used for the file name, tappy "
+"will read a TAP stream from STDIN."
+msgstr ""
+
+#: tap/main.py:38
 msgid ""
 "A file containing TAP output. Any directories listed will be scanned for "
 "files to include as TAP files."
 msgstr ""
 
-#: tap/main.py:36
+#: tap/main.py:43
 msgid "use verbose messages"
 msgstr ""
 
-#: tap/parser.py:100
+#: tap/parser.py:106
 msgid "It is an error to explicitly specify any version lower than 13."
 msgstr ""
 
-#: tap/rules.py:25 tap/tests/test_loader.py:76
+#: tap/rules.py:25 tap/tests/test_loader.py:82
 msgid "Multiple version lines appeared."
 msgstr ""
 
-#: tap/rules.py:27 tap/tests/test_loader.py:94
+#: tap/rules.py:27 tap/tests/test_loader.py:100
 msgid "The version must be on the first line."
 msgstr ""
 
@@ -63,50 +69,50 @@ msgstr ""
 msgid "Bailed: {reason}"
 msgstr ""
 
-#: tap/rules.py:74 tap/tests/test_loader.py:44
+#: tap/rules.py:74 tap/tests/test_loader.py:50
 msgid "{filename} does not exist."
 msgstr ""
 
-#: tap/runner.py:53
+#: tap/runner.py:63
 msgid "(expected failure)"
 msgstr ""
 
-#: tap/runner.py:58
+#: tap/runner.py:68
 msgid "(unexpected success)"
 msgstr ""
 
-#: tap/runner.py:70 tap/plugins/_nose.py:108
+#: tap/runner.py:80 tap/plugins/_nose.py:114
 msgid ""
 "Bad format string: {format}\n"
 "Replacement options are: {{short_description}} and {{method_name}}"
 msgstr ""
 
-#: tap/tracker.py:129 tap/tests/test_tracker.py:19
+#: tap/tracker.py:138 tap/tests/test_tracker.py:19
 msgid "# TAP results for {test_case}"
 msgstr ""
 
-#: tap/plugins/_nose.py:40 tap/plugins/_pytest.py:19
+#: tap/plugins/_nose.py:41 tap/plugins/_pytest.py:25
 msgid "Stream TAP output instead of the default test runner output."
 msgstr ""
 
-#: tap/plugins/_nose.py:43 tap/plugins/_pytest.py:27
+#: tap/plugins/_nose.py:44 tap/plugins/_pytest.py:33
 msgid ""
 "An optional output directory to write TAP files to. If the directory does"
 " not exist, it will be created."
 msgstr ""
 
-#: tap/plugins/_nose.py:48 tap/plugins/_pytest.py:25
+#: tap/plugins/_nose.py:49 tap/plugins/_pytest.py:31
 msgid "Store all TAP test results into a combined output file."
 msgstr ""
 
-#: tap/plugins/_nose.py:51
+#: tap/plugins/_nose.py:52
 msgid ""
 "An optional format string for the TAP output. The format options are: "
 "{short_description} for the short description, and {method_name} for the "
 "test method name."
 msgstr ""
 
-#: tap/plugins/_pytest.py:22
+#: tap/plugins/_pytest.py:28
 msgid "Store all TAP test results into individual files per test case."
 msgstr ""
 
