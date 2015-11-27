@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tappy\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-10-19 21:53-0400\n"
-"PO-Revision-Date: 2015-11-14 01:33+0000\n"
+"POT-Creation-Date: 2015-11-26 09:08-0500\n"
+"PO-Revision-Date: 2015-11-27 19:19+0000\n"
 "Last-Translator: Matt Layman <matthewlayman@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/tappy/tappy/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -19,29 +19,35 @@ msgstr ""
 "Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: tap/main.py:28
+#: tap/main.py:32
 msgid "A TAP consumer for Python"
 msgstr "Um consumidor TAP para Python"
 
-#: tap/main.py:31
+#: tap/main.py:33
+msgid ""
+"When no files are given or a dash (-) is used for the file name, tappy will "
+"read a TAP stream from STDIN."
+msgstr "Quando não há arquivos são dados ou um traço (-) é usado para o nome do arquivo, tappy vai ler um fluxo TAP a partir do STDIN."
+
+#: tap/main.py:38
 msgid ""
 "A file containing TAP output. Any directories listed will be scanned for "
 "files to include as TAP files."
 msgstr "A saída TAP arquivo que contém. Quaisquer diretórios listados serão verificados para arquivos a serem incluídos como arquivos TAP."
 
-#: tap/main.py:36
+#: tap/main.py:43
 msgid "use verbose messages"
 msgstr "usar mensagens detalhadas"
 
-#: tap/parser.py:100
+#: tap/parser.py:106
 msgid "It is an error to explicitly specify any version lower than 13."
 msgstr "É um erro especificar explicitamente qualquer versão menor do que 13."
 
-#: tap/rules.py:25 tap/tests/test_loader.py:76
+#: tap/rules.py:25 tap/tests/test_loader.py:82
 msgid "Multiple version lines appeared."
 msgstr "Várias linhas de versão apareceu."
 
-#: tap/rules.py:27 tap/tests/test_loader.py:94
+#: tap/rules.py:27 tap/tests/test_loader.py:100
 msgid "The version must be on the first line."
 msgstr "A versão deve estar na primeira linha."
 
@@ -65,49 +71,49 @@ msgstr "Esperados {expected_count} testes, mas apenas {seen_count} correu."
 msgid "Bailed: {reason}"
 msgstr "Afiançado: {reason}"
 
-#: tap/rules.py:74 tap/tests/test_loader.py:44
+#: tap/rules.py:74 tap/tests/test_loader.py:50
 msgid "{filename} does not exist."
 msgstr "{filename} não existe."
 
-#: tap/runner.py:53
+#: tap/runner.py:63
 msgid "(expected failure)"
 msgstr "(falha esperado)"
 
-#: tap/runner.py:58
+#: tap/runner.py:68
 msgid "(unexpected success)"
 msgstr "(sucesso inesperado)"
 
-#: tap/runner.py:70 tap/plugins/_nose.py:108
+#: tap/runner.py:80 tap/plugins/_nose.py:114
 msgid ""
 "Bad format string: {format}\n"
 "Replacement options are: {{short_description}} and {{method_name}}"
 msgstr "Bad seqüência de formato: {format}\nAs opções de substituição são: {{short_description}} e {{method_name}}"
 
-#: tap/tracker.py:129 tap/tests/test_tracker.py:19
+#: tap/tracker.py:138 tap/tests/test_tracker.py:19
 msgid "# TAP results for {test_case}"
 msgstr "# Resultados da TAP para {test_case}"
 
-#: tap/plugins/_nose.py:40 tap/plugins/_pytest.py:19
+#: tap/plugins/_nose.py:41 tap/plugins/_pytest.py:25
 msgid "Stream TAP output instead of the default test runner output."
 msgstr "Fluxo de saída TAP em vez da saída corredor de teste padrão."
 
-#: tap/plugins/_nose.py:43 tap/plugins/_pytest.py:27
+#: tap/plugins/_nose.py:44 tap/plugins/_pytest.py:33
 msgid ""
 "An optional output directory to write TAP files to. If the directory does "
 "not exist, it will be created."
 msgstr "Um diretório de saída opcional para gravar arquivos da TAP. Se o diretório não existir, ele será criado."
 
-#: tap/plugins/_nose.py:48 tap/plugins/_pytest.py:25
+#: tap/plugins/_nose.py:49 tap/plugins/_pytest.py:31
 msgid "Store all TAP test results into a combined output file."
 msgstr "Armazenar todos os resultados do teste TAP numa arquivo de saída combinada."
 
-#: tap/plugins/_nose.py:51
+#: tap/plugins/_nose.py:52
 msgid ""
 "An optional format string for the TAP output. The format options are: "
 "{short_description} for the short description, and {method_name} for the "
 "test method name."
 msgstr "Uma cadeia de formato opcional para a saída TAP. As opções de formato são: {short_description} para a breve descrição, e {method_name} para o nome do método de teste."
 
-#: tap/plugins/_pytest.py:22
+#: tap/plugins/_pytest.py:28
 msgid "Store all TAP test results into individual files per test case."
 msgstr "Armazenar todos os resultados do teste TAP em arquivos individuais por caso de teste."

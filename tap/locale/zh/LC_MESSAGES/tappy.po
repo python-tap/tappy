@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tappy\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-10-19 21:53-0400\n"
-"PO-Revision-Date: 2015-11-17 02:55+0000\n"
+"POT-Creation-Date: 2015-11-26 09:08-0500\n"
+"PO-Revision-Date: 2015-11-27 19:23+0000\n"
 "Last-Translator: Matt Layman <matthewlayman@gmail.com>\n"
 "Language-Team: Chinese (http://www.transifex.com/tappy/tappy/language/zh/)\n"
 "MIME-Version: 1.0\n"
@@ -19,29 +19,35 @@ msgstr ""
 "Language: zh\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: tap/main.py:28
+#: tap/main.py:32
 msgid "A TAP consumer for Python"
 msgstr "TAP消费者对于Python"
 
-#: tap/main.py:31
+#: tap/main.py:33
+msgid ""
+"When no files are given or a dash (-) is used for the file name, tappy will "
+"read a TAP stream from STDIN."
+msgstr "如果没有给定文件或破折号（ - ）用于文件名，tappy将读取STDIN一个TAP流。"
+
+#: tap/main.py:38
 msgid ""
 "A file containing TAP output. Any directories listed will be scanned for "
 "files to include as TAP files."
 msgstr "包含文件TAP。列出的所有目录将被扫描的文件，包括为TAP文件。"
 
-#: tap/main.py:36
+#: tap/main.py:43
 msgid "use verbose messages"
 msgstr "使用详细信息"
 
-#: tap/parser.py:100
+#: tap/parser.py:106
 msgid "It is an error to explicitly specify any version lower than 13."
 msgstr "它是明确指定比13低的任何版本错误。"
 
-#: tap/rules.py:25 tap/tests/test_loader.py:76
+#: tap/rules.py:25 tap/tests/test_loader.py:82
 msgid "Multiple version lines appeared."
 msgstr "多个版本的线条出现。"
 
-#: tap/rules.py:27 tap/tests/test_loader.py:94
+#: tap/rules.py:27 tap/tests/test_loader.py:100
 msgid "The version must be on the first line."
 msgstr "版本必须在第一行。"
 
@@ -65,49 +71,49 @@ msgstr "预计{expected_count}测试，但只有{seen_count}跑。"
 msgid "Bailed: {reason}"
 msgstr "跳伞：{reason}"
 
-#: tap/rules.py:74 tap/tests/test_loader.py:44
+#: tap/rules.py:74 tap/tests/test_loader.py:50
 msgid "{filename} does not exist."
 msgstr "{filename}不存在。"
 
-#: tap/runner.py:53
+#: tap/runner.py:63
 msgid "(expected failure)"
 msgstr "（预期失败）"
 
-#: tap/runner.py:58
+#: tap/runner.py:68
 msgid "(unexpected success)"
 msgstr "（意想不到的成功）"
 
-#: tap/runner.py:70 tap/plugins/_nose.py:108
+#: tap/runner.py:80 tap/plugins/_nose.py:114
 msgid ""
 "Bad format string: {format}\n"
 "Replacement options are: {{short_description}} and {{method_name}}"
 msgstr "错误格式字符串：{format}\n替换选项为：{{short_description}}和{{method_name}}"
 
-#: tap/tracker.py:129 tap/tests/test_tracker.py:19
+#: tap/tracker.py:138 tap/tests/test_tracker.py:19
 msgid "# TAP results for {test_case}"
 msgstr "＃TAP结果{test_case}"
 
-#: tap/plugins/_nose.py:40 tap/plugins/_pytest.py:19
+#: tap/plugins/_nose.py:41 tap/plugins/_pytest.py:25
 msgid "Stream TAP output instead of the default test runner output."
 msgstr "流TAP输出，而不是默认的测试运行器输出。"
 
-#: tap/plugins/_nose.py:43 tap/plugins/_pytest.py:27
+#: tap/plugins/_nose.py:44 tap/plugins/_pytest.py:33
 msgid ""
 "An optional output directory to write TAP files to. If the directory does "
 "not exist, it will be created."
 msgstr "一个可选的输出目录写入TAP文件。如果该目录不存在，它将被创建。"
 
-#: tap/plugins/_nose.py:48 tap/plugins/_pytest.py:25
+#: tap/plugins/_nose.py:49 tap/plugins/_pytest.py:31
 msgid "Store all TAP test results into a combined output file."
 msgstr "存储所有TAP测试结果为组合的输出文件。"
 
-#: tap/plugins/_nose.py:51
+#: tap/plugins/_nose.py:52
 msgid ""
 "An optional format string for the TAP output. The format options are: "
 "{short_description} for the short description, and {method_name} for the "
 "test method name."
 msgstr "一个可选的格式字符串TAP输出。格式选项有：{short_description}的简短描述，以及测试方法的名称{method_name}。"
 
-#: tap/plugins/_pytest.py:22
+#: tap/plugins/_pytest.py:28
 msgid "Store all TAP test results into individual files per test case."
 msgstr "存储所有TAP测试结果为每测试用例的单个文件。"

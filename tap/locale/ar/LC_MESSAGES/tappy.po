@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tappy\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-10-19 21:53-0400\n"
-"PO-Revision-Date: 2015-11-21 22:17+0000\n"
+"POT-Creation-Date: 2015-11-26 09:08-0500\n"
+"PO-Revision-Date: 2015-11-27 19:24+0000\n"
 "Last-Translator: Matt Layman <matthewlayman@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/tappy/tappy/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -19,29 +19,35 @@ msgstr ""
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: tap/main.py:28
+#: tap/main.py:32
 msgid "A TAP consumer for Python"
 msgstr " المستهلك TAP ل Python"
 
-#: tap/main.py:31
+#: tap/main.py:33
+msgid ""
+"When no files are given or a dash (-) is used for the file name, tappy will "
+"read a TAP stream from STDIN."
+msgstr "عندما يتم إعطاء أية ملفات أو شرطة (-) يستخدم لاسم الملف، tappy سيقرأ تيار TAP من STDIN."
+
+#: tap/main.py:38
 msgid ""
 "A file containing TAP output. Any directories listed will be scanned for "
 "files to include as TAP files."
 msgstr "ملف يحتوي على TAP الانتاج. سيتم فحص أي الدلائل المذكورة للملفات التي تتضمن كملفات TAP."
 
-#: tap/main.py:36
+#: tap/main.py:43
 msgid "use verbose messages"
 msgstr "استخدام الرسائل مطول"
 
-#: tap/parser.py:100
+#: tap/parser.py:106
 msgid "It is an error to explicitly specify any version lower than 13."
 msgstr "ومن خطأ لتحديد صراحة أقل أي إصدار من 13."
 
-#: tap/rules.py:25 tap/tests/test_loader.py:76
+#: tap/rules.py:25 tap/tests/test_loader.py:82
 msgid "Multiple version lines appeared."
 msgstr "ظهرت خطوط النسخة متعددة."
 
-#: tap/rules.py:27 tap/tests/test_loader.py:94
+#: tap/rules.py:27 tap/tests/test_loader.py:100
 msgid "The version must be on the first line."
 msgstr "يجب أن يكون الإصدار في السطر الأول."
 
@@ -65,49 +71,49 @@ msgstr "يتوقع {expected_count} الاختبارات ولكن فقط {seen_c
 msgid "Bailed: {reason}"
 msgstr "إنقاذها: {reason}"
 
-#: tap/rules.py:74 tap/tests/test_loader.py:44
+#: tap/rules.py:74 tap/tests/test_loader.py:50
 msgid "{filename} does not exist."
 msgstr "{filename} غير موجود."
 
-#: tap/runner.py:53
+#: tap/runner.py:63
 msgid "(expected failure)"
 msgstr "(فشل متوقع)"
 
-#: tap/runner.py:58
+#: tap/runner.py:68
 msgid "(unexpected success)"
 msgstr "(نجاح غير متوقع)"
 
-#: tap/runner.py:70 tap/plugins/_nose.py:108
+#: tap/runner.py:80 tap/plugins/_nose.py:114
 msgid ""
 "Bad format string: {format}\n"
 "Replacement options are: {{short_description}} and {{method_name}}"
 msgstr "سيئة سلسلة تنسيق: {format}\nخيارات استبدال هي: {{short_description}} و {{method_name}}"
 
-#: tap/tracker.py:129 tap/tests/test_tracker.py:19
+#: tap/tracker.py:138 tap/tests/test_tracker.py:19
 msgid "# TAP results for {test_case}"
 msgstr "# النتائج TAP ل {test_case}"
 
-#: tap/plugins/_nose.py:40 tap/plugins/_pytest.py:19
+#: tap/plugins/_nose.py:41 tap/plugins/_pytest.py:25
 msgid "Stream TAP output instead of the default test runner output."
 msgstr "دفق إخراج TAP بدلا من الإخراج الافتراضي اختبار عداء."
 
-#: tap/plugins/_nose.py:43 tap/plugins/_pytest.py:27
+#: tap/plugins/_nose.py:44 tap/plugins/_pytest.py:33
 msgid ""
 "An optional output directory to write TAP files to. If the directory does "
 "not exist, it will be created."
 msgstr "دليل الانتاج اختياري لإرسال ملفات TAP ل. حالة عدم وجود الدليل، سيتم إنشاؤه."
 
-#: tap/plugins/_nose.py:48 tap/plugins/_pytest.py:25
+#: tap/plugins/_nose.py:49 tap/plugins/_pytest.py:31
 msgid "Store all TAP test results into a combined output file."
 msgstr "تخزين جميع نتائج الاختبار TAP إلى ملف إخراج مجتمعة."
 
-#: tap/plugins/_nose.py:51
+#: tap/plugins/_nose.py:52
 msgid ""
 "An optional format string for the TAP output. The format options are: "
 "{short_description} for the short description, and {method_name} for the "
 "test method name."
 msgstr "سلسلة شكل اختياري لإخراج TAP. خيارات التنسيق هي: {short_description} لوصف قصير، و{method_name} لاسم طريقة الاختبار."
 
-#: tap/plugins/_pytest.py:22
+#: tap/plugins/_pytest.py:28
 msgid "Store all TAP test results into individual files per test case."
 msgstr "تخزين جميع نتائج الاختبار TAP إلى الملفات الفردية لكل حالة اختبار."
