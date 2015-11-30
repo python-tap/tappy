@@ -1,8 +1,8 @@
 Releases
 ========
 
-Version 1.8, In Development
----------------------------
+Version 1.8, Released November 30, 2015
+---------------------------------------
 
 * The ``tappy`` TAP consumer can read a TAP stream
   directly from STDIN.
