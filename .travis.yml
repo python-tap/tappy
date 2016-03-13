@@ -9,9 +9,6 @@ matrix:
       python: 2.7
       env: TOX_ENV=py27
     - os: linux
-      python: 3.2
-      env: TOX_ENV=py32
-    - os: linux
       python: 3.3
       env: TOX_ENV=py33
     - os: linux
