@@ -1,6 +1,11 @@
 Releases
 ========
 
+Version 1.9, In Development
+---------------------------
+
+* Drop support for Python 3.2.
+
 Version 1.8, Released November 30, 2015
 ---------------------------------------
 
