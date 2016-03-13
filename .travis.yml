@@ -1,25 +1,10 @@
 sudo: false
 language: python
-env:
-  - TOX_ENV=py26
-  - TOX_ENV=py27
-  - TOX_ENV=py32
-  - TOX_ENV=py33
-  - TOX_ENV=py34
-  - TOX_ENV=pypy
-  - TOX_ENV=runner
-  - TOX_ENV=flake8
-  - TOX_ENV=integration
-  - TOX_ENV=coverage
-  - TOX_ENV=language_ar
-  - TOX_ENV=language_de
-  - TOX_ENV=language_es
-  - TOX_ENV=language_fr
-  - TOX_ENV=language_it
-  - TOX_ENV=language_ja
-  - TOX_ENV=language_nl
-  - TOX_ENV=language_pt
-  - TOX_ENV=language_ru
+matrix:
+  include:
+    - os: linux
+      python: 2.6
+      env: TOX_ENV=py26
 install:
   - pip install tox
 script: tox -e $TOX_ENV
