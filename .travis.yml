@@ -18,6 +18,7 @@ matrix:
       python: pypy
       env: TOX_ENV=pypy
     - os: osx
+      sudo: required
       language: generic
       env: TOX_ENV=py27
 install:
