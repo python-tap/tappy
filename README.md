@@ -5,6 +5,7 @@ tappy
 [![BSD license][license]](https://raw.githubusercontent.com/mblayman/tappy/master/LICENSE)
 [![Downloads][shield]](https://pypi.python.org/pypi/tap.py)
 [![Linux status][travis]](https://travis-ci.org/mblayman/tappy)
+[![OS X status][travisosx]](https://travis-ci.org/mblayman/tappy)
 [![Windows status][appveyor]](https://ci.appveyor.com/project/mblayman/tappy)
 [![Coverage][coverage]](https://codecov.io/github/mblayman/tappy)
 
@@ -33,7 +34,7 @@ on Python
 3.3,
 3.4,
 and PyPy.
-It is continuously tested on Linux and Windows.
+It is continuously tested on Linux, OS X, and Windows.
 tappy is also translated into
 Arabic,
 Chinese,
@@ -96,6 +97,7 @@ Consumers
 [license]: https://img.shields.io/pypi/l/tap.py.svg
 [shield]: https://img.shields.io/pypi/dm/tap.py.svg
 [travis]: https://img.shields.io/travis/mblayman/tappy.svg?label=linux+build
+[travisosx]: https://img.shields.io/travis/mblayman/tappy.svg?label=os+x++build
 [appveyor]: https://img.shields.io/appveyor/ci/mblayman/tappy.svg?label=windows+build
 [coverage]: https://img.shields.io/codecov/c/github/mblayman/tappy.svg
 [rtd]: http://tappy.readthedocs.org/en/latest/

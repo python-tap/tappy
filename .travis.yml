@@ -1,24 +1,68 @@
 sudo: false
 language: python
-env:
-  - TOX_ENV=py26
-  - TOX_ENV=py27
-  - TOX_ENV=py33
-  - TOX_ENV=py34
-  - TOX_ENV=pypy
-  - TOX_ENV=runner
-  - TOX_ENV=flake8
-  - TOX_ENV=integration
-  - TOX_ENV=coverage
-  - TOX_ENV=language_ar
-  - TOX_ENV=language_de
-  - TOX_ENV=language_es
-  - TOX_ENV=language_fr
-  - TOX_ENV=language_it
-  - TOX_ENV=language_ja
-  - TOX_ENV=language_nl
-  - TOX_ENV=language_pt
-  - TOX_ENV=language_ru
+matrix:
+  include:
+    - os: linux
+      python: 2.6
+      env: TOX_ENV=py26
+    - os: linux
+      python: 2.7
+      env: TOX_ENV=py27
+    - os: linux
+      python: 3.3
+      env: TOX_ENV=py33
+    - os: linux
+      python: 3.4
+      env: TOX_ENV=py34
+    - os: linux
+      python: pypy
+      env: TOX_ENV=pypy
+    - os: osx
+      language: generic
+      env: TOX_ENV=py27
+    - os: linux
+      python: 2.7
+      env: TOX_ENV=runner
+    - os: linux
+      python: 2.7
+      env: TOX_ENV=flake8
+    - os: linux
+      python: 2.7
+      env: TOX_ENV=integration
+    - os: linux
+      python: 2.7
+      env: TOX_ENV=coverage
+    - os: linux
+      python: 2.7
+      env: TOX_ENV=language_ar
+    - os: linux
+      python: 2.7
+      env: TOX_ENV=language_de
+    - os: linux
+      python: 2.7
+      env: TOX_ENV=language_es
+    - os: linux
+      python: 2.7
+      env: TOX_ENV=language_fr
+    - os: linux
+      python: 2.7
+      env: TOX_ENV=language_it
+    - os: linux
+      python: 2.7
+      env: TOX_ENV=language_ja
+    - os: linux
+      python: 2.7
+      env: TOX_ENV=language_nl
+    - os: linux
+      python: 2.7
+      env: TOX_ENV=language_pt
+    - os: linux
+      python: 2.7
+      env: TOX_ENV=language_ru
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install pyenv-virtualenv; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then virtualenv venv; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source venv/bin/activate; fi
 install:
   - pip install tox
 script: tox -e $TOX_ENV
