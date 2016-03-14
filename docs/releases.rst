@@ -4,6 +4,7 @@ Releases
 Version 1.9, In Development
 ---------------------------
 
+* Add support for Python 3.5.
 * Perform continuous integration testing on OS X.
 * Drop support for Python 3.2.
 
