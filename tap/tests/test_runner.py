@@ -113,4 +113,3 @@ class TestTAPTestRunner(unittest.TestCase):
         self.assertTrue(_tracker.header)
 
         _tracker.header = previous_header
-
