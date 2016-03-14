@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Copyright (c) 2015, Matt Layman
 
 import os
@@ -125,6 +126,11 @@ class TAPTestRunner(TextTestRunner):
     def set_combined(cls, combined):
         """Set the tracker to use a single output file."""
         _tracker.combined = combined
+
+    @classmethod
+    def set_header(cls, header):
+        """Set the header display flag."""
+        _tracker.header = header
 
     @classmethod
     def set_format(cls, fmt):

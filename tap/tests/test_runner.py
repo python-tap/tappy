@@ -100,3 +100,17 @@ class TestTAPTestRunner(unittest.TestCase):
 
         _tracker.streaming = previous_streaming
         _tracker.stream = previous_stream
+
+    def test_runner_uses_header(self):
+        """Test that the case header can be turned off."""
+        # Save previous header in case **this** execution was using it.
+        previous_header = _tracker.header
+
+        TAPTestRunner.set_header(False)
+        self.assertFalse(_tracker.header)
+
+        TAPTestRunner.set_header(True)
+        self.assertTrue(_tracker.header)
+
+        _tracker.header = previous_header
+
