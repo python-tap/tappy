@@ -33,6 +33,7 @@ on Python
 2.7,
 3.3,
 3.4,
+3.5,
 and PyPy.
 It is continuously tested on Linux, OS X, and Windows.
 tappy is also translated into
