@@ -96,9 +96,9 @@ Consumers
 [pypishield]: https://img.shields.io/pypi/v/tap.py.svg
 [license]: https://img.shields.io/pypi/l/tap.py.svg
 [shield]: https://img.shields.io/pypi/dm/tap.py.svg
-[travis]: https://img.shields.io/travis/mblayman/tappy.svg?label=linux+build
-[travisosx]: https://img.shields.io/travis/mblayman/tappy.svg?label=os+x++build
-[appveyor]: https://img.shields.io/appveyor/ci/mblayman/tappy.svg?label=windows+build
+[travis]: https://img.shields.io/travis/mblayman/tappy/master.svg?label=linux+build
+[travisosx]: https://img.shields.io/travis/mblayman/tappy/master.svg?label=os+x++build
+[appveyor]: https://img.shields.io/appveyor/ci/mblayman/tappy/master.svg?label=windows+build
 [coverage]: https://img.shields.io/codecov/c/github/mblayman/tappy.svg
 [rtd]: http://tappy.readthedocs.org/en/latest/
 [pypi]: https://pypi.python.org/pypi/tap.py
