@@ -127,6 +127,11 @@ class TAPTestRunner(TextTestRunner):
         _tracker.combined = combined
 
     @classmethod
+    def set_header(cls, header):
+        """Set the header display flag."""
+        _tracker.header = header
+
+    @classmethod
     def set_format(cls, fmt):
         """Set the format of each test line.
 

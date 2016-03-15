@@ -199,3 +199,21 @@ class TestTracker(TestCase):
             'FakeTestCase', 'a description', diagnostics='# more info\n')
         line = tracker._test_cases['FakeTestCase'][0]
         self.assertEqual('# more info\n', line.diagnostics)
+
+    def test_header_displayed_by_default(self):
+        tracker = Tracker()
+        self.assertTrue(tracker.header)
+
+    def test_header_set_by_init(self):
+        tracker = Tracker(header=False)
+        self.assertFalse(tracker.header)
+
+    def test_does_not_write_header(self):
+        stream = StringIO()
+        tracker = Tracker(streaming=True, stream=stream, header=False)
+
+        tracker.add_skip('FakeTestCase', 'YESSS!', 'a reason')
+
+        expected = inspect.cleandoc(
+            """ok 1 - YESSS! # SKIP a reason""")
+        self.assertEqual(stream.getvalue().strip(), expected)

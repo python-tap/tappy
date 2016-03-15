@@ -13,7 +13,8 @@ from tap.line import Result
 class Tracker(object):
 
     def __init__(
-            self, outdir=None, combined=False, streaming=False, stream=None):
+            self, outdir=None, combined=False, streaming=False, stream=None,
+            header=True):
         self.outdir = outdir
 
         # Combine all the test results into one file.
@@ -28,6 +29,9 @@ class Tracker(object):
         # Stream output directly to a stream instead of file output.
         self.streaming = streaming
         self.stream = stream
+
+        # Display the test case header unless told not to.
+        self.header = header
 
         # Internal state for tracking each test case.
         self._test_cases = {}
@@ -51,7 +55,7 @@ class Tracker(object):
     def _track(self, class_name):
         """Keep track of which test cases have executed."""
         if self._test_cases.get(class_name) is None:
-            if self.streaming:
+            if self.streaming and self.header:
                 self._write_test_case_header(class_name, self.stream)
 
             self._test_cases[class_name] = []
