@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # Copyright (c) 2015, Matt Layman
 
 from __future__ import print_function
@@ -52,14 +51,6 @@ class Tracker(object):
             os.makedirs(outdir)
 
     outdir = property(_get_outdir, _set_outdir)
-
-    def _get_header(self):
-        return self._header
-
-    def _set_header(self, header):
-        self._header = header
-
-    header = property(_get_header, _set_header)
 
     def _track(self, class_name):
         """Keep track of which test cases have executed."""
