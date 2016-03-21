@@ -10,6 +10,32 @@ How
 Fork tappy on `GitHub <https://github.com/mblayman/tappy>`_ and submit a pull
 request when you're ready.
 
+Setup
+-----
+
+tappy uses a standard Python toolchain.
+While many setups are possible,
+the following should get you started quickly.
+At minimum, you'll need 
+`virtualenv <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_
+and
+`pip <https://pip.pypa.io/en/stable/installing/>`_
+to begin.
+
+.. code-block:: console
+
+   $ # Start from the root of a tappy clone.
+   $ virtualenv venv                            # Create your virtual environment.
+   $ source venv/bin/activate                   # Activate it.
+   (venv)$ pip install -r requirements-dev.txt  # Install developer tools.
+   (venv)$ pip install -e .                     # Install tappy in editable mode.
+   (venv)$ nosetests                            # Run the test suite.
+
+The commands above show how to get a tappy clone configured.
+If you've executed those commands
+and the test suite passes,
+you should be ready to develop.
+
 Guidelines
 ----------
 
