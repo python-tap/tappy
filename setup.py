@@ -78,7 +78,7 @@ if __name__ == '__main__':
         include_package_data=True,
         zip_safe=False,
         platforms='any',
-        install_requires=install_requirements()
+        install_requires=install_requirements(),
         setup_requires=[
             'Babel',  # sdist compiles po into mo.
         ],
