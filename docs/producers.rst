@@ -146,8 +146,8 @@ methods.
 
       TAPTestRunner.set_format('{method_name}: {short_description}')
 
-* ``set_header`` - Turn off or on the test case header output. The default
-is True (ie, the header is displayed.)
+* ``set_header`` - Turn off or on the test case header output.
+  The default is ``True`` (ie, the header is displayed.)
   Use the ``set_header`` instance method.
 
   .. code-block:: python

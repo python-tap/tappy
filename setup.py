@@ -56,21 +56,6 @@ if __name__ == '__main__':
 
     long_description = __doc__ + '\n\n' + releases
 
-    install_requires = install_requirements()
-    # Add some developer tools.
-    if 'develop' in sys.argv:
-        install_requires.extend([
-            'Babel',
-            'coverage',
-            'flake8',
-            'mock<1.1.0',  # 1.1 dropped support for Python 2.6.
-            'requests',
-            'Sphinx',
-            'tox',
-            'twine',
-            'wheel',
-        ])
-
     setup(
         name='tap.py',
         version=__version__,
@@ -93,7 +78,7 @@ if __name__ == '__main__':
         include_package_data=True,
         zip_safe=False,
         platforms='any',
-        install_requires=install_requires,
+        install_requires=install_requirements()
         setup_requires=[
             'Babel',  # sdist compiles po into mo.
         ],

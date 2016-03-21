@@ -1,0 +1,10 @@
+Babel
+coverage
+flake8
+# mock 1.1 dropped support for Python 2.6.
+mock<1.1.0
+requests
+Sphinx
+tox
+twine
+wheel
