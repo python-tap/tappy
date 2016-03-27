@@ -1,6 +1,8 @@
 tappy - TAP tools for Python
 ============================
 
+.. image:: images/tap.png
+
 tappy provides tools for working with the Test Anything Protocol (TAP) in
 Python.
 

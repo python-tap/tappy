@@ -9,7 +9,7 @@ tappy
 [![Windows status][appveyor]](https://ci.appveyor.com/project/mblayman/tappy)
 [![Coverage][coverage]](https://codecov.io/github/mblayman/tappy)
 
-<img align="right" src="https://github.com/mblayman/tappy/blob/master/tap.png" 
+<img align="right" src="https://github.com/mblayman/tappy/blob/master/docs/images/tap.png"
   alt="TAP logo" />
 
 tappy is a set of tools for working with the
