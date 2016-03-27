@@ -3,7 +3,7 @@ environment:
     PATH: "C:\\Python34;C:\\Python34\\Scripts;%PATH%"
 install:
     - python -m ensurepip
-    - pip install tox
+    - pip install Babel tox
 build_script:
     - python --version
 test_script:
