@@ -14,7 +14,7 @@ from setuptools.command.build_py import build_py
 from setuptools.command.sdist import sdist
 import sys
 
-__version__ = '1.8'
+import tap
 
 
 class BuildPy(build_py):
@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
     setup(
         name='tap.py',
-        version=__version__,
+        version=tap.__version__,
         url='https://github.com/mblayman/tappy',
         license='BSD',
         author='Matt Layman',
