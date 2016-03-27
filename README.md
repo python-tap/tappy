@@ -93,6 +93,13 @@ Consumers
 *   `tappy` - A command line tool for processing TAP files.
 *   `Loader` and `Parser` - Python APIs for handling of TAP files and data.
 
+Contributing
+------------
+
+The project welcomes contributions of all kinds.
+Check out the [contributing guidelines][contributing]
+for tips on how to get started.
+
 [tap]: http://testanything.org/
 [pypishield]: https://img.shields.io/pypi/v/tap.py.svg
 [license]: https://img.shields.io/pypi/l/tap.py.svg
@@ -108,3 +115,4 @@ Consumers
 [consume]: http://testanything.org/consumers.html
 [ns]: https://nose.readthedocs.org/en/latest/
 [pytest]: http://pytest.org/latest/
+[contributing]: http://tappy.readthedocs.org/en/latest/contributing.html

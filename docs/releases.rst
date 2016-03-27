@@ -4,6 +4,8 @@ Releases
 Version 1.9, In Development
 ---------------------------
 
+* ``TAPTestRunner`` has a ``set_header`` method
+  to enable or disable test case header ouput in the TAP stream.
 * Add support for Python 3.5.
 * Perform continuous integration testing on OS X.
 * Drop support for Python 3.2.
