@@ -110,7 +110,7 @@ for tips on how to get started.
 [coverage]: https://img.shields.io/codecov/c/github/mblayman/tappy.svg
 [rtd]: http://tappy.readthedocs.org/en/latest/
 [pypi]: https://pypi.python.org/pypi/tap.py
-[stream]: https://github.com/mblayman/tappy/blob/master/stream.gif
+[stream]: https://github.com/mblayman/tappy/blob/master/docs/images/stream.gif
 [produce]: http://testanything.org/producers.html
 [consume]: http://testanything.org/consumers.html
 [ns]: https://nose.readthedocs.org/en/latest/

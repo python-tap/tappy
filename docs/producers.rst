@@ -55,6 +55,8 @@ for piping output directly to tools that read TAP natively.
     ok 10 - The parser extracts a plan line containing a SKIP.
     1..10
 
+.. image:: images/stream.gif
+
 Examples
 --------
 
