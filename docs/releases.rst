@@ -1,8 +1,8 @@
 Releases
 ========
 
-Version 1.9, In Development
----------------------------
+Version 1.9, Released March 28, 2016
+------------------------------------
 
 * ``TAPTestRunner`` has a ``set_header`` method
   to enable or disable test case header ouput in the TAP stream.
