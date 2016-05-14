@@ -4,7 +4,7 @@ TAP Producers
 tappy integrates with ``unittest`` based test cases to produce TAP output.
 The producers come in three varieties:
 support with only the standard library,
-support for `nose <https://nose.readthedocs.org/en/latest/>`_,
+support for `nose <https://nose.readthedocs.io/en/latest/>`_,
 and support for `pytest <http://pytest.org/latest/>`_.
 
 * ``TAPTestRunner`` - This subclass of ``unittest.TextTestRunner`` provides all

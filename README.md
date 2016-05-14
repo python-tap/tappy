@@ -108,11 +108,11 @@ for tips on how to get started.
 [travisosx]: https://img.shields.io/travis/mblayman/tappy/master.svg?label=os+x++build
 [appveyor]: https://img.shields.io/appveyor/ci/mblayman/tappy/master.svg?label=windows+build
 [coverage]: https://img.shields.io/codecov/c/github/mblayman/tappy.svg
-[rtd]: http://tappy.readthedocs.org/en/latest/
+[rtd]: http://tappy.readthedocs.io/en/latest/
 [pypi]: https://pypi.python.org/pypi/tap.py
 [stream]: https://github.com/mblayman/tappy/blob/master/docs/images/stream.gif
 [produce]: http://testanything.org/producers.html
 [consume]: http://testanything.org/consumers.html
-[ns]: https://nose.readthedocs.org/en/latest/
+[ns]: https://nose.readthedocs.io/en/latest/
 [pytest]: http://pytest.org/latest/
-[contributing]: http://tappy.readthedocs.org/en/latest/contributing.html
+[contributing]: http://tappy.readthedocs.io/en/latest/contributing.html

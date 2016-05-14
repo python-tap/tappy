@@ -6,7 +6,7 @@ data in a standard way.
 
 Follow tappy development on `GitHub <https://github.com/mblayman/tappy>`_.
 Developer documentation is on
-`Read the Docs <https://tappy.readthedocs.org/>`_.
+`Read the Docs <https://tappy.readthedocs.io/>`_.
 """
 
 from setuptools import find_packages, setup
