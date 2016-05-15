@@ -206,3 +206,23 @@ or the plugin will take no action.
 
   Use ``--tap-outdir`` followed by a directory path to store the files
   in a different place. The directory will be created if it does not exist.
+
+Python and TAP
+--------------
+
+The TAP specification is open-ended
+on certain topics.
+This section clarifies how tappy interprets these topics.
+
+The specification indicates that a test line represents a "test point"
+without explicitly defining "test point."
+tappy assumes that each test line is **per test method**.
+TAP producers in other languages may output test lines **per assertion**,
+but the unit of work in the Python ecosystem is the test method
+(i.e. ``unittest``, nose, and pytest all report per method by default).
+
+tappy does not permit setting the plan.
+Instead, the plan is a count of the number of test methods executed.
+Python test runners execute all test methods in a suite,
+regardless of any errors encountered.
+Thus, the test method count should be an accurate measure for the plan.
