@@ -49,7 +49,7 @@ Author
 ------
 
 The :program:`tappy` and the :py:mod:`tap` modules were written
-by Matt LAYMAN (https://github.com/mblayman/tappy).
+by Matt LAYMAN (https://github.com/python-tap/tappy).
 
 This manual page was written Nicolas CANIART, for the Debian project.
 

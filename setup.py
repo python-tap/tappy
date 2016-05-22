@@ -4,7 +4,7 @@ tappy is a set of tools for working with the `Test Anything Protocol (TAP)
 <http://testanything.org/>`_, a line based test protocol for recording test
 data in a standard way.
 
-Follow tappy development on `GitHub <https://github.com/mblayman/tappy>`_.
+Follow tappy development on `GitHub <https://github.com/python-tap/tappy>`_.
 Developer documentation is on
 `Read the Docs <https://tappy.readthedocs.io/>`_.
 """
@@ -59,7 +59,7 @@ if __name__ == '__main__':
     setup(
         name='tap.py',
         version=tap.__version__,
-        url='https://github.com/mblayman/tappy',
+        url='https://github.com/python-tap/tappy',
         license='BSD',
         author='Matt Layman',
         author_email='matthewlayman@gmail.com',

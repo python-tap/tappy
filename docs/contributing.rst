@@ -7,7 +7,7 @@ contribute, please submit an issue on GitHub so that we can fix it!
 How
 -----
 
-Fork tappy on `GitHub <https://github.com/mblayman/tappy>`_ and submit a pull
+Fork tappy on `GitHub <https://github.com/python-tap/tappy>`_ and submit a pull
 request when you're ready.
 
 Setup

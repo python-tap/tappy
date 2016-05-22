@@ -2,14 +2,14 @@ tappy
 =====
 
 [![PyPI version][pypishield]](https://pypi.python.org/pypi/tap.py)
-[![BSD license][license]](https://raw.githubusercontent.com/mblayman/tappy/master/LICENSE)
+[![BSD license][license]](https://raw.githubusercontent.com/python-tap/tappy/master/LICENSE)
 [![Downloads][shield]](https://pypi.python.org/pypi/tap.py)
 [![Linux status][travis]](https://travis-ci.org/mblayman/tappy)
 [![OS X status][travisosx]](https://travis-ci.org/mblayman/tappy)
 [![Windows status][appveyor]](https://ci.appveyor.com/project/mblayman/tappy)
 [![Coverage][coverage]](https://codecov.io/github/mblayman/tappy)
 
-<img align="right" src="https://github.com/mblayman/tappy/blob/master/docs/images/tap.png"
+<img align="right" src="https://github.com/python-tap/tappy/blob/master/docs/images/tap.png"
   alt="TAP logo" />
 
 tappy is a set of tools for working with the
@@ -110,7 +110,7 @@ for tips on how to get started.
 [coverage]: https://img.shields.io/codecov/c/github/mblayman/tappy.svg
 [rtd]: http://tappy.readthedocs.io/en/latest/
 [pypi]: https://pypi.python.org/pypi/tap.py
-[stream]: https://github.com/mblayman/tappy/blob/master/docs/images/stream.gif
+[stream]: https://github.com/python-tap/tappy/blob/master/docs/images/stream.gif
 [produce]: http://testanything.org/producers.html
 [consume]: http://testanything.org/consumers.html
 [ns]: https://nose.readthedocs.io/en/latest/
