@@ -4,8 +4,8 @@ tappy
 [![PyPI version][pypishield]](https://pypi.python.org/pypi/tap.py)
 [![BSD license][license]](https://raw.githubusercontent.com/python-tap/tappy/master/LICENSE)
 [![Downloads][shield]](https://pypi.python.org/pypi/tap.py)
-[![Linux status][travis]](https://travis-ci.org/mblayman/tappy)
-[![OS X status][travisosx]](https://travis-ci.org/mblayman/tappy)
+[![Linux status][travis]](https://travis-ci.org/python-tap/tappy)
+[![OS X status][travisosx]](https://travis-ci.org/python-tap/tappy)
 [![Windows status][appveyor]](https://ci.appveyor.com/project/mblayman/tappy)
 [![Coverage][coverage]](https://codecov.io/github/mblayman/tappy)
 
@@ -104,8 +104,8 @@ for tips on how to get started.
 [pypishield]: https://img.shields.io/pypi/v/tap.py.svg
 [license]: https://img.shields.io/pypi/l/tap.py.svg
 [shield]: https://img.shields.io/pypi/dm/tap.py.svg
-[travis]: https://img.shields.io/travis/mblayman/tappy/master.svg?label=linux+build
-[travisosx]: https://img.shields.io/travis/mblayman/tappy/master.svg?label=os+x++build
+[travis]: https://img.shields.io/travis/python-tap/tappy/master.svg?label=linux+build
+[travisosx]: https://img.shields.io/travis/python-tap/tappy/master.svg?label=os+x++build
 [appveyor]: https://img.shields.io/appveyor/ci/mblayman/tappy/master.svg?label=windows+build
 [coverage]: https://img.shields.io/codecov/c/github/mblayman/tappy.svg
 [rtd]: http://tappy.readthedocs.io/en/latest/
