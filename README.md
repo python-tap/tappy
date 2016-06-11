@@ -91,7 +91,7 @@ Producers
 *   tappy for [nose][ns] - tappy provides a plugin for the **nose**
     testing tool.
 *   tappy for [pytest][pytest] -
-    tappy provides a plugin
+    `pytest-tap` provides a plugin
     for the **pytest** testing tool.
 
 Consumers
