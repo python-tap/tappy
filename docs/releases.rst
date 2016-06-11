@@ -1,6 +1,12 @@
 Releases
 ========
 
+Version 2.0, In Development
+---------------------------
+
+* Remove pytest plugin.
+  The plugin moved to the ``pytest-tap`` distribution.
+
 Version 1.9, Released March 28, 2016
 ------------------------------------
 
