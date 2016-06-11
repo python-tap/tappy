@@ -41,7 +41,6 @@ def install_requirements():
     requirements = [
         'nose',
         'Pygments',
-        'pytest',
     ]
     if sys.version_info < (2, 7, 0):
         requirements.append('argparse')
@@ -73,7 +72,6 @@ if __name__ == '__main__':
             ],
             'nose.plugins.0.10': ['tap = tap.plugins._nose:TAP'],
             'pygments.lexers': ['tap = tap.lexer:TAPLexer'],
-            'pytest11': ['tap = tap.plugins._pytest'],
         },
         include_package_data=True,
         zip_safe=False,
