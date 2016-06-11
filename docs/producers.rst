@@ -184,6 +184,10 @@ The **nose** TAP plugin is configured from command line flags.
 pytest TAP Plugin
 -----------------
 
+.. note::
+
+   To use this plugin, install it with ``pip install pytest-tap``.
+
 The **pytest** TAP plugin is configured from command line flags.
 Since **pytest** automatically activates the TAP plugin,
 the plugin does nothing by default.

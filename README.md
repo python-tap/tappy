@@ -52,6 +52,13 @@ and Spanish.
 $ pip install tap.py
 ```
 
+For testing with [pytest][pytest],
+you only need to install `pytest-tap`.
+
+```bash
+$ pip install pytest-tap
+```
+
 Motivation
 ----------
 
