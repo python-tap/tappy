@@ -7,7 +7,7 @@ tappy
 [![Linux status][travis]](https://travis-ci.org/python-tap/tappy)
 [![OS X status][travisosx]](https://travis-ci.org/python-tap/tappy)
 [![Windows status][appveyor]](https://ci.appveyor.com/project/mblayman/tappy)
-[![Coverage][coverage]](https://codecov.io/github/mblayman/tappy)
+[![Coverage][coverage]](https://codecov.io/github/python-tap/tappy)
 
 <img align="right" src="https://github.com/python-tap/tappy/blob/master/docs/images/tap.png"
   alt="TAP logo" />
@@ -114,7 +114,7 @@ for tips on how to get started.
 [travis]: https://img.shields.io/travis/python-tap/tappy/master.svg?label=linux+build
 [travisosx]: https://img.shields.io/travis/python-tap/tappy/master.svg?label=os+x++build
 [appveyor]: https://img.shields.io/appveyor/ci/mblayman/tappy/master.svg?label=windows+build
-[coverage]: https://img.shields.io/codecov/c/github/mblayman/tappy.svg
+[coverage]: https://img.shields.io/codecov/c/github/python-tap/tappy.svg
 [rtd]: http://tappy.readthedocs.io/en/latest/
 [pypi]: https://pypi.python.org/pypi/tap.py
 [stream]: https://github.com/python-tap/tappy/blob/master/docs/images/stream.gif
