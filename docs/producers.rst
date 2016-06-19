@@ -160,6 +160,10 @@ methods.
 nose TAP Plugin
 ---------------
 
+.. note::
+
+   To use this plugin, install it with ``pip install nose-tap``.
+
 The **nose** TAP plugin is configured from command line flags.
 
 * ``--with-tap`` - This flag is required to enable the plugin.

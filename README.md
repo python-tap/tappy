@@ -58,6 +58,13 @@ you only need to install `pytest-tap`.
 $ pip install pytest-tap
 ```
 
+For testing with [nose][ns],
+you only need to install `nose-tap`.
+
+```bash
+$ pip install nose-tap
+```
+
 Motivation
 ----------
 
