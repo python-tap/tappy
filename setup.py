@@ -39,7 +39,6 @@ class Sdist(sdist):
 
 def install_requirements():
     requirements = [
-        'Pygments',
     ]
     if sys.version_info < (2, 7, 0):
         requirements.append('argparse')
@@ -69,7 +68,6 @@ if __name__ == '__main__':
                 'tappy = tap.main:main',
                 'tap = tap.main:main',
             ],
-            'pygments.lexers': ['tap = tap.lexer:TAPLexer'],
         },
         include_package_data=True,
         zip_safe=False,

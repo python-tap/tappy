@@ -8,6 +8,9 @@ Version 2.0, In Development
   The plugin moved to the ``nose-tap`` distribution.
 * Remove pytest plugin.
   The plugin moved to the ``pytest-tap`` distribution.
+* Remove Pygments syntax highlighting plugin.
+  The plugin was merged upstream directly into the Pygments project
+  and is available without tappy.
 
 Version 1.9, Released March 28, 2016
 ------------------------------------
