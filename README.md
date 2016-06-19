@@ -3,7 +3,6 @@ tappy
 
 [![PyPI version][pypishield]](https://pypi.python.org/pypi/tap.py)
 [![BSD license][license]](https://raw.githubusercontent.com/python-tap/tappy/master/LICENSE)
-[![Downloads][shield]](https://pypi.python.org/pypi/tap.py)
 [![Linux status][travis]](https://travis-ci.org/python-tap/tappy)
 [![OS X status][travisosx]](https://travis-ci.org/python-tap/tappy)
 [![Windows status][appveyor]](https://ci.appveyor.com/project/mblayman/tappy)
