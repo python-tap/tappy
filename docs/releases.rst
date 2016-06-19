@@ -4,6 +4,8 @@ Releases
 Version 2.0, In Development
 ---------------------------
 
+* Remove nose plugin.
+  The plugin moved to the ``nose-tap`` distribution.
 * Remove pytest plugin.
   The plugin moved to the ``pytest-tap`` distribution.
 
