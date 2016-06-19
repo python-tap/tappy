@@ -39,7 +39,6 @@ class Sdist(sdist):
 
 def install_requirements():
     requirements = [
-        'nose',
         'Pygments',
     ]
     if sys.version_info < (2, 7, 0):
@@ -70,7 +69,6 @@ if __name__ == '__main__':
                 'tappy = tap.main:main',
                 'tap = tap.main:main',
             ],
-            'nose.plugins.0.10': ['tap = tap.plugins._nose:TAP'],
             'pygments.lexers': ['tap = tap.lexer:TAPLexer'],
         },
         include_package_data=True,
