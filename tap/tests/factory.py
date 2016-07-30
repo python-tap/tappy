@@ -1,5 +1,6 @@
 # Copyright (c) 2016, Matt Layman
 
+import sys
 import tempfile
 from unittest.runner import TextTestResult
 
@@ -27,3 +28,13 @@ class Factory(object):
     def make_test_result(self):
         stream = tempfile.TemporaryFile(mode='w')
         return TextTestResult(stream, None, 1)
+
+    def make_exc(self):
+        """Make a traceback tuple.
+
+        Doing this intentionally is not straight forward.
+        """
+        try:
+            raise ValueError('boom')
+        except ValueError:
+            return sys.exc_info()

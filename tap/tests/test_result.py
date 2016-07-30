@@ -5,6 +5,7 @@ import unittest
 
 from tap.i18n import _
 from tap.runner import TAPTestResult
+from tap.tests import TestCase
 from tap.tracker import Tracker
 
 
@@ -17,7 +18,7 @@ class FakeTestCase(unittest.TestCase):
         pass
 
 
-class TestTAPTestResult(unittest.TestCase):
+class TestTAPTestResult(TestCase):
 
     @classmethod
     def _make_one(cls):
@@ -56,8 +57,9 @@ class TestTAPTestResult(unittest.TestCase):
         self.assertEqual(len(result.tracker._test_cases['FakeTestCase']), 1)
 
     def test_adds_expected_failure(self):
+        exc = self.factory.make_exc()
         result = self._make_one()
-        result.addExpectedFailure(FakeTestCase(), (None, None, None))
+        result.addExpectedFailure(FakeTestCase(), exc)
         line = result.tracker._test_cases['FakeTestCase'][0]
         self.assertFalse(line.ok)
         self.assertEqual(line.directive.text, _('(expected failure)'))
