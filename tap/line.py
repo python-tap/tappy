@@ -74,7 +74,7 @@ class Result(Line):
         if not self.ok:
             is_not = 'not '
         directive = ''
-        if self.directive is not None:
+        if self.directive is not None and self.directive.text:
             directive = ' # {0}'.format(self.directive.text)
         diagnostics = ''
         if self.diagnostics is not None:

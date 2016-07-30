@@ -1,11 +1,7 @@
 # Copyright (c) 2016, Matt Layman
 
 import tempfile
-try:
-    from unittest.runner import TextTestResult
-except ImportError:
-    # Support Python 2.6.
-    from unittest import _TextTestResult as TextTestResult
+from unittest.runner import TextTestResult
 
 from tap.directive import Directive
 from tap.line import Bail, Plan, Result

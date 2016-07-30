@@ -28,7 +28,6 @@ Installation
 
 tappy is available for download from [PyPI][pypi]. tappy is currently supported
 on Python
-2.6,
 2.7,
 3.3,
 3.4,
@@ -94,8 +93,9 @@ Producers
 
 *   `TAPTestRunner` - This subclass of `unittest.TextTestRunner` provides all
     the functionality of `TextTestRunner` and generates TAP files.
-*   tappy for [nose][ns] - tappy provides a plugin for the **nose**
-    testing tool.
+*   tappy for [nose][ns] -
+    `nose-tap` provides a plugin
+    for the **nose** testing tool.
 *   tappy for [pytest][pytest] -
     `pytest-tap` provides a plugin
     for the **pytest** testing tool.

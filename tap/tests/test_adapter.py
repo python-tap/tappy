@@ -1,7 +1,5 @@
 # Copyright (c) 2016, Matt Layman
 
-import sys
-
 try:
     from unittest import mock
 except ImportError:
@@ -33,10 +31,6 @@ class TestAdapter(TestCase):
 
     def test_handles_skip_test_line(self):
         """Add a skip when a test line contains a skip directive."""
-        # Don't test on Python 2.6.
-        if sys.version_info[0] == 2 and sys.version_info[1] == 6:
-            return
-
         skip_line = self.factory.make_ok(
             directive_text='SKIP This is the reason.')
         adapter = Adapter('fake.tap', skip_line)
@@ -49,10 +43,6 @@ class TestAdapter(TestCase):
 
     def test_handles_ok_todo_test_line(self):
         """Add an unexpected success for an ok todo test line."""
-        # Don't test on Python 2.6.
-        if sys.version_info[0] == 2 and sys.version_info[1] == 6:
-            return
-
         todo_line = self.factory.make_ok(
             directive_text='TODO An incomplete test')
         adapter = Adapter('fake.tap', todo_line)
@@ -64,10 +54,6 @@ class TestAdapter(TestCase):
 
     def test_handles_not_ok_todo_test_line(self):
         """Add an expected failure for a not ok todo test line."""
-        # Don't test on Python 2.6.
-        if sys.version_info[0] == 2 and sys.version_info[1] == 6:
-            return
-
         todo_line = self.factory.make_not_ok(
             directive_text='TODO An incomplete test')
         adapter = Adapter('fake.tap', todo_line)
@@ -76,34 +62,3 @@ class TestAdapter(TestCase):
         adapter(result)
 
         self.assertEqual(1, len(result.expectedFailures))
-
-    def test_skips_on_26(self):
-        """Python 2.6 does not support addSkip."""
-        skip_line = self.factory.make_ok(
-            directive_text='SKIP This is the reason.')
-        result = mock.Mock()
-        result.addSkip.side_effect = AttributeError
-        adapter = Adapter('fake.tap', skip_line)
-        adapter(result)
-        self.assertTrue(result.addSuccess.called)
-
-    @mock.patch.object(Adapter, 'addFailure')
-    def test_unexpected_success_on_26(self, failure):
-        """Python 2.6 does not support addUnexpectedSuccess."""
-        todo_line = self.factory.make_ok(
-            directive_text='TODO An incomplete test')
-        result = mock.Mock()
-        result.addUnexpectedSuccess.side_effect = AttributeError
-        adapter = Adapter('fake.tap', todo_line)
-        adapter(result)
-        self.assertTrue(failure.called)
-
-    def test_expected_failure_on_26(self):
-        """Python 2.6 does not support addExpectedFailure."""
-        todo_line = self.factory.make_not_ok(
-            directive_text='TODO An incomplete test')
-        result = mock.Mock()
-        result.addExpectedFailure.side_effect = AttributeError
-        adapter = Adapter('fake.tap', todo_line)
-        adapter(result)
-        self.assertTrue(result.addSuccess.called)

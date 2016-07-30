@@ -11,6 +11,7 @@ Version 2.0, In Development
 * Remove Pygments syntax highlighting plugin.
   The plugin was merged upstream directly into the Pygments project
   and is available without tappy.
+* Drop support for Python 2.6.
 
 Version 1.9, Released March 28, 2016
 ------------------------------------

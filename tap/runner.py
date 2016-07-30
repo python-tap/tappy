@@ -1,19 +1,9 @@
 # Copyright (c) 2016, Matt Layman
 
 import os
-from unittest import TextTestRunner
+from unittest import TextTestResult, TextTestRunner
+from unittest.runner import _WritelnDecorator
 import sys
-
-# Older versions of Python have the result under a different name.
-try:
-    from unittest import TextTestResult
-except ImportError:  # pragma: no cover
-    from unittest import _TextTestResult as TextTestResult
-try:
-    from unittest.runner import _WritelnDecorator
-except ImportError:  # pragma: no cover
-    # Python 2.6 has a different package structure.
-    from unittest import _WritelnDecorator
 
 from tap import formatter
 from tap.i18n import _
@@ -84,6 +74,9 @@ class TAPTestResult(TextTestResult):
 
         return test.shortDescription() or str(test)
 
+
+# TODO: 2016-7-30 mblayman - Since the 2.6 signature is no longer relevant,
+# check the possibility of removing the module level scope.
 
 # Module level state stinks, but this is the only way to keep compatibility
 # with Python 2.6. The best place for the tracker is as an instance variable

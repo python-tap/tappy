@@ -13,7 +13,7 @@ class TestFormatter(TestCase):
         self.assertEqual(expected_diagnostics, diagnostics)
 
     def test_format_exception_as_diagnostics(self):
-        # Making a tracback intentionally is not straight forward.
+        # Making a traceback intentionally is not straight forward.
         try:
             raise ValueError('boom')
         except ValueError:

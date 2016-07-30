@@ -24,27 +24,14 @@ class Adapter(object):
         result.startTest(self)
 
         if self._line.skip:
-            try:
-                result.addSkip(None, self._line.directive.reason)
-            except AttributeError:
-                # Python 2.6 does not support skipping.
-                result.addSuccess(self)
+            result.addSkip(None, self._line.directive.reason)
             return
 
         if self._line.todo:
             if self._line.ok:
-                try:
-                    result.addUnexpectedSuccess(self)
-                except AttributeError:
-                    # Python 2.6 does not support unexpected success.
-                    self.addFailure(result)
+                result.addUnexpectedSuccess(self)
             else:
-                try:
-                    result.addExpectedFailure(
-                        self, (Exception, Exception(), None))
-                except AttributeError:
-                    # Python 2.6 does not support expected failures.
-                    result.addSuccess(self)
+                result.addExpectedFailure(self, (Exception, Exception(), None))
             return
 
         if self._line.ok:

@@ -36,15 +36,6 @@ class Sdist(sdist):
         # sdist is an old style class so super cannot be used.
         sdist.run(self)
 
-
-def install_requirements():
-    requirements = [
-    ]
-    if sys.version_info < (2, 7, 0):
-        requirements.append('argparse')
-
-    return requirements
-
 # The docs import setup.py for the version so only call setup when not behaving
 # as a module.
 if __name__ == '__main__':
@@ -72,14 +63,13 @@ if __name__ == '__main__':
         include_package_data=True,
         zip_safe=False,
         platforms='any',
-        install_requires=install_requirements(),
+        install_requires=[],
         classifiers=[
             'Development Status :: 5 - Production/Stable',
             'Environment :: Console',
             'Intended Audience :: Developers',
             'License :: OSI Approved :: BSD License',
             'Operating System :: OS Independent',
-            'Programming Language :: Python :: 2.6',
             'Programming Language :: Python :: 2.7',
             'Programming Language :: Python :: 3.3',
             'Programming Language :: Python :: 3.4',

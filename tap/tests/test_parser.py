@@ -116,7 +116,8 @@ class TestParser(unittest.TestCase):
         """The TAP spec dictates that anything less than 13 is an error."""
         parser = Parser()
 
-        self.assertRaises(ValueError, parser.parse_line, 'TAP version 12')
+        with self.assertRaises(ValueError):
+            parser.parse_line('TAP version 12')
 
     def test_finds_plan(self):
         """The parser extracts a plan line."""
