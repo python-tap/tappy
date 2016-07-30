@@ -1,5 +1,5 @@
 # Translations template for tap.py.
-# Copyright (C) 2015 Matt Layman
+# Copyright (C) 2016 Matt Layman
 # This file is distributed under the same license as the tap.py project.
 # 
 # Translators:
@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tappy\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-11-26 09:08-0500\n"
-"PO-Revision-Date: 2015-11-27 19:19+0000\n"
+"POT-Creation-Date: 2016-06-19 10:03-0400\n"
+"PO-Revision-Date: 2016-06-20 09:32+0000\n"
 "Last-Translator: Matt Layman <matthewlayman@gmail.com>\n"
-"Language-Team: Portuguese (http://www.transifex.com/tappy/tappy/language/pt/)\n"
+"Language-Team: Portuguese (http://www.transifex.com/python-tap/tappy/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.0\n"
+"Generated-By: Babel 2.3.4\n"
 "Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -83,37 +83,12 @@ msgstr "(falha esperado)"
 msgid "(unexpected success)"
 msgstr "(sucesso inesperado)"
 
-#: tap/runner.py:80 tap/plugins/_nose.py:114
+#: tap/runner.py:80
 msgid ""
 "Bad format string: {format}\n"
 "Replacement options are: {{short_description}} and {{method_name}}"
 msgstr "Bad seqüência de formato: {format}\nAs opções de substituição são: {{short_description}} e {{method_name}}"
 
-#: tap/tracker.py:138 tap/tests/test_tracker.py:19
+#: tap/tests/test_tracker.py:19 tap/tracker.py:142
 msgid "# TAP results for {test_case}"
 msgstr "# Resultados da TAP para {test_case}"
-
-#: tap/plugins/_nose.py:41 tap/plugins/_pytest.py:25
-msgid "Stream TAP output instead of the default test runner output."
-msgstr "Fluxo de saída TAP em vez da saída corredor de teste padrão."
-
-#: tap/plugins/_nose.py:44 tap/plugins/_pytest.py:33
-msgid ""
-"An optional output directory to write TAP files to. If the directory does "
-"not exist, it will be created."
-msgstr "Um diretório de saída opcional para gravar arquivos da TAP. Se o diretório não existir, ele será criado."
-
-#: tap/plugins/_nose.py:49 tap/plugins/_pytest.py:31
-msgid "Store all TAP test results into a combined output file."
-msgstr "Armazenar todos os resultados do teste TAP numa arquivo de saída combinada."
-
-#: tap/plugins/_nose.py:52
-msgid ""
-"An optional format string for the TAP output. The format options are: "
-"{short_description} for the short description, and {method_name} for the "
-"test method name."
-msgstr "Uma cadeia de formato opcional para a saída TAP. As opções de formato são: {short_description} para a breve descrição, e {method_name} para o nome do método de teste."
-
-#: tap/plugins/_pytest.py:28
-msgid "Store all TAP test results into individual files per test case."
-msgstr "Armazenar todos os resultados do teste TAP em arquivos individuais por caso de teste."
