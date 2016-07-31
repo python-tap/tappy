@@ -1,8 +1,8 @@
 Releases
 ========
 
-Version 2.0, In Development
----------------------------
+Version 2.0, Released July 31, 2016
+-----------------------------------
 
 * Remove nose plugin.
   The plugin moved to the ``nose-tap`` distribution.
@@ -110,4 +110,3 @@ Version 1.0, Released March 16, 2014
 * ``TAPTestRunner`` - A test runner for ``unittest`` modules that generates
   TAP files.
 * Provides a plugin for integrating with **nose**.
-
