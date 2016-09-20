@@ -168,13 +168,13 @@ class TestParser(unittest.TestCase):
 
     @mock.patch('tap.parser.sys')
     def test_parses_stdin(self, mock_sys):
-        def stdin_data():
-            yield '1..2\n'
-            yield 'ok 1 A passing test\n'
-            yield 'not ok 2 A failing test\n'
-        mock_stdin = mock.PropertyMock()
-        mock_stdin.side_effect = stdin_data
-        type(mock_sys).stdin = mock_stdin
+        mock_sys.stdin.__iter__.return_value = iter([
+            '1..2\n',
+            'ok 1 A passing test\n',
+            'not ok 2 A failing test\n',
+            ])
+        mock_sys.stdin.__enter__.return_value = None
+        mock_sys.stdin.__exit__.return_value = None
         parser = Parser()
         lines = []
 
