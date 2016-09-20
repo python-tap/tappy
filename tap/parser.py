@@ -2,6 +2,7 @@
 
 import re
 import sys
+from io import StringIO
 
 from tap.directive import Directive
 from tap.i18n import _
@@ -41,20 +42,41 @@ class Parser(object):
 
     TAP_MINIMUM_DECLARED_VERSION = 13
 
-    def parse_file(self, filename):
-        """Parse a TAP file and determine what each line in the file is.
+    def parse(self, fh):
+        """Generate tap.line.Line objects, given a file-like object `fh`.
 
-        This is a generator method that will yield each parsed line. The
-        filename is assumed to exist.
+        `fh` may be any object that implements both the iterator and
+        context management protocol (i.e. it can be used in both a
+        "with" statement and a "for...in" statement.)
+
+        Trailing whitespace and newline characters will be automatically
+        stripped from the input lines.
         """
-        with open(filename, 'r') as tap_file:
-            for line in tap_file:
+        if isinstance(fh, basestring):
+            raise TypeError("'fh' should be a file-like object.")
+        with fh:
+            for line in fh:
                 yield self.parse_line(line.rstrip())
 
+    def parse_text(self, text):
+        """Parse a string containing one or more lines of TAP output."""
+        return self.parse(StringIO(text))
+
+    def parse_file(self, filename):
+        """Parse a TAP file to an iterable of tap.line.Line objects.
+
+        This is a generator method that will yield an object for each
+        parsed line. The file given by `filename` is assumed to exist.
+        """
+        return self.parse(open(filename, 'r'))
+
     def parse_stdin(self):
-        """Parse a TAP stream from STDIN."""
-        for line in sys.stdin:
-            yield self.parse_line(line.rstrip())
+        """Parse a TAP stream from standard input.
+
+        Note: this has the side effect of closing the standard input
+        filehandle after parsing.
+        """
+        return self.parse(sys.stdin)
 
     def parse_line(self, text):
         """Parse a line into whatever TAP category it belongs."""

@@ -145,6 +145,24 @@ class TestParser(unittest.TestCase):
 
         self.assertEqual('unknown', line.category)
 
+    def test_parses_text(self):
+        sample = inspect.cleandoc(
+            u"""1..2
+            ok 1 A passing test
+            not ok 2 A failing test""")
+        parser = Parser()
+        lines = []
+
+        for line in parser.parse_text(sample):
+            lines.append(line)
+
+        self.assertEqual(3, len(lines))
+        self.assertEqual('plan', lines[0].category)
+        self.assertEqual('test', lines[1].category)
+        self.assertTrue(lines[1].ok)
+        self.assertEqual('test', lines[2].category)
+        self.assertFalse(lines[2].ok)
+
     def test_parses_file(self):
         sample = inspect.cleandoc(
             """1..2
