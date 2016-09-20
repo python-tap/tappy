@@ -52,8 +52,6 @@ class Parser(object):
         Trailing whitespace and newline characters will be automatically
         stripped from the input lines.
         """
-        if isinstance(fh, basestring):
-            raise TypeError("'fh' should be a file-like object.")
         with fh:
             for line in fh:
                 yield self.parse_line(line.rstrip())
