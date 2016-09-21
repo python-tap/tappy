@@ -42,24 +42,6 @@ class Parser(object):
 
     TAP_MINIMUM_DECLARED_VERSION = 13
 
-    def parse(self, fh):
-        """Generate tap.line.Line objects, given a file-like object `fh`.
-
-        `fh` may be any object that implements both the iterator and
-        context management protocol (i.e. it can be used in both a
-        "with" statement and a "for...in" statement.)
-
-        Trailing whitespace and newline characters will be automatically
-        stripped from the input lines.
-        """
-        with fh:
-            for line in fh:
-                yield self.parse_line(line.rstrip())
-
-    def parse_text(self, text):
-        """Parse a string containing one or more lines of TAP output."""
-        return self.parse(StringIO(text))
-
     def parse_file(self, filename):
         """Parse a TAP file to an iterable of tap.line.Line objects.
 
@@ -75,6 +57,24 @@ class Parser(object):
         filehandle after parsing.
         """
         return self.parse(sys.stdin)
+
+    def parse_text(self, text):
+        """Parse a string containing one or more lines of TAP output."""
+        return self.parse(StringIO(text))
+
+    def parse(self, fh):
+        """Generate tap.line.Line objects, given a file-like object `fh`.
+
+        `fh` may be any object that implements both the iterator and
+        context management protocol (i.e. it can be used in both a
+        "with" statement and a "for...in" statement.)
+
+        Trailing whitespace and newline characters will be automatically
+        stripped from the input lines.
+        """
+        with fh:
+            for line in fh:
+                yield self.parse_line(line.rstrip())
 
     def parse_line(self, text):
         """Parse a line into whatever TAP category it belongs."""
