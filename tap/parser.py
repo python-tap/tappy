@@ -1,8 +1,8 @@
 # Copyright (c) 2016, Matt Layman
 
+from io import StringIO
 import re
 import sys
-from io import StringIO
 
 from tap.directive import Directive
 from tap.i18n import _
