@@ -190,7 +190,7 @@ class TestParser(unittest.TestCase):
             '1..2\n',
             'ok 1 A passing test\n',
             'not ok 2 A failing test\n',
-            ])
+        ])
         mock_sys.stdin.__enter__.return_value = None
         mock_sys.stdin.__exit__.return_value = None
         parser = Parser()
