@@ -1,6 +1,12 @@
 Releases
 ========
 
+Version 2.1, In Development
+---------------------------
+
+* Add ``Parser.parse_text`` to parse TAP
+  provided as a string.
+
 Version 2.0, Released July 31, 2016
 -----------------------------------
 
