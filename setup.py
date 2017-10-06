@@ -36,6 +36,7 @@ class Sdist(sdist):
         # sdist is an old style class so super cannot be used.
         sdist.run(self)
 
+
 # The docs import setup.py for the version so only call setup when not behaving
 # as a module.
 if __name__ == '__main__':
