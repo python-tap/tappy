@@ -1,4 +1,4 @@
-# Copyright (c) 2016, Matt Layman
+# Copyright (c) 2017, Matt Layman
 """
 tappy is a set of tools for working with the `Test Anything Protocol (TAP)
 <http://testanything.org/>`_, a line based test protocol for recording test

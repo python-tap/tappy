@@ -1,4 +1,4 @@
-# Copyright (c) 2016, Matt Layman
+# Copyright (c) 2017, Matt Layman
 
 try:
     from unittest import mock
