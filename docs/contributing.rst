@@ -7,29 +7,29 @@ contribute, please submit an issue on GitHub so that we can fix it!
 How
 -----
 
-Fork tappy on `GitHub <https://github.com/python-tap/tappy>`_ and submit a pull
-request when you're ready.
+Fork tappy on `GitHub <https://github.com/python-tap/tappy>`_ and
+`submit a Pull Request <https://help.github.com/articles/creating-a-pull-request/>`_
+when you're ready.
 
 Setup
 -----
 
-tappy uses a standard Python toolchain.
-While many setups are possible,
-the following should get you started quickly.
-At minimum, you'll need 
-`virtualenv <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_
-and
-`pip <https://pip.pypa.io/en/stable/installing/>`_
-to begin.
+tappy uses Pipenv
+to manage development.
+The following instructions assume that Pipenv is installed.
+See the `Pipenv install instructions <https://docs.pipenv.org/install/>`_
+for more details.
+
+After installing Pipenv:
 
 .. code-block:: console
 
-   $ # Start from the root of a tappy clone.
-   $ virtualenv venv                            # Create your virtual environment.
-   $ source venv/bin/activate                   # Activate it.
-   (venv)$ pip install -r requirements-dev.txt  # Install developer tools.
-   (venv)$ pip install -e .                     # Install tappy in editable mode.
-   (venv)$ nosetests                            # Run the test suite.
+   $ git clone git@github.com:python-tap/tappy.git
+   $ cd tappy
+   $ pipenv install --dev --ignore-pipfile
+   $ pipenv shell
+   $ # Edit some files and run the tests.
+   $ nosetests
 
 The commands above show how to get a tappy clone configured.
 If you've executed those commands
