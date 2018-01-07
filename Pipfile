@@ -7,15 +7,16 @@ name = "pypi"
 
 [dev-packages]
 
-babel = "*"
+Babel = "*"
 coverage = "*"
 "flake8" = "*"
 mock = "*"
 requests = "*"
-sphinx = "*"
+Sphinx = "*"
 tox = "*"
 twine = "*"
-nose = "*"
+pytest = "*"
+
 
 [packages]
 

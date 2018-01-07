@@ -6,6 +6,8 @@ Version 2.2, In Development
 
 * Add support for Python 3.6.
 * Drop support for Python 3.3 (it is end-of-life).
+* Use Pipenv for managing development.
+* Switch to pytest as the development test runner.
 
 Version 2.1, Released September 23, 2016
 ----------------------------------------
