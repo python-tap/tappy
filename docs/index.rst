@@ -3,8 +3,9 @@ tappy - TAP tools for Python
 
 .. image:: images/tap.png
 
-tappy provides tools for working with the Test Anything Protocol (TAP) in
-Python.
+tappy provides tools for working with the
+`Test Anything Protocol (TAP) <http://testanything.org>`_
+in Python.
 
 tappy generates TAP output from your ``unittest`` test cases. You
 can use the TAP output files with a tool like the `Jenkins TAP plugin
