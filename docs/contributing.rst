@@ -29,7 +29,7 @@ After installing Pipenv:
    $ pipenv install --dev --ignore-pipfile
    $ pipenv shell
    $ # Edit some files and run the tests.
-   $ nosetests
+   $ pytest
 
 The commands above show how to get a tappy clone configured.
 If you've executed those commands
