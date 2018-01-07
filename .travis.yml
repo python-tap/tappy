@@ -6,20 +6,24 @@ matrix:
       python: 2.7
       env: TOX_ENV=py27
     - os: linux
-      python: 3.3
-      env: TOX_ENV=py33
-    - os: linux
       python: 3.4
       env: TOX_ENV=py34
     - os: linux
       python: 3.5
       env: TOX_ENV=py35
     - os: linux
+      python: 3.6
+      env: TOX_ENV=py36
+    - os: linux
       python: pypy
       env: TOX_ENV=pypy
     - os: osx
       language: generic
       env: TOX_ENV=py27
+      before_install:
+        - brew install python3
+        - python3 -m venv venv
+        - source venv/bin/activate
     - os: linux
       python: 2.7
       env: TOX_ENV=runner
@@ -32,37 +36,34 @@ matrix:
     - os: linux
       python: 2.7
       env: TOX_ENV=coverage
-    - os: linux
-      python: 2.7
-      env: TOX_ENV=language_ar
-    - os: linux
-      python: 2.7
-      env: TOX_ENV=language_de
-    - os: linux
-      python: 2.7
-      env: TOX_ENV=language_es
-    - os: linux
-      python: 2.7
-      env: TOX_ENV=language_fr
-    - os: linux
-      python: 2.7
-      env: TOX_ENV=language_it
-    - os: linux
-      python: 2.7
-      env: TOX_ENV=language_ja
-    - os: linux
-      python: 2.7
-      env: TOX_ENV=language_nl
-    - os: linux
-      python: 2.7
-      env: TOX_ENV=language_pt
-    - os: linux
-      python: 2.7
-      env: TOX_ENV=language_ru
-before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install pyenv-virtualenv; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then virtualenv venv; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source venv/bin/activate; fi
+    # Stop testing the languages until someone steps up to support them.
+    # - os: linux
+    #   python: 2.7
+    #   env: TOX_ENV=language_ar
+    # - os: linux
+    #   python: 2.7
+    #   env: TOX_ENV=language_de
+    # - os: linux
+    #   python: 2.7
+    #   env: TOX_ENV=language_es
+    # - os: linux
+    #   python: 2.7
+    #   env: TOX_ENV=language_fr
+    # - os: linux
+    #   python: 2.7
+    #   env: TOX_ENV=language_it
+    # - os: linux
+    #   python: 2.7
+    #   env: TOX_ENV=language_ja
+    # - os: linux
+    #   python: 2.7
+    #   env: TOX_ENV=language_nl
+    # - os: linux
+    #   python: 2.7
+    #   env: TOX_ENV=language_pt
+    # - os: linux
+    #   python: 2.7
+    #   env: TOX_ENV=language_ru
 install:
   - pip install Babel tox
 script: tox -e $TOX_ENV
