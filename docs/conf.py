@@ -52,7 +52,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'tappy'
-copyright = u'2017, Matt Layman'
+copyright = u'2018, Matt Layman and contributors'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -205,7 +205,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'tappy.tex', u'tappy Documentation',
-   u'Matt Layman', 'manual'),
+   u'Matt Layman and contributors', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -249,7 +249,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'tappy', u'tappy Documentation',
-   u'Matt Layman', 'tappy', 'One line description of project.',
+   u'Matt Layman and contributors', 'tappy', 'One line description of project.',
    'Miscellaneous'),
 ]
 
