@@ -22,7 +22,7 @@ class Directive(object):
 
         The text is assumed to be everything after a '#\s*' on a result line.
         """
-        self._text = text
+        self._text = text.lstrip('# ')
         self._skip = False
         self._todo = False
         self._reason = None
