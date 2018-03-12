@@ -61,3 +61,6 @@ class Directive(object):
     def reason(self):
         """Get the reason for the directive."""
         return self._reason
+
+    def __str__(self):
+        return '# {}'.format(self.text)

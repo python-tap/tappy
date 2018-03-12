@@ -92,7 +92,8 @@ class TestParser(unittest.TestCase):
         line = parser.parse_line(text)
 
         self.assertEqual('diagnostic', line.category)
-        self.assertEqual(text, line.text)
+        self.assertEqual(text.lstrip('# '), line.text)
+        self.assertEqual(text, str(line))
 
     def test_bail_out_line(self):
         """The parser extracts a bail out line."""
