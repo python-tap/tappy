@@ -23,7 +23,7 @@ class Result(Line):
         else:
             # The number may be an empty string so explicitly set to None.
             self._number = None
-        self._description = description
+        self._description = description.lstrip('- ')
         self.directive = directive
         self.diagnostics = diagnostics
 
@@ -116,7 +116,7 @@ class Diagnostic(Line):
     """A diagnostic line (i.e. anything starting with a hash)."""
 
     def __init__(self, text):
-        self._text = text
+        self._text = text.lstrip('# ')
 
     @property
     def category(self):
