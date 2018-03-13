@@ -29,20 +29,20 @@ class TestResult(unittest.TestCase):
     def test_str_ok(self):
         result = Result(True, 42, 'passing')
         self.assertEqual(
-            'ok 42 - passing', str(result))
+            'ok 42 passing', str(result))
 
     def test_str_not_ok(self):
         result = Result(False, 43, 'failing')
         self.assertEqual(
-            'not ok 43 - failing', str(result))
+            'not ok 43 failing', str(result))
 
     def test_str_directive(self):
         directive = Directive('SKIP a reason')
         result = Result(True, 44, 'passing', directive)
         self.assertEqual(
-            'ok 44 - passing # SKIP a reason', str(result))
+            'ok 44 passing # SKIP a reason', str(result))
 
     def test_str_diagnostics(self):
         result = Result(False, 43, 'failing', diagnostics='# more info')
         self.assertEqual(
-            'not ok 43 - failing\n# more info', str(result))
+            'not ok 43 failing\n# more info', str(result))

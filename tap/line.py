@@ -23,7 +23,7 @@ class Result(Line):
         else:
             # The number may be an empty string so explicitly set to None.
             self._number = None
-        self._description = description.lstrip('- ')
+        self._description = description
         self.directive = directive
         self.diagnostics = diagnostics
 
@@ -79,7 +79,7 @@ class Result(Line):
         diagnostics = ''
         if self.diagnostics is not None:
             diagnostics = '\n' + self.diagnostics.rstrip()
-        return "{0}ok {1} - {2}{3}{4}".format(
+        return "{0}ok {1} {2}{3}{4}".format(
             is_not, self.number, self.description, directive, diagnostics)
 
 
@@ -116,7 +116,7 @@ class Diagnostic(Line):
     """A diagnostic line (i.e. anything starting with a hash)."""
 
     def __init__(self, text):
-        self._text = text.lstrip('# ')
+        self._text = text
 
     @property
     def category(self):
@@ -129,7 +129,7 @@ class Diagnostic(Line):
         return self._text
 
     def __str__(self):
-        return '# {}'.format(self.text)
+        return self._text
 
 
 class Bail(Line):
