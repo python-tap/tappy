@@ -128,9 +128,6 @@ class Diagnostic(Line):
         """Get the text."""
         return self._text
 
-    def __str__(self):
-        return self._text
-
 
 class Bail(Line):
     """A bail out line (i.e. anything starting with 'Bail out!')."""
