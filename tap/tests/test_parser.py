@@ -80,8 +80,9 @@ class TestParser(unittest.TestCase):
     def test_finds_directive(self):
         """The parser extracts a directive"""
         parser = Parser()
+        test_line = 'not ok - This line fails # TODO not implemented'
 
-        line = parser.parse_line('not ok - This line fails # TODO not implemented')
+        line = parser.parse_line(test_line)
         directive = line.directive
 
         self.assertEqual('test', line.category)
