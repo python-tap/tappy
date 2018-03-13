@@ -103,9 +103,9 @@ class TestTracker(TestCase):
             report = f.read()
         expected = inspect.cleandoc(
             """{header_1}
-            ok 1 - YESSS!
+            ok 1 YESSS!
             {header_2}
-            ok 2 - GOAAL!
+            ok 2 GOAAL!
             1..2
             """.format(
                 header_1=self._make_header('FakeTestCase'),
@@ -129,9 +129,9 @@ class TestTracker(TestCase):
 
         expected = inspect.cleandoc(
             """{header_1}
-            ok 1 - YESSS!
+            ok 1 YESSS!
             {header_2}
-            ok 2 - Sure.
+            ok 2 Sure.
             """.format(
                 header_1=self._make_header('FakeTestCase'),
                 header_2=self._make_header('AnotherTestCase')))
@@ -145,7 +145,7 @@ class TestTracker(TestCase):
 
         expected = inspect.cleandoc(
             """{header}
-            not ok 1 - YESSS!
+            not ok 1 YESSS!
             """.format(
                 header=self._make_header('FakeTestCase')))
         self.assertEqual(stream.getvalue().strip(), expected)
@@ -158,7 +158,7 @@ class TestTracker(TestCase):
 
         expected = inspect.cleandoc(
             """{header}
-            ok 1 - YESSS! # SKIP a reason
+            ok 1 YESSS! # SKIP a reason
             """.format(
                 header=self._make_header('FakeTestCase')))
         self.assertEqual(stream.getvalue().strip(), expected)
@@ -215,5 +215,5 @@ class TestTracker(TestCase):
         tracker.add_skip('FakeTestCase', 'YESSS!', 'a reason')
 
         expected = inspect.cleandoc(
-            """ok 1 - YESSS! # SKIP a reason""")
+            """ok 1 YESSS! # SKIP a reason""")
         self.assertEqual(stream.getvalue().strip(), expected)
