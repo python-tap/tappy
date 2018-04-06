@@ -75,6 +75,21 @@ class TestParser(unittest.TestCase):
         self.assertEqual('test', line.category)
         self.assertFalse(line.ok)
         self.assertTrue(line.number is None)
+        self.assertEqual('', line.directive.text)
+
+    def test_finds_directive(self):
+        """The parser extracts a directive"""
+        parser = Parser()
+        test_line = 'not ok - This line fails # TODO not implemented'
+
+        line = parser.parse_line(test_line)
+        directive = line.directive
+
+        self.assertEqual('test', line.category)
+        self.assertEqual('TODO not implemented', directive.text)
+        self.assertFalse(directive.skip)
+        self.assertTrue(directive.todo)
+        self.assertEqual('not implemented', directive.reason)
 
     def test_unrecognizable_line(self):
         """The parser returns an unrecognizable line."""
