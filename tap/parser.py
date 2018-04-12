@@ -10,7 +10,7 @@ from tap.i18n import _
 from tap.line import Bail, Diagnostic, Plan, Result, Unknown, Version
 
 try:
-    import more_itertools as mi
+    from more_itertools import peekable
     import yaml
     SUPPORTS_PEEKING = True
 except ImportError:
@@ -97,7 +97,7 @@ class Parser(object):
             first_parsed = self.parse_line(first_line.rstrip())
             if SUPPORTS_PEEKING and first_parsed.category == 'version' and \
                     int(first_parsed.version) == 13:
-                fh_new = mi.peekable(itertools.chain([first_line], fh))
+                fh_new = peekable(itertools.chain([first_line], fh))
                 self._try_peeking = True
             else:
                 fh_new = itertools.chain([first_line], fh)
