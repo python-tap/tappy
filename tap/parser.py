@@ -96,14 +96,14 @@ class Parser(object):
             first_line = next(fh)
             first_parsed = self.parse_line(first_line.rstrip())
             if SUPPORTS_PEEKING and first_parsed.category == 'version' and \
-                int(first_parsed.version) == 13: 
+                    int(first_parsed.version) == 13:
                 fh_new = mi.peekable(itertools.chain([first_line], fh))
                 self._try_peeking = True
             else:
                 fh_new = itertools.chain([first_line], fh)
-            
+
             for line in fh_new:
-                    yield self.parse_line(line.rstrip(), fh_new)
+                yield self.parse_line(line.rstrip(), fh_new)
 
     def parse_line(self, text, fh=None):
         """Parse a line into whatever TAP category it belongs."""
@@ -151,11 +151,11 @@ class Parser(object):
             peek_match = self.yaml_block_start.match(fh.peek())
         if not peek_match:
             return Result(
-                ok, 
-                number=match.group('number'), 
+                ok,
+                number=match.group('number'),
                 description=match.group('description').strip(),
                 directive=Directive(match.group('directive'))
-                )
+            )
         raw_yaml = []
         indent = peek_match.group('indent')
         indent_match = re.compile(r'^{}'.format(indent))
@@ -171,13 +171,12 @@ class Parser(object):
             pass
         concat_yaml = '\n'.join(raw_yaml)
         return Result(
-            ok, 
-            number=match.group('number'), 
+            ok,
+            number=match.group('number'),
             description=match.group('description').strip(),
-            directive=Directive(match.group('directive')), 
+            directive=Directive(match.group('directive')),
             yaml=yaml.load(concat_yaml)
-            )
-        
+        )
 
     def _parse_version(self, match):
         version = int(match.group('version'))
