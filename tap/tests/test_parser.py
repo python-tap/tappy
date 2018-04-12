@@ -215,7 +215,6 @@ class TestParser(unittest.TestCase):
 
         for line in parser.parse_text(sample):
             lines.append(line)
-            print(line)
 
         self.assertEqual(4, len(lines))
         self.assertEqual(13, lines[0].version)
@@ -261,7 +260,6 @@ class TestParser(unittest.TestCase):
 
         for line in parser.parse_text(sample):
             lines.append(line)
-            print(line)
 
         self.assertEqual(8, len(lines))
         self.assertEqual(13, lines[0].version)
