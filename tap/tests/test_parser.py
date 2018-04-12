@@ -216,10 +216,18 @@ class TestParser(unittest.TestCase):
         for line in parser.parse_text(sample):
             lines.append(line)
 
-        self.assertEqual(4, len(lines))
-        self.assertEqual(13, lines[0].version)
-        self.assertEqual({'test':'sample yaml'}, lines[2].yaml_block)
-        self.assertIsNone(lines[3].yaml_block)
+                
+        try:
+            import yaml, more_itertools
+            self.assertEqual(4, len(lines))
+            self.assertEqual(13, lines[0].version)
+            self.assertEqual({'test':'sample yaml'}, lines[2].yaml_block)
+            self.assertIsNone(lines[3].yaml_block)
+        except ImportError:
+            self.assertEqual(7, len(lines))
+            self.assertEqual(13, lines[0].version)
+            for l in list(range(3,6)):
+                self.assertEqual('unknown', lines[l].category)
 
     def test_parses_yaml_more_complex(self):
         sample = inspect.cleandoc(
@@ -241,9 +249,17 @@ class TestParser(unittest.TestCase):
         for line in parser.parse_text(sample):
             lines.append(line)
 
-        self.assertEqual(3, len(lines))
-        self.assertEqual(13, lines[0].version)
-        self.assertEqual({'message': 'test', 'severity': 'fail', 'data': {'got': ['foo'], 'expect': ['bar']}}, lines[2].yaml_block)
+
+        try:
+            import yaml, more_itertools
+            self.assertEqual(3, len(lines))
+            self.assertEqual(13, lines[0].version)
+            self.assertEqual({'message': 'test', 'severity': 'fail', 'data': {'got': ['foo'], 'expect': ['bar']}}, lines[2].yaml_block)
+        except ImportError:
+            self.assertEqual(12, len(lines))
+            self.assertEqual(13, lines[0].version)
+            for l in list(range(3,12)):
+                self.assertEqual('unknown', lines[l].category)
 
     def test_parses_yaml_no_association(self):
         sample = inspect.cleandoc(
@@ -265,9 +281,8 @@ class TestParser(unittest.TestCase):
         self.assertEqual(13, lines[0].version)
         self.assertIsNone(lines[2].yaml_block)
         self.assertEqual('diagnostic', lines[3].category)
-        self.assertEqual('unknown', lines[4].category)
-        self.assertEqual('unknown', lines[5].category)
-        self.assertEqual('unknown', lines[6].category)
+        for l in list(range(4,7)):
+            self.assertEqual('unknown', lines[l].category)
         
 
     @mock.patch('tap.parser.sys.stdin', StringIO(u'1..2\nok 1 A passing test\nnot ok 2 A failing test\n'))
