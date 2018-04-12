@@ -211,6 +211,7 @@ class TestParser(unittest.TestCase):
                ...
             not ok 2 A failing test""")
         parser = Parser()
+
         lines = []
 
         for line in parser.parse_text(sample):
@@ -223,6 +224,7 @@ class TestParser(unittest.TestCase):
             self.assertEqual(4, len(lines))
             self.assertEqual(13, lines[0].version)
             self.assertEqual(converted_yaml, lines[2].yaml_block)
+            self.assertEqual('test', lines[3].category)
             self.assertIsNone(lines[3].yaml_block)
             # use more_itertools so PEP8 doesn't complain
             p = peekable([1, 2])
@@ -232,6 +234,41 @@ class TestParser(unittest.TestCase):
             self.assertEqual(13, lines[0].version)
             for l in list(range(3, 6)):
                 self.assertEqual('unknown', lines[l].category)
+            self.assertEqual('test', lines[6].category)
+
+    def test_parses_yaml_no_end(self):
+        sample = inspect.cleandoc(
+            u"""TAP version 13
+            1..2
+            ok 1 A passing test
+               ---
+               test: sample yaml
+            not ok 2 A failing test""")
+        parser = Parser()
+
+        lines = []
+
+        for line in parser.parse_text(sample):
+            lines.append(line)
+
+        try:
+            import yaml
+            from more_itertools import peekable
+            converted_yaml = yaml.load(u"""test: sample yaml""")
+            self.assertEqual(4, len(lines))
+            self.assertEqual(13, lines[0].version)
+            self.assertEqual(converted_yaml, lines[2].yaml_block)
+            self.assertEqual('test', lines[3].category)
+            self.assertIsNone(lines[3].yaml_block)
+            # use more_itertools so PEP8 doesn't complain
+            p = peekable([1, 2])
+            self.assertEqual(p.peek(), 1)
+        except ImportError:
+            self.assertEqual(6, len(lines))
+            self.assertEqual(13, lines[0].version)
+            for l in list(range(3, 5)):
+                self.assertEqual('unknown', lines[l].category)
+            self.assertEqual('test', lines[5].category)
 
     def test_parses_yaml_more_complex(self):
         sample = inspect.cleandoc(
@@ -245,8 +282,7 @@ class TestParser(unittest.TestCase):
                  got:
                    - foo
                  expect:
-                   - bar
-               ...""")
+                   - bar""")
         parser = Parser()
         lines = []
 
@@ -271,9 +307,9 @@ class TestParser(unittest.TestCase):
             p = peekable([])
             self.assertRaises(StopIteration, p.peek)
         except ImportError:
-            self.assertEqual(12, len(lines))
+            self.assertEqual(11, len(lines))
             self.assertEqual(13, lines[0].version)
-            for l in list(range(3, 12)):
+            for l in list(range(3, 11)):
                 self.assertEqual('unknown', lines[l].category)
 
     def test_parses_yaml_no_association(self):
@@ -298,6 +334,28 @@ class TestParser(unittest.TestCase):
         self.assertEqual('diagnostic', lines[3].category)
         for l in list(range(4, 7)):
             self.assertEqual('unknown', lines[l].category)
+        self.assertEqual('test', lines[7].category)
+
+    def test_parses_yaml_no_start(self):
+        sample = inspect.cleandoc(
+            u"""TAP version 13
+            1..2
+            ok 1 A passing test
+               test: sample yaml
+               ...
+            not ok 2 A failing test""")
+        parser = Parser()
+        lines = []
+
+        for line in parser.parse_text(sample):
+            lines.append(line)
+
+        self.assertEqual(6, len(lines))
+        self.assertEqual(13, lines[0].version)
+        self.assertIsNone(lines[2].yaml_block)
+        for l in list(range(3, 5)):
+            self.assertEqual('unknown', lines[l].category)
+        self.assertEqual('test', lines[5].category)
 
     @mock.patch('tap.parser.sys.stdin',
                 StringIO(u'1..2\nok 1 A passing test\nnot ok 2 A failing test\n'))
