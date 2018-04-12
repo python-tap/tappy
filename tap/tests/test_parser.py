@@ -358,7 +358,8 @@ class TestParser(unittest.TestCase):
         self.assertEqual('test', lines[5].category)
 
     @mock.patch('tap.parser.sys.stdin',
-                StringIO(u'1..2\nok 1 A passing test\nnot ok 2 A failing test\n'))
+                StringIO(u'1..2\nok 1 A passing test\n\
+                not ok 2 A failing test\n'))
     def test_parses_stdin(self):
         parser = Parser()
         lines = []
