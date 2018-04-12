@@ -221,6 +221,31 @@ class TestParser(unittest.TestCase):
         self.assertEqual(13, lines[0].version)
         self.assertEqual({'test':'sample yaml'}, lines[2].yaml_block)
         self.assertIsNone(lines[3].yaml_block)
+
+    def test_parses_yaml_no_association(self):
+        sample = inspect.cleandoc(
+            """TAP version 13
+            1..2
+            ok 1 A passing test
+            # Diagnostic line
+               ---
+               test: sample yaml
+               ...
+            not ok 2 A failing test""")
+        parser = Parser()
+        lines = []
+
+        for line in parser.parse_text(sample):
+            lines.append(line)
+            print(line)
+
+        self.assertEqual(8, len(lines))
+        self.assertEqual(13, lines[0].version)
+        self.assertIsNone(lines[2].yaml_block)
+        self.assertEqual('diagnostic', lines[3].category)
+        self.assertEqual('unknown', lines[4].category)
+        self.assertEqual('unknown', lines[5].category)
+        self.assertEqual('unknown', lines[6].category)
         
 
     @mock.patch('tap.parser.sys.stdin', StringIO('1..2\nok 1 A passing test\nnot ok 2 A failing test\n'))
