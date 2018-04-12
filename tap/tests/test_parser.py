@@ -203,7 +203,7 @@ class TestParser(unittest.TestCase):
 
     def test_parses_yaml(self):
         sample = inspect.cleandoc(
-            """TAP version 13
+            u"""TAP version 13
             1..2
             ok 1 A passing test
                ---
@@ -223,7 +223,7 @@ class TestParser(unittest.TestCase):
 
     def test_parses_yaml_more_complex(self):
         sample = inspect.cleandoc(
-            """TAP version 13
+            u"""TAP version 13
             1..2
             ok 1 A passing test
                ---
@@ -247,7 +247,7 @@ class TestParser(unittest.TestCase):
 
     def test_parses_yaml_no_association(self):
         sample = inspect.cleandoc(
-            """TAP version 13
+            u"""TAP version 13
             1..2
             ok 1 A passing test
             # Diagnostic line
@@ -270,7 +270,7 @@ class TestParser(unittest.TestCase):
         self.assertEqual('unknown', lines[6].category)
         
 
-    @mock.patch('tap.parser.sys.stdin', StringIO('1..2\nok 1 A passing test\nnot ok 2 A failing test\n'))
+    @mock.patch('tap.parser.sys.stdin', StringIO(u'1..2\nok 1 A passing test\nnot ok 2 A failing test\n'))
     def test_parses_stdin(self):
         parser = Parser()
         lines = []
