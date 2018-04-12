@@ -16,7 +16,7 @@ class Result(Line):
 
     def __init__(
             self, ok, number=None, description='', directive=None,
-            diagnostics=None):
+            diagnostics=None, yaml=None):
         self._ok = ok
         if number:
             self._number = int(number)
@@ -26,6 +26,7 @@ class Result(Line):
         self._description = description
         self.directive = directive
         self.diagnostics = diagnostics
+        self.yaml_block = yaml
 
     @property
     def category(self):

@@ -16,7 +16,8 @@ Sphinx = "*"
 tox = "*"
 twine = "*"
 pytest = "*"
-
+more-itertools = "*"
+pyyaml = "*"
 
 [packages]
 

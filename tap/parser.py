@@ -1,8 +1,20 @@
 # Copyright (c) 2018, Matt Layman and contributors
 
 from io import StringIO
+import itertools
 import re
 import sys
+
+SUPPORTS_PEEKING = False
+try:
+    import more_itertools as mi
+    import yaml
+    SUPPORTS_PEEKING = True
+except ModuleNotFoundError:
+    print("""
+        WARNING: Optional imports not found, TAP 13 output will be ignored. To 
+            parse yaml, ensure `more-itertools` and `pyyaml` modules are installed.
+    """)
 
 from tap.directive import Directive
 from tap.i18n import _
@@ -40,7 +52,13 @@ class Parser(object):
     """, re.VERBOSE)
     version = re.compile(r'^TAP version (?P<version>\d+)$')
 
+    yaml_block_start = re.compile(r'^(?P<indent>\s+)-')
+    yaml_block_end = re.compile(r'^\s+...')
+
     TAP_MINIMUM_DECLARED_VERSION = 13
+
+    def __init__(self):
+        self._try_peeking = False
 
     def parse_file(self, filename):
         """Parse a TAP file to an iterable of tap.line.Line objects.
@@ -72,16 +90,25 @@ class Parser(object):
         Trailing whitespace and newline characters will be automatically
         stripped from the input lines.
         """
-        with fh:
-            for line in fh:
-                yield self.parse_line(line.rstrip())
+        with fh: 
+            first_line = next(fh)
+            first_parsed = self.parse_line(first_line.rstrip())
+            if SUPPORTS_PEEKING and first_parsed.category == 'version' and int(first_parsed.version) == 13: 
+                fh_new = mi.peekable(itertools.chain([first_line], fh))
+                self._try_peeking = True
+            else:
+                fh_new = itertools.chain([first_line], fh)
+            
+            for line in fh_new:
+                    yield self.parse_line(line.rstrip(), fh_new)
 
-    def parse_line(self, text):
+    def parse_line(self, text, fh=None):
         """Parse a line into whatever TAP category it belongs."""
         match = self.ok.match(text)
         if match:
-            return self._parse_result(True, match)
+            return self._parse_result(True, match, fh)
 
+        self._reset_last_result = True
         match = self.not_ok.match(text)
         if match:
             return self._parse_result(False, match)
@@ -114,11 +141,33 @@ class Parser(object):
 
         return Plan(expected_tests, directive)
 
-    def _parse_result(self, ok, match):
+    def _parse_result(self, ok, match, fh=None):
         """Parse a matching result line into a result instance."""
+        peek_match = False
+        if fh is not None and self._try_peeking:
+            peek_match = self.yaml_block_start.match(fh.peek())
+        if not peek_match:
+            return Result(
+                ok, number=match.group('number'), description=match.group('description').strip(),
+                directive=Directive(match.group('directive')))
+        raw_yaml = []
+        indent = peek_match.group('indent')
+        indent_match = re.compile(r'^{}'.format(indent))
+        try:
+            fh.next()
+            while indent_match.match(fh.peek()):
+                raw_yaml.append(fh.next().replace(indent, '', 1))
+                # check for the end and stop adding yaml if we encounter it
+                if self.yaml_block_end.match(fh.peek()):
+                    fh.next()
+                    break
+        except StopIteration:
+            pass
+        concat_yaml = '\n'.join(raw_yaml)
         return Result(
-            ok, match.group('number'), match.group('description').strip(),
-            Directive(match.group('directive')))
+            ok, number=match.group('number'), description=match.group('description').strip(),
+            directive=Directive(match.group('directive')), yaml=yaml.load(concat_yaml))
+        
 
     def _parse_version(self, match):
         version = int(match.group('version'))

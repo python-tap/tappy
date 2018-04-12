@@ -28,6 +28,7 @@ pip-log.txt
 nosetests.xml
 htmlcov
 .cache
+.pytest_cache
 
 # Translations
 .transifex.ini
@@ -38,8 +39,9 @@ htmlcov
 .project
 .pydevproject
 
-# Vim
+# Dev
 *.swp
+.vscode
 
 # TAP
 *.tap

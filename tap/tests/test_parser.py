@@ -1,6 +1,7 @@
 # Copyright (c) 2018, Matt Layman and contributors
 
 import inspect
+from io import StringIO
 import tempfile
 import unittest
 
@@ -196,18 +197,34 @@ class TestParser(unittest.TestCase):
         self.assertEqual('plan', lines[0].category)
         self.assertEqual('test', lines[1].category)
         self.assertTrue(lines[1].ok)
+        self.assertIsNone(lines[1].yaml_block)
         self.assertEqual('test', lines[2].category)
         self.assertFalse(lines[2].ok)
 
-    @mock.patch('tap.parser.sys')
-    def test_parses_stdin(self, mock_sys):
-        mock_sys.stdin.__iter__.return_value = iter([
-            '1..2\n',
-            'ok 1 A passing test\n',
-            'not ok 2 A failing test\n',
-        ])
-        mock_sys.stdin.__enter__.return_value = None
-        mock_sys.stdin.__exit__.return_value = None
+    def test_parses_yaml(self):
+        sample = inspect.cleandoc(
+            """TAP version 13
+            1..2
+            ok 1 A passing test
+               ---
+               test: sample yaml
+               ...
+            not ok 2 A failing test""")
+        parser = Parser()
+        lines = []
+
+        for line in parser.parse_text(sample):
+            lines.append(line)
+            print(line)
+
+        self.assertEqual(4, len(lines))
+        self.assertEqual(13, lines[0].version)
+        self.assertEqual({'test':'sample yaml'}, lines[2].yaml_block)
+        self.assertIsNone(lines[3].yaml_block)
+        
+
+    @mock.patch('tap.parser.sys.stdin', StringIO('1..2\nok 1 A passing test\nnot ok 2 A failing test\n'))
+    def test_parses_stdin(self):
         parser = Parser()
         lines = []
 
