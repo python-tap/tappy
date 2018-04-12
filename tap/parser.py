@@ -5,20 +5,22 @@ import itertools
 import re
 import sys
 
-SUPPORTS_PEEKING = False
+from tap.directive import Directive
+from tap.i18n import _
+from tap.line import Bail, Diagnostic, Plan, Result, Unknown, Version
+
 try:
     import more_itertools as mi
     import yaml
     SUPPORTS_PEEKING = True
 except ImportError:
+    SUPPORTS_PEEKING = False
     print("""
-        WARNING: Optional imports not found, TAP 13 output will be ignored. To 
-            parse yaml, ensure `more-itertools` and `pyyaml` modules are installed.
+        WARNING: Optional imports not found, TAP 13 output will be ignored. To
+            parse yaml, ensure the following modules are installed:
+            * `more-itertools`
+            * `pyyaml`
     """)
-
-from tap.directive import Directive
-from tap.i18n import _
-from tap.line import Bail, Diagnostic, Plan, Result, Unknown, Version
 
 
 class Parser(object):
@@ -90,10 +92,11 @@ class Parser(object):
         Trailing whitespace and newline characters will be automatically
         stripped from the input lines.
         """
-        with fh: 
+        with fh:
             first_line = next(fh)
             first_parsed = self.parse_line(first_line.rstrip())
-            if SUPPORTS_PEEKING and first_parsed.category == 'version' and int(first_parsed.version) == 13: 
+            if SUPPORTS_PEEKING and first_parsed.category == 'version' and \
+                int(first_parsed.version) == 13: 
                 fh_new = mi.peekable(itertools.chain([first_line], fh))
                 self._try_peeking = True
             else:
@@ -148,8 +151,11 @@ class Parser(object):
             peek_match = self.yaml_block_start.match(fh.peek())
         if not peek_match:
             return Result(
-                ok, number=match.group('number'), description=match.group('description').strip(),
-                directive=Directive(match.group('directive')))
+                ok, 
+                number=match.group('number'), 
+                description=match.group('description').strip(),
+                directive=Directive(match.group('directive'))
+                )
         raw_yaml = []
         indent = peek_match.group('indent')
         indent_match = re.compile(r'^{}'.format(indent))
@@ -157,7 +163,7 @@ class Parser(object):
             fh.next()
             while indent_match.match(fh.peek()):
                 raw_yaml.append(fh.next().replace(indent, '', 1))
-                # check for the end and stop adding yaml if we encounter it
+                # check for the end and stop adding yaml if encountered
                 if self.yaml_block_end.match(fh.peek()):
                     fh.next()
                     break
@@ -165,8 +171,12 @@ class Parser(object):
             pass
         concat_yaml = '\n'.join(raw_yaml)
         return Result(
-            ok, number=match.group('number'), description=match.group('description').strip(),
-            directive=Directive(match.group('directive')), yaml=yaml.load(concat_yaml))
+            ok, 
+            number=match.group('number'), 
+            description=match.group('description').strip(),
+            directive=Directive(match.group('directive')), 
+            yaml=yaml.load(concat_yaml)
+            )
         
 
     def _parse_version(self, match):

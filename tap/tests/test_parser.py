@@ -216,17 +216,21 @@ class TestParser(unittest.TestCase):
         for line in parser.parse_text(sample):
             lines.append(line)
 
-                
         try:
-            import yaml, more_itertools
+            import yaml
+            from more_itertools import peekable
+            converted_yaml = yaml.load(u"""test: sample yaml""")
             self.assertEqual(4, len(lines))
             self.assertEqual(13, lines[0].version)
-            self.assertEqual({'test':'sample yaml'}, lines[2].yaml_block)
+            self.assertEqual(converted_yaml, lines[2].yaml_block)
             self.assertIsNone(lines[3].yaml_block)
+            # use more_itertools so PEP8 doesn't complain
+            p = peekable([1, 2])
+            self.assertEqual(p.peek(), 1)
         except ImportError:
             self.assertEqual(7, len(lines))
             self.assertEqual(13, lines[0].version)
-            for l in list(range(3,6)):
+            for l in list(range(3, 6)):
                 self.assertEqual('unknown', lines[l].category)
 
     def test_parses_yaml_more_complex(self):
@@ -249,16 +253,27 @@ class TestParser(unittest.TestCase):
         for line in parser.parse_text(sample):
             lines.append(line)
 
-
         try:
-            import yaml, more_itertools
+            import yaml
+            from more_itertools import peekable
+            converted_yaml = yaml.load(u"""
+               message: test
+               severity: fail
+               data:
+                 got:
+                   - foo
+                 expect:
+                   - bar""")
             self.assertEqual(3, len(lines))
             self.assertEqual(13, lines[0].version)
-            self.assertEqual({'message': 'test', 'severity': 'fail', 'data': {'got': ['foo'], 'expect': ['bar']}}, lines[2].yaml_block)
+            self.assertEqual(converted_yaml, lines[2].yaml_block)
+            # use more_itertools so PEP8 doesn't complain
+            p = peekable([])
+            self.assertRaises(StopIteration, p.peek)
         except ImportError:
             self.assertEqual(12, len(lines))
             self.assertEqual(13, lines[0].version)
-            for l in list(range(3,12)):
+            for l in list(range(3, 12)):
                 self.assertEqual('unknown', lines[l].category)
 
     def test_parses_yaml_no_association(self):
@@ -281,11 +296,11 @@ class TestParser(unittest.TestCase):
         self.assertEqual(13, lines[0].version)
         self.assertIsNone(lines[2].yaml_block)
         self.assertEqual('diagnostic', lines[3].category)
-        for l in list(range(4,7)):
+        for l in list(range(4, 7)):
             self.assertEqual('unknown', lines[l].category)
-        
 
-    @mock.patch('tap.parser.sys.stdin', StringIO(u'1..2\nok 1 A passing test\nnot ok 2 A failing test\n'))
+    @mock.patch('tap.parser.sys.stdin', 
+        StringIO(u'1..2\nok 1 A passing test\nnot ok 2 A failing test\n'))
     def test_parses_stdin(self):
         parser = Parser()
         lines = []
