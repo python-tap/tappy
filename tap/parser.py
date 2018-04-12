@@ -13,7 +13,7 @@ try:
     from more_itertools import peekable
     import yaml
     SUPPORTS_PEEKING = True
-except ImportError:
+except ImportError:  # pragma: no cover
     SUPPORTS_PEEKING = False
     print("""
         WARNING: Optional imports not found, TAP 13 output will be ignored. To
