@@ -10,7 +10,7 @@ try:
     import more_itertools as mi
     import yaml
     SUPPORTS_PEEKING = True
-except ModuleNotFoundError:
+except ImportError:
     print("""
         WARNING: Optional imports not found, TAP 13 output will be ignored. To 
             parse yaml, ensure `more-itertools` and `pyyaml` modules are installed.
