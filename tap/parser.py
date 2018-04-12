@@ -53,7 +53,7 @@ class Parser(object):
     version = re.compile(r'^TAP version (?P<version>\d+)$')
 
     yaml_block_start = re.compile(r'^(?P<indent>\s+)-')
-    yaml_block_end = re.compile(r'^\s+...')
+    yaml_block_end = re.compile(r'^\s+\.\.\.')
 
     TAP_MINIMUM_DECLARED_VERSION = 13
 

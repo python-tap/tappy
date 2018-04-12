@@ -222,6 +222,30 @@ class TestParser(unittest.TestCase):
         self.assertEqual({'test':'sample yaml'}, lines[2].yaml_block)
         self.assertIsNone(lines[3].yaml_block)
 
+    def test_parses_yaml_more_complex(self):
+        sample = inspect.cleandoc(
+            """TAP version 13
+            1..2
+            ok 1 A passing test
+               ---
+               message: test
+               severity: fail
+               data:
+                 got:
+                   - foo
+                 expect:
+                   - bar
+               ...""")
+        parser = Parser()
+        lines = []
+
+        for line in parser.parse_text(sample):
+            lines.append(line)
+
+        self.assertEqual(3, len(lines))
+        self.assertEqual(13, lines[0].version)
+        self.assertEqual({'message': 'test', 'severity': 'fail', 'data': {'got': ['foo'], 'expect': ['bar']}}, lines[2].yaml_block)
+
     def test_parses_yaml_no_association(self):
         sample = inspect.cleandoc(
             """TAP version 13
