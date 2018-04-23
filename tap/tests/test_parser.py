@@ -296,7 +296,7 @@ class TestParser(unittest.TestCase):
 
         try:
             import yaml
-            from more_itertools import peekable
+            from more_itertools import peekable  # noqa
             converted_yaml = yaml.load(u"""
                message: test
                severity: fail
@@ -308,9 +308,6 @@ class TestParser(unittest.TestCase):
             self.assertEqual(3, len(lines))
             self.assertEqual(13, lines[0].version)
             self.assertEqual(converted_yaml, lines[2].yaml_block)
-            # use more_itertools so PEP8 doesn't complain
-            p = peekable([])
-            self.assertRaises(StopIteration, p.peek)
         except ImportError:
             self.assertEqual(11, len(lines))
             self.assertEqual(13, lines[0].version)
