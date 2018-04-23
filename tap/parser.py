@@ -100,7 +100,7 @@ class Parser(object):
                     fh_new = peekable(itertools.chain([first_line], fh))
                     self._try_peeking = True
                 else:  # pragma no cover
-                    print(u"""
+                    print("""
 WARNING: Optional imports not found, TAP 13 output will be
     ignored. To parse yaml, see requirements in docs:
     https://tappy.readthedocs.io/en/latest/consumers.html#tap-v13""")
