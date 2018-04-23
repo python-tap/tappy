@@ -2,7 +2,7 @@
 
 from contextlib import contextmanager
 import inspect
-from io import StringIO
+from io import BytesIO, StringIO
 import sys
 import tempfile
 import unittest
@@ -17,7 +17,10 @@ from tap.parser import Parser
 
 @contextmanager
 def captured_output():
-    new_out, new_err = StringIO(), StringIO()
+    if sys.version_info[0] < 3:
+        new_out, new_err = BytesIO(), BytesIO()
+    else:
+        new_out, new_err = StringIO(), StringIO()
     old_out, old_err = sys.stdout, sys.stderr
     try:
         sys.stdout, sys.stderr = new_out, new_err
@@ -367,7 +370,7 @@ class TestParser(unittest.TestCase):
             ok 1 A passing test
                ---
                test: sample yaml
-            \tfail: tabs are not allowed!
+               \tfail: tabs are not allowed!
                ...
             not ok 2 A failing test""")
         yaml_err = inspect.cleandoc(
@@ -388,9 +391,9 @@ WARNING: Optional imports not found, TAP 13 output will be
             self.assertEqual(4, len(lines))
             self.assertEqual(13, lines[0].version)
             with captured_output() as (out, _):
-                self.assertEqual(None, lines[2].yaml_block)
+                self.assertIsNone(lines[2].yaml_block)
             self.assertEqual(
-                "Error parsing yaml block. Check formatting.",
+                'Error parsing yaml block. Check formatting.',
                 out.getvalue().strip())
             self.assertEqual('test', lines[3].category)
             self.assertIsNone(lines[3].yaml_block)
@@ -400,7 +403,8 @@ WARNING: Optional imports not found, TAP 13 output will be
             for l in list(range(3, 7)):
                 self.assertEqual('unknown', lines[l].category)
             self.assertEqual('test', lines[7].category)
-            self.assertEqual(yaml_err, parse_out.getvalue().strip())
+            self.assertEqual(
+                yaml_err, parse_out.getvalue().strip())
 
     def test_parse_empty_file(self):
         sample = inspect.cleandoc(
