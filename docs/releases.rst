@@ -1,6 +1,13 @@
 Releases
 ========
 
+Version 2.3
+-----------
+
+* Make tappy version 13 compliant by adding
+  support for parsing yaml blocks.
+
+
 Version 2.2, Released January 7, 2018
 -------------------------------------
 
