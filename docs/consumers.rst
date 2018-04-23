@@ -112,6 +112,23 @@ The API specifics are listed below.
 .. autoclass:: tap.parser.Parser
    :members:
 
+TAP v13
+~~~~~~~
+The specification for version 13 adds support for `yaml blocks <https://testanything.org/tap-version-13-specification.html#yaml-blocks>`_
+to provide additional information about the preceding test. In order to consume
+yaml blocks, ``tappy`` requires `pyyaml <https://pypi.org/project/PyYAML/>`_ and
+`more-itertools <https://pypi.org/project/more-itertools/>`_ to be installed.
+
+These dependencies are optional. If they are not installed, TAP output will still
+be consumed, but any yaml blocks will be parsed as :class:`tap.line.Unknown`. If a 
+:class:`tap.line.Result` object has an associated yaml block, :attr:`~tap.line.Result.yaml_block`
+will return the block converted to a `dict`. Otherwise, it will return `None`.
+
+``tappy`` provides a strict interpretation of the specification. A yaml block will
+only be associated with a result if it immediately follows that result. Any 
+:class:`diagnostic <tap.line.Diagnostic>` between a :class:`result <tap.line.Result>` and a yaml
+block will result in the block lines being parsed as :class:`tap.line.Unknown`.
+
 Line Categories
 ~~~~~~~~~~~~~~~
 
