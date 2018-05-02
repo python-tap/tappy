@@ -36,6 +36,17 @@ class TAPTestResult(TextTestResult):
             self._cls_name(test), self._description(test),
             diagnostics=diagnostics)
 
+    def addSubTest(self, test, subtest, err):
+        super(TAPTestResult, self).addSubTest(test, subtest, err)
+        if err is not None:
+            diagnostics = formatter.format_exception(err)
+            self.tracker.add_not_ok(
+                self._cls_name(test), self._description(subtest),
+                diagnostics=diagnostics)
+        else:
+            self.tracker.add_ok(
+                self._cls_name(test), self._description(subtest))
+
     def addSuccess(self, test):
         super(TAPTestResult, self).addSuccess(test)
         self.tracker.add_ok(self._cls_name(test), self._description(test))
