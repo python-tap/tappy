@@ -1,6 +1,12 @@
 Releases
 ========
 
+Version 2.3, To Be Released
+---------------------------
+
+* `unittest.expectedFailure` now uses a TODO directive to better align
+  with the specification.
+
 Version 2.2, Released January 7, 2018
 -------------------------------------
 
