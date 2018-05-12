@@ -62,11 +62,13 @@ class TestTAPTestResult(TestCase):
         result.addExpectedFailure(FakeTestCase(), exc)
         line = result.tracker._test_cases['FakeTestCase'][0]
         self.assertFalse(line.ok)
-        self.assertEqual(line.directive.text, _('(expected failure)'))
+        self.assertEqual(
+            line.directive.text, 'TODO {}'.format(_('(expected failure)')))
 
     def test_adds_unexpected_success(self):
         result = self._make_one()
         result.addUnexpectedSuccess(FakeTestCase())
         line = result.tracker._test_cases['FakeTestCase'][0]
         self.assertTrue(line.ok)
-        self.assertEqual(line.directive.text, _('(unexpected success)'))
+        self.assertEqual(
+            line.directive.text, 'TODO {}'.format(_('(unexpected success)')))

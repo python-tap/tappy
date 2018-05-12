@@ -50,12 +50,12 @@ class TAPTestResult(TextTestResult):
         diagnostics = formatter.format_exception(err)
         self.tracker.add_not_ok(
             self._cls_name(test), self._description(test),
-            _('(expected failure)'), diagnostics=diagnostics)
+            'TODO {}'.format(_('(expected failure)')), diagnostics=diagnostics)
 
     def addUnexpectedSuccess(self, test):
         super(TAPTestResult, self).addUnexpectedSuccess(test)
         self.tracker.add_ok(self._cls_name(test), self._description(test),
-                            _('(unexpected success)'))
+                            'TODO {}'.format(_('(unexpected success)')))
 
     def _cls_name(self, test):
         return test.__class__.__name__
