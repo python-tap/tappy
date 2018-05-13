@@ -31,6 +31,16 @@ It is continuously tested on Linux, OS X, and Windows.
 
    $ pip install tap.py
 
+TAP version 13 brings support for YAML blocks
+for `YAML blocks <http://testanything.org/tap-version-13-specification.html#yaml-blocks>`_
+associated with test results.
+To work with version 13, install the optional dependencies.
+Learn more about YAML support in the :ref:`tap-version-13` section.
+
+.. code-block:: console
+
+   $ pip install tap.py[yaml]
+
 Documentation
 -------------
 

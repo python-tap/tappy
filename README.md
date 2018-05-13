@@ -53,6 +53,17 @@ you only need to install `nose-tap`.
 $ pip install nose-tap
 ```
 
+TAP version 13 brings support
+for [YAML blocks](http://testanything.org/tap-version-13-specification.html#yaml-blocks)
+associated with test results.
+To work with version 13, install the optional dependencies.
+Learn more about YAML support
+in the [TAP version 13](http://tappy.readthedocs.io/en/latest/consumers.html#tap-version-13) section.
+
+```bash
+$ pip install tap.py[yaml]
+```
+
 Motivation
 ----------
 
