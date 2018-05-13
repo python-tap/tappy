@@ -407,14 +407,15 @@ WARNING: Optional imports not found, TAP 13 output will be
                 yaml_err, parse_out.getvalue().strip())
 
     def test_parse_empty_file(self):
-        with tempfile.NamedTemporaryFile() as temp:
-            parser = Parser()
-            lines = []
+        temp = tempfile.NamedTemporaryFile(delete=False)
+        temp.close()
+        parser = Parser()
+        lines = []
 
-            for line in parser.parse_file(temp.name):
-                lines.append(line)
+        for line in parser.parse_file(temp.name):
+            lines.append(line)
 
-            self.assertEqual(0, len(lines))
+        self.assertEqual(0, len(lines))
 
     @mock.patch('tap.parser.sys.stdin',
                 StringIO(u"""1..2
