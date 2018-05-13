@@ -1,6 +1,7 @@
 # Copyright (c) 2018, Matt Layman and contributors
 
 import inspect
+from io import StringIO
 import os
 import tempfile
 import unittest
@@ -116,8 +117,8 @@ class TestLoader(TestCase):
         self.assertEqual(
             'Skipping this test file.', suite._tests[0]._line.description)
 
-    @mock.patch('tap.parser.sys')
-    def test_loads_from_stream(self, mock_sys):
+    @mock.patch('tap.parser.sys.stdin', StringIO(u''))
+    def test_loads_from_stream(self):
         loader = Loader()
         suite = loader.load_suite_from_stdin()
         self.assertTrue(isinstance(suite, unittest.TestSuite))

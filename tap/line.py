@@ -1,4 +1,9 @@
 # Copyright (c) 2018, Matt Layman and contributors
+try:
+    import yaml
+    LOAD_YAML = True
+except ImportError:  # pragma: no cover
+    LOAD_YAML = False
 
 
 class Line(object):
@@ -16,7 +21,7 @@ class Result(Line):
 
     def __init__(
             self, ok, number=None, description='', directive=None,
-            diagnostics=None):
+            diagnostics=None, raw_yaml_block=None):
         self._ok = ok
         if number:
             self._number = int(number)
@@ -26,6 +31,7 @@ class Result(Line):
         self._description = description
         self.directive = directive
         self.diagnostics = diagnostics
+        self._yaml_block = raw_yaml_block
 
     @property
     def category(self):
@@ -68,6 +74,25 @@ class Result(Line):
         :rtype: bool
         """
         return self.directive.todo
+
+    @property
+    def yaml_block(self):
+        """Lazy load a yaml_block.
+
+        If yaml support is not available,
+        there is an error in parsing the yaml block,
+        or no yaml is associated with this result,
+        ``None`` will be returned.
+
+        :rtype: dict
+        """
+        if LOAD_YAML and self._yaml_block is not None:
+            try:
+                yaml_dict = yaml.load(self._yaml_block)
+                return yaml_dict
+            except yaml.error.YAMLError:
+                print('Error parsing yaml block. Check formatting.')
+        return None
 
     def __str__(self):
         is_not = ''

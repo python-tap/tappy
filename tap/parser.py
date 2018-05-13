@@ -1,12 +1,20 @@
 # Copyright (c) 2018, Matt Layman and contributors
 
 from io import StringIO
+import itertools
 import re
 import sys
 
 from tap.directive import Directive
 from tap.i18n import _
 from tap.line import Bail, Diagnostic, Plan, Result, Unknown, Version
+
+try:
+    from more_itertools import peekable
+    import yaml  # noqa
+    ENABLE_VERSION_13 = True
+except ImportError:  # pragma: no cover
+    ENABLE_VERSION_13 = False
 
 
 class Parser(object):
@@ -40,7 +48,13 @@ class Parser(object):
     """, re.VERBOSE)
     version = re.compile(r'^TAP version (?P<version>\d+)$')
 
+    yaml_block_start = re.compile(r'^(?P<indent>\s+)-')
+    yaml_block_end = re.compile(r'^\s+\.\.\.')
+
     TAP_MINIMUM_DECLARED_VERSION = 13
+
+    def __init__(self):
+        self._try_peeking = False
 
     def parse_file(self, filename):
         """Parse a TAP file to an iterable of tap.line.Line objects.
@@ -73,18 +87,35 @@ class Parser(object):
         stripped from the input lines.
         """
         with fh:
-            for line in fh:
-                yield self.parse_line(line.rstrip())
+            try:
+                first_line = next(fh)
+            except StopIteration:
+                return
+            first_parsed = self.parse_line(first_line.rstrip())
+            fh_new = itertools.chain([first_line], fh)
+            if first_parsed.category == 'version' and \
+                    first_parsed.version >= 13:
+                if ENABLE_VERSION_13:
+                    fh_new = peekable(itertools.chain([first_line], fh))
+                    self._try_peeking = True
+                else:  # pragma no cover
+                    print("""
+WARNING: Optional imports not found, TAP 13 output will be
+    ignored. To parse yaml, see requirements in docs:
+    https://tappy.readthedocs.io/en/latest/consumers.html#tap-version-13""")
 
-    def parse_line(self, text):
+            for line in fh_new:
+                yield self.parse_line(line.rstrip(), fh_new)
+
+    def parse_line(self, text, fh=None):
         """Parse a line into whatever TAP category it belongs."""
         match = self.ok.match(text)
         if match:
-            return self._parse_result(True, match)
+            return self._parse_result(True, match, fh)
 
         match = self.not_ok.match(text)
         if match:
-            return self._parse_result(False, match)
+            return self._parse_result(False, match, fh)
 
         if self.diagnostic.match(text):
             return Diagnostic(text)
@@ -114,11 +145,46 @@ class Parser(object):
 
         return Plan(expected_tests, directive)
 
-    def _parse_result(self, ok, match):
+    def _parse_result(self, ok, match, fh=None):
         """Parse a matching result line into a result instance."""
+        peek_match = None
+        try:
+            if fh is not None and self._try_peeking:
+                peek_match = self.yaml_block_start.match(fh.peek())
+        except StopIteration:
+            pass
+        if peek_match is None:
+            return Result(
+                ok,
+                number=match.group('number'),
+                description=match.group('description').strip(),
+                directive=Directive(match.group('directive'))
+            )
+        indent = peek_match.group('indent')
+        concat_yaml = self._extract_yaml_block(indent, fh)
         return Result(
-            ok, match.group('number'), match.group('description').strip(),
-            Directive(match.group('directive')))
+            ok,
+            number=match.group('number'),
+            description=match.group('description').strip(),
+            directive=Directive(match.group('directive')),
+            raw_yaml_block=concat_yaml
+        )
+
+    def _extract_yaml_block(self, indent, fh):
+        """Extract a raw yaml block from a file handler"""
+        raw_yaml = []
+        indent_match = re.compile(r'^{}'.format(indent))
+        try:
+            fh.next()
+            while indent_match.match(fh.peek()):
+                raw_yaml.append(fh.next().replace(indent, '', 1))
+                # check for the end and stop adding yaml if encountered
+                if self.yaml_block_end.match(fh.peek()):
+                    fh.next()
+                    break
+        except StopIteration:
+            pass
+        return '\n'.join(raw_yaml)
 
     def _parse_version(self, match):
         version = int(match.group('version'))

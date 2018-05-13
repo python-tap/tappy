@@ -4,6 +4,8 @@ Releases
 Version 2.3, To Be Released
 ---------------------------
 
+* Make tappy version 13 compliant by adding
+  support for parsing yaml blocks.
 * `unittest.expectedFailure` now uses a TODO directive to better align
   with the specification.
 

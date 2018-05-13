@@ -26,6 +26,9 @@ matrix:
         - python3 -m venv venv
         - source venv/bin/activate
     - os: linux
+      python: 3.6
+      env: TOX_ENV=with_optional
+    - os: linux
       python: 2.7
       env: TOX_ENV=runner
     - os: linux
