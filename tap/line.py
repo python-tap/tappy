@@ -77,10 +77,12 @@ class Result(Line):
 
     @property
     def yaml_block(self):
-        """Lazy load a yaml_block. If yaml support is not
-        available, there is an error in parsing the yaml
-        block, or no yaml is associate with this result,
-        None will be returned.
+        """Lazy load a yaml_block.
+
+        If yaml support is not available,
+        there is an error in parsing the yaml block,
+        or no yaml is associated with this result,
+        ``None`` will be returned.
 
         :rtype: dict
         """

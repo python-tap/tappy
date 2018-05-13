@@ -11,7 +11,7 @@ from tap.line import Bail, Diagnostic, Plan, Result, Unknown, Version
 
 try:
     from more_itertools import peekable
-    import yaml     # noqa
+    import yaml  # noqa
     ENABLE_VERSION_13 = True
 except ImportError:  # pragma: no cover
     ENABLE_VERSION_13 = False
@@ -55,7 +55,6 @@ class Parser(object):
 
     def __init__(self):
         self._try_peeking = False
-        self._show_v13_warning = True
 
     def parse_file(self, filename):
         """Parse a TAP file to an iterable of tap.line.Line objects.
@@ -103,7 +102,7 @@ class Parser(object):
                     print("""
 WARNING: Optional imports not found, TAP 13 output will be
     ignored. To parse yaml, see requirements in docs:
-    https://tappy.readthedocs.io/en/latest/consumers.html#tap-v13""")
+    https://tappy.readthedocs.io/en/latest/consumers.html#tap-version-13""")
 
             for line in fh_new:
                 yield self.parse_line(line.rstrip(), fh_new)

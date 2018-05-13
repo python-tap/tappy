@@ -377,7 +377,7 @@ class TestParser(unittest.TestCase):
             u"""
 WARNING: Optional imports not found, TAP 13 output will be
     ignored. To parse yaml, see requirements in docs:
-    https://tappy.readthedocs.io/en/latest/consumers.html#tap-v13""")
+    https://tappy.readthedocs.io/en/latest/consumers.html#tap-version-13""")
         parser = Parser()
         lines = []
 
@@ -407,18 +407,14 @@ WARNING: Optional imports not found, TAP 13 output will be
                 yaml_err, parse_out.getvalue().strip())
 
     def test_parse_empty_file(self):
-        sample = inspect.cleandoc(
-            """""")
-        temp = tempfile.NamedTemporaryFile(delete=False)
-        temp.write(sample.encode('utf-8'))
-        temp.close()
-        parser = Parser()
-        lines = []
+        with tempfile.NamedTemporaryFile() as temp:
+            parser = Parser()
+            lines = []
 
-        for line in parser.parse_file(temp.name):
-            lines.append(line)
+            for line in parser.parse_file(temp.name):
+                lines.append(line)
 
-        self.assertEqual(0, len(lines))
+            self.assertEqual(0, len(lines))
 
     @mock.patch('tap.parser.sys.stdin',
                 StringIO(u"""1..2
