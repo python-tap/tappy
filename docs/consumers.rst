@@ -112,10 +112,12 @@ The API specifics are listed below.
 .. autoclass:: tap.parser.Parser
    :members:
 
+.. _tap-version-13:
+
 TAP version 13
 ~~~~~~~~~~~~~~
 
-The specification for version 13 adds support for `yaml blocks <https://testanything.org/tap-version-13-specification.html#yaml-blocks>`_
+The specification for TAP version 13 adds support for `yaml blocks <https://testanything.org/tap-version-13-specification.html#yaml-blocks>`_
 to provide additional information about the preceding test. In order to consume
 yaml blocks, ``tappy`` requires `pyyaml <https://pypi.org/project/PyYAML/>`_ and
 `more-itertools <https://pypi.org/project/more-itertools/>`_ to be installed.

@@ -62,6 +62,12 @@ if __name__ == '__main__':
         zip_safe=False,
         platforms='any',
         install_requires=[],
+        extras_require={
+            'yaml': [
+                'more-itertools',
+                'PyYAML',
+            ],
+        },
         classifiers=[
             'Development Status :: 5 - Production/Stable',
             'Environment :: Console',
