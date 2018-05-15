@@ -1,8 +1,8 @@
 Releases
 ========
 
-Version 2.3, To Be Released
----------------------------
+Version 2.3, Released May 15, 2018
+----------------------------------
 
 * Add optional method to install tappy for YAML support
   with ``pip install tap.py[yaml]``.
