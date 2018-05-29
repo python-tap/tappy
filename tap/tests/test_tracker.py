@@ -8,6 +8,7 @@ try:
 except ImportError:
     from io import StringIO
 
+from unittest.mock import patch
 from tap.i18n import _
 from tap.tests import TestCase
 from tap.tracker import Tracker
@@ -87,7 +88,8 @@ class TestTracker(TestCase):
         self.assertTrue('Look ma' in report)
         self.assertFalse('1..' in report)
 
-    def test_combined_results_in_one_file(self):
+    @patch('tap.tracker.ENABLE_VERSION_13', False)
+    def test_combined_results_in_one_file_tappy_version12(self):
         outdir = tempfile.mkdtemp()
         tracker = Tracker(outdir=outdir, combined=True)
         tracker.add_ok('FakeTestCase', 'YESSS!')
@@ -103,6 +105,34 @@ class TestTracker(TestCase):
             report = f.read()
         expected = inspect.cleandoc(
             """{header_1}
+            ok 1 YESSS!
+            {header_2}
+            ok 2 GOAAL!
+            1..2
+            """.format(
+                header_1=self._make_header('FakeTestCase'),
+                header_2=self._make_header('DifferentFakeTestCase')))
+        self.assertEqual(report.strip(), expected)
+
+    @patch('tap.tracker.ENABLE_VERSION_13', True)
+    def test_combined_results_in_one_file_tappy_version13(self):
+        outdir = tempfile.mkdtemp()
+        tracker = Tracker(outdir=outdir, combined=True)
+        tracker.add_ok('FakeTestCase', 'YESSS!')
+        tracker.add_ok('DifferentFakeTestCase', 'GOAAL!')
+
+        tracker.generate_tap_reports()
+
+        self.assertFalse(
+            os.path.exists(os.path.join(outdir, 'FakeTestCase.tap')))
+        self.assertFalse(
+            os.path.exists(os.path.join(outdir, 'DifferentFakeTestCase.tap')))
+        with open(os.path.join(outdir, 'testresults.tap'), 'r') as f:
+            report = f.read()
+        expected = inspect.cleandoc(
+            """
+            TAP version 13
+            {header_1}
             ok 1 YESSS!
             {header_2}
             ok 2 GOAAL!

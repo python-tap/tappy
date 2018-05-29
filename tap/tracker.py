@@ -9,6 +9,13 @@ from tap.directive import Directive
 from tap.i18n import _
 from tap.line import Result
 
+try:
+    import more_itertools  # noqa
+    import yaml  # noqa
+    ENABLE_VERSION_13 = True
+except ImportError:  # pragma: no cover
+    ENABLE_VERSION_13 = False
+
 
 class Tracker(object):
 
@@ -118,6 +125,7 @@ class Tracker(object):
             if self.outdir:
                 combined_file = os.path.join(self.outdir, combined_file)
             with open(combined_file, 'w') as out_file:
+                self._write_tappy_version(out_file)
                 for test_case in self.combined_test_cases_seen:
                     self.generate_tap_report(
                         test_case, self._test_cases[test_case], out_file)
@@ -126,6 +134,7 @@ class Tracker(object):
         else:
             for test_case, tap_lines in self._test_cases.items():
                 with open(self._get_tap_file_path(test_case), 'w') as out_file:
+                    self._write_tappy_version(out_file)
                     self.generate_tap_report(test_case, tap_lines, out_file)
 
     def generate_tap_report(self, test_case, tap_lines, out_file):
@@ -138,6 +147,14 @@ class Tracker(object):
         # all the test cases complete.
         if not self.combined:
             print('1..{0}'.format(len(tap_lines)), file=out_file)
+
+    def _write_tappy_version(self, filename):
+        """
+        Writes a version header row if Version 13 of Tappy is enabled via
+        more_itertools and yaml libraries
+        """
+        if ENABLE_VERSION_13:
+            print('TAP version 13', file=filename)
 
     def _write_test_case_header(self, test_case, stream):
         print(_('# TAP results for {test_case}').format(
