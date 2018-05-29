@@ -8,7 +8,11 @@ try:
 except ImportError:
     from io import StringIO
 
-from unittest.mock import patch
+try:
+    from unittest import mock
+except ImportError:
+    import mock
+
 from tap.i18n import _
 from tap.tests import TestCase
 from tap.tracker import Tracker
@@ -88,7 +92,7 @@ class TestTracker(TestCase):
         self.assertTrue('Look ma' in report)
         self.assertFalse('1..' in report)
 
-    @patch('tap.tracker.ENABLE_VERSION_13', False)
+    @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
     def test_combined_results_in_one_file_tappy_version12(self):
         outdir = tempfile.mkdtemp()
         tracker = Tracker(outdir=outdir, combined=True)
@@ -114,7 +118,7 @@ class TestTracker(TestCase):
                 header_2=self._make_header('DifferentFakeTestCase')))
         self.assertEqual(report.strip(), expected)
 
-    @patch('tap.tracker.ENABLE_VERSION_13', True)
+    @mock.patch('tap.tracker.ENABLE_VERSION_13', True)
     def test_combined_results_in_one_file_tappy_version13(self):
         outdir = tempfile.mkdtemp()
         tracker = Tracker(outdir=outdir, combined=True)
