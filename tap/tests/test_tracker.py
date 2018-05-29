@@ -8,6 +8,11 @@ try:
 except ImportError:
     from io import StringIO
 
+try:
+    from unittest import mock
+except ImportError:
+    import mock
+
 from tap.i18n import _
 from tap.tests import TestCase
 from tap.tracker import Tracker
@@ -87,7 +92,8 @@ class TestTracker(TestCase):
         self.assertTrue('Look ma' in report)
         self.assertFalse('1..' in report)
 
-    def test_combined_results_in_one_file(self):
+    @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
+    def test_combined_results_in_one_file_tap_version_12(self):
         outdir = tempfile.mkdtemp()
         tracker = Tracker(outdir=outdir, combined=True)
         tracker.add_ok('FakeTestCase', 'YESSS!')
@@ -112,6 +118,34 @@ class TestTracker(TestCase):
                 header_2=self._make_header('DifferentFakeTestCase')))
         self.assertEqual(report.strip(), expected)
 
+    @mock.patch('tap.tracker.ENABLE_VERSION_13', True)
+    def test_combined_results_in_one_file_tap_version_13(self):
+        outdir = tempfile.mkdtemp()
+        tracker = Tracker(outdir=outdir, combined=True)
+        tracker.add_ok('FakeTestCase', 'YESSS!')
+        tracker.add_ok('DifferentFakeTestCase', 'GOAAL!')
+
+        tracker.generate_tap_reports()
+
+        self.assertFalse(
+            os.path.exists(os.path.join(outdir, 'FakeTestCase.tap')))
+        self.assertFalse(
+            os.path.exists(os.path.join(outdir, 'DifferentFakeTestCase.tap')))
+        with open(os.path.join(outdir, 'testresults.tap'), 'r') as f:
+            report = f.read()
+        expected = inspect.cleandoc(
+            """
+            TAP version 13
+            {header_1}
+            ok 1 YESSS!
+            {header_2}
+            ok 2 GOAAL!
+            1..2
+            """.format(
+                header_1=self._make_header('FakeTestCase'),
+                header_2=self._make_header('DifferentFakeTestCase')))
+        self.assertEqual(report.strip(), expected)
+
     def test_tracker_does_not_stream_by_default(self):
         tracker = Tracker()
         self.assertFalse(tracker.streaming)
@@ -120,6 +154,7 @@ class TestTracker(TestCase):
         tracker = Tracker()
         self.assertTrue(tracker.stream is None)
 
+    @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
     def test_add_ok_writes_to_stream_while_streaming(self):
         stream = StringIO()
         tracker = Tracker(streaming=True, stream=stream)
@@ -137,6 +172,7 @@ class TestTracker(TestCase):
                 header_2=self._make_header('AnotherTestCase')))
         self.assertEqual(stream.getvalue().strip(), expected)
 
+    @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
     def test_add_not_ok_writes_to_stream_while_streaming(self):
         stream = StringIO()
         tracker = Tracker(streaming=True, stream=stream)
@@ -150,6 +186,7 @@ class TestTracker(TestCase):
                 header=self._make_header('FakeTestCase')))
         self.assertEqual(stream.getvalue().strip(), expected)
 
+    @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
     def test_add_skip_writes_to_stream_while_streaming(self):
         stream = StringIO()
         tracker = Tracker(streaming=True, stream=stream)
@@ -174,6 +211,7 @@ class TestTracker(TestCase):
         self.assertFalse(
             os.path.exists(os.path.join(outdir, 'FakeTestCase.tap')))
 
+    @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
     def test_streaming_writes_plan(self):
         stream = StringIO()
         tracker = Tracker(streaming=True, stream=stream)
@@ -182,6 +220,22 @@ class TestTracker(TestCase):
         tracker.generate_tap_reports()
 
         self.assertEqual(stream.getvalue(), '1..42\n')
+
+    @mock.patch('tap.tracker.ENABLE_VERSION_13', True)
+    def test_streaming_writes_tap_version_13(self):
+        stream = StringIO()
+        tracker = Tracker(streaming=True, stream=stream)
+
+        tracker.add_skip('FakeTestCase', 'YESSS!', 'a reason')
+
+        expected = inspect.cleandoc(
+            """
+            TAP version 13
+            {header}
+            ok 1 YESSS! # SKIP a reason
+            """.format(
+                header=self._make_header('FakeTestCase')))
+        self.assertEqual(stream.getvalue().strip(), expected)
 
     def test_get_default_tap_file_path(self):
         tracker = Tracker()
@@ -208,6 +262,7 @@ class TestTracker(TestCase):
         tracker = Tracker(header=False)
         self.assertFalse(tracker.header)
 
+    @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
     def test_does_not_write_header(self):
         stream = StringIO()
         tracker = Tracker(streaming=True, stream=stream, header=False)
@@ -215,5 +270,7 @@ class TestTracker(TestCase):
         tracker.add_skip('FakeTestCase', 'YESSS!', 'a reason')
 
         expected = inspect.cleandoc(
-            """ok 1 YESSS! # SKIP a reason""")
+            """
+            ok 1 YESSS! # SKIP a reason
+            """)
         self.assertEqual(stream.getvalue().strip(), expected)
