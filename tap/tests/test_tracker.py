@@ -271,7 +271,6 @@ class TestTracker(TestCase):
 
         expected = inspect.cleandoc(
             """
-            TAP version 13
             ok 1 YESSS! # SKIP a reason
             """)
         self.assertEqual(stream.getvalue().strip(), expected)
