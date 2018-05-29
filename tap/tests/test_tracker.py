@@ -262,6 +262,7 @@ class TestTracker(TestCase):
         tracker = Tracker(header=False)
         self.assertFalse(tracker.header)
 
+    @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
     def test_does_not_write_header(self):
         stream = StringIO()
         tracker = Tracker(streaming=True, stream=stream, header=False)
