@@ -1,9 +1,12 @@
 Releases
 ========
 
-Version 2.4, In Development May 15, 2018
-----------------------------------------
-* Add support for producing version 13 TAP output (streaming and file reports)
+Version 2.4, Released May 29, 2018
+----------------------------------
+
+* Add support for producing TAP version 13 output
+  to streaming and file reports
+  by including the ``TAP version 13`` line.
 
 Version 2.3, Released May 15, 2018
 ----------------------------------
