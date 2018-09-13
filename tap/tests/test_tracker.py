@@ -221,6 +221,14 @@ class TestTracker(TestCase):
 
         self.assertEqual(stream.getvalue(), '1..42\n')
 
+    @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
+    def test_streaming_writes_plan_first(self):
+        stream = StringIO()
+        tracker = Tracker(streaming=True, stream=stream)
+        tracker.set_plan(123)
+        tracker.generate_tap_reports()
+        self.assertEqual(stream.getvalue(), '1..123\n')
+
     @mock.patch('tap.tracker.ENABLE_VERSION_13', True)
     def test_streaming_writes_tap_version_13(self):
         stream = StringIO()
