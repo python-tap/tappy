@@ -158,7 +158,9 @@ class Tracker(object):
                         test_case, self._test_cases[test_case], out_file)
                 if self.plan is None:
                     print(
-                        '1..{0}'.format(self.combined_line_number), file=out_file)
+                        '1..{0}'.format(self.combined_line_number),
+                        file=out_file,
+                    )
         else:
             for test_case, tap_lines in self._test_cases.items():
                 with open(self._get_tap_file_path(test_case), 'w') as out_file:
