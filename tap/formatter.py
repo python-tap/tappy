@@ -10,7 +10,7 @@ def format_exception(exception):
     # The lines returned from format_exception do not strictly contain
     # one line per element in the list (i.e. some elements have new
     # line characters in the middle). Normalize that oddity.
-    lines = ''.join(exception_lines).splitlines(True)
+    lines = "".join(exception_lines).splitlines(True)
     return format_as_diagnostics(lines)
 
 
@@ -19,4 +19,4 @@ def format_as_diagnostics(lines):
 
     This function makes no assumptions about the line endings.
     """
-    return ''.join(['# ' + line for line in lines])
+    return "".join(["# " + line for line in lines])

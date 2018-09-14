@@ -1,6 +1,7 @@
 # Copyright (c) 2018, Matt Layman and contributors
 try:
     import yaml
+
     LOAD_YAML = True
 except ImportError:  # pragma: no cover
     LOAD_YAML = False
@@ -11,6 +12,7 @@ class Line(object):
 
     TAP is a line based protocol. Thus, the most primitive type is a line.
     """
+
     @property
     def category(self):
         raise NotImplementedError
@@ -20,8 +22,14 @@ class Result(Line):
     """Information about an individual test line."""
 
     def __init__(
-            self, ok, number=None, description='', directive=None,
-            diagnostics=None, raw_yaml_block=None):
+        self,
+        ok,
+        number=None,
+        description="",
+        directive=None,
+        diagnostics=None,
+        raw_yaml_block=None,
+    ):
         self._ok = ok
         if number:
             self._number = int(number)
@@ -36,7 +44,7 @@ class Result(Line):
     @property
     def category(self):
         """:returns: ``test``"""
-        return 'test'
+        return "test"
 
     @property
     def ok(self):
@@ -91,21 +99,22 @@ class Result(Line):
                 yaml_dict = yaml.load(self._yaml_block)
                 return yaml_dict
             except yaml.error.YAMLError:
-                print('Error parsing yaml block. Check formatting.')
+                print("Error parsing yaml block. Check formatting.")
         return None
 
     def __str__(self):
-        is_not = ''
+        is_not = ""
         if not self.ok:
-            is_not = 'not '
-        directive = ''
+            is_not = "not "
+        directive = ""
         if self.directive is not None and self.directive.text:
-            directive = ' # {0}'.format(self.directive.text)
-        diagnostics = ''
+            directive = " # {0}".format(self.directive.text)
+        diagnostics = ""
         if self.diagnostics is not None:
-            diagnostics = '\n' + self.diagnostics.rstrip()
+            diagnostics = "\n" + self.diagnostics.rstrip()
         return "{0}ok {1} {2}{3}{4}".format(
-            is_not, self.number, self.description, directive, diagnostics)
+            is_not, self.number, self.description, directive, diagnostics
+        )
 
 
 class Plan(Line):
@@ -118,7 +127,7 @@ class Plan(Line):
     @property
     def category(self):
         """:returns: ``plan``"""
-        return 'plan'
+        return "plan"
 
     @property
     def expected_tests(self):
@@ -146,7 +155,7 @@ class Diagnostic(Line):
     @property
     def category(self):
         """:returns: ``diagnostic``"""
-        return 'diagnostic'
+        return "diagnostic"
 
     @property
     def text(self):
@@ -163,7 +172,7 @@ class Bail(Line):
     @property
     def category(self):
         """:returns: ``bail``"""
-        return 'bail'
+        return "bail"
 
     @property
     def reason(self):
@@ -180,7 +189,7 @@ class Version(Line):
     @property
     def category(self):
         """:returns: ``version``"""
-        return 'version'
+        return "version"
 
     @property
     def version(self):
@@ -196,7 +205,8 @@ class Unknown(Line):
 
     This exists for the purpose of a Null Object pattern.
     """
+
     @property
     def category(self):
         """:returns: ``unknown``"""
-        return 'unknown'
+        return "unknown"

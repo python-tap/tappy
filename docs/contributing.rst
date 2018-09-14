@@ -39,6 +39,9 @@ you should be ready to develop.
 Guidelines
 ----------
 
-1. Code should follow PEP 8 style. Please run it through ``pep8`` to check.
-2. Please try to conform with any conventions seen in the code for consistency.
-3. Make sure your change works against master! (Bonus points for unit tests.)
+1. Code uses Black style. Please run it through ``black tap`` to autoformat.
+2. Make sure your change works against master! (Bonus points for unit tests.)
+3. Document your change in the ``docs/releases.rst`` file.
+4. For first time contributors, please add your name to ``AUTHORS``
+   so you get attribution for you effort.
+   This is also to recognize your claim to the copyright in the project.

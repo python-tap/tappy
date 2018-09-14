@@ -10,12 +10,14 @@ class Directive(object):
         r"""^SKIP\S*
             (?P<whitespace>\s*) # Optional whitespace.
             (?P<reason>.*)      # Slurp up the rest.""",
-        re.IGNORECASE | re.VERBOSE)
+        re.IGNORECASE | re.VERBOSE,
+    )
     todo_pattern = re.compile(
         r"""^TODO\b             # The directive name
             (?P<whitespace>\s*) # Immediately following must be whitespace.
             (?P<reason>.*)      # Slurp up the rest.""",
-        re.IGNORECASE | re.VERBOSE)
+        re.IGNORECASE | re.VERBOSE,
+    )
 
     def __init__(self, text):
         """Initialize the directive by parsing the text.
@@ -30,17 +32,17 @@ class Directive(object):
         match = self.skip_pattern.match(text)
         if match:
             self._skip = True
-            self._reason = match.group('reason')
+            self._reason = match.group("reason")
 
         match = self.todo_pattern.match(text)
         if match:
-            if match.group('whitespace'):
+            if match.group("whitespace"):
                 self._todo = True
             else:
                 # Catch the case where the directive has no descriptive text.
-                if match.group('reason') == '':
+                if match.group("reason") == "":
                     self._todo = True
-            self._reason = match.group('reason')
+            self._reason = match.group("reason")
 
     @property
     def text(self):

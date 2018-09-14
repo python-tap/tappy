@@ -10,7 +10,6 @@ from tap.tracker import Tracker
 
 
 class FakeTestCase(unittest.TestCase):
-
     def runTest(self):
         pass
 
@@ -19,11 +18,10 @@ class FakeTestCase(unittest.TestCase):
 
 
 class TestTAPTestResult(TestCase):
-
     @classmethod
     def _make_one(cls):
         # Yep, the stream is not being closed.
-        stream = open(os.devnull, 'w')
+        stream = open(os.devnull, "w")
         result = TAPTestResult(stream, False, 0)
         result.tracker = Tracker()
         return result
@@ -35,7 +33,7 @@ class TestTAPTestResult(TestCase):
         ex = Exception()
         ex.__cause__ = None
         result.addError(FakeTestCase(), (None, ex, None))
-        self.assertEqual(len(result.tracker._test_cases['FakeTestCase']), 1)
+        self.assertEqual(len(result.tracker._test_cases["FakeTestCase"]), 1)
 
     def test_adds_failure(self):
         result = self._make_one()
@@ -44,31 +42,31 @@ class TestTAPTestResult(TestCase):
         ex = Exception()
         ex.__cause__ = None
         result.addFailure(FakeTestCase(), (None, ex, None))
-        self.assertEqual(len(result.tracker._test_cases['FakeTestCase']), 1)
+        self.assertEqual(len(result.tracker._test_cases["FakeTestCase"]), 1)
 
     def test_adds_success(self):
         result = self._make_one()
         result.addSuccess(FakeTestCase())
-        self.assertEqual(len(result.tracker._test_cases['FakeTestCase']), 1)
+        self.assertEqual(len(result.tracker._test_cases["FakeTestCase"]), 1)
 
     def test_adds_skip(self):
         result = self._make_one()
-        result.addSkip(FakeTestCase(), 'a reason')
-        self.assertEqual(len(result.tracker._test_cases['FakeTestCase']), 1)
+        result.addSkip(FakeTestCase(), "a reason")
+        self.assertEqual(len(result.tracker._test_cases["FakeTestCase"]), 1)
 
     def test_adds_expected_failure(self):
         exc = self.factory.make_exc()
         result = self._make_one()
         result.addExpectedFailure(FakeTestCase(), exc)
-        line = result.tracker._test_cases['FakeTestCase'][0]
+        line = result.tracker._test_cases["FakeTestCase"][0]
         self.assertFalse(line.ok)
-        self.assertEqual(
-            line.directive.text, 'TODO {}'.format(_('(expected failure)')))
+        self.assertEqual(line.directive.text, "TODO {}".format(_("(expected failure)")))
 
     def test_adds_unexpected_success(self):
         result = self._make_one()
         result.addUnexpectedSuccess(FakeTestCase())
-        line = result.tracker._test_cases['FakeTestCase'][0]
+        line = result.tracker._test_cases["FakeTestCase"][0]
         self.assertTrue(line.ok)
         self.assertEqual(
-            line.directive.text, 'TODO {}'.format(_('(unexpected success)')))
+            line.directive.text, "TODO {}".format(_("(unexpected success)"))
+        )

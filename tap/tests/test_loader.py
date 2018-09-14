@@ -29,9 +29,10 @@ class TestLoader(TestCase):
             not ok 2 A failing test
             This is an unknown line.
             Bail out! This test would abort.
-            """)
+            """
+        )
         temp = tempfile.NamedTemporaryFile(delete=False)
-        temp.write(sample.encode('utf-8'))
+        temp.write(sample.encode("utf-8"))
         temp.close()
         loader = Loader()
 
@@ -44,21 +45,22 @@ class TestLoader(TestCase):
         """The loader records a failure when a file does not exist."""
         loader = Loader()
 
-        suite = loader.load_suite_from_file('phony.tap')
+        suite = loader.load_suite_from_file("phony.tap")
 
         self.assertEqual(1, len(suite._tests))
         self.assertEqual(
-            _('{filename} does not exist.').format(filename='phony.tap'),
-            suite._tests[0]._line.description)
+            _("{filename} does not exist.").format(filename="phony.tap"),
+            suite._tests[0]._line.description,
+        )
 
     def test_handles_directory(self):
         directory = tempfile.mkdtemp()
-        sub_directory = os.path.join(directory, 'sub')
+        sub_directory = os.path.join(directory, "sub")
         os.mkdir(sub_directory)
-        with open(os.path.join(directory, 'a_file.tap'), 'w') as f:
-            f.write('ok A passing test')
-        with open(os.path.join(sub_directory, 'another_file.tap'), 'w') as f:
-            f.write('not ok A failing test')
+        with open(os.path.join(directory, "a_file.tap"), "w") as f:
+            f.write("ok A passing test")
+        with open(os.path.join(sub_directory, "another_file.tap"), "w") as f:
+            f.write("not ok A failing test")
         loader = Loader()
 
         suite = loader.load([directory])
@@ -70,9 +72,10 @@ class TestLoader(TestCase):
             """TAP version 13
             TAP version 13
             1..0
-            """)
+            """
+        )
         temp = tempfile.NamedTemporaryFile(delete=False)
-        temp.write(sample.encode('utf-8'))
+        temp.write(sample.encode("utf-8"))
         temp.close()
         loader = Loader()
 
@@ -80,17 +83,18 @@ class TestLoader(TestCase):
 
         self.assertEqual(1, len(suite._tests))
         self.assertEqual(
-            _('Multiple version lines appeared.'),
-            suite._tests[0]._line.description)
+            _("Multiple version lines appeared."), suite._tests[0]._line.description
+        )
 
     def test_errors_with_version_not_on_first_line(self):
         sample = inspect.cleandoc(
             """# Something that doesn't belong.
             TAP version 13
             1..0
-            """)
+            """
+        )
         temp = tempfile.NamedTemporaryFile(delete=False)
-        temp.write(sample.encode('utf-8'))
+        temp.write(sample.encode("utf-8"))
         temp.close()
         loader = Loader()
 
@@ -98,26 +102,27 @@ class TestLoader(TestCase):
 
         self.assertEqual(1, len(suite._tests))
         self.assertEqual(
-            _('The version must be on the first line.'),
-            suite._tests[0]._line.description)
+            _("The version must be on the first line."),
+            suite._tests[0]._line.description,
+        )
 
     def test_skip_plan_aborts_loading(self):
         sample = inspect.cleandoc(
             """1..0 # Skipping this test file.
             ok This should not get processed.
-            """)
+            """
+        )
         temp = tempfile.NamedTemporaryFile(delete=False)
-        temp.write(sample.encode('utf-8'))
+        temp.write(sample.encode("utf-8"))
         temp.close()
         loader = Loader()
 
         suite = loader.load_suite_from_file(temp.name)
 
         self.assertEqual(1, len(suite._tests))
-        self.assertEqual(
-            'Skipping this test file.', suite._tests[0]._line.description)
+        self.assertEqual("Skipping this test file.", suite._tests[0]._line.description)
 
-    @mock.patch('tap.parser.sys.stdin', StringIO(u''))
+    @mock.patch("tap.parser.sys.stdin", StringIO(u""))
     def test_loads_from_stream(self):
         loader = Loader()
         suite = loader.load_suite_from_stdin()

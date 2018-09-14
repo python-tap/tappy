@@ -15,7 +15,6 @@ from tap.runner import TAPTestResult, _tracker
 
 
 class TestTAPTestRunner(unittest.TestCase):
-
     def test_has_tap_test_result(self):
         runner = TAPTestRunner()
         self.assertEqual(runner.resultclass, TAPTestResult)
@@ -60,7 +59,7 @@ class TestTAPTestRunner(unittest.TestCase):
 
         _tracker.combined = previous_combined
 
-    @mock.patch('sys.exit')
+    @mock.patch("sys.exit")
     def test_bad_format_string(self, fake_exit):
         """A bad format string exits the runner."""
         previous_format = TAPTestResult.FORMAT

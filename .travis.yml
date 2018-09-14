@@ -32,42 +32,14 @@ matrix:
       python: 2.7
       env: TOX_ENV=runner
     - os: linux
-      python: 2.7
-      env: TOX_ENV=flake8
+      python: 3.7
+      env: TOX_ENV=lint
     - os: linux
       python: 2.7
       env: TOX_ENV=integration
     - os: linux
       python: 2.7
       env: TOX_ENV=coverage
-    # Stop testing the languages until someone steps up to support them.
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_ar
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_de
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_es
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_fr
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_it
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_ja
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_nl
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_pt
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_ru
 install:
   - pip install Babel tox
 script: tox -e $TOX_ENV
