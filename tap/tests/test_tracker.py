@@ -222,12 +222,23 @@ class TestTracker(TestCase):
         self.assertEqual(stream.getvalue(), '1..42\n')
 
     @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
-    def test_streaming_writes_plan_first(self):
+    def test_write_plan_first_streaming(self):
         stream = StringIO()
         tracker = Tracker(streaming=True, stream=stream)
         tracker.set_plan(123)
         tracker.generate_tap_reports()
         self.assertEqual(stream.getvalue(), '1..123\n')
+
+    @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
+    def test_write_plan_first_file(self):
+        stream = StringIO()
+        outdir = tempfile.mkdtemp()
+        tracker = Tracker(streaming=False, outdir=outdir, combined=True)
+        tracker.set_plan(123)
+        tracker.generate_tap_reports()
+        with open(os.path.join(outdir, "testresults.tap"), "r") as f:
+            lines = f.readlines()
+        self.assertEqual(lines[0], '1..123\n')
 
     @mock.patch('tap.tracker.ENABLE_VERSION_13', True)
     def test_streaming_writes_tap_version_13(self):
