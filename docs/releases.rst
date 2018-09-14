@@ -1,6 +1,13 @@
 Releases
 ========
 
+Version 2.5, In Development
+---------------------------
+
+* Add `set_plan` to `Tracker` which allows producing the `1..N` line
+  before any tests.
+
+
 Version 2.4, Released May 29, 2018
 ----------------------------------
 

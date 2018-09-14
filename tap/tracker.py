@@ -21,7 +21,7 @@ class Tracker(object):
 
     def __init__(
             self, outdir=None, combined=False, streaming=False, stream=None,
-            header=True):
+            header=True, plan=None):
         self.outdir = outdir
 
         # Combine all the test results into one file.
@@ -36,6 +36,9 @@ class Tracker(object):
         # Stream output directly to a stream instead of file output.
         self.streaming = streaming
         self.stream = stream
+        # The total number of tests we expect (or None if we don't know yet).
+        self.plan = plan
+        self._plan_written = False
 
         # Display the test case header unless told not to.
         self.header = header
@@ -51,6 +54,8 @@ class Tracker(object):
 
         if self.streaming:
             self._write_tap_version(self.stream)
+            if self.plan is not None:
+                self._write_plan(self.stream)
 
     def _get_outdir(self):
         return self._outdir
@@ -112,15 +117,32 @@ class Tracker(object):
                 # case may not be tracked yet. In that case, the line is 1.
                 return 1
 
+    def set_plan(self, total):
+        """Notify the tracker how many total tests there will be"""
+        self.plan = total
+        if self.streaming:
+            # this will only write the plan if we haven't written it
+            # already .. but we want to check if we already wrote a
+            # test out (in which case we can't just write the plan out
+            # right here..)
+            if not self.combined_test_cases_seen:
+                self._write_plan(self.stream)
+        elif not self.combined:
+            raise ValueError(
+                "set_plan can only be used with combined or streaming output"
+            )
+
     def generate_tap_reports(self):
         """Generate TAP reports.
 
         The results are either combined into a single output file or
         the output file name is generated from the test case.
         """
-        if self.streaming:
-            # The results already went to the stream, record the plan.
+        # We're streaming but set_plan wasn't called, so we can only
+        # know the plan now (at the end)
+        if self.streaming and not self._plan_written:
             print('1..{0}'.format(self.combined_line_number), file=self.stream)
+            self._plan_written = True
             return
 
         if self.combined:
@@ -129,11 +151,16 @@ class Tracker(object):
                 combined_file = os.path.join(self.outdir, combined_file)
             with open(combined_file, 'w') as out_file:
                 self._write_tap_version(out_file)
+                if self.plan is not None:
+                    print('1..{0}'.format(self.plan), file=out_file)
                 for test_case in self.combined_test_cases_seen:
                     self.generate_tap_report(
                         test_case, self._test_cases[test_case], out_file)
-                print(
-                    '1..{0}'.format(self.combined_line_number), file=out_file)
+                if self.plan is None:
+                    print(
+                        '1..{0}'.format(self.combined_line_number),
+                        file=out_file,
+                    )
         else:
             for test_case, tap_lines in self._test_cases.items():
                 with open(self._get_tap_file_path(test_case), 'w') as out_file:
@@ -158,6 +185,17 @@ class Tracker(object):
         """
         if ENABLE_VERSION_13:
             print('TAP version 13', file=filename)
+
+    def _write_plan(self, stream):
+        """Write the plan line to the stream
+
+        If we have a plan and have not yet written it out, write it to
+        the given stream
+        """
+        if self.plan is not None:
+            if not self._plan_written:
+                print('1..{0}'.format(self.plan), file=stream)
+            self._plan_written = True
 
     def _write_test_case_header(self, test_case, stream):
         print(_('# TAP results for {test_case}').format(
