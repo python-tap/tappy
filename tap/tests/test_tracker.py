@@ -232,7 +232,7 @@ class TestTracker(TestCase):
     @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
     def test_write_plan_immediate_streaming(self):
         stream = StringIO()
-        tracker = Tracker(streaming=True, stream=stream, plan=123)
+        Tracker(streaming=True, stream=stream, plan=123)
         self.assertEqual(stream.getvalue(), '1..123\n')
 
     @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
