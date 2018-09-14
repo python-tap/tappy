@@ -231,7 +231,6 @@ class TestTracker(TestCase):
 
     @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
     def test_write_plan_first_combined(self):
-        stream = StringIO()
         outdir = tempfile.mkdtemp()
         tracker = Tracker(streaming=False, outdir=outdir, combined=True)
         tracker.set_plan(123)
@@ -242,7 +241,6 @@ class TestTracker(TestCase):
 
     @mock.patch('tap.tracker.ENABLE_VERSION_13', False)
     def test_write_plan_first_not_combined(self):
-        stream = StringIO()
         outdir = tempfile.mkdtemp()
         tracker = Tracker(streaming=False, outdir=outdir, combined=False)
         with self.assertRaises(ValueError):
