@@ -127,6 +127,10 @@ class Tracker(object):
             # right here..)
             if not self.combined_test_cases_seen:
                 self._write_plan(self.stream)
+        elif not self.combined:
+            raise ValueError(
+                "set_plan can only be used with combined or streaming output"
+            )
 
     def generate_tap_reports(self):
         """Generate TAP reports.
