@@ -36,7 +36,7 @@ class Tracker(object):
         # Stream output directly to a stream instead of file output.
         self.streaming = streaming
         self.stream = stream
-        # the plan is how many tests we expect (or None if we don't know yet)
+        # The total number of tests we expect (or None if we don't know yet).
         self.plan = plan
         self._plan_written = False
 
@@ -134,11 +134,9 @@ class Tracker(object):
         The results are either combined into a single output file or
         the output file name is generated from the test case.
         """
-        # this re-creates legacy behavior by writing out the plan at
-        # the end of the stream in case "set_plan" was not called up
-        # front..
+        # We're streaming but set_plan wasn't called, so we can only
+        # know the plan now (at the end)
         if self.streaming and not self._plan_written:
-            # The results already went to the stream, record the plan.
             print('1..{0}'.format(self.combined_line_number), file=self.stream)
             self._plan_written = True
             return
