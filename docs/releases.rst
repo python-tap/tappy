@@ -4,7 +4,7 @@ Releases
 Version 2.5, Released September 15, 2018
 ----------------------------------------
 
-* Add `set_plan` to `Tracker` which allows producing the `1..N` plan line
+* Add ``set_plan`` to ``Tracker`` which allows producing the ``1..N`` plan line
   before any tests.
 * Switch code style to use Black formatting.
 
