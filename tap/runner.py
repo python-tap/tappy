@@ -1,6 +1,8 @@
 # Copyright (c) 2018, Matt Layman and contributors
 
+from collections import Counter
 import os
+from time import time
 from unittest import TextTestResult, TextTestRunner
 from unittest.runner import _WritelnDecorator
 import sys
@@ -13,9 +15,15 @@ from tap.tracker import Tracker
 class TAPTestResult(TextTestResult):
 
     FORMAT = None
+    track_duration = False
 
     def __init__(self, stream, descriptions, verbosity):
         super(TAPTestResult, self).__init__(stream, descriptions, verbosity)
+        self._durationTracker = Counter({'startTime': time()})
+
+    def startTest(self, test):
+        super().startTest(test)
+        self._durationTracker[test.id()] = (time() - self._durationTracker['startTime']) * 1000
 
     def stopTestRun(self):
         """Once the test run is complete, generate each of the TAP files."""
@@ -49,7 +57,8 @@ class TAPTestResult(TextTestResult):
 
     def addSuccess(self, test):
         super(TAPTestResult, self).addSuccess(test)
-        self.tracker.add_ok(self._cls_name(test), self._description(test))
+        self.tracker.add_ok(self._cls_name(test), self._description(test),
+                            diagnostics=self._diagnostics(test))
 
     def addSkip(self, test, reason):
         super(TAPTestResult, self).addSkip(test, reason)
@@ -70,6 +79,11 @@ class TAPTestResult(TextTestResult):
 
     def _cls_name(self, test):
         return test.__class__.__name__
+
+    def _diagnostics(self, test):
+        if self.track_duration and test.id() in self._durationTracker:
+            return "  ---\n  duration_ms: {:0.2f}\n  ...\n".format(self._durationTracker[test.id()])
+        return None
 
     def _description(self, test):
         if self.FORMAT:
@@ -134,6 +148,11 @@ class TAPTestRunner(TextTestRunner):
     def set_header(cls, header):
         """Set the header display flag."""
         _tracker.header = header
+
+    @classmethod
+    def set_track_duration(cls, track_duration):
+        """Track test duration (ms) and output in TAP file."""
+        TAPTestResult.track_duration = track_duration
 
     @classmethod
     def set_format(cls, fmt):
