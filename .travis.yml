@@ -19,8 +19,8 @@ matrix:
       python: 3.7
       env: TOX_ENV=py37
     - os: linux
-      python: pypy
-      env: TOX_ENV=pypy
+      python: pypy3
+      env: TOX_ENV=pypy3
     - os: osx
       language: generic
       env: TOX_ENV=py27

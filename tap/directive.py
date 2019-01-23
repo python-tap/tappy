@@ -23,7 +23,7 @@ class Directive(object):
         """Initialize the directive by parsing the text.
 
         The text is assumed to be everything after a '#\s*' on a result line.
-        """
+        """  # noqa: flake8 is grumbling about the \s in the description.
         self._text = text
         self._skip = False
         self._todo = False
