@@ -1,4 +1,4 @@
-# Copyright (c) 2018, Matt Layman and contributors
+# Copyright (c) 2019, Matt Layman and contributors
 
 from .runner import TAPTestRunner
 
