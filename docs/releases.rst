@@ -1,6 +1,11 @@
 Releases
 ========
 
+Version 2.6, In Development
+---------------------------
+
+* Add support for Python 3.7.
+
 Version 2.5, Released September 15, 2018
 ----------------------------------------
 
