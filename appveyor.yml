@@ -7,4 +7,4 @@ install:
 build_script:
     - python --version
 test_script:
-    - tox -e py36
+    - tox -e windows
