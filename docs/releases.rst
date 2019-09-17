@@ -1,6 +1,11 @@
 Releases
 ========
 
+Version 2.6.1, Released September 17, 2019
+------------------------------------------
+
+* Fix TAP version 13 support from more-itertools behavior change.
+
 Version 2.6, Released September 16, 2019
 ----------------------------------------
 
