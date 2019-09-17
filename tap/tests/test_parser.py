@@ -239,7 +239,7 @@ class TestParser(unittest.TestCase):
             import yaml
             from more_itertools import peekable  # noqa
 
-            converted_yaml = yaml.load(u"""test: sample yaml""")
+            converted_yaml = yaml.safe_load(u"""test: sample yaml""")
             self.assertEqual(4, len(lines))
             self.assertEqual(13, lines[0].version)
             self.assertEqual(converted_yaml, lines[2].yaml_block)
@@ -271,7 +271,7 @@ class TestParser(unittest.TestCase):
             import yaml
             from more_itertools import peekable  # noqa
 
-            converted_yaml = yaml.load(u"""test: sample yaml""")
+            converted_yaml = yaml.safe_load(u"""test: sample yaml""")
             self.assertEqual(4, len(lines))
             self.assertEqual(13, lines[0].version)
             self.assertEqual(converted_yaml, lines[2].yaml_block)
@@ -308,7 +308,7 @@ class TestParser(unittest.TestCase):
             import yaml
             from more_itertools import peekable  # noqa
 
-            converted_yaml = yaml.load(
+            converted_yaml = yaml.safe_load(
                 u"""
                message: test
                severity: fail

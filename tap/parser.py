@@ -183,12 +183,12 @@ WARNING: Optional imports not found, TAP 13 output will be
         raw_yaml = []
         indent_match = re.compile(r"^{}".format(indent))
         try:
-            fh.next()
+            next(fh)
             while indent_match.match(fh.peek()):
-                raw_yaml.append(fh.next().replace(indent, "", 1))
+                raw_yaml.append(next(fh).replace(indent, "", 1))
                 # check for the end and stop adding yaml if encountered
                 if self.yaml_block_end.match(fh.peek()):
-                    fh.next()
+                    next(fh)
                     break
         except StopIteration:
             pass
