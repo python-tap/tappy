@@ -1,8 +1,8 @@
 Releases
 ========
 
-Version 2.6, In Development
----------------------------
+Version 2.6, Released September 16, 2019
+----------------------------------------
 
 * Add support for Python 3.7.
 * Drop support for Python 3.4 (it is end-of-life).
