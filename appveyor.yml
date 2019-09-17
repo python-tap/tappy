@@ -1,10 +1,10 @@
 environment:
-    PYTHON: "C:\\Python34"
-    PATH: "C:\\Python34;C:\\Python34\\Scripts;%PATH%"
+    PYTHON: "C:\\Python36"
+    PATH: "C:\\Python36;C:\\Python36\\Scripts;%PATH%"
 install:
     - python -m ensurepip
     - pip install Babel tox
 build_script:
     - python --version
 test_script:
-    - tox -e py34
+    - tox -e windows
