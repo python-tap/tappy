@@ -1,6 +1,12 @@
 Releases
 ========
 
+Version 2.6.2, Released October 20, 2019
+----------------------------------------
+
+* Fix bug in streaming mode that would generate tap files
+  when the plan was already set (affected pytest).
+
 Version 2.6.1, Released September 17, 2019
 ------------------------------------------
 
