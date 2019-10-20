@@ -152,11 +152,12 @@ class Tracker(object):
         The results are either combined into a single output file or
         the output file name is generated from the test case.
         """
-        # We're streaming but set_plan wasn't called, so we can only
-        # know the plan now (at the end).
-        if self.streaming and not self._plan_written:
-            print("1..{0}".format(self.combined_line_number), file=self.stream)
-            self._plan_written = True
+        if self.streaming:
+            # We're streaming but set_plan wasn't called, so we can only
+            # know the plan now (at the end).
+            if not self._plan_written:
+                print("1..{0}".format(self.combined_line_number), file=self.stream)
+                self._plan_written = True
             return
 
         if self.combined:

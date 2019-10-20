@@ -233,11 +233,18 @@ class TestTracker(TestCase):
 
     @mock.patch("tap.tracker.ENABLE_VERSION_13", False)
     def test_write_plan_first_streaming(self):
+        outdir = tempfile.mkdtemp()
         stream = StringIO()
-        tracker = Tracker(streaming=True, stream=stream)
+        tracker = Tracker(outdir=outdir, streaming=True, stream=stream)
         tracker.set_plan(123)
+        tracker.add_ok("FakeTestCase", "YESSS!")
+
         tracker.generate_tap_reports()
-        self.assertEqual(stream.getvalue(), "1..123\n")
+
+        self.assertEqual(
+            stream.getvalue(), "1..123\n# TAP results for FakeTestCase\nok 1 YESSS!\n"
+        )
+        self.assertFalse(os.path.exists(os.path.join(outdir, "FakeTestCase.tap")))
 
     @mock.patch("tap.tracker.ENABLE_VERSION_13", False)
     def test_write_plan_immediate_streaming(self):
