@@ -75,6 +75,4 @@ if __name__ == "__main__":
         ],
         keywords=["TAP", "unittest"],
         cmdclass={"build_py": BuildPy, "sdist": Sdist},
-        test_suite="tap.tests",
-        tests_require=["mock"],
     )
