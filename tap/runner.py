@@ -22,8 +22,10 @@ class TAPTestResult(TextTestResult):
         if err is not None:
             diagnostics = formatter.format_exception(err)
             self.tracker.add_not_ok(
-                self._cls_name(test), self._description(subtest),
-                diagnostics=diagnostics)
+                self._cls_name(test),
+                self._description(subtest),
+                diagnostics=diagnostics,
+            )
         else:
             self.tracker.add_ok(self._cls_name(test), self._description(subtest))
 
