@@ -77,7 +77,7 @@ class TestTAPTestResult(TestCase):
         result = self._make_one()
         test = FakeTestCase()
         with test.subTest():
-            subtest = unittest.case._SubTest(test, object(), unittest.case._OrderedChainMap())
+            subtest = unittest.case._SubTest(test, object(), {})
             result.addSubTest(test, subtest, None)
         line = result.tracker._test_cases["FakeTestCase"][0]
         self.assertTrue(line.ok)
@@ -91,6 +91,6 @@ class TestTAPTestResult(TestCase):
         ex.__cause__ = None
         test = FakeTestCase()
         with test.subTest():
-            subtest = unittest.case._SubTest(test, object(), unittest.case._OrderedChainMap())
+            subtest = unittest.case._SubTest(test, object(), {})
             result.addSubTest(test, subtest, (ex.__class__, ex, None))
         self.assertEqual(len(result.tracker._test_cases["FakeTestCase"]), 1)
