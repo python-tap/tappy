@@ -1,5 +1,6 @@
 # Copyright (c) 2019, Matt Layman and contributors
 
+import contextlib
 import os
 import unittest
 import unittest.case
@@ -13,6 +14,14 @@ from tap.tracker import Tracker
 class FakeTestCase(unittest.TestCase):
     def runTest(self):
         pass
+
+    @contextlib.contextmanager
+    def subTest(self, *args, **kwargs):
+        try:
+            self._subtest = unittest.case._SubTest(self, object(), {})
+            yield
+        finally:
+            self._subtest = None
 
     def __call__(self, result):
         pass
@@ -77,8 +86,7 @@ class TestTAPTestResult(TestCase):
         result = self._make_one()
         test = FakeTestCase()
         with test.subTest():
-            subtest = unittest.case._SubTest(test, object(), {})
-            result.addSubTest(test, subtest, None)
+            result.addSubTest(test, test._subtest, None)
         line = result.tracker._test_cases["FakeTestCase"][0]
         self.assertTrue(line.ok)
 
@@ -91,6 +99,5 @@ class TestTAPTestResult(TestCase):
         ex.__cause__ = None
         test = FakeTestCase()
         with test.subTest():
-            subtest = unittest.case._SubTest(test, object(), {})
-            result.addSubTest(test, subtest, (ex.__class__, ex, None))
+            result.addSubTest(test, test._subtest, (ex.__class__, ex, None))
         self.assertEqual(len(result.tracker._test_cases["FakeTestCase"]), 1)
