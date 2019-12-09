@@ -82,7 +82,7 @@ class TestTAPTestResult(TestCase):
             line.directive.text, "TODO {}".format(_("(unexpected success)"))
         )
 
-    def test_runner_add_subtest_success(self):
+    def test_adds_subtest_success(self):
         """Test that the runner handles subtest success results."""
         if sys.version_info[0] < 3:
             self.skipTest("Subtests are only available from Python 3.4")
@@ -93,7 +93,7 @@ class TestTAPTestResult(TestCase):
         line = result.tracker._test_cases["FakeTestCase"][0]
         self.assertTrue(line.ok)
 
-    def test_runner_add_subtest_failure(self):
+    def test_adds_subtest_failure(self):
         """Test that the runner handles subtest failure results."""
         if sys.version_info[0] < 3:
             self.skipTest("Subtests are only available from Python 3.4")
