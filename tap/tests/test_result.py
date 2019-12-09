@@ -2,6 +2,7 @@
 
 import os
 import unittest
+import unittest.case
 
 from tap.i18n import _
 from tap.runner import TAPTestResult
@@ -70,3 +71,26 @@ class TestTAPTestResult(TestCase):
         self.assertEqual(
             line.directive.text, "TODO {}".format(_("(unexpected success)"))
         )
+
+    def test_runner_add_subtest_success(self):
+        """Test that the runner handles subtest success results."""
+        result = self._make_one()
+        test = FakeTestCase()
+        with test.subTest():
+            subtest = unittest.case._SubTest(test, object(), unittest.case._OrderedChainMap())
+            result.addSubTest(test, subtest, None)
+        line = result.tracker._test_cases["FakeTestCase"][0]
+        self.assertTrue(line.ok)
+
+    def test_runner_add_subtest_failure(self):
+        """Test that the runner handles subtest failure results."""
+        result = self._make_one()
+        # Python 3 does some extra testing in unittest on exceptions so fake
+        # the cause as if it were raised.
+        ex = Exception()
+        ex.__cause__ = None
+        test = FakeTestCase()
+        with test.subTest():
+            subtest = unittest.case._SubTest(test, object(), unittest.case._OrderedChainMap())
+            result.addSubTest(test, subtest, (ex.__class__, ex, None))
+        self.assertEqual(len(result.tracker._test_cases["FakeTestCase"]), 1)
