@@ -17,7 +17,7 @@ class TAPTestResult(TextTestResult):
     def __init__(self, stream, descriptions, verbosity):
         super(TAPTestResult, self).__init__(stream, descriptions, verbosity)
 
-    def addSubTest(self, test, subtest, err):
+    def addSubTest(self, test, subtest, err):  # pragma: no cover
         super(TAPTestResult, self).addSubTest(test, subtest, err)
         if err is not None:
             diagnostics = formatter.format_exception(err)
