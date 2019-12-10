@@ -2,7 +2,6 @@
 
 import contextlib
 import os
-import sys
 import unittest
 import unittest.case
 
