@@ -1,9 +1,6 @@
 # Copyright (c) 2019, Matt Layman and contributors
 
-from __future__ import print_function
 import os
-import string
-import sys
 
 from tap.directive import Directive
 from tap.i18n import _
@@ -52,11 +49,7 @@ class Tracker(object):
         # Internal state for tracking each test case.
         self._test_cases = {}
 
-        # Python versions 2 and 3 keep maketrans in different locations.
-        if sys.version_info[0] < 3:
-            self._sanitized_table = string.maketrans(" \\/\n", "----")
-        else:  # pragma: no cover
-            self._sanitized_table = str.maketrans(" \\/\n", "----")
+        self._sanitized_table = str.maketrans(" \\/\n", "----")
 
         if self.streaming:
             self._write_tap_version(self.stream)
