@@ -58,6 +58,7 @@ if __name__ == "__main__":
         include_package_data=True,
         zip_safe=False,
         platforms="any",
+        setup_requires=['Babel'],
         install_requires=[],
         extras_require={"yaml": ["more-itertools", "PyYAML"]},
         classifiers=[
