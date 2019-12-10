@@ -4,9 +4,6 @@ dist: xenial
 matrix:
   include:
     - os: linux
-      python: 2.7
-      env: TOX_ENV=py27
-    - os: linux
       python: 3.4
       env: TOX_ENV=py34
     - os: linux
@@ -29,17 +26,17 @@ matrix:
       python: 3.6
       env: TOX_ENV=with_optional
     - os: linux
-      python: 2.7
+      python: 3.7
       env: TOX_ENV=runner
     - os: linux
-      python: 3.6
+      python: 3.7
       env: TOX_ENV=lint
     - os: linux
-      python: 2.7
+      python: 3.7
       env: TOX_ENV=integration
     - os: linux
-      python: 2.7
+      python: 3.7
       env: TOX_ENV=coverage
 install:
-  - pip install Babel tox
+  - pip3 install Babel tox
 script: tox -e $TOX_ENV
