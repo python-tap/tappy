@@ -84,8 +84,6 @@ class TestTAPTestResult(TestCase):
 
     def test_adds_subtest_success(self):
         """Test that the runner handles subtest success results."""
-        if sys.version_info[0] < 3:
-            self.skipTest("Subtests are only available from Python 3.4")
         result = self._make_one()
         test = FakeTestCase()
         with test.subTest():
@@ -95,8 +93,6 @@ class TestTAPTestResult(TestCase):
 
     def test_adds_subtest_failure(self):
         """Test that the runner handles subtest failure results."""
-        if sys.version_info[0] < 3:
-            self.skipTest("Subtests are only available from Python 3.4")
         result = self._make_one()
         # Python 3 does some extra testing in unittest on exceptions so fake
         # the cause as if it were raised.
