@@ -1,7 +1,6 @@
 # Copyright (c) 2019, Matt Layman and contributors
 
 import os
-import string
 
 from tap.directive import Directive
 from tap.i18n import _
