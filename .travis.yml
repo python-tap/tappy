@@ -41,5 +41,5 @@ matrix:
       python: 2.7
       env: TOX_ENV=coverage
 install:
-  - pip3 install Babel tox
+  - pip install Babel tox
 script: tox -e $TOX_ENV
