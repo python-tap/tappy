@@ -100,4 +100,5 @@ class TestTAPTestResult(TestCase):
         test = FakeTestCase()
         with test.subTest():
             result.addSubTest(test, test._subtest, (ex.__class__, ex, None))
-        self.assertEqual(len(result.tracker._test_cases["FakeTestCase"]), 1)
+        line = result.tracker._test_cases["FakeTestCase"][0]
+        self.assertFalse(line.ok)
