@@ -1,7 +1,9 @@
 # Copyright (c) 2019, Matt Layman and contributors
 
+import contextlib
 import os
 import unittest
+import unittest.case
 
 from tap.i18n import _
 from tap.runner import TAPTestResult
@@ -12,6 +14,14 @@ from tap.tracker import Tracker
 class FakeTestCase(unittest.TestCase):
     def runTest(self):
         pass
+
+    @contextlib.contextmanager
+    def subTest(self, *args, **kwargs):
+        try:
+            self._subtest = unittest.case._SubTest(self, object(), {})
+            yield
+        finally:
+            self._subtest = None
 
     def __call__(self, result):
         pass
@@ -70,3 +80,25 @@ class TestTAPTestResult(TestCase):
         self.assertEqual(
             line.directive.text, "TODO {}".format(_("(unexpected success)"))
         )
+
+    def test_adds_subtest_success(self):
+        """Test that the runner handles subtest success results."""
+        result = self._make_one()
+        test = FakeTestCase()
+        with test.subTest():
+            result.addSubTest(test, test._subtest, None)
+        line = result.tracker._test_cases["FakeTestCase"][0]
+        self.assertTrue(line.ok)
+
+    def test_adds_subtest_failure(self):
+        """Test that the runner handles subtest failure results."""
+        result = self._make_one()
+        # Python 3 does some extra testing in unittest on exceptions so fake
+        # the cause as if it were raised.
+        ex = Exception()
+        ex.__cause__ = None
+        test = FakeTestCase()
+        with test.subTest():
+            result.addSubTest(test, test._subtest, (ex.__class__, ex, None))
+        line = result.tracker._test_cases["FakeTestCase"][0]
+        self.assertFalse(line.ok)

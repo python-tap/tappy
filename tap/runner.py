@@ -17,6 +17,18 @@ class TAPTestResult(TextTestResult):
     def __init__(self, stream, descriptions, verbosity):
         super(TAPTestResult, self).__init__(stream, descriptions, verbosity)
 
+    def addSubTest(self, test, subtest, err):
+        super(TAPTestResult, self).addSubTest(test, subtest, err)
+        if err is not None:
+            diagnostics = formatter.format_exception(err)
+            self.tracker.add_not_ok(
+                self._cls_name(test),
+                self._description(subtest),
+                diagnostics=diagnostics,
+            )
+        else:
+            self.tracker.add_ok(self._cls_name(test), self._description(subtest))
+
     def stopTestRun(self):
         """Once the test run is complete, generate each of the TAP files."""
         super(TAPTestResult, self).stopTestRun()
