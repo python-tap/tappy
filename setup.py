@@ -37,7 +37,7 @@ class ReleaseCommand(Command):
         self.run_command("sdist")
         self.run_command("bdist_wheel")
 
-        
+
 # The docs import setup.py for the version so only call setup when not behaving
 # as a module.
 if __name__ == "__main__":
