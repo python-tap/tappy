@@ -9,29 +9,33 @@ Developer documentation is on
 `Read the Docs <https://tappy.readthedocs.io/>`_.
 """
 
-from setuptools import find_packages, setup
-from setuptools.command.build_py import build_py
-from setuptools.command.sdist import sdist
+from setuptools import find_packages, setup, Command
 
 import tap
 
 
-class BuildPy(build_py):
-    """Custom ``build_py`` command to always build mo files for wheels."""
+class ReleaseCommand(Command):
+    description = "generate distribution release artifacts"
+    user_options = []
+
+    def initialize_options(self):
+        """Initialize options.
+        This method overrides a required abstract method.
+        """
+
+    def finalize_options(self):
+        """Finalize options.
+        This method overrides a required abstract method.
+        """
 
     def run(self):
+        """Generate the distribution release artifacts.
+        The custom command is used to ensure that compiling
+        po to mo is not skipped.
+        """
         self.run_command("compile_catalog")
-        # build_py is an old style class so super cannot be used.
-        build_py.run(self)
-
-
-class Sdist(sdist):
-    """Custom ``sdist`` command to ensure that mo files are always created."""
-
-    def run(self):
-        self.run_command("compile_catalog")
-        # sdist is an old style class so super cannot be used.
-        sdist.run(self)
+        self.run_command("sdist")
+        self.run_command("bdist_wheel")
 
 
 # The docs import setup.py for the version so only call setup when not behaving
@@ -73,5 +77,5 @@ if __name__ == "__main__":
             "Topic :: Software Development :: Testing",
         ],
         keywords=["TAP", "unittest"],
-        cmdclass={"build_py": BuildPy, "sdist": Sdist},
+        cmdclass={"release": ReleaseCommand},
     )
