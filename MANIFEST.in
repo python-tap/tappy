@@ -1,8 +1,6 @@
 include AUTHORS
 include LICENSE
 include README.md
-include Pipfile
-include Pipfile.lock
 recursive-include docs *
 recursive-include tap/locale *
 prune docs/_build

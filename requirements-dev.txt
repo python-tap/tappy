@@ -1,0 +1,13 @@
+Babel
+black
+coverage
+flake8
+pytest
+requests
+Sphinx
+tox
+twine
+
+# These are the optional dependencies to enable TAP version 13 support.
+more-itertools
+pyyaml
