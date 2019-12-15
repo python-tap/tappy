@@ -4,9 +4,6 @@ dist: xenial
 matrix:
   include:
     - os: linux
-      python: 3.4
-      env: TOX_ENV=py34
-    - os: linux
       python: 3.5
       env: TOX_ENV=py35
     - os: linux
