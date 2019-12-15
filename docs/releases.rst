@@ -6,6 +6,7 @@ Version 3.0, To Be Released
 
 * Drop support for Python 2 (it is end-of-life).
 * Add support for subtests.
+* Discontinue use of Pipenv for managing development.
 
 Version 2.6.2, Released October 20, 2019
 ----------------------------------------

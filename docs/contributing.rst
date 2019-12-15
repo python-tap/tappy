@@ -14,20 +14,15 @@ when you're ready.
 Setup
 -----
 
-tappy uses Pipenv
-to manage development.
-The following instructions assume that Pipenv is installed.
-See the `Pipenv install instructions <https://docs.pipenv.org/install/>`_
-for more details.
-
-After installing Pipenv:
+tappy uses the built-in `venv` module.
 
 .. code-block:: console
 
    $ git clone git@github.com:python-tap/tappy.git
    $ cd tappy
-   $ pipenv install --dev --ignore-pipfile
-   $ pipenv shell
+   $ python3 -m venv venv
+   $ source venv/bin/activate
+   $ pip install -r requirements-dev.txt
    $ # Edit some files and run the tests.
    $ pytest
 
