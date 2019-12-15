@@ -45,6 +45,18 @@ Learn more about YAML support in the :ref:`tap-version-13` section.
 
    $ pip install tap.py[yaml]
 
+Quickstart
+----------
+
+tappy can run like the built-in ``unittest`` discovery runner.
+
+.. code-block:: console
+
+   $ python -m tap
+
+This should be enough to run a unittest-based test suite
+and output TAP to the console.
+
 Documentation
 -------------
 
