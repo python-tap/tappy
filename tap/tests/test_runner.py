@@ -4,11 +4,7 @@ import os
 import sys
 import tempfile
 import unittest
-
-try:
-    from unittest import mock
-except ImportError:
-    import mock
+from unittest import mock
 
 from tap import TAPTestRunner
 from tap.runner import TAPTestResult, _tracker
