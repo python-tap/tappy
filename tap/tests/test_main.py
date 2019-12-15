@@ -5,7 +5,7 @@ import os
 from unittest import mock
 
 from tap.loader import Loader
-from tap.main import build_suite, get_status, main, parse_args
+from tap.main import build_suite, get_status, main, main_module, parse_args
 from tap.tests import TestCase
 
 
@@ -53,3 +53,11 @@ class TestMain(TestCase):
         parse_args(argv)
         self.assertTrue(print_help.called)
         self.assertTrue(sys_exit.called)
+
+
+class TestMainModule(TestCase):
+    @mock.patch("tap.main.unittest")
+    def test_main_set_to_stream(self, mock_unittest):
+        main_module()
+
+        mock_unittest.main.called

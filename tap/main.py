@@ -6,6 +6,7 @@ import unittest
 
 from tap.i18n import _
 from tap.loader import Loader
+from tap.runner import TAPTestRunner
 
 
 def main(argv=sys.argv, stream=sys.stderr):
@@ -71,3 +72,10 @@ def get_status(result):
         return 0
     else:
         return 1
+
+
+def main_module():
+    """Entry point for running as ``python -m tap``."""
+    runner = TAPTestRunner()
+    runner.set_stream(True)
+    unittest.main(module=None, testRunner=runner)
