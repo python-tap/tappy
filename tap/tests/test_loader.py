@@ -5,11 +5,7 @@ from io import StringIO
 import os
 import tempfile
 import unittest
-
-try:
-    from unittest import mock
-except ImportError:
-    import mock
+from unittest import mock
 
 from tap.i18n import _
 from tap.loader import Loader

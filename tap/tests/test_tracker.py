@@ -1,18 +1,10 @@
 # Copyright (c) 2019, Matt Layman and contributors
 
 import inspect
+from io import StringIO
 import os
 import tempfile
-
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from io import StringIO
-
-try:
-    from unittest import mock
-except ImportError:
-    import mock
+from unittest import mock
 
 from tap.i18n import _
 from tap.tests import TestCase

@@ -2,11 +2,7 @@
 
 import argparse
 import os
-
-try:
-    from unittest import mock
-except ImportError:
-    import mock
+from unittest import mock
 
 from tap.loader import Loader
 from tap.main import build_suite, get_status, main, parse_args
