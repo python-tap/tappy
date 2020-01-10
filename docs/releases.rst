@@ -1,8 +1,8 @@
 Releases
 ========
 
-Version 3.0, To Be Released
----------------------------
+Version 3.0, Released January 10, 2020
+--------------------------------------
 
 * Drop support for Python 2 (it is end-of-life).
 * Add support for subtests.
