@@ -17,7 +17,7 @@ The :program:`tappy` command consumes the list of tap files
 given as *pathname* s and produces an output similar to what
 the regular text test-runner from python's :py:mod:`unittest`
 module would. If *pathname* points to a directory,
-:program:`tappy` will look in that directory of ``*.tap``
+:program:`tappy` will look in that directory for ``*.tap``
 files to consume.
 
 If you have a tool that consumes the `unittest` regular output,
