@@ -234,7 +234,10 @@ class TestTracker(TestCase):
         tracker.generate_tap_reports()
 
         self.assertEqual(
-            stream.getvalue(), "1..123\n# TAP results for FakeTestCase\nok 1 YESSS!\n"
+            stream.getvalue(),
+            "1..123\n{header}\nok 1 YESSS!\n".format(
+                header=self._make_header("FakeTestCase")
+            ),
         )
         self.assertFalse(os.path.exists(os.path.join(outdir, "FakeTestCase.tap")))
 
