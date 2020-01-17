@@ -153,7 +153,7 @@ WARNING: Optional imports not found, TAP 13 output will be
         """Parse a matching result line into a result instance."""
         peek_match = None
         try:
-            if fh is not None and isinstance(fh, peekable):
+            if fh is not None and ENABLE_VERSION_13 and isinstance(fh, peekable):
                 peek_match = self.yaml_block_start.match(fh.peek())
         except StopIteration:
             pass
