@@ -13,6 +13,7 @@ from tap.parser import Parser
 try:
     import yaml
     from more_itertools import peekable  # noqa
+
     have_yaml = True
 except ImportError:
     have_yaml = False
