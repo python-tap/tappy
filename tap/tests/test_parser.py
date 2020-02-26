@@ -248,6 +248,67 @@ class TestParser(unittest.TestCase):
                 self.assertEqual("unknown", lines[l].category)
             self.assertEqual("test", lines[6].category)
 
+    def test_parses_mixed(self):
+        # Test that we can parse both a version 13 and earlier version files
+        # using the same parser. Make sure that parsing works regardless of
+        # the order of the incoming documents.
+        sample_version_13 = inspect.cleandoc(
+            u"""TAP version 13
+            1..2
+            ok 1 A passing version 13 test
+               ---
+               test: sample yaml
+               ...
+            not ok 2 A failing version 13 test"""
+        )
+        sample_pre_13 = inspect.cleandoc(
+            """1..2
+            ok 1 A passing pre-13 test
+            not ok 2 A failing pre-13 test"""
+        )
+
+        parser = Parser()
+        lines = []
+        lines.extend(parser.parse_text(sample_version_13))
+        lines.extend(parser.parse_text(sample_pre_13))
+        try:
+            import yaml
+            from more_itertools import peekable  # noqa
+
+            self.assertEqual(13, lines[0].version)
+            self.assertEqual("A passing version 13 test", lines[2].description)
+            self.assertEqual("A failing version 13 test", lines[3].description)
+            self.assertEqual("A passing pre-13 test", lines[5].description)
+            self.assertEqual("A failing pre-13 test", lines[6].description)
+        except ImportError:
+            self.assertEqual(13, lines[0].version)
+            self.assertEqual("A passing version 13 test", lines[2].description)
+            self.assertEqual("A failing version 13 test", lines[6].description)
+            self.assertEqual("A passing pre-13 test", lines[8].description)
+            self.assertEqual("A failing pre-13 test", lines[9].description)
+
+        # Test parsing documents in reverse order
+        parser = Parser()
+        lines = []
+        lines.extend(parser.parse_text(sample_pre_13))
+        lines.extend(parser.parse_text(sample_version_13))
+        try:
+            import yaml
+            from more_itertools import peekable  # noqa
+
+            self.assertEqual("A passing pre-13 test", lines[1].description)
+            self.assertEqual("A failing pre-13 test", lines[2].description)
+            self.assertEqual(13, lines[3].version)
+            self.assertEqual("A passing version 13 test", lines[5].description)
+            self.assertEqual("A failing version 13 test", lines[6].description)
+        except ImportError:
+            self.assertEqual("A passing pre-13 test", lines[1].description)
+            self.assertEqual("A failing pre-13 test", lines[2].description)
+            self.assertEqual(13, lines[3].version)
+            self.assertEqual("A passing version 13 test", lines[5].description)
+            self.assertEqual("A failing version 13 test", lines[9].description)
+
+
     def test_parses_yaml_no_end(self):
         sample = inspect.cleandoc(
             u"""TAP version 13
