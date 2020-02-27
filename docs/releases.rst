@@ -1,6 +1,11 @@
 Releases
 ========
 
+Version 3.1, To Be Released
+---------------------------
+
+* Add support for Python 3.8.
+
 Version 3.0, Released January 10, 2020
 --------------------------------------
 
