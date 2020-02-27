@@ -31,6 +31,7 @@ on Python
 3.5,
 3.6,
 3.7,
+3.8,
 and PyPy.
 It is continuously tested on Linux, OS X, and Windows.
 
