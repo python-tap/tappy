@@ -60,9 +60,6 @@ class Parser(object):
 
     TAP_MINIMUM_DECLARED_VERSION = 13
 
-    def __init__(self):
-        self._try_peeking = False
-
     def parse_file(self, filename):
         """Parse a TAP file to an iterable of tap.line.Line objects.
 
@@ -103,7 +100,6 @@ class Parser(object):
             if first_parsed.category == "version" and first_parsed.version >= 13:
                 if ENABLE_VERSION_13:
                     fh_new = peekable(itertools.chain([first_line], fh))
-                    self._try_peeking = True
                 else:  # pragma no cover
                     print(
                         """
@@ -157,7 +153,7 @@ WARNING: Optional imports not found, TAP 13 output will be
         """Parse a matching result line into a result instance."""
         peek_match = None
         try:
-            if fh is not None and self._try_peeking:
+            if fh is not None and ENABLE_VERSION_13 and isinstance(fh, peekable):
                 peek_match = self.yaml_block_start.match(fh.peek())
         except StopIteration:
             pass

@@ -10,6 +10,14 @@ from unittest import mock
 
 from tap.parser import Parser
 
+try:
+    import yaml
+    from more_itertools import peekable  # noqa
+
+    have_yaml = True
+except ImportError:
+    have_yaml = False
+
 
 @contextmanager
 def captured_output():
@@ -231,22 +239,73 @@ class TestParser(unittest.TestCase):
         for line in parser.parse_text(sample):
             lines.append(line)
 
-        try:
-            import yaml
-            from more_itertools import peekable  # noqa
-
+        if have_yaml:
             converted_yaml = yaml.safe_load(u"""test: sample yaml""")
             self.assertEqual(4, len(lines))
             self.assertEqual(13, lines[0].version)
             self.assertEqual(converted_yaml, lines[2].yaml_block)
             self.assertEqual("test", lines[3].category)
             self.assertIsNone(lines[3].yaml_block)
-        except ImportError:
+        else:
             self.assertEqual(7, len(lines))
             self.assertEqual(13, lines[0].version)
             for l in list(range(3, 6)):
                 self.assertEqual("unknown", lines[l].category)
             self.assertEqual("test", lines[6].category)
+
+    def test_parses_mixed(self):
+        # Test that we can parse both a version 13 and earlier version files
+        # using the same parser. Make sure that parsing works regardless of
+        # the order of the incoming documents.
+        sample_version_13 = inspect.cleandoc(
+            u"""TAP version 13
+            1..2
+            ok 1 A passing version 13 test
+               ---
+               test: sample yaml
+               ...
+            not ok 2 A failing version 13 test"""
+        )
+        sample_pre_13 = inspect.cleandoc(
+            """1..2
+            ok 1 A passing pre-13 test
+            not ok 2 A failing pre-13 test"""
+        )
+
+        parser = Parser()
+        lines = []
+        lines.extend(parser.parse_text(sample_version_13))
+        lines.extend(parser.parse_text(sample_pre_13))
+        if have_yaml:
+            self.assertEqual(13, lines[0].version)
+            self.assertEqual("A passing version 13 test", lines[2].description)
+            self.assertEqual("A failing version 13 test", lines[3].description)
+            self.assertEqual("A passing pre-13 test", lines[5].description)
+            self.assertEqual("A failing pre-13 test", lines[6].description)
+        else:
+            self.assertEqual(13, lines[0].version)
+            self.assertEqual("A passing version 13 test", lines[2].description)
+            self.assertEqual("A failing version 13 test", lines[6].description)
+            self.assertEqual("A passing pre-13 test", lines[8].description)
+            self.assertEqual("A failing pre-13 test", lines[9].description)
+
+        # Test parsing documents in reverse order
+        parser = Parser()
+        lines = []
+        lines.extend(parser.parse_text(sample_pre_13))
+        lines.extend(parser.parse_text(sample_version_13))
+        if have_yaml:
+            self.assertEqual("A passing pre-13 test", lines[1].description)
+            self.assertEqual("A failing pre-13 test", lines[2].description)
+            self.assertEqual(13, lines[3].version)
+            self.assertEqual("A passing version 13 test", lines[5].description)
+            self.assertEqual("A failing version 13 test", lines[6].description)
+        else:
+            self.assertEqual("A passing pre-13 test", lines[1].description)
+            self.assertEqual("A failing pre-13 test", lines[2].description)
+            self.assertEqual(13, lines[3].version)
+            self.assertEqual("A passing version 13 test", lines[5].description)
+            self.assertEqual("A failing version 13 test", lines[9].description)
 
     def test_parses_yaml_no_end(self):
         sample = inspect.cleandoc(
@@ -263,17 +322,14 @@ class TestParser(unittest.TestCase):
         for line in parser.parse_text(sample):
             lines.append(line)
 
-        try:
-            import yaml
-            from more_itertools import peekable  # noqa
-
+        if have_yaml:
             converted_yaml = yaml.safe_load(u"""test: sample yaml""")
             self.assertEqual(4, len(lines))
             self.assertEqual(13, lines[0].version)
             self.assertEqual(converted_yaml, lines[2].yaml_block)
             self.assertEqual("test", lines[3].category)
             self.assertIsNone(lines[3].yaml_block)
-        except ImportError:
+        else:
             self.assertEqual(6, len(lines))
             self.assertEqual(13, lines[0].version)
             for l in list(range(3, 5)):
@@ -300,10 +356,7 @@ class TestParser(unittest.TestCase):
         for line in parser.parse_text(sample):
             lines.append(line)
 
-        try:
-            import yaml
-            from more_itertools import peekable  # noqa
-
+        if have_yaml:
             converted_yaml = yaml.safe_load(
                 u"""
                message: test
@@ -317,7 +370,7 @@ class TestParser(unittest.TestCase):
             self.assertEqual(3, len(lines))
             self.assertEqual(13, lines[0].version)
             self.assertEqual(converted_yaml, lines[2].yaml_block)
-        except ImportError:
+        else:
             self.assertEqual(11, len(lines))
             self.assertEqual(13, lines[0].version)
             for l in list(range(3, 11)):
@@ -395,10 +448,7 @@ WARNING: Optional imports not found, TAP 13 output will be
             for line in parser.parse_text(sample):
                 lines.append(line)
 
-        try:
-            import yaml  # noqa
-            from more_itertools import peekable  # noqa
-
+        if have_yaml:
             self.assertEqual(4, len(lines))
             self.assertEqual(13, lines[0].version)
             with captured_output() as (out, _):
@@ -408,7 +458,7 @@ WARNING: Optional imports not found, TAP 13 output will be
             )
             self.assertEqual("test", lines[3].category)
             self.assertIsNone(lines[3].yaml_block)
-        except ImportError:
+        else:
             self.assertEqual(8, len(lines))
             self.assertEqual(13, lines[0].version)
             for l in list(range(3, 7)):
