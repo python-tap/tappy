@@ -348,7 +348,12 @@ class TestParser(unittest.TestCase):
                  got:
                    - foo
                  expect:
-                   - bar"""
+                   - bar
+               output: |-
+                 a multiline string
+                 must be handled properly
+                 even with | pipes
+                 | here > and: there"""
         )
         parser = Parser()
         lines = []
@@ -358,20 +363,21 @@ class TestParser(unittest.TestCase):
 
         if have_yaml:
             converted_yaml = yaml.safe_load(
-                u"""
+                u'''
                message: test
                severity: fail
                data:
                  got:
                    - foo
                  expect:
-                   - bar"""
+                   - bar
+               output: "a multiline string\\nmust be handled properly\\neven with | pipes\\n| here > and: there"'''
             )
             self.assertEqual(3, len(lines))
             self.assertEqual(13, lines[0].version)
             self.assertEqual(converted_yaml, lines[2].yaml_block)
         else:
-            self.assertEqual(11, len(lines))
+            self.assertEqual(16, len(lines))
             self.assertEqual(13, lines[0].version)
             for l in list(range(3, 11)):
                 self.assertEqual("unknown", lines[l].category)
