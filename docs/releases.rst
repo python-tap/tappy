@@ -5,6 +5,7 @@ Version 3.1, To Be Released
 ---------------------------
 
 * Add support for Python 3.8.
+* Fix parsing of multi-line strings in YAML blocks (#111)
 
 Version 3.0, Released January 10, 2020
 --------------------------------------
