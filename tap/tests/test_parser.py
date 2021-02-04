@@ -249,8 +249,8 @@ class TestParser(unittest.TestCase):
         else:
             self.assertEqual(7, len(lines))
             self.assertEqual(13, lines[0].version)
-            for l in list(range(3, 6)):
-                self.assertEqual("unknown", lines[l].category)
+            for line_index in list(range(3, 6)):
+                self.assertEqual("unknown", lines[line_index].category)
             self.assertEqual("test", lines[6].category)
 
     def test_parses_mixed(self):
@@ -332,8 +332,8 @@ class TestParser(unittest.TestCase):
         else:
             self.assertEqual(6, len(lines))
             self.assertEqual(13, lines[0].version)
-            for l in list(range(3, 5)):
-                self.assertEqual("unknown", lines[l].category)
+            for line_index in list(range(3, 5)):
+                self.assertEqual("unknown", lines[line_index].category)
             self.assertEqual("test", lines[5].category)
 
     def test_parses_yaml_more_complex(self):
@@ -371,7 +371,7 @@ class TestParser(unittest.TestCase):
                    - foo
                  expect:
                    - bar
-               output: "a multiline string\\nmust be handled properly\\neven with | pipes\\n| here > and: there"'''
+               output: "a multiline string\\nmust be handled properly\\neven with | pipes\\n| here > and: there"'''  # noqa
             )
             self.assertEqual(3, len(lines))
             self.assertEqual(13, lines[0].version)
@@ -379,8 +379,8 @@ class TestParser(unittest.TestCase):
         else:
             self.assertEqual(16, len(lines))
             self.assertEqual(13, lines[0].version)
-            for l in list(range(3, 11)):
-                self.assertEqual("unknown", lines[l].category)
+            for line_index in list(range(3, 11)):
+                self.assertEqual("unknown", lines[line_index].category)
 
     def test_parses_yaml_no_association(self):
         sample = inspect.cleandoc(
@@ -403,8 +403,8 @@ class TestParser(unittest.TestCase):
         self.assertEqual(13, lines[0].version)
         self.assertIsNone(lines[2].yaml_block)
         self.assertEqual("diagnostic", lines[3].category)
-        for l in list(range(4, 7)):
-            self.assertEqual("unknown", lines[l].category)
+        for line_index in list(range(4, 7)):
+            self.assertEqual("unknown", lines[line_index].category)
         self.assertEqual("test", lines[7].category)
 
     def test_parses_yaml_no_start(self):
@@ -425,8 +425,8 @@ class TestParser(unittest.TestCase):
         self.assertEqual(6, len(lines))
         self.assertEqual(13, lines[0].version)
         self.assertIsNone(lines[2].yaml_block)
-        for l in list(range(3, 5)):
-            self.assertEqual("unknown", lines[l].category)
+        for line_index in list(range(3, 5)):
+            self.assertEqual("unknown", lines[line_index].category)
         self.assertEqual("test", lines[5].category)
 
     def test_malformed_yaml(self):
@@ -467,8 +467,8 @@ WARNING: Optional imports not found, TAP 13 output will be
         else:
             self.assertEqual(8, len(lines))
             self.assertEqual(13, lines[0].version)
-            for l in list(range(3, 7)):
-                self.assertEqual("unknown", lines[l].category)
+            for line_index in list(range(3, 7)):
+                self.assertEqual("unknown", lines[line_index].category)
             self.assertEqual("test", lines[7].category)
             self.assertEqual(yaml_err, parse_out.getvalue().strip())
 
