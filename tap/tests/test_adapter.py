@@ -1,9 +1,6 @@
-# Copyright (c) 2018, Matt Layman and contributors
+# Copyright (c) 2019, Matt Layman and contributors
 
-try:
-    from unittest import mock
-except ImportError:
-    import mock
+from unittest import mock
 
 from tap.adapter import Adapter
 from tap.tests import TestCase
@@ -14,7 +11,7 @@ class TestAdapter(TestCase):
 
     def test_adapter_has_filename(self):
         """The adapter has a TAP filename."""
-        tap_filename = 'fake.tap'
+        tap_filename = "fake.tap"
         adapter = Adapter(tap_filename, None)
 
         self.assertEqual(tap_filename, adapter._filename)
@@ -22,7 +19,7 @@ class TestAdapter(TestCase):
     def test_handles_ok_test_line(self):
         """Add a success for an ok test line."""
         ok_line = self.factory.make_ok()
-        adapter = Adapter('fake.tap', ok_line)
+        adapter = Adapter("fake.tap", ok_line)
         result = mock.Mock()
 
         adapter(result)
@@ -31,21 +28,19 @@ class TestAdapter(TestCase):
 
     def test_handles_skip_test_line(self):
         """Add a skip when a test line contains a skip directive."""
-        skip_line = self.factory.make_ok(
-            directive_text='SKIP This is the reason.')
-        adapter = Adapter('fake.tap', skip_line)
+        skip_line = self.factory.make_ok(directive_text="SKIP This is the reason.")
+        adapter = Adapter("fake.tap", skip_line)
         result = self.factory.make_test_result()
 
         adapter(result)
 
         self.assertEqual(1, len(result.skipped))
-        self.assertEqual('This is the reason.', result.skipped[0][1])
+        self.assertEqual("This is the reason.", result.skipped[0][1])
 
     def test_handles_ok_todo_test_line(self):
         """Add an unexpected success for an ok todo test line."""
-        todo_line = self.factory.make_ok(
-            directive_text='TODO An incomplete test')
-        adapter = Adapter('fake.tap', todo_line)
+        todo_line = self.factory.make_ok(directive_text="TODO An incomplete test")
+        adapter = Adapter("fake.tap", todo_line)
         result = self.factory.make_test_result()
 
         adapter(result)
@@ -54,9 +49,8 @@ class TestAdapter(TestCase):
 
     def test_handles_not_ok_todo_test_line(self):
         """Add an expected failure for a not ok todo test line."""
-        todo_line = self.factory.make_not_ok(
-            directive_text='TODO An incomplete test')
-        adapter = Adapter('fake.tap', todo_line)
+        todo_line = self.factory.make_not_ok(directive_text="TODO An incomplete test")
+        adapter = Adapter("fake.tap", todo_line)
         result = self.factory.make_test_result()
 
         adapter(result)

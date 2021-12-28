@@ -1,15 +1,11 @@
-# Copyright (c) 2018, Matt Layman and contributors
+# Copyright (c) 2019, Matt Layman and contributors
 
 import argparse
 import os
-
-try:
-    from unittest import mock
-except ImportError:
-    import mock
+from unittest import mock
 
 from tap.loader import Loader
-from tap.main import build_suite, get_status, main, parse_args
+from tap.main import build_suite, get_status, main, main_module, parse_args
 from tap.tests import TestCase
 
 
@@ -18,8 +14,8 @@ class TestMain(TestCase):
 
     def test_exits_with_error(self):
         """The main function returns an error status if there were failures."""
-        argv = ['/bin/fake', 'fake.tap']
-        stream = open(os.devnull, 'w')
+        argv = ["/bin/fake", "fake.tap"]
+        stream = open(os.devnull, "w")
 
         status = main(argv, stream=stream)
 
@@ -30,7 +26,7 @@ class TestMain(TestCase):
         result.wasSuccessful.return_value = True
         self.assertEqual(0, get_status(result))
 
-    @mock.patch.object(Loader, 'load_suite_from_stdin')
+    @mock.patch.object(Loader, "load_suite_from_stdin")
     def test_build_suite_from_stdin(self, load_suite_from_stdin):
         args = mock.Mock()
         args.files = []
@@ -39,21 +35,29 @@ class TestMain(TestCase):
         suite = build_suite(args)
         self.assertEqual(expected_suite, suite)
 
-    @mock.patch.object(Loader, 'load_suite_from_stdin')
+    @mock.patch.object(Loader, "load_suite_from_stdin")
     def test_build_suite_from_stdin_dash(self, load_suite_from_stdin):
-        argv = ['/bin/fake', '-']
+        argv = ["/bin/fake", "-"]
         args = parse_args(argv)
         expected_suite = mock.Mock()
         load_suite_from_stdin.return_value = expected_suite
         suite = build_suite(args)
         self.assertEqual(expected_suite, suite)
 
-    @mock.patch('tap.main.sys.stdin')
-    @mock.patch('tap.main.sys.exit')
-    @mock.patch.object(argparse.ArgumentParser, 'print_help')
+    @mock.patch("tap.main.sys.stdin")
+    @mock.patch("tap.main.sys.exit")
+    @mock.patch.object(argparse.ArgumentParser, "print_help")
     def test_when_no_pipe_to_stdin(self, print_help, sys_exit, mock_stdin):
-        argv = ['/bin/fake']
+        argv = ["/bin/fake"]
         mock_stdin.isatty = mock.Mock(return_value=True)
         parse_args(argv)
         self.assertTrue(print_help.called)
         self.assertTrue(sys_exit.called)
+
+
+class TestMainModule(TestCase):
+    @mock.patch("tap.main.unittest")
+    def test_main_set_to_stream(self, mock_unittest):
+        main_module()
+
+        mock_unittest.main.called

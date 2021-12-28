@@ -1,21 +1,16 @@
-# Copyright (c) 2018, Matt Layman and contributors
+# Copyright (c) 2019, Matt Layman and contributors
 
 import os
 import sys
 import tempfile
 import unittest
-
-try:
-    from unittest import mock
-except ImportError:
-    import mock
+from unittest import mock
 
 from tap import TAPTestRunner
 from tap.runner import TAPTestResult, _tracker
 
 
 class TestTAPTestRunner(unittest.TestCase):
-
     def test_has_tap_test_result(self):
         runner = TAPTestRunner()
         self.assertEqual(runner.resultclass, TAPTestResult)
@@ -60,7 +55,7 @@ class TestTAPTestRunner(unittest.TestCase):
 
         _tracker.combined = previous_combined
 
-    @mock.patch('sys.exit')
+    @mock.patch("sys.exit")
     def test_bad_format_string(self, fake_exit):
         """A bad format string exits the runner."""
         previous_format = TAPTestResult.FORMAT

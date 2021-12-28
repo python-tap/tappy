@@ -14,20 +14,15 @@ when you're ready.
 Setup
 -----
 
-tappy uses Pipenv
-to manage development.
-The following instructions assume that Pipenv is installed.
-See the `Pipenv install instructions <https://docs.pipenv.org/install/>`_
-for more details.
-
-After installing Pipenv:
+tappy uses the built-in `venv` module.
 
 .. code-block:: console
 
    $ git clone git@github.com:python-tap/tappy.git
    $ cd tappy
-   $ pipenv install --dev --ignore-pipfile
-   $ pipenv shell
+   $ python3 -m venv venv
+   $ source venv/bin/activate
+   $ pip install -r requirements-dev.txt
    $ # Edit some files and run the tests.
    $ pytest
 
@@ -39,6 +34,9 @@ you should be ready to develop.
 Guidelines
 ----------
 
-1. Code should follow PEP 8 style. Please run it through ``pep8`` to check.
-2. Please try to conform with any conventions seen in the code for consistency.
-3. Make sure your change works against master! (Bonus points for unit tests.)
+1. Code uses Black style. Please run it through ``black tap`` to autoformat.
+2. Make sure your change works against master! (Bonus points for unit tests.)
+3. Document your change in the ``docs/releases.rst`` file.
+4. For first time contributors, please add your name to ``AUTHORS``
+   so you get attribution for you effort.
+   This is also to recognize your claim to the copyright in the project.

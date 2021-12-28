@@ -1,4 +1,4 @@
-# Copyright (c) 2018, Matt Layman and contributors
+# Copyright (c) 2019, Matt Layman and contributors
 
 from collections import Counter
 import os
@@ -25,6 +25,18 @@ class TAPTestResult(TextTestResult):
         super().startTest(test)
         self._durationTracker[test.id()] = (time() - self._durationTracker['startTime']) * 1000
 
+    def addSubTest(self, test, subtest, err):
+        super(TAPTestResult, self).addSubTest(test, subtest, err)
+        if err is not None:
+            diagnostics = formatter.format_exception(err)
+            self.tracker.add_not_ok(
+                self._cls_name(test),
+                self._description(subtest),
+                diagnostics=diagnostics,
+            )
+        else:
+            self.tracker.add_ok(self._cls_name(test), self._description(subtest))
+
     def stopTestRun(self):
         """Once the test run is complete, generate each of the TAP files."""
         super(TAPTestResult, self).stopTestRun()
@@ -34,15 +46,15 @@ class TAPTestResult(TextTestResult):
         super(TAPTestResult, self).addError(test, err)
         diagnostics = formatter.format_exception(err)
         self.tracker.add_not_ok(
-            self._cls_name(test), self._description(test),
-            diagnostics=diagnostics)
+            self._cls_name(test), self._description(test), diagnostics=diagnostics
+        )
 
     def addFailure(self, test, err):
         super(TAPTestResult, self).addFailure(test, err)
         diagnostics = formatter.format_exception(err)
         self.tracker.add_not_ok(
-            self._cls_name(test), self._description(test),
-            diagnostics=diagnostics)
+            self._cls_name(test), self._description(test), diagnostics=diagnostics
+        )
 
     def addSubTest(self, test, subtest, err):
         super(TAPTestResult, self).addSubTest(test, subtest, err)
@@ -62,20 +74,25 @@ class TAPTestResult(TextTestResult):
 
     def addSkip(self, test, reason):
         super(TAPTestResult, self).addSkip(test, reason)
-        self.tracker.add_skip(
-            self._cls_name(test), self._description(test), reason)
+        self.tracker.add_skip(self._cls_name(test), self._description(test), reason)
 
     def addExpectedFailure(self, test, err):
         super(TAPTestResult, self).addExpectedFailure(test, err)
         diagnostics = formatter.format_exception(err)
         self.tracker.add_not_ok(
-            self._cls_name(test), self._description(test),
-            _('(expected failure)'), diagnostics=diagnostics)
+            self._cls_name(test),
+            self._description(test),
+            "TODO {}".format(_("(expected failure)")),
+            diagnostics=diagnostics,
+        )
 
     def addUnexpectedSuccess(self, test):
         super(TAPTestResult, self).addUnexpectedSuccess(test)
-        self.tracker.add_ok(self._cls_name(test), self._description(test),
-                            _('(unexpected success)'))
+        self.tracker.add_ok(
+            self._cls_name(test),
+            self._description(test),
+            "TODO {}".format(_("(unexpected success)")),
+        )
 
     def _cls_name(self, test):
         return test.__class__.__name__
@@ -90,12 +107,16 @@ class TAPTestResult(TextTestResult):
             try:
                 return self.FORMAT.format(
                     method_name=str(test),
-                    short_description=test.shortDescription() or '')
+                    short_description=test.shortDescription() or "",
+                )
             except KeyError:
-                sys.exit(_(
-                    'Bad format string: {format}\n'
-                    'Replacement options are: {{short_description}} and '
-                    '{{method_name}}').format(format=self.FORMAT))
+                sys.exit(
+                    _(
+                        "Bad format string: {format}\n"
+                        "Replacement options are: {{short_description}} and "
+                        "{{method_name}}"
+                    ).format(format=self.FORMAT)
+                )
 
         return test.shortDescription() or str(test)
 
@@ -121,13 +142,12 @@ class TAPTestRunner(TextTestRunner):
 
         The test runner default output will be suppressed in favor of TAP.
         """
-        self.stream = _WritelnDecorator(open(os.devnull, 'w'))
+        self.stream = _WritelnDecorator(open(os.devnull, "w"))
         _tracker.streaming = streaming
         _tracker.stream = sys.stdout
 
     def _makeResult(self):
-        result = self.resultclass(
-            self.stream, self.descriptions, self.verbosity)
+        result = self.resultclass(self.stream, self.descriptions, self.verbosity)
         result.tracker = _tracker
         return result
 

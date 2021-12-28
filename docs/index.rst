@@ -24,12 +24,39 @@ Installation
 
 tappy is available for download from `PyPI
 <https://pypi.python.org/pypi/tap.py>`_. tappy is currently supported on
-Python 2.7, 3.4, 3.5, 3.6, and PyPy.
+Python
+3.5,
+3.6,
+3.7,
+3.8,
+and PyPy.
 It is continuously tested on Linux, OS X, and Windows.
 
 .. code-block:: console
 
    $ pip install tap.py
+
+TAP version 13 brings support for YAML blocks
+for `YAML blocks <http://testanything.org/tap-version-13-specification.html#yaml-blocks>`_
+associated with test results.
+To work with version 13, install the optional dependencies.
+Learn more about YAML support in the :ref:`tap-version-13` section.
+
+.. code-block:: console
+
+   $ pip install tap.py[yaml]
+
+Quickstart
+----------
+
+tappy can run like the built-in ``unittest`` discovery runner.
+
+.. code-block:: console
+
+   $ python -m tap
+
+This should be enough to run a unittest-based test suite
+and output TAP to the console.
 
 Documentation
 -------------

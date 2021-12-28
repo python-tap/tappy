@@ -13,6 +13,8 @@ and support for `pytest <http://pytest.org/latest/>`_.
   for the **nose** testing tool.
 * tappy for **pytest** - tappy provides a plugin called ``tap``
   for the **pytest** testing tool.
+* tappy as the test runner - tappy can run like ``python -m unittest``.
+  Run your test suite with ``python -m tap``.
 
 By default, the producers will create one TAP file for each ``TestCase``
 executed by the test suite.

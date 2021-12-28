@@ -1,4 +1,4 @@
-# Copyright (c) 2018, Matt Layman and contributors
+# Copyright (c) 2019, Matt Layman and contributors
 
 
 class Adapter(object):
@@ -6,6 +6,7 @@ class Adapter(object):
 
     It is an alternative to TestCase to collect TAP results.
     """
+
     failureException = AssertionError
 
     def __init__(self, filename, line):
@@ -45,7 +46,7 @@ class Adapter(object):
         # Since TAP will not provide assertion data, clean up the assertion
         # section so it is not so spaced out.
         test, err = result.failures[-1]
-        result.failures[-1] = (test, '')
+        result.failures[-1] = (test, "")
 
     def __repr__(self):
-        return '<file={filename}>'.format(filename=self._filename)
+        return "<file={filename}>".format(filename=self._filename)

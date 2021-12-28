@@ -1,6 +1,61 @@
 Releases
 ========
 
+Version 3.1, To Be Released
+---------------------------
+
+* Add support for Python 3.8.
+* Fix parsing of multi-line strings in YAML blocks (#111)
+
+Version 3.0, Released January 10, 2020
+--------------------------------------
+
+* Drop support for Python 2 (it is end-of-life).
+* Add support for subtests.
+* Run a test suite with ``python -m tap``.
+* Discontinue use of Pipenv for managing development.
+
+Version 2.6.2, Released October 20, 2019
+----------------------------------------
+
+* Fix bug in streaming mode that would generate tap files
+  when the plan was already set (affected pytest).
+
+Version 2.6.1, Released September 17, 2019
+------------------------------------------
+
+* Fix TAP version 13 support from more-itertools behavior change.
+
+Version 2.6, Released September 16, 2019
+----------------------------------------
+
+* Add support for Python 3.7.
+* Drop support for Python 3.4 (it is end-of-life).
+
+Version 2.5, Released September 15, 2018
+----------------------------------------
+
+* Add ``set_plan`` to ``Tracker`` which allows producing the ``1..N`` plan line
+  before any tests.
+* Switch code style to use Black formatting.
+
+
+Version 2.4, Released May 29, 2018
+----------------------------------
+
+* Add support for producing TAP version 13 output
+  to streaming and file reports
+  by including the ``TAP version 13`` line.
+
+Version 2.3, Released May 15, 2018
+----------------------------------
+
+* Add optional method to install tappy for YAML support
+  with ``pip install tap.py[yaml]``.
+* Make tappy version 13 compliant by adding support for parsing YAML blocks.
+* ``unittest.expectedFailure`` now uses a TODO directive to better align
+  with the specification.
+
 Version 2.2, Released January 7, 2018
 -------------------------------------
 

@@ -1,13 +1,8 @@
 sudo: false
 language: python
+dist: xenial
 matrix:
   include:
-    - os: linux
-      python: 2.7
-      env: TOX_ENV=py27
-    - os: linux
-      python: 3.4
-      env: TOX_ENV=py34
     - os: linux
       python: 3.5
       env: TOX_ENV=py35
@@ -15,55 +10,36 @@ matrix:
       python: 3.6
       env: TOX_ENV=py36
     - os: linux
-      python: pypy
-      env: TOX_ENV=pypy
-    - os: osx
-      language: generic
-      env: TOX_ENV=py27
-      before_install:
-        - brew upgrade python
-        - python3 -m venv venv
-        - source venv/bin/activate
+      python: 3.7
+      env: TOX_ENV=py37
     - os: linux
-      python: 2.7
+      python: 3.8
+      env: TOX_ENV=py38
+    - os: linux
+      python: pypy3.5
+      env: TOX_ENV=pypy3
+    - os: osx
+      osx_image: xcode11.2
+      language: generic
+      env: TOX_ENV=py37
+    - os: linux
+      python: 3.8
+      env: TOX_ENV=with_optional
+    - os: linux
+      python: 3.8
       env: TOX_ENV=runner
     - os: linux
-      python: 2.7
-      env: TOX_ENV=flake8
+      python: 3.8
+      env: TOX_ENV=module
     - os: linux
-      python: 2.7
+      python: 3.8
+      env: TOX_ENV=lint
+    - os: linux
+      python: 3.8
       env: TOX_ENV=integration
     - os: linux
-      python: 2.7
+      python: 3.8
       env: TOX_ENV=coverage
-    # Stop testing the languages until someone steps up to support them.
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_ar
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_de
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_es
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_fr
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_it
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_ja
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_nl
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_pt
-    # - os: linux
-    #   python: 2.7
-    #   env: TOX_ENV=language_ru
 install:
-  - pip install Babel tox
+  - pip3 install tox
 script: tox -e $TOX_ENV
