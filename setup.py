@@ -9,34 +9,9 @@ Developer documentation is on
 `Read the Docs <https://tappy.readthedocs.io/>`_.
 """
 
-from setuptools import find_packages, setup, Command
+from setuptools import find_packages, setup
 
 import tap
-
-
-class ReleaseCommand(Command):
-    description = "generate distribution release artifacts"
-    user_options = []
-
-    def initialize_options(self):
-        """Initialize options.
-        This method overrides a required abstract method.
-        """
-
-    def finalize_options(self):
-        """Finalize options.
-        This method overrides a required abstract method.
-        """
-
-    def run(self):
-        """Generate the distribution release artifacts.
-        The custom command is used to ensure that compiling
-        po to mo is not skipped.
-        """
-        self.run_command("compile_catalog")
-        self.run_command("sdist")
-        self.run_command("bdist_wheel")
-
 
 # The docs import setup.py for the version so only call setup when not behaving
 # as a module.
@@ -78,5 +53,4 @@ if __name__ == "__main__":
             "Topic :: Software Development :: Testing",
         ],
         keywords=["TAP", "unittest"],
-        cmdclass={"release": ReleaseCommand},
     )

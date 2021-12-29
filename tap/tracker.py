@@ -3,7 +3,6 @@
 import os
 
 from tap.directive import Directive
-from tap.i18n import _
 from tap.line import Result
 
 try:
@@ -204,9 +203,7 @@ class Tracker(object):
             self._plan_written = True
 
     def _write_test_case_header(self, test_case, stream):
-        print(
-            _("# TAP results for {test_case}").format(test_case=test_case), file=stream
-        )
+        print("# TAP results for {test_case}".format(test_case=test_case), file=stream)
 
     def _get_tap_file_path(self, test_case):
         """Get the TAP output file path for the test case."""
