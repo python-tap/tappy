@@ -10,8 +10,6 @@ Developer documentation is on
 
 from setuptools import find_packages, setup
 
-import tap
-
 # The docs import setup.py for the version so only call setup when not behaving
 # as a module.
 if __name__ == "__main__":
@@ -22,7 +20,7 @@ if __name__ == "__main__":
 
     setup(
         name="tap.py",
-        version=tap.__version__,
+        version="3.0",
         url="https://github.com/python-tap/tappy",
         license="BSD",
         author="Matt Layman",
