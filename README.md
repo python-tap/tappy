@@ -2,10 +2,6 @@ tappy
 =====
 
 [![PyPI version][pypishield]](https://pypi.python.org/pypi/tap.py)
-[![BSD license][license]](https://raw.githubusercontent.com/python-tap/tappy/master/LICENSE)
-[![Linux status][travis]](https://travis-ci.org/python-tap/tappy)
-[![OS X status][travisosx]](https://travis-ci.org/python-tap/tappy)
-[![Windows status][appveyor]](https://ci.appveyor.com/project/mblayman/tappy)
 [![Coverage][coverage]](https://codecov.io/github/python-tap/tappy)
 
 <img align="right" src="https://github.com/python-tap/tappy/blob/master/docs/images/tap.png"
