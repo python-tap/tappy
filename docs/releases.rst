@@ -1,8 +1,8 @@
 Releases
 ========
 
-Version 3.1, To Be Released
----------------------------
+Version 3.1, Released December 29, 2021
+---------------------------------------
 
 * Add support for Python 3.10.
 * Add support for Python 3.9.
