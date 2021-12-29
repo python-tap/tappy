@@ -2,5 +2,4 @@ include AUTHORS
 include LICENSE
 include README.md
 recursive-include docs *
-recursive-include tap/locale *
 prune docs/_build
