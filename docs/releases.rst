@@ -4,6 +4,8 @@ Releases
 Version 3.1, To Be Released
 ---------------------------
 
+* Add support for Python 3.10.
+* Add support for Python 3.9.
 * Add support for Python 3.8.
 * Drop support for Python 3.5 (it is end-of-life).
 * Fix parsing of multi-line strings in YAML blocks (#111)

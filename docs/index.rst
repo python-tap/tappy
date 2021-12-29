@@ -25,10 +25,11 @@ Installation
 tappy is available for download from `PyPI
 <https://pypi.python.org/pypi/tap.py>`_. tappy is currently supported on
 Python
-3.5,
 3.6,
 3.7,
 3.8,
+3.9,
+3.10,
 and PyPy.
 It is continuously tested on Linux, OS X, and Windows.
 
