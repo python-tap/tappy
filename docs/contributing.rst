@@ -11,6 +11,12 @@ Fork tappy on `GitHub <https://github.com/python-tap/tappy>`_ and
 `submit a Pull Request <https://help.github.com/articles/creating-a-pull-request/>`_
 when you're ready.
 
+The goal of tappy is to be a TAP-compliant producer and consumer.
+If you want to work on an issue
+that is outside of the TAP spec,
+please write up an issue first,
+so we can discuss the change.
+
 Setup
 -----
 
@@ -35,7 +41,7 @@ Guidelines
 ----------
 
 1. Code uses Black style. Please run it through ``black tap`` to autoformat.
-2. Make sure your change works against master! (Bonus points for unit tests.)
+2. Make sure your change works against master with unit tests.
 3. Document your change in the ``docs/releases.rst`` file.
 4. For first time contributors, please add your name to ``AUTHORS``
    so you get attribution for you effort.
