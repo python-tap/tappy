@@ -3,25 +3,7 @@ name: Python package
 on: [push]
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-
-      - name: Install tox and any other packages
-        run: pip install tox
-
-      - name: Check for lint
-        run: tox -e lint
-
   build:
-    needs: lint
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
