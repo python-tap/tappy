@@ -2,7 +2,6 @@
 
 import unittest
 
-from tap.i18n import _
 from tap.rules import Rules
 from tap.tests import TestCase
 
@@ -40,7 +39,7 @@ class TestRules(TestCase):
         rules.check(42)
 
         self.assertEqual(
-            _("A plan must appear at the beginning or end of the file."),
+            "A plan must appear at the beginning or end of the file.",
             self.suite._tests[0]._line.description,
         )
 
@@ -49,7 +48,7 @@ class TestRules(TestCase):
 
         rules.check(42)
 
-        self.assertEqual(_("Missing a plan."), self.suite._tests[0]._line.description)
+        self.assertEqual("Missing a plan.", self.suite._tests[0]._line.description)
 
     def test_only_one_plan(self):
         plan = self.factory.make_plan()
@@ -60,7 +59,7 @@ class TestRules(TestCase):
         rules.check(42)
 
         self.assertEqual(
-            _("Only one plan line is permitted per file."),
+            "Only one plan line is permitted per file.",
             self.suite._tests[0]._line.description,
         )
 
@@ -82,7 +81,7 @@ class TestRules(TestCase):
         rules.check(2)
 
         self.assertEqual(
-            _("Expected {expected_count} tests but only {seen_count} ran.").format(
+            "Expected {expected_count} tests but only {seen_count} ran.".format(
                 expected_count=42, seen_count=1
             ),
             self.suite._tests[0]._line.description,
@@ -96,6 +95,6 @@ class TestRules(TestCase):
 
         self.assertEqual(1, len(self.suite._tests))
         self.assertEqual(
-            _("Bailed: {reason}").format(reason="Missing something important."),
+            "Bailed: {reason}".format(reason="Missing something important."),
             self.suite._tests[0]._line.description,
         )

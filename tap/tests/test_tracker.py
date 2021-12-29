@@ -6,14 +6,13 @@ import os
 import tempfile
 from unittest import mock
 
-from tap.i18n import _
 from tap.tests import TestCase
 from tap.tracker import Tracker
 
 
 class TestTracker(TestCase):
     def _make_header(self, test_case):
-        return _("# TAP results for {test_case}").format(test_case=test_case)
+        return "# TAP results for {test_case}".format(test_case=test_case)
 
     def test_has_test_cases(self):
         tracker = Tracker()

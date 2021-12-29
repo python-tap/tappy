@@ -31,10 +31,6 @@ htmlcov
 .cache
 .pytest_cache
 
-# Translations
-.transifex.ini
-*.mo
-
 # Mr Developer
 .mr.developer.cfg
 .project

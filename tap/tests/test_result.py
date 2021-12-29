@@ -5,7 +5,6 @@ import os
 import unittest
 import unittest.case
 
-from tap.i18n import _
 from tap.runner import TAPTestResult
 from tap.tests import TestCase
 from tap.tracker import Tracker
@@ -70,16 +69,14 @@ class TestTAPTestResult(TestCase):
         result.addExpectedFailure(FakeTestCase(), exc)
         line = result.tracker._test_cases["FakeTestCase"][0]
         self.assertFalse(line.ok)
-        self.assertEqual(line.directive.text, "TODO {}".format(_("(expected failure)")))
+        self.assertEqual(line.directive.text, "TODO {}".format("(expected failure)"))
 
     def test_adds_unexpected_success(self):
         result = self._make_one()
         result.addUnexpectedSuccess(FakeTestCase())
         line = result.tracker._test_cases["FakeTestCase"][0]
         self.assertTrue(line.ok)
-        self.assertEqual(
-            line.directive.text, "TODO {}".format(_("(unexpected success)"))
-        )
+        self.assertEqual(line.directive.text, "TODO {}".format("(unexpected success)"))
 
     def test_adds_subtest_success(self):
         """Test that the runner handles subtest success results."""

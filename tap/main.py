@@ -4,7 +4,6 @@ import argparse
 import sys
 import unittest
 
-from tap.i18n import _
 from tap.loader import Loader
 from tap.runner import TAPTestRunner
 
@@ -30,8 +29,8 @@ def build_suite(args):
 
 
 def parse_args(argv):
-    description = _("A TAP consumer for Python")
-    epilog = _(
+    description = "A TAP consumer for Python"
+    epilog = (
         "When no files are given or a dash (-) is used for the file name, "
         "tappy will read a TAP stream from STDIN."
     )
@@ -40,7 +39,7 @@ def parse_args(argv):
         "files",
         metavar="FILE",
         nargs="*",
-        help=_(
+        help=(
             "A file containing TAP output. Any directories listed will be "
             "scanned for files to include as TAP files."
         ),
@@ -51,7 +50,7 @@ def parse_args(argv):
         action="store_const",
         default=1,
         const=2,
-        help=_("use verbose messages"),
+        help="use verbose messages",
     )
 
     # argparse expects the executable to be removed from argv.

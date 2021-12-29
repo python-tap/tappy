@@ -2,7 +2,6 @@
 
 from tap.adapter import Adapter
 from tap.directive import Directive
-from tap.i18n import _
 from tap.line import Result
 
 
@@ -21,30 +20,28 @@ class Rules(object):
     def _process_version_lines(self):
         """Process version line rules."""
         if len(self._lines_seen["version"]) > 1:
-            self._add_error(_("Multiple version lines appeared."))
+            self._add_error("Multiple version lines appeared.")
         elif self._lines_seen["version"][0] != 1:
-            self._add_error(_("The version must be on the first line."))
+            self._add_error("The version must be on the first line.")
 
     def _process_plan_lines(self, final_line_count):
         """Process plan line rules."""
         if not self._lines_seen["plan"]:
-            self._add_error(_("Missing a plan."))
+            self._add_error("Missing a plan.")
             return
 
         if len(self._lines_seen["plan"]) > 1:
-            self._add_error(_("Only one plan line is permitted per file."))
+            self._add_error("Only one plan line is permitted per file.")
             return
 
         plan, at_line = self._lines_seen["plan"][0]
         if not self._plan_on_valid_line(at_line, final_line_count):
-            self._add_error(
-                _("A plan must appear at the beginning or end of the file.")
-            )
+            self._add_error("A plan must appear at the beginning or end of the file.")
             return
 
         if plan.expected_tests != self._lines_seen["test"]:
             self._add_error(
-                _("Expected {expected_count} tests but only {seen_count} ran.").format(
+                "Expected {expected_count} tests but only {seen_count} ran.".format(
                     expected_count=plan.expected_tests,
                     seen_count=self._lines_seen["test"],
                 )
@@ -69,11 +66,11 @@ class Rules(object):
 
     def handle_bail(self, bail):
         """Handle a bail line."""
-        self._add_error(_("Bailed: {reason}").format(reason=bail.reason))
+        self._add_error("Bailed: {reason}".format(reason=bail.reason))
 
     def handle_file_does_not_exist(self):
         """Handle a test file that does not exist."""
-        self._add_error(_("{filename} does not exist.").format(filename=self._filename))
+        self._add_error("{filename} does not exist.".format(filename=self._filename))
 
     def handle_skipping_plan(self, skip_plan):
         """Handle a plan that contains a SKIP directive."""
