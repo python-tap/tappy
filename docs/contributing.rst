@@ -41,7 +41,7 @@ Guidelines
 ----------
 
 1. Code uses Black style. Please run it through ``black tap`` to autoformat.
-2. Make sure your change works against master with unit tests.
+2. Make sure your change works against main with unit tests.
 3. Document your change in the ``docs/releases.rst`` file.
 4. For first time contributors, please add your name to ``AUTHORS``
    so you get attribution for you effort.
