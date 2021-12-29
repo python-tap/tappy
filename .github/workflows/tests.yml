@@ -43,8 +43,27 @@ jobs:
         # Run tox using the version of Python in `PATH`
         run: tox -e py
 
-  coverage:
+  # Run the extra tox configurations that run integration type tests.
+  extra:
     needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install tox and any other packages
+        run: pip install tox
+
+      - name: Run tox
+        run: tox -e with_optional,runner,module,integration
+
+  coverage:
+    needs: extra
     runs-on: ubuntu-latest
 
     steps:
