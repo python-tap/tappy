@@ -1,4 +1,4 @@
 from .runner import TAPTestRunner
 
 __all__ = ["TAPTestRunner"]
-__version__ = "3.0"
+__version__ = "3.1"

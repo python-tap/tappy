@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
     setup(
         name="tap.py",
-        version="3.0",
+        version="3.1",
         url="https://github.com/python-tap/tappy",
         license="BSD",
         author="Matt Layman",
