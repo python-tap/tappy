@@ -1,5 +1,3 @@
-# Copyright (c) 2019, Matt Layman and contributors
-
 from contextlib import contextmanager
 import inspect
 from io import BytesIO, StringIO

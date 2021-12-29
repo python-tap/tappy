@@ -1,6 +1,3 @@
-# Copyright (c) 2019, Matt Layman and contributors
-
-
 class Adapter(object):
     """The adapter processes a TAP test line and updates a unittest result.
 

@@ -1,5 +1,3 @@
-# Copyright (c) 2019, Matt Layman and contributors
-
 from tap.adapter import Adapter
 from tap.directive import Directive
 from tap.line import Result

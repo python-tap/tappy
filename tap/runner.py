@@ -1,5 +1,3 @@
-# Copyright (c) 2019, Matt Layman and contributors
-
 import os
 from unittest import TextTestResult, TextTestRunner
 from unittest.runner import _WritelnDecorator

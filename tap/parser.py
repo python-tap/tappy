@@ -1,5 +1,3 @@
-# Copyright (c) 2019, Matt Layman and contributors
-
 from io import StringIO
 import itertools
 import re

@@ -1,5 +1,3 @@
-# Copyright (c) 2019, Matt Layman and contributors
-
 import argparse
 import os
 from unittest import mock

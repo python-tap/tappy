@@ -1,5 +1,3 @@
-# Copyright (c) 2019, Matt Layman and contributors
-
 from unittest import mock
 
 from tap.adapter import Adapter

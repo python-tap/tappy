@@ -1,5 +1,3 @@
-# Copyright (c) 2019, Matt Layman and contributors
-
 import contextlib
 import os
 import unittest

@@ -1,5 +1,3 @@
-# Copyright (c) 2019, Matt Layman and contributors
-
 import os
 
 from tap.directive import Directive

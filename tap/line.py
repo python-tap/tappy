@@ -1,4 +1,3 @@
-# Copyright (c) 2019, Matt Layman and contributors
 try:
     import yaml
 
