@@ -1,0 +1,8 @@
+[paths]
+source =
+    tap
+    */site-packages/tap
+
+[run]
+omit =
+    tap/tests/*
