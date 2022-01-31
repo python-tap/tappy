@@ -115,7 +115,7 @@ class TestLoader(TestCase):
         self.assertEqual(1, len(suite._tests))
         self.assertEqual("Skipping this test file.", suite._tests[0]._line.description)
 
-    @mock.patch("tap.parser.sys.stdin", StringIO(u""))
+    @mock.patch("tap.parser.sys.stdin", StringIO(""))
     def test_loads_from_stream(self):
         loader = Loader()
         suite = loader.load_suite_from_stdin()
