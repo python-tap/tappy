@@ -8,7 +8,6 @@ from tap.tracker import Tracker
 
 
 class TAPTestResult(TextTestResult):
-
     FORMAT = None
 
     def __init__(self, stream, descriptions, verbosity):
