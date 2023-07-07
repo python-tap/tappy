@@ -178,15 +178,14 @@ WARNING: Optional imports not found, TAP 13 output will be
         try:
             next(fh)
             while indent_match.match(fh.peek()):
-                yaml_line = next(fh).replace(indent, "", 1)
-                raw_yaml.append(yaml_line.rstrip("\n"))
+                raw_yaml.append(next(fh).replace(indent, "", 1))
                 # check for the end and stop adding yaml if encountered
                 if self.yaml_block_end.match(fh.peek()):
                     next(fh)
                     break
         except StopIteration:
             pass
-        return "\n".join(raw_yaml)
+        return "".join(raw_yaml)
 
     def _parse_version(self, match):
         version = int(match.group("version"))
