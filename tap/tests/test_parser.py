@@ -361,7 +361,7 @@ class TestParser(unittest.TestCase):
 
         if have_yaml:
             converted_yaml = yaml.safe_load(
-                '''
+                r'''
                message: test
                severity: fail
                data:
@@ -369,7 +369,7 @@ class TestParser(unittest.TestCase):
                    - foo
                  expect:
                    - bar
-               output: "a multiline string\\nmust be handled properly\\neven with | pipes\\n| here > and: there"'''  # noqa
+               output: "a multiline string\nmust be handled properly\neven with | pipes\n| here > and: there"'''  # noqa
             )
             self.assertEqual(3, len(lines))
             self.assertEqual(13, lines[0].version)
