@@ -351,7 +351,10 @@ class TestParser(unittest.TestCase):
                  a multiline string
                  must be handled properly
                  even with | pipes
-                 | here > and: there"""
+                 | here > and: there
+               last_nl: |+
+                 there's a newline here ->
+               """
         )
         parser = Parser()
         lines = []
@@ -361,7 +364,7 @@ class TestParser(unittest.TestCase):
 
         if have_yaml:
             converted_yaml = yaml.safe_load(
-                '''
+                r'''
                message: test
                severity: fail
                data:
@@ -369,13 +372,14 @@ class TestParser(unittest.TestCase):
                    - foo
                  expect:
                    - bar
-               output: "a multiline string\\nmust be handled properly\\neven with | pipes\\n| here > and: there"'''  # noqa
+               output: "a multiline string\nmust be handled properly\neven with | pipes\n| here > and: there"
+               last_nl: "there's a newline here ->\n"'''  # noqa
             )
             self.assertEqual(3, len(lines))
             self.assertEqual(13, lines[0].version)
             self.assertEqual(converted_yaml, lines[2].yaml_block)
         else:
-            self.assertEqual(16, len(lines))
+            self.assertEqual(19, len(lines))
             self.assertEqual(13, lines[0].version)
             for line_index in list(range(3, 11)):
                 self.assertEqual("unknown", lines[line_index].category)
