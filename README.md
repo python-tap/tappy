@@ -2,7 +2,6 @@ tappy
 =====
 
 [![PyPI version][pypishield]](https://pypi.python.org/pypi/tap.py)
-[![Coverage][coverage]](https://codecov.io/github/python-tap/tappy)
 
 <img align="right" src="https://github.com/python-tap/tappy/blob/main/docs/images/tap.png"
   alt="TAP logo" />
@@ -111,7 +110,6 @@ for tips on how to get started.
 
 [tap]: http://testanything.org/
 [pypishield]: https://img.shields.io/pypi/v/tap.py.svg
-[coverage]: https://img.shields.io/codecov/c/github/python-tap/tappy.svg
 [rtd]: http://tappy.readthedocs.io/en/latest/
 [pypi]: https://pypi.python.org/pypi/tap.py
 [stream]: https://github.com/python-tap/tappy/blob/main/docs/images/stream.gif
