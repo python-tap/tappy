@@ -50,7 +50,6 @@ jobs:
         run: |
           python -Im pip install --upgrade coverage[toml]
 
-          python -Im coverage combine
           python -Im coverage html --skip-covered --skip-empty
 
           # Report and write to summary.
