@@ -1,3 +1,11 @@
+tappy is a set of tools for working with the `Test Anything Protocol (TAP)
+<http://testanything.org/>`_, a line based test protocol for recording test
+data in a standard way.
+
+Follow tappy development on `GitHub <https://github.com/python-tap/tappy>`_.
+Developer documentation is on
+`Read the Docs <https://tappy.readthedocs.io/>`_.
+
 Releases
 ========
 

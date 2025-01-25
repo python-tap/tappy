@@ -5,7 +5,7 @@ tappy should be easy to contribute to. If anything is unclear about how to
 contribute, please submit an issue on GitHub so that we can fix it!
 
 How
------
+---
 
 Fork tappy on `GitHub <https://github.com/python-tap/tappy>`_ and
 `submit a Pull Request <https://help.github.com/articles/creating-a-pull-request/>`_
@@ -46,3 +46,16 @@ Guidelines
 4. For first time contributors, please add your name to ``AUTHORS``
    so you get attribution for you effort.
    This is also to recognize your claim to the copyright in the project.
+
+Release checklist
+-----------------
+
+These are notes for my release process,
+so I don't have to remember all the steps.
+
+1. Update ``docs/releases.rst``.
+2. Update version in ``pyproject.toml`` and ``tap/__init__.py``.
+3. ``rm -rf dist && python -m build``
+4. ``twine upload dist/*``
+5. ``git tag -a vX.X -m "Version X.X"``
+6. ``git push --tags``
