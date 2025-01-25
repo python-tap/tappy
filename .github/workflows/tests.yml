@@ -44,8 +44,7 @@ jobs:
         run: pip install tox
 
       - name: Run tox
-        # run: tox -e with_optional,runner,module,integration
-        run: tox -e with_optional,runner,module
+        run: tox -e with_optional,runner,module,integration
 
   # coverage:
   #   needs: extra
