@@ -25,7 +25,7 @@ class TAPTestResult(TextTestResult):
         else:
             self.tracker.add_ok(self._cls_name(test), self._description(subtest))
 
-    def stopTestRun(self):
+    def stopTestRun(self):  # pragma: no cover
         """Once the test run is complete, generate each of the TAP files."""
         super().stopTestRun()
         self.tracker.generate_tap_reports()
@@ -115,7 +115,7 @@ class TAPTestRunner(TextTestRunner):
         _tracker.streaming = streaming
         _tracker.stream = sys.stdout
 
-    def _makeResult(self):
+    def _makeResult(self):  # pragma: no cover
         result = self.resultclass(self.stream, self.descriptions, self.verbosity)
         result.tracker = _tracker
         return result

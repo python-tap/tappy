@@ -7,4 +7,4 @@ source =
 omit =
     tap/tests/*
     # This is tested with tox -e module in CI.
-    tap/__main__.py
+    src/tap/__main__.py
