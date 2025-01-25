@@ -79,9 +79,7 @@ class TestRules(TestCase):
         rules.check(2)
 
         self.assertEqual(
-            "Expected {expected_count} tests but only {seen_count} ran.".format(
-                expected_count=42, seen_count=1
-            ),
+            f"Expected {42} tests but only {1} ran.",
             self.suite._tests[0]._line.description,
         )
 

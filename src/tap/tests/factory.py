@@ -6,7 +6,7 @@ from tap.directive import Directive
 from tap.line import Bail, Plan, Result
 
 
-class Factory(object):
+class Factory:
     """A factory to produce commonly needed objects"""
 
     def make_ok(self, directive_text=""):
@@ -22,7 +22,7 @@ class Factory(object):
         return Plan(expected_tests, Directive(directive_text))
 
     def make_test_result(self):
-        stream = tempfile.TemporaryFile(mode="w")
+        stream = tempfile.TemporaryFile(mode="w")  # noqa: SIM115
         return TextTestResult(stream, None, 1)
 
     def make_exc(self):

@@ -1,9 +1,9 @@
-from contextlib import contextmanager
 import inspect
-from io import BytesIO, StringIO
 import sys
 import tempfile
 import unittest
+from contextlib import contextmanager
+from io import StringIO
 from unittest import mock
 
 from tap.parser import Parser
@@ -19,10 +19,7 @@ except ImportError:
 
 @contextmanager
 def captured_output():
-    if sys.version_info[0] < 3:
-        new_out, new_err = BytesIO(), BytesIO()
-    else:
-        new_out, new_err = StringIO(), StringIO()
+    new_out, new_err = StringIO(), StringIO()
     old_out, old_err = sys.stdout, sys.stderr
     try:
         sys.stdout, sys.stderr = new_out, new_err
@@ -204,7 +201,7 @@ class TestParser(unittest.TestCase):
             ok 1 A passing test
             not ok 2 A failing test"""
         )
-        temp = tempfile.NamedTemporaryFile(delete=False)
+        temp = tempfile.NamedTemporaryFile(delete=False)  # noqa: SIM115
         temp.write(sample.encode("utf-8"))
         temp.close()
         parser = Parser()
@@ -475,7 +472,7 @@ WARNING: Optional imports not found, TAP 13 output will be
             self.assertEqual(yaml_err, parse_out.getvalue().strip())
 
     def test_parse_empty_file(self):
-        temp = tempfile.NamedTemporaryFile(delete=False)
+        temp = tempfile.NamedTemporaryFile(delete=False)  # noqa: SIM115
         temp.close()
         parser = Parser()
         lines = []

@@ -1,4 +1,4 @@
-class Adapter(object):
+class Adapter:
     """The adapter processes a TAP test line and updates a unittest result.
 
     It is an alternative to TestCase to collect TAP results.
@@ -46,4 +46,4 @@ class Adapter(object):
         result.failures[-1] = (test, "")
 
     def __repr__(self):
-        return "<file={filename}>".format(filename=self._filename)
+        return f"<file={self._filename}>"

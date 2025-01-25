@@ -1,8 +1,8 @@
 import inspect
-from io import StringIO
 import os
 import tempfile
 import unittest
+from io import StringIO
 from unittest import mock
 
 from tap.loader import Loader
@@ -24,9 +24,8 @@ class TestLoader(TestCase):
             Bail out! This test would abort.
             """
         )
-        temp = tempfile.NamedTemporaryFile(delete=False)
-        temp.write(sample.encode("utf-8"))
-        temp.close()
+        with tempfile.NamedTemporaryFile(delete=False) as temp:
+            temp.write(sample.encode("utf-8"))
         loader = Loader()
 
         suite = loader.load_suite_from_file(temp.name)
@@ -67,9 +66,8 @@ class TestLoader(TestCase):
             1..0
             """
         )
-        temp = tempfile.NamedTemporaryFile(delete=False)
-        temp.write(sample.encode("utf-8"))
-        temp.close()
+        with tempfile.NamedTemporaryFile(delete=False) as temp:
+            temp.write(sample.encode("utf-8"))
         loader = Loader()
 
         suite = loader.load_suite_from_file(temp.name)
@@ -86,9 +84,8 @@ class TestLoader(TestCase):
             1..0
             """
         )
-        temp = tempfile.NamedTemporaryFile(delete=False)
-        temp.write(sample.encode("utf-8"))
-        temp.close()
+        with tempfile.NamedTemporaryFile(delete=False) as temp:
+            temp.write(sample.encode("utf-8"))
         loader = Loader()
 
         suite = loader.load_suite_from_file(temp.name)
@@ -105,9 +102,8 @@ class TestLoader(TestCase):
             ok This should not get processed.
             """
         )
-        temp = tempfile.NamedTemporaryFile(delete=False)
-        temp.write(sample.encode("utf-8"))
-        temp.close()
+        with tempfile.NamedTemporaryFile(delete=False) as temp:
+            temp.write(sample.encode("utf-8"))
         loader = Loader()
 
         suite = loader.load_suite_from_file(temp.name)

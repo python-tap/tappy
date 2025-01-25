@@ -10,7 +10,7 @@ class TestLine(unittest.TestCase):
     def test_line_requires_category(self):
         line = Line()
         with self.assertRaises(NotImplementedError):
-            line.category
+            _ = line.category
 
 
 class TestResult(unittest.TestCase):

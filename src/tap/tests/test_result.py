@@ -28,7 +28,7 @@ class TestTAPTestResult(TestCase):
     @classmethod
     def _make_one(cls):
         # Yep, the stream is not being closed.
-        stream = open(os.devnull, "w")
+        stream = open(os.devnull, "w")  # noqa: SIM115
         result = TAPTestResult(stream, False, 0)
         result.tracker = Tracker()
         return result

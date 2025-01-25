@@ -12,7 +12,7 @@ except ImportError:  # pragma: no cover
     ENABLE_VERSION_13 = False
 
 
-class Tracker(object):
+class Tracker:
     def __init__(
         self,
         outdir=None,
@@ -93,7 +93,7 @@ class Tracker(object):
         self._add_line(class_name, result)
 
     def add_skip(self, class_name, description, reason):
-        directive = "SKIP {0}".format(reason)
+        directive = f"SKIP {reason}"
         result = Result(
             ok=True,
             number=self._get_next_line_number(class_name),
@@ -146,7 +146,7 @@ class Tracker(object):
             # We're streaming but set_plan wasn't called, so we can only
             # know the plan now (at the end).
             if not self._plan_written:
-                print("1..{0}".format(self.combined_line_number), file=self.stream)
+                print(f"1..{self.combined_line_number}", file=self.stream)
                 self._plan_written = True
             return
 
@@ -157,13 +157,13 @@ class Tracker(object):
             with open(combined_file, "w") as out_file:
                 self._write_tap_version(out_file)
                 if self.plan is not None:
-                    print("1..{0}".format(self.plan), file=out_file)
+                    print(f"1..{self.plan}", file=out_file)
                 for test_case in self.combined_test_cases_seen:
                     self.generate_tap_report(
                         test_case, self._test_cases[test_case], out_file
                     )
                 if self.plan is None:
-                    print("1..{0}".format(self.combined_line_number), file=out_file)
+                    print(f"1..{self.combined_line_number}", file=out_file)
         else:
             for test_case, tap_lines in self._test_cases.items():
                 with open(self._get_tap_file_path(test_case), "w") as out_file:
@@ -179,7 +179,7 @@ class Tracker(object):
         # For combined results, the plan is only output once after
         # all the test cases complete.
         if not self.combined:
-            print("1..{0}".format(len(tap_lines)), file=out_file)
+            print(f"1..{len(tap_lines)}", file=out_file)
 
     def _write_tap_version(self, filename):
         """Write a Version 13 TAP row.
@@ -197,11 +197,11 @@ class Tracker(object):
         """
         if self.plan is not None:
             if not self._plan_written:
-                print("1..{0}".format(self.plan), file=stream)
+                print(f"1..{self.plan}", file=stream)
             self._plan_written = True
 
     def _write_test_case_header(self, test_case, stream):
-        print("# TAP results for {test_case}".format(test_case=test_case), file=stream)
+        print(f"# TAP results for {test_case}", file=stream)
 
     def _get_tap_file_path(self, test_case):
         """Get the TAP output file path for the test case."""
