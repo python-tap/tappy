@@ -61,6 +61,9 @@ sources = ["src"]
 include = ["docs/releases.rst", "LICENSE"]
 sources = ["src"]
 
+[tool.pytest.ini_options]
+pythonpath = [".", "src"]
+
 [tool.ruff.lint]
 select = [
     # pycodestyle
