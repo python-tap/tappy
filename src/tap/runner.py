@@ -1,7 +1,7 @@
 import os
+import sys
 from unittest import TextTestResult, TextTestRunner
 from unittest.runner import _WritelnDecorator
-import sys
 
 from tap import formatter
 from tap.tracker import Tracker
@@ -11,10 +11,10 @@ class TAPTestResult(TextTestResult):
     FORMAT = None
 
     def __init__(self, stream, descriptions, verbosity):
-        super(TAPTestResult, self).__init__(stream, descriptions, verbosity)
+        super().__init__(stream, descriptions, verbosity)
 
     def addSubTest(self, test, subtest, err):
-        super(TAPTestResult, self).addSubTest(test, subtest, err)
+        super().addSubTest(test, subtest, err)
         if err is not None:
             diagnostics = formatter.format_exception(err)
             self.tracker.add_not_ok(
@@ -25,35 +25,35 @@ class TAPTestResult(TextTestResult):
         else:
             self.tracker.add_ok(self._cls_name(test), self._description(subtest))
 
-    def stopTestRun(self):
+    def stopTestRun(self):  # pragma: no cover
         """Once the test run is complete, generate each of the TAP files."""
-        super(TAPTestResult, self).stopTestRun()
+        super().stopTestRun()
         self.tracker.generate_tap_reports()
 
     def addError(self, test, err):
-        super(TAPTestResult, self).addError(test, err)
+        super().addError(test, err)
         diagnostics = formatter.format_exception(err)
         self.tracker.add_not_ok(
             self._cls_name(test), self._description(test), diagnostics=diagnostics
         )
 
     def addFailure(self, test, err):
-        super(TAPTestResult, self).addFailure(test, err)
+        super().addFailure(test, err)
         diagnostics = formatter.format_exception(err)
         self.tracker.add_not_ok(
             self._cls_name(test), self._description(test), diagnostics=diagnostics
         )
 
     def addSuccess(self, test):
-        super(TAPTestResult, self).addSuccess(test)
+        super().addSuccess(test)
         self.tracker.add_ok(self._cls_name(test), self._description(test))
 
     def addSkip(self, test, reason):
-        super(TAPTestResult, self).addSkip(test, reason)
+        super().addSkip(test, reason)
         self.tracker.add_skip(self._cls_name(test), self._description(test), reason)
 
     def addExpectedFailure(self, test, err):
-        super(TAPTestResult, self).addExpectedFailure(test, err)
+        super().addExpectedFailure(test, err)
         diagnostics = formatter.format_exception(err)
         self.tracker.add_not_ok(
             self._cls_name(test),
@@ -63,7 +63,7 @@ class TAPTestResult(TextTestResult):
         )
 
     def addUnexpectedSuccess(self, test):
-        super(TAPTestResult, self).addUnexpectedSuccess(test)
+        super().addUnexpectedSuccess(test)
         self.tracker.add_ok(
             self._cls_name(test),
             self._description(test),
@@ -82,9 +82,9 @@ class TAPTestResult(TextTestResult):
                 )
             except KeyError:
                 sys.exit(
-                    "Bad format string: {format}\n"
-                    "Replacement options are: {{short_description}} and "
-                    "{{method_name}}".format(format=self.FORMAT)
+                    f"Bad format string: {self.FORMAT}\n"
+                    "Replacement options are: {short_description} and "
+                    "{method_name}"
                 )
 
         return test.shortDescription() or str(test)
@@ -111,11 +111,11 @@ class TAPTestRunner(TextTestRunner):
 
         The test runner default output will be suppressed in favor of TAP.
         """
-        self.stream = _WritelnDecorator(open(os.devnull, "w"))
+        self.stream = _WritelnDecorator(open(os.devnull, "w"))  # noqa: SIM115
         _tracker.streaming = streaming
         _tracker.stream = sys.stdout
 
-    def _makeResult(self):
+    def _makeResult(self):  # pragma: no cover
         result = self.resultclass(self.stream, self.descriptions, self.verbosity)
         result.tracker = _tracker
         return result

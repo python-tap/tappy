@@ -1,7 +1,7 @@
 import inspect
-from io import StringIO
 import os
 import tempfile
+from io import StringIO
 from unittest import mock
 
 from tap.tests import TestCase
@@ -10,7 +10,7 @@ from tap.tracker import Tracker
 
 class TestTracker(TestCase):
     def _make_header(self, test_case):
-        return "# TAP results for {test_case}".format(test_case=test_case)
+        return f"# TAP results for {test_case}"
 
     def test_has_test_cases(self):
         tracker = Tracker()
@@ -95,7 +95,7 @@ class TestTracker(TestCase):
         self.assertFalse(
             os.path.exists(os.path.join(outdir, "DifferentFakeTestCase.tap"))
         )
-        with open(os.path.join(outdir, "testresults.tap"), "r") as f:
+        with open(os.path.join(outdir, "testresults.tap")) as f:
             report = f.read()
         expected = inspect.cleandoc(
             """{header_1}
@@ -123,7 +123,7 @@ class TestTracker(TestCase):
         self.assertFalse(
             os.path.exists(os.path.join(outdir, "DifferentFakeTestCase.tap"))
         )
-        with open(os.path.join(outdir, "testresults.tap"), "r") as f:
+        with open(os.path.join(outdir, "testresults.tap")) as f:
             report = f.read()
         expected = inspect.cleandoc(
             """
@@ -178,9 +178,7 @@ class TestTracker(TestCase):
         expected = inspect.cleandoc(
             """{header}
             not ok 1 YESSS!
-            """.format(
-                header=self._make_header("FakeTestCase")
-            )
+            """.format(header=self._make_header("FakeTestCase"))
         )
         self.assertEqual(stream.getvalue().strip(), expected)
 
@@ -194,9 +192,7 @@ class TestTracker(TestCase):
         expected = inspect.cleandoc(
             """{header}
             ok 1 YESSS! # SKIP a reason
-            """.format(
-                header=self._make_header("FakeTestCase")
-            )
+            """.format(header=self._make_header("FakeTestCase"))
         )
         self.assertEqual(stream.getvalue().strip(), expected)
 
@@ -250,7 +246,7 @@ class TestTracker(TestCase):
         tracker = Tracker(streaming=False, outdir=outdir, combined=True)
         tracker.set_plan(123)
         tracker.generate_tap_reports()
-        with open(os.path.join(outdir, "testresults.tap"), "r") as f:
+        with open(os.path.join(outdir, "testresults.tap")) as f:
             lines = f.readlines()
         self.assertEqual(lines[0], "1..123\n")
 
@@ -273,9 +269,7 @@ class TestTracker(TestCase):
             TAP version 13
             {header}
             ok 1 YESSS! # SKIP a reason
-            """.format(
-                header=self._make_header("FakeTestCase")
-            )
+            """.format(header=self._make_header("FakeTestCase"))
         )
         self.assertEqual(stream.getvalue().strip(), expected)
 

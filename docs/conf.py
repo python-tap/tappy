@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # tappy documentation build configuration file, created by
 # sphinx-quickstart on Tue Mar 11 20:21:22 2014.
@@ -12,8 +11,8 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath(".."))
 from tap import __version__  # noqa

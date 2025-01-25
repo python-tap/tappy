@@ -1,7 +1,7 @@
 import re
 
 
-class Directive(object):
+class Directive:
     """A representation of a result line directive."""
 
     skip_pattern = re.compile(

@@ -7,14 +7,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python: [3.7, 3.8, 3.9, '3.10', 'pypy-3.7']
+        python: ['3.9', '3.10', '3.11', '3.12', '3.13']
         os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -31,39 +31,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.9
+          python-version: '3.13'
 
       - name: Install tox and any other packages
         run: pip install tox
 
       - name: Run tox
-        run: tox -e with_optional,runner,module,integration
+        run: tox -e with_optional,runner,module,integration,coverage
 
-  coverage:
-    needs: extra
-    runs-on: ubuntu-latest
+      - name: Combine coverage & fail if it's <100%
+        run: |
+          python -Im pip install --upgrade coverage[toml]
 
-    steps:
-      - uses: actions/checkout@v2
+          python -Im coverage html --skip-covered --skip-empty
 
-      - name: Setup Python
-        uses: actions/setup-python@v2
+          # Report and write to summary.
+          python -Im coverage report --format=markdown >> $GITHUB_STEP_SUMMARY
+
+          # Report again and fail if under 100%.
+          python -Im coverage report --fail-under=100
+
+      - name: Upload HTML report if check failed
+        uses: actions/upload-artifact@v4
         with:
-          python-version: 3.9
-
-      - name: Install tox and any other packages
-        run: pip install tox
-
-      - name: Collect coverage data
-        run: tox -e coverage
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
-        with:
-          fail_ci_if_error: true
-          verbose: true
+          name: html-report
+          path: htmlcov
+        if: ${{ failure() }}

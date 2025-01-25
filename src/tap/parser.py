@@ -1,21 +1,21 @@
-from io import StringIO
 import itertools
 import re
 import sys
+from io import StringIO
 
 from tap.directive import Directive
 from tap.line import Bail, Diagnostic, Plan, Result, Unknown, Version
 
 try:
-    from more_itertools import peekable
     import yaml  # noqa
+    from more_itertools import peekable
 
     ENABLE_VERSION_13 = True
 except ImportError:  # pragma: no cover
     ENABLE_VERSION_13 = False
 
 
-class Parser(object):
+class Parser:
     """A parser for TAP files and lines."""
 
     # ok and not ok share most of the same characteristics.
@@ -63,7 +63,7 @@ class Parser(object):
         This is a generator method that will yield an object for each
         parsed line. The file given by `filename` is assumed to exist.
         """
-        return self.parse(open(filename, "r"))
+        return self.parse(open(filename))
 
     def parse_stdin(self):
         """Parse a TAP stream from standard input.
@@ -174,7 +174,7 @@ WARNING: Optional imports not found, TAP 13 output will be
     def _extract_yaml_block(self, indent, fh):
         """Extract a raw yaml block from a file handler"""
         raw_yaml = []
-        indent_match = re.compile(r"^{}".format(indent))
+        indent_match = re.compile(rf"^{indent}")
         try:
             next(fh)
             while indent_match.match(fh.peek()):

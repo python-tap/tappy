@@ -6,7 +6,7 @@ from tap.parser import Parser
 from tap.rules import Rules
 
 
-class Loader(object):
+class Loader:
     """Load TAP lines into unittest-able objects."""
 
     ignored_lines = set(["diagnostic", "unknown"])
@@ -56,7 +56,7 @@ class Loader(object):
 
     def _find_tests_in_directory(self, directory, suite):
         """Find test files in the directory and add them to the suite."""
-        for dirpath, dirnames, filenames in os.walk(directory):
+        for dirpath, _dirnames, filenames in os.walk(directory):
             for filename in filenames:
                 filepath = os.path.join(dirpath, filename)
                 suite.addTest(self.load_suite_from_file(filepath))

@@ -3,7 +3,7 @@ from tap.directive import Directive
 from tap.line import Result
 
 
-class Rules(object):
+class Rules:
     def __init__(self, filename, suite):
         self._filename = filename
         self._suite = suite
@@ -57,18 +57,15 @@ class Rules(object):
             and self._lines_seen["version"][0] == 1
             and at_line == 2
         )
-        if after_version:
-            return True
-
-        return False
+        return bool(after_version)
 
     def handle_bail(self, bail):
         """Handle a bail line."""
-        self._add_error("Bailed: {reason}".format(reason=bail.reason))
+        self._add_error(f"Bailed: {bail.reason}")
 
     def handle_file_does_not_exist(self):
         """Handle a test file that does not exist."""
-        self._add_error("{filename} does not exist.".format(filename=self._filename))
+        self._add_error(f"{self._filename} does not exist.")
 
     def handle_skipping_plan(self, skip_plan):
         """Handle a plan that contains a SKIP directive."""

@@ -6,7 +6,7 @@ except ImportError:  # pragma: no cover
     LOAD_YAML = False
 
 
-class Line(object):
+class Line:
     """Base type for TAP data.
 
     TAP is a line based protocol. Thus, the most primitive type is a line.
@@ -107,13 +107,11 @@ class Result(Line):
             is_not = "not "
         directive = ""
         if self.directive is not None and self.directive.text:
-            directive = " # {0}".format(self.directive.text)
+            directive = f" # {self.directive.text}"
         diagnostics = ""
         if self.diagnostics is not None:
             diagnostics = "\n" + self.diagnostics.rstrip()
-        return "{0}ok {1} {2}{3}{4}".format(
-            is_not, self.number, self.description, directive, diagnostics
-        )
+        return f"{is_not}ok {self.number} {self.description}{directive}{diagnostics}"
 
 
 class Plan(Line):

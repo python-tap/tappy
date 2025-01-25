@@ -13,7 +13,7 @@ class TestMain(TestCase):
     def test_exits_with_error(self):
         """The main function returns an error status if there were failures."""
         argv = ["/bin/fake", "fake.tap"]
-        stream = open(os.devnull, "w")
+        stream = open(os.devnull, "w")  # noqa: SIM115
 
         status = main(argv, stream=stream)
 
@@ -58,4 +58,4 @@ class TestMainModule(TestCase):
     def test_main_set_to_stream(self, mock_unittest):
         main_module()
 
-        mock_unittest.main.called
+        assert mock_unittest.main.called
