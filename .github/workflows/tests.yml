@@ -45,7 +45,7 @@ jobs:
 
       - name: Run tox
         # run: tox -e with_optional,runner,module,integration
-        run: tox -e with_optional
+        run: tox -e with_optional,runner
 
   coverage:
     needs: extra
