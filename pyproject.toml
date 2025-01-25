@@ -55,9 +55,11 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.sdist]
 include = ["docs/releases.rst", "LICENSE"]
+sources = ["src"]
 
 [tool.hatch.build.targets.wheel]
 include = ["docs/releases.rst", "LICENSE"]
+sources = ["src"]
 
 [tool.ruff.lint]
 select = [
