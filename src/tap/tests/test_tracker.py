@@ -178,9 +178,7 @@ class TestTracker(TestCase):
         expected = inspect.cleandoc(
             """{header}
             not ok 1 YESSS!
-            """.format(
-                header=self._make_header("FakeTestCase")
-            )
+            """.format(header=self._make_header("FakeTestCase"))
         )
         self.assertEqual(stream.getvalue().strip(), expected)
 
@@ -194,9 +192,7 @@ class TestTracker(TestCase):
         expected = inspect.cleandoc(
             """{header}
             ok 1 YESSS! # SKIP a reason
-            """.format(
-                header=self._make_header("FakeTestCase")
-            )
+            """.format(header=self._make_header("FakeTestCase"))
         )
         self.assertEqual(stream.getvalue().strip(), expected)
 
@@ -273,9 +269,7 @@ class TestTracker(TestCase):
             TAP version 13
             {header}
             ok 1 YESSS! # SKIP a reason
-            """.format(
-                header=self._make_header("FakeTestCase")
-            )
+            """.format(header=self._make_header("FakeTestCase"))
         )
         self.assertEqual(stream.getvalue().strip(), expected)
 
