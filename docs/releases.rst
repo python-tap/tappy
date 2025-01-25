@@ -13,6 +13,11 @@ Version 3.2, To Be Released
 ---------------------------
 
 * Drop support for Python 3.6 (it is end-of-life).
+* Drop support for Python 3.7 (it is end-of-life).
+* Drop support for Python 3.8 (it is end-of-life).
+* Add support for Python 3.11.
+* Add support for Python 3.12.
+* Add support for Python 3.13.
 
 Version 3.1, Released December 29, 2021
 ---------------------------------------
