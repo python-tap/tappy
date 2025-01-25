@@ -34,16 +34,13 @@ tap = "tap.main:main"
 
 [dependency-groups]
 dev = [
-    "build>=1.2.2.post1",
     "coverage>=7.6.10",
     "pre-commit>=4.1.0",
     "pytest>=8.3.4",
     "ruff>=0.9.3",
     "sphinx>=7.4.7",
     "tox>=4.24.1",
-    "twine>=6.1.0",
     "wheel>=0.45.1",
-
     # These are the optional dependencies to enable TAP version 13 support.
     "more-itertools>=10.6.0",
     "pyyaml>=6.0.2",

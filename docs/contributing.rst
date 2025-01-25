@@ -56,7 +56,7 @@ Other contributors are free to ignore this.
 
 1. Update ``docs/releases.rst``.
 2. Update version in ``pyproject.toml`` and ``tap/__init__.py``.
-3. ``rm -rf dist && python -m build``
-4. ``twine upload dist/*``
+3. ``rm -rf dist && uv build``
+4. ``uv publish``
 5. ``git tag -a vX.X -m "Version X.X"``
 6. ``git push --tags``
