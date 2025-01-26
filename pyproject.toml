@@ -57,9 +57,6 @@ include = [
 sources = ["src"]
 
 [tool.hatch.build.targets.wheel]
-include = [
-    "/src",
-]
 sources = ["src"]
 packages = ["tap"]
 
