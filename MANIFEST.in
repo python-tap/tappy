@@ -1,5 +1,0 @@
-include AUTHORS
-include LICENSE
-include README.md
-recursive-include docs *
-prune docs/_build
