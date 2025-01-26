@@ -18,6 +18,7 @@ Version 3.2, To Be Released
 * Add support for Python 3.11.
 * Add support for Python 3.12.
 * Add support for Python 3.13.
+* Add support for adding diagnostics to ok test
 
 Version 3.1, Released December 29, 2021
 ---------------------------------------
