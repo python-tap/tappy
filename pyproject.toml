@@ -53,7 +53,7 @@ include = ["src/*", "docs/releases.rst", "LICENSE"]
 sources = ["src"]
 
 [tool.hatch.build.targets.wheel]
-include = ["src/*", "docs/releases.rst", "LICENSE"]
+include = ["src/*", "LICENSE"]
 sources = ["src"]
 packages = ["tap"]
 
