@@ -73,11 +73,12 @@ class Tracker:
             if self.combined:
                 self.combined_test_cases_seen.append(class_name)
 
-    def add_ok(self, class_name, description, directive=""):
+    def add_ok(self, class_name, description, directive="", diagnostics=None):
         result = Result(
             ok=True,
             number=self._get_next_line_number(class_name),
             description=description,
+            diagnostics=diagnostics,
             directive=Directive(directive),
         )
         self._add_line(class_name, result)
