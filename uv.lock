@@ -668,7 +668,7 @@ wheels = [
 
 [[package]]
 name = "tap-py"
-version = "3.2"
+version = "3.2.1"
 source = { editable = "." }
 
 [package.optional-dependencies]

@@ -1,6 +1,6 @@
 [project]
 name = "tap.py"
-version = "3.2"
+version = "3.2.1"
 description = "Test Anything Protocol (TAP) tools"
 readme = "docs/releases.rst"
 license = {text = "BSD"}
@@ -55,6 +55,7 @@ sources = ["src"]
 [tool.hatch.build.targets.wheel]
 include = ["src/*", "docs/releases.rst", "LICENSE"]
 sources = ["src"]
+packages = ["tap"]
 
 [tool.pytest.ini_options]
 pythonpath = [".", "src"]
