@@ -203,7 +203,15 @@ class Unknown(Line):
     This exists for the purpose of a Null Object pattern.
     """
 
+    def __init__(self, text=None):
+        self._text = text
+
     @property
     def category(self):
         """:returns: ``unknown``"""
         return "unknown"
+
+    @property
+    def text(self):
+        """Get the text."""
+        return self._text

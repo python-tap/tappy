@@ -133,7 +133,7 @@ WARNING: Optional imports not found, TAP 13 output will be
         if match:
             return self._parse_version(match)
 
-        return Unknown()
+        return Unknown(text)
 
     def _parse_plan(self, match):
         """Parse a matching plan line."""
@@ -142,7 +142,7 @@ WARNING: Optional imports not found, TAP 13 output will be
 
         # Only SKIP directives are allowed in the plan.
         if directive.text and not directive.skip:
-            return Unknown()
+            return Unknown(match.string)
 
         return Plan(expected_tests, directive)
 

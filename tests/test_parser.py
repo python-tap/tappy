@@ -110,10 +110,12 @@ class TestParser(unittest.TestCase):
     def test_unrecognizable_line(self):
         """The parser returns an unrecognizable line."""
         parser = Parser()
+        test_line = "This is not a valid TAP line. # srsly"
 
-        line = parser.parse_line("This is not a valid TAP line. # srsly")
+        line = parser.parse_line(test_line)
 
         self.assertEqual("unknown", line.category)
+        self.assertEqual(test_line, line.text)
 
     def test_diagnostic_line(self):
         """The parser extracts a diagnostic line."""
@@ -171,10 +173,12 @@ class TestParser(unittest.TestCase):
     def test_ignores_plan_with_any_non_skip_directive(self):
         """The parser only recognizes SKIP directives in plans."""
         parser = Parser()
+        test_line = "1..42 # TODO will not work."
 
-        line = parser.parse_line("1..42 # TODO will not work.")
+        line = parser.parse_line(test_line)
 
         self.assertEqual("unknown", line.category)
+        self.assertEqual(test_line, line.text)
 
     def test_parses_text(self):
         sample = inspect.cleandoc(
