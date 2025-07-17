@@ -1,0 +1,29 @@
+1..21
+# TAP results for homeschool/accounts/tests/test_forms.py
+ok 1 homeschool/accounts/tests/test_forms.py::TestSigninForm.test_create_user
+ok 2 homeschool/accounts/tests/test_forms.py::TestSigninForm.test_existing_user
+ok 3 homeschool/accounts/tests/test_forms.py::TestSigninForm.test_invalid_email
+# TAP results for homeschool/accounts/tests/test_middleware.py
+ok 4 homeschool/accounts/tests/test_middleware.py::TestAccountGateMiddleware.test_allow_list
+ok 5 homeschool/accounts/tests/test_middleware.py::TestAccountGateMiddleware.test_allow_list_resolves
+ok 6 homeschool/accounts/tests/test_middleware.py::TestAccountGateMiddleware.test_anonymous_user
+ok 7 homeschool/accounts/tests/test_middleware.py::TestAccountGateMiddleware.test_inactive_redirect
+ok 8 homeschool/accounts/tests/test_middleware.py::TestAccountGateMiddleware.test_no_gate_url_redirect
+ok 9 homeschool/accounts/tests/test_middleware.py::TestAccountGateMiddleware.test_request_has_account
+# TAP results for homeschool/accounts/tests/test_models.py
+ok 10 homeschool/accounts/tests/test_models.py::TestAccount.test_email
+ok 11 homeschool/accounts/tests/test_models.py::TestAccount.test_factory
+ok 12 homeschool/accounts/tests/test_models.py::TestAccount.test_trial_end
+# TAP results for homeschool/accounts/tests/test_stripe_gateway.py
+ok 13 homeschool/accounts/tests/test_stripe_gateway.py::TestStripeGateway.test_creates_billing_portal_session
+ok 14 homeschool/accounts/tests/test_stripe_gateway.py::TestStripeGateway.test_creates_session
+ok 15 homeschool/accounts/tests/test_stripe_gateway.py::TestStripeGateway.test_no_trial_in_stripe_limits
+# TAP results for homeschool/accounts/tests/test_stripe_webhooks.py
+ok 16 homeschool/accounts/tests/test_stripe_webhooks.py::TestHandleCheckoutSessionCompleted.test_account_active
+# TAP results for homeschool/accounts/tests/test_tasks.py
+ok 17 homeschool/accounts/tests/test_tasks.py::TestExpireTrials.test_expires_trials
+ok 18 homeschool/accounts/tests/test_tasks.py::TestExpireTrials.test_keep_active_trials
+ok 19 homeschool/accounts/tests/test_tasks.py::TestExpireTrials.test_other_statuses_not_expired
+# TAP results for homeschool/accounts/tests/test_templatetags.py
+ok 20 homeschool/accounts/tests/test_templatetags.py::TestTrialBanner.test_display_banner
+ok 21 homeschool/accounts/tests/test_templatetags.py::TestTrialBanner.test_non_trialing
