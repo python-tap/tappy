@@ -38,5 +38,14 @@ class TestResult(unittest.TestCase):
         self.assertEqual("ok 44 passing # SKIP a reason", str(result))
 
     def test_str_diagnostics(self):
-        result = Result(False, 43, "failing", diagnostics="# more info")
-        self.assertEqual("not ok 43 failing\n# more info", str(result))
+        result = Result(False, 45, "failing", diagnostics="# more info")
+        self.assertEqual("not ok 45 failing\n# more info", str(result))
+
+    def test_yaml_block(self):
+        raw_yaml_block = """\
+message: test_message
+severity: fail
+"""
+        result = Result(False, 46, "passing", None, None,
+                        raw_yaml_block=raw_yaml_block)
+        self.assertEqual(result.yaml_block["message"], "test_message")
