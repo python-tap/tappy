@@ -4,7 +4,7 @@ from tap.directive import Directive
 from tap.line import Line, Result
 
 try:
-    import yaml
+    import yaml  # noqa
     from more_itertools import peekable  # noqa
 
     have_yaml = True
@@ -57,6 +57,6 @@ severity: fail
         result = Result(False, 46, "passing", raw_yaml_block=raw_yaml_block)
         if have_yaml:
             self.assertEqual(result.yaml_block["message"], "test_message")
-            self.assertIn(str(result), " ---\n message: test_message\n severity: fail\n ...")
+            self.assertIn(" ---\n message: test_message\n severity: fail\n ...", str(result))
         else:
             self.assertIsNone(result.yaml_block)

@@ -8,7 +8,7 @@ from tap.tests import TestCase
 from tap.tracker import Tracker
 
 try:
-    import yaml
+    import yaml  # noqa
     from more_itertools import peekable  # noqa
 
     have_yaml = True

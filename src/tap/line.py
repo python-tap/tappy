@@ -118,7 +118,8 @@ class Result(Line):
                 f"{indent}{line}" for line in self._yaml_block.splitlines()
             )
             yaml_block = f"\n{indent}---\n{indented_yaml_block}\n{indent}..."
-        return f"{is_not}ok {self.number} {self.description}{directive}{diagnostics}{yaml_block}"
+        return (f"{is_not}ok {self.number} {self.description}{directive}"
+                f"{diagnostics}{yaml_block}")
 
 
 class Plan(Line):
