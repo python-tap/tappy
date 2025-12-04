@@ -41,6 +41,7 @@ class TestResult(unittest.TestCase):
         result = Result(False, 45, "failing", diagnostics="# more info")
         self.assertEqual("not ok 45 failing\n# more info", str(result))
 
+    @unittest.mock.patch("tap.line.LOAD_YAML", True)
     def test_yaml_block(self):
         raw_yaml_block = """\
 message: test_message

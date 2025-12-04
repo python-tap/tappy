@@ -295,6 +295,8 @@ class TestTracker(TestCase):
         line = tracker._test_cases["FakeTestCase"][0]
         self.assertEqual("# more info\n", line.diagnostics)
 
+    @mock.patch("tap.tracker.ENABLE_VERSION_13", True)
+    @mock.patch("tap.line.LOAD_YAML", True)
     def test_adds_ok_with_yaml_block(self):
         tracker = Tracker()
         tracker.add_ok("FakeTestCase", "a description", raw_yaml_block="""\
@@ -304,6 +306,8 @@ severity: pass
         line = tracker._test_cases["FakeTestCase"][0]
         self.assertEqual("test_message", line.yaml_block["message"])
 
+    @mock.patch("tap.tracker.ENABLE_VERSION_13", True)
+    @mock.patch("tap.line.LOAD_YAML", True)
     def test_adds_not_ok_with_yaml_block(self):
         tracker = Tracker()
         tracker.add_not_ok("FakeTestCase", "a description", raw_yaml_block="""\
