@@ -46,6 +46,5 @@ class TestResult(unittest.TestCase):
 message: test_message
 severity: fail
 """
-        result = Result(False, 46, "passing", None, None,
-                        raw_yaml_block=raw_yaml_block)
+        result = Result(False, 46, "passing", None, None, raw_yaml_block=raw_yaml_block)
         self.assertEqual(result.yaml_block["message"], "test_message")
