@@ -114,7 +114,9 @@ class Result(Line):
         yaml_block = ""
         if self._yaml_block is not None:
             indent = " "
-            indented_yaml_block = '\n'.join(f"{indent}{line}" for line in self._yaml_block.splitlines())
+            indented_yaml_block = "\n".join(
+                f"{indent}{line}" for line in self._yaml_block.splitlines()
+            )
             yaml_block = f"\n{indent}---\n{indented_yaml_block}\n{indent}..."
         return f"{is_not}ok {self.number} {self.description}{directive}{diagnostics}{yaml_block}"
 
