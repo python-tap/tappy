@@ -57,6 +57,8 @@ severity: fail
         result = Result(False, 46, "passing", raw_yaml_block=raw_yaml_block)
         if have_yaml:
             self.assertEqual(result.yaml_block["message"], "test_message")
-            self.assertIn(" ---\n message: test_message\n severity: fail\n ...", str(result))
+            self.assertIn(
+                str(result), " ---\n message: test_message\n severity: fail\n ..."
+            )
         else:
             self.assertIsNone(result.yaml_block)
