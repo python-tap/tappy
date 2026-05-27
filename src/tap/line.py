@@ -111,7 +111,16 @@ class Result(Line):
         diagnostics = ""
         if self.diagnostics is not None:
             diagnostics = "\n" + self.diagnostics.rstrip()
-        return f"{is_not}ok {self.number} {self.description}{directive}{diagnostics}"
+        yaml_block = ""
+        if self._yaml_block is not None:
+            indented_yaml_block = "\n".join(
+                f" {line}" for line in self._yaml_block.splitlines()
+            )
+            yaml_block = f"\n ---\n{indented_yaml_block}\n ..."
+        return (
+            f"{is_not}ok {self.number} {self.description}{directive}"
+            f"{diagnostics}{yaml_block}"
+        )
 
 
 class Plan(Line):
