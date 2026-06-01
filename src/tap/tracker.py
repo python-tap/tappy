@@ -73,23 +73,39 @@ class Tracker:
             if self.combined:
                 self.combined_test_cases_seen.append(class_name)
 
-    def add_ok(self, class_name, description, directive="", diagnostics=None):
+    def add_ok(
+        self,
+        class_name,
+        description,
+        directive="",
+        diagnostics=None,
+        raw_yaml_block=None,
+    ):
         result = Result(
             ok=True,
             number=self._get_next_line_number(class_name),
             description=description,
             diagnostics=diagnostics,
             directive=Directive(directive),
+            raw_yaml_block=raw_yaml_block,
         )
         self._add_line(class_name, result)
 
-    def add_not_ok(self, class_name, description, directive="", diagnostics=None):
+    def add_not_ok(
+        self,
+        class_name,
+        description,
+        directive="",
+        diagnostics=None,
+        raw_yaml_block=None,
+    ):
         result = Result(
             ok=False,
             number=self._get_next_line_number(class_name),
             description=description,
             diagnostics=diagnostics,
             directive=Directive(directive),
+            raw_yaml_block=raw_yaml_block,
         )
         self._add_line(class_name, result)
 

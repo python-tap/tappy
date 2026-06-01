@@ -7,6 +7,14 @@ from unittest import mock
 from tap.tests import TestCase
 from tap.tracker import Tracker
 
+try:
+    import yaml  # noqa
+    from more_itertools import peekable  # noqa
+
+    have_yaml = True
+except ImportError:
+    have_yaml = False
+
 
 class TestTracker(TestCase):
     def _make_header(self, test_case):
@@ -294,6 +302,38 @@ class TestTracker(TestCase):
         tracker.add_not_ok("FakeTestCase", "a description", diagnostics="# more info\n")
         line = tracker._test_cases["FakeTestCase"][0]
         self.assertEqual("# more info\n", line.diagnostics)
+
+    def test_adds_ok_with_yaml_block(self):
+        tracker = Tracker()
+        tracker.add_ok(
+            "FakeTestCase",
+            "a description",
+            raw_yaml_block="""\
+message: test_message
+severity: pass
+""",
+        )
+        line = tracker._test_cases["FakeTestCase"][0]
+        if have_yaml:
+            self.assertEqual("test_message", line.yaml_block["message"])
+        else:
+            self.assertIsNone(line.yaml_block)
+
+    def test_adds_not_ok_with_yaml_block(self):
+        tracker = Tracker()
+        tracker.add_not_ok(
+            "FakeTestCase",
+            "a description",
+            raw_yaml_block="""\
+message: test_message
+severity: fail
+""",
+        )
+        line = tracker._test_cases["FakeTestCase"][0]
+        if have_yaml:
+            self.assertEqual("test_message", line.yaml_block["message"])
+        else:
+            self.assertIsNone(line.yaml_block)
 
     def test_header_displayed_by_default(self):
         tracker = Tracker()
