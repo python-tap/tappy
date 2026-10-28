@@ -55,7 +55,7 @@ so I don't have to remember all the steps.
 Other contributors are free to ignore this.
 
 1. Update ``docs/releases.rst``.
-2. Update version in ``pyproject.toml`` and ``tap/__init__.py``.
+2. Update version in ``pyproject.toml`` and ``src/tap/__init__.py``.
 3. ``rm -rf dist && uv build``
 4. ``uv publish``
 5. ``git tag -a vX.X -m "Version X.X"``
