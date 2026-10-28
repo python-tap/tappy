@@ -9,6 +9,11 @@ Developer documentation is on
 Releases
 ========
 
+Unreleased
+----------
+
+* Correct the package version file path in the release checklist.
+
 Version 3.2, Released January 25, 2025
 --------------------------------------
 
